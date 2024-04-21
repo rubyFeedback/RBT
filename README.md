@@ -1,4782 +1,8964 @@
-# RBT
+[![logo](https://i.imgur.com/QAAheRP.png)](https://rubygems.org/gems/rbt)
+[![logo](https://i.imgur.com/LiwQlUB.png)](https://rubygems.org/gems/rbt)
 
-This gem was last updated on the 19.04.2024 (dd.mm.yyyy notation), at 18:03:29 o'clock.
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://www.gobolinux.org/)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://www.ruby-lang.org/en/)
+[![Gem Version](https://badge.fury.io/rb/rbt.svg)](https://badge.fury.io/rb/rbt)
 
-Introduction to the "Ruby Build Tools" Project (RBT)
- Welcome to the Ruby Build Tools, also called the RBT suite - getting work done! Making compiling great again. \o/
+This gem was <b>last updated</b> on the <span style="color: darkblue; font-weight: bold">19.04.2024</span> (dd.mm.yyyy notation), at <span style="color: steelblue; font-weight: bold">18:03:29</span> o'clock.
 
-This documentation attempts to detail the various objectives for the RBT project, including its history, as well as how people may benefit from the project.
+## Introduction to the "Ruby Build Tools" Project (RBT)
 
-What is the RBT project about?
-The primary goal for the RBT project is to support a user whenever the need arises to install software, on a given computer system.
+<img src="https://i.imgur.com/PN2lOHj.png"> Welcome to the 
+<span style="color: darkgreen; font-weight: bold">Ruby Build Tools</span>,
+also called the <b>RBT suite</b> - <b>getting work done</b>! <b>Making
+compiling great again</b>. \o/
 
-The primary operating system in this regard is, first and foremost, Linux operating systems (henceforthwith simply called linux in this document.
+This <b>documentation</b> attempts to detail the various objectives for
+the RBT project, including its history, as well as how people may benefit
+from the project.
 
-Additionally, when we refer to allowing a user to install software, this typically refers to taking the source code and compiling this source code - in other words: to simply compile the program at hand, from a remote URL.
+## What is the RBT project about?
 
-While the primary platform for the RBT project is predominantly the Linux platform, whenever possible support for other platforms will be added as well. In fact, it is a secondary goal for the RBT project to support all platforms ruby is able to run on in the long term. How realistic it is to reach that goal is another matter, but as a goal RBT will eventually try to support as many different operating systems as possible, provided that ruby can run on such a system.
+The <span style="color: darkblue; font-weight:bold ">primary goal</span> for
+the <b>RBT project</b> is <b>to support a user whenever the need arises
+to install software, on a given computer system</b>.
 
-Linux is the main target OS for the rbt project, though, so things will be tested on Linux first. Most development for RBT does indeed take place on a Linux system currently.
+The primary operating system in this regard is, first and foremost, 
+<b>Linux operating systems</b> (henceforthwith simply called <b>linux</b>
+in this document.
 
-Ideally, in the future, we could reach a state where we can test the RBT suite on less commonly used systems as well, such as HaikuOS or ReactOS to name only a few here. And, of course, the more popular ones such as OSX or Microsoft's Windows suite as well, naturally. Windows is the second operating system that RBT will support, by the way; it is less well-tested than the Linux-specific code of the RBT project.
+Additionally, when we refer to allowing a user to install software, 
+this typically refers to taking the <b>source code</b> and compiling
+this source code - in other words: <b>to simply compile the program</b>
+at hand, from a <b>remote URL</b>.
 
-Installing the rbt gem itself
-This subsection addresses the possible user question How to install the rbt gem?.
+While the <b>primary platform</b> for the <b>RBT project</b> is predominantly
+the <b>Linux</b> platform, whenever possible support for <b>other platforms</b>
+will be added as well. In fact, it is a secondary goal for the RBT project
+to support <b>all</b> platforms ruby is able to run on in the long term. How
+realistic it is to reach that goal is another matter, but as a goal RBT
+will eventually try to support as many different operating systems as
+possible, provided that ruby can run on such a system.
 
-The canonical way to install the rbt gem, via the commandline, goes via:
+<b>Linux</b> is the <b>main target OS</b> for the rbt project, though,
+so things will be tested on <b>Linux</b> first. Most development for
+RBT does indeed take place on a Linux system currently.
 
-gem install rbt
-However had, I recommend to make use of the --user-install option; this makes it easier to use the bin/ scripts that are part of this gem, as they will reside in your home directory, at bin/ there:
+Ideally, in the future, we could reach a state where we can test the
+RBT suite on less commonly used systems as well, such as <b>HaikuOS</b>
+or <b>ReactOS</b> to name only a few here. And, of course, the more
+popular ones such as OSX or Microsoft's Windows suite as well, naturally.
+Windows is the second operating system that RBT will support, by the
+way; it is less well-tested than the Linux-specific code of the
+RBT project.
 
-gem install rbt --user-install
-Then you can use them easily if you have the bin/ to your home directory in your $PATH. (The path may be a bit awkward these days, though, such as $HOME_DIR/.gem/ruby/2.7.0/gems/rbt-0.8.11/bin/run_make_then_make_install. In older ruby versions the path was simpler; no idea why that changed, please ask the rubygems maintainers if you are interested in the why.)
+## Installing the rbt gem itself
 
-While the /usr/ hierarchy as prefix is fine, in principle, some distributions, in particular debian, have a habit of splitting up gems a lot (or did so in the past). This makes it harder for users to know where files reside - see typical questions asked by users on IRC.
+This subsection addresses the possible user question <b>How to install
+the rbt gem?</b>.
 
-This is also another reason why the --user-install option is better, in my opinion - you don't have to guess where the executables will reside; they are just in the home directory, somewhere there. And you can move them from there to any other location anyway, or use symlinks and/or aliases via your shell to setup the system how you want it to be. Or, use the ruby code directly - after all you can create your own executables, since that is precisely what all gems do anyway in their corresponding bin/ subdirectory.
+The <b>canonical</b> way to install the <b>rbt</b> gem, via the
+commandline, goes via:
 
-Since gems are also downloaded locally, and then available as a .gem file, other users can easily install these gems into their home directory as well, without depending on a global installation. This may be especially useful in environments where you are restricted, such as at a campus/university environment.
+    gem install rbt
 
-On windows, if you plan to upgrade the rbt gem, I recommend to first uninstall all old rbt gems. While this is, strictly speaking, not really necessary, I found that it may work better if old gems are removed - at the least on windows. There I manually remove the directory where the old ruby stores gems. Again, this is probably not strictly necessary, but I found that this works better in the long run.
+However had, I recommend to make use of the <b>--user-install</b> option;
+this makes it easier to use the <b>bin/</b> scripts that are part of this
+gem, as they will reside in your home directory, at <b>bin/</b> there:
 
-How does RBT handle compiling from source, explained in a simple manner?
-Let us now briefly explain how RBT approaches compiling from a source archive: after all that is the main goal for the RBT project.
+    gem install rbt --user-install
 
-Let's take any random remote URL to some tarball archive, such as the .tar.xz file for evince that may be found here → https://download.gnome.org/sources/evince/42/evince-42.3.tar.xz.
+Then you can use them easily if you have the bin/ to your home directory
+in your $PATH. (The path may be a bit awkward these days, though,
+such as **$HOME_DIR/.gem/ruby/2.7.0/gems/rbt-0.8.11/bin/run_make_then_make_install**.
+In older ruby versions the path was simpler; no idea why that changed,
+please ask the rubygems maintainers if you are interested in the
+why.)
 
-So, to then compile this via the RBT suite, we should be able to do something as simple as the following, via the commandline:
+While the <b>/usr/</b> hierarchy as prefix is fine, in principle, some
+distributions, in particular debian, have a habit of splitting up
+gems <b>a lot</b> (or did so in the past). This makes it harder for users
+to know where files reside - see typical questions asked by users on
+<b>IRC</b>.
 
-rbt evince
-That's it! In the above example, rbt refers to the executable bin/rbt, which is part of the rbt gem itself.
+This is also another reason why the <b>--user-install option</b> is better,
+in my opinion - you don't have to guess where the executables
+will reside; they are just in the home directory, somewhere there.
+And you can move them from there to any other location anyway,
+or use <b>symlinks</b> and/or **aliases** via your shell to setup
+the system how <b>you</b> want it to be. Or, use the ruby code
+directly - after all you can create your own executables, since
+that is precisely what all gems do anyway in their corresponding
+**bin/** subdirectory.
 
-If all goes well then the above tarball, the file name evince-42.3.tar.xz, will be downloaded (unless it already exists locally), extracted, and then compiled. It all goes well the user will then have the specified version of evince installed, compiled from source.
+Since gems are also <b>downloaded locally</b>, and then available as
+a .gem file, other users can easily install these gems into their
+home directory as well, without depending on a global installation.
+This may be especially useful in environments where you are
+restricted, such as at a **campus/university environment**.
 
-It should never be more complicated than that, for well-behaving programs. At the least in theory; in practice you can imagine that some things may go awry or not work, but this is where rbt will also try to be of help, in order to resolve such problems.
+On windows, if you plan to upgrade the rbt gem, I recommend to first
+<b>uninstall</b> all old rbt gems. While this is, strictly speaking,
+not really necessary, I found that it may work better if old gems
+are removed - at the least on windows. There I manually remove the
+directory where the old ruby stores gems. Again, this is probably
+not strictly necessary, but I found that this works better in the
+long run.
 
-Note that while the primary focus is on compiling source code as-is, a secondary focus is to allow installation from a binary source, as well as to support different package managers, similar to the fpm gem (https://github.com/jordansissel/fpm).
+## How does RBT handle compiling from source, explained in a simple manner?
 
-This was the brief introduction to how rbt should work in theory. Of course there are more details to be had, which will be mentioned in other subsections of this document.
+Let us now briefly explain how RBT approaches compiling from a source
+archive: after all that is <b>the main goal for the</b> 
+<span style="color: darkgreen; font-weight: bold">RBT project</span></b>.
 
-The full scope of the RBT project: extended objectives
-The content in this document above delineated the primary objective for the RBT project.
+Let's take any random remote URL to some tarball archive, 
+such as the <b>.tar.xz file</b> for <b>evince</b> that may
+be found here →
+https://download.gnome.org/sources/evince/42/evince-42.3.tar.xz.
 
-Of course the full scope of the RBT project is a significantly wider one:
+So, to then compile this via the RBT suite, we should be able to
+do something as simple as the following, via the commandline:
 
-The RBT project will attempt to be of help to the user as a general-purpose build toolset.
+    rbt evince
 
-What does this mean? This means that the RBT project will try to be of help to people who wish to manage the software on their respective computer systems in general. This may even extend towards other programming languages, be it python, java, C/C++, shell scripts - you name it.
+That's it! In the above example, <b>rbt</b> refers to the
+executable <b>bin/rbt</b>, which is part of the rbt gem itself.
 
-Although RBT has started via ruby, other programming languages are permissive as well.
+If all goes well then the above tarball, the file name
+<b>evince-42.3.tar.xz</b>, will be downloaded (unless it
+already exists locally), extracted, and then compiled.
+It all goes well the user will then have the specified
+version of evince installed, compiled from source.
 
-Another "higher" meta-goal that follows this vision is to integrate tasks that are typicall done via a package manager. Support for this within RBT itself is presently (2024) still fairly minimal. Do not expect RBT to become a fully fledged package manager right now; but, perhaps this use case may be covered one day in the future. Until then singular aspects found in different package managers may be included into the RBT suite as well.
+It should never be more complicated than that, for
+<b>well-behaving programs</b>. At the least in theory;
+in practice you can imagine that some things may go
+awry or not work, but this is where <b>rbt</b> will 
+also try to be of help, in order to resolve such
+problems.
 
-Yet another goal for the RBT project is to provide all the raw data used for managing all programs on a Linux Distribution or another Operating system. As one example: (almost) all programs that are registered in the RBT suite have a remote URL registered - see the evince example above.
+Note that while the primary focus is on compiling
+source code as-is, a secondary focus is to allow 
+installation from a binary source, as well as to
+support different package managers, similar to the
+<b>fpm gem</b> (https://github.com/jordansissel/fpm).
 
-What the user then does with this data is up to them; I simply wanted to have this all available within a single project as-is; and to be able to query this via the commandline, too.
+This was the brief introduction to how rbt should work
+in theory. Of course there are more details to be
+had, which will be mentioned in other subsections of
+this document.
 
-The data is primarily stored in various individual cookbook .yml files. These .yml files can be turned into a SQL dataset. This will at one point in time probably become the default way for users to interact with the dataset made available by the RBT project. In the past, since as of August 2022, it even was recommended to make use of a SQL database, but I no longer recommend this for now; many things have to be polished in the RBT project before we can fully transition into a SQL database. For now, prefer to make use of the various .yml files that are distributed. See elsewhere in this document more information pertaining to this.
+## The full scope of the RBT project: extended objectives
 
-This SQL-based approach will eventually be more useful, as it should be faster to query its content - in particular on Windows.
+The content in this document above delineated the primary
+objective for the RBT project.
 
-For more objectives of the RBT suite, consider reading the subsection called Is the RBT suite actually useful?.
+Of course the <b>full scope</b> of the <b>RBT project</b>
+is a significantly wider one:
 
-What is the policy for program-names stored in .yml files?
-Let's consider the program called htop.
+The <b>RBT project</b> will attempt to be of help to
+the user as a <b>general-purpose build toolset</b>.
 
-This program will be stored in the file called htop.yml, as far as the RBT project is concerned.
+What does this mean? This means that the RBT project
+will try to be of <b>help to people who wish to
+manage the software</b> on their respective computer
+systems in general. This may even extend towards other
+programming languages, be it python, java, C/C++,
+shell scripts - you name it.
 
-The program called anjuta would be stored in the file anjuta.yml and so on and so forth.
+Although RBT has started via ruby, other programming languages
+are permissive as well.
 
-If the program name contains any '-' character, as part of their name, then these '-' characters (the hyphen) are ignored. So, for instance, if the remote URL to a program is like this:
+Another "<i>higher</i>" meta-goal that follows this vision is
+to integrate tasks that are typicall done via a
+<b>package manager</b>. Support for this within RBT itself
+is presently (2024) still fairly minimal. Do not expect RBT
+to become a fully fledged package manager right now; but,
+perhaps this use case may be covered one day in the future.
+Until then singular aspects found in different package
+managers may be included into the RBT suite as well.
+
+Yet another goal for the <b>RBT project</b> is to provide
+all the raw data used for managing <b>all</b> programs
+on a <b>Linux Distribution</b> or another Operating
+system. As one example: (almost) all programs that are
+registered in the RBT suite have a remote URL registered -
+see the evince example above.
+
+What the user then does with this data is up to them; I
+simply wanted to have this all available within a
+<b>single</b> project as-is; and to be able to query
+this via the commandline, too.
+
+The data is primarily stored in various individual cookbook
+.yml files. These .yml files can be turned into a SQL
+dataset. This will at one point in time probably become
+the default way for users to interact with the dataset
+made available by the RBT project. In the past, since
+as of <b>August 2022</b>, it even was recommended to make
+use of a SQL database, but I no longer recommend this
+for now; many things have to be polished in the RBT
+project before we can fully transition into a SQL
+database. For now, prefer to make use of the various
+.yml files that are distributed. See elsewhere
+in this document more information pertaining to this.
+
+This <b>SQL-based approach</b> will eventually be more useful,
+as it should be faster to query its content - in
+particular on <b>Windows</b>.
+
+For more objectives of the RBT suite, consider reading
+the subsection called <b>Is the RBT suite actually useful?</b>.
+
+## What is the policy for program-names stored in .yml files?
+
+Let's consider the program called <b>htop</b>.
+
+This program will be stored in the file called
+<b>htop.yml</b>, as far as the RBT project is concerned.
+
+The program called <b>anjuta</b> would be stored
+in the file <b>anjuta.yml</b> and so on and so forth.
+
+If the program name contains any '-' character, as part
+of their name, then these '-' characters (the hyphen)
+are ignored. So, for instance, if the remote URL
+to a program is like this:
 
 https://download.gnome.org/sources/gnome-commander/1.14/gnome-commander-1.14.3.tar.xz
 
-then the corresponding .yml file would simply be called gnomecommander.yml. In other words: the '-' character is completely ignored, as far as the name for the .yml file is concerned.
+then the corresponding .yml file would simply be called
+<b>gnomecommander.yml</b>. In other words: the 
+'-' character is completely ignored, as far as the name
+for the .yml file is concerned.
 
-This is a rather simple convention - the name of the program will become the name of the yaml file in question.
+This is a rather simple convention - the name of the program will become
+the name of the yaml file in question.
 
-These .yml files are so-called individual "cookbooks". This name derives from "to cook/compile a program from source".
+These .yml files are so-called individual "cookbooks". This name derives
+from "<b>to cook/compile a program from source</b>".
 
-Take note that this term is a bit similar to the old linux distribution called sorcery (see https://sourcemage.org/Sorcery).
+Take note that this term is a bit similar to the old linux
+distribution called sorcery (see https://sourcemage.org/Sorcery).
 
-Although this approach is very easy to remember and apply, it does lead to a few issues sometimes. For instance, if two remote projects have the same name, then only one can be registered in the RBT project, using that simple naming scheme. The workaround I use in this case - and let me assure you it happens very, very rarely only - is to change the name of the .yml file a bit, such as perlsdl.yml for the perl wrapper over sdl.
+Although this approach is very easy to remember and apply, it does
+lead to a few issues sometimes. For instance, if two remote
+projects have the same name, then only one can be registered in
+the RBT project, using that simple naming scheme. The workaround
+I use in this case - and let me assure you it happens very,
+very rarely only - is to change the name of the .yml file a bit,
+such as perlsdl.yml for the perl wrapper over sdl.
 
-Is the RBT suite actually useful?
+## Is the RBT suite actually useful?
+
 This is an interesting question.
 
-I have used RBT specifically to help me in my attempts to boostrap a LFS/BLFS (Linux from Scratch / Beyond Linux from Scratch) system, so this is an additional use case (and goal) for the RBT suite as well.
+I have used RBT specifically to help me in my attempts to
+<b>boostrap</b> a LFS/BLFS (Linux from Scratch / Beyond Linux from
+Scratch) system, so this is an additional use case (and goal) for
+the RBT suite as well.
 
-I think that the RBT suite does have some real value here - or there. For this I would like to coin the phrase "from zero to hero" - which means to bootstrap and create a Linux system that can be burned on a DVD or simply put on a USB device. This is not yet working flawlessly, but it is on the TODO list as well: to support LFS/BLFS builds from scratch (aka from zero).
+I think that the RBT suite does have some real value here - or
+there. For this I would like to coin the phrase <b>"from zero
+to hero"</b> - which means to <b>bootstrap and create a Linux
+system</b> that can be burned on a DVD or simply put on
+a USB device. This is not yet working flawlessly, but it is
+on the TODO list as well: to support LFS/BLFS builds from
+scratch (aka <b>from zero</b>). 
 
-Additionally, as yet-another-objective, the RBT project may aid in the process of autogenerating files and code related to installing and compiling in general, such as generating standalone shell scripts or valid archive formats: archive formats such as .rpm or .deb.
+Additionally, as yet-another-objective, the <b>RBT</b> project may
+aid in the process of <b>autogenerating files and code</b> related
+to installing and compiling in general, such as
+<b>generating standalone shell scripts</b> or **valid archive formats**:
+archive formats such as <b>.rpm</b> or <b>.deb</b>.
 
-For example, one part of RBT can be used to autogenerate completion files for bash and zsh; I use this to more easily compile programs, such as by typing "ry autom", to become the very same as "ry automake". This thus saves me a few keystrokes on the keyboard.
+For example, one part of <b>RBT</b> can be used to <b>autogenerate completion files
+for bash and zsh</b>; I use this to more easily compile programs, such as
+by typing "ry autom<TAB>", to become the very same as "ry automake". This
+thus saves me a few keystrokes on the keyboard.
 
-Another script, also part of the RBT suite, can modify Makefiles and change the prefix in that file, without me having to remember the awkward syntax make uses when trying to override the default prefix in use. These are examples for such "toolkit" scripts in RBT, so the overall goal for the RBT suite is to help in regards to such use cases. The primary use case remains on compiling source code as-is, though.
+Another script, also part of the RBT suite, can modify <b>Makefiles</b> and
+change the prefix in that file, without me having to remember the awkward
+syntax <b>make</b> uses when trying to override the default prefix in
+use. These are examples for such "toolkit" scripts in RBT, so the overall
+goal for the RBT suite is to help in regards to such <b>use cases</b>. The
+primary use case remains on <b>compiling source code</b> as-is, though.
 
-We could continue this listing here, but I think the basic point was already pointed out now. If you look at the RBT suite from a wider perspective, RBT attempts to be a swiss army knife for compilation/installation of software projects. The focus here lies on hands-on use - it is a toolset project and has to offer code/functionality that helps solve certain computer-related tasks.
+We could continue this listing here, but I think the basic point was
+already pointed out now. If you look at the <b>RBT suite</b> from a wider
+perspective, <b>RBT</b> attempts to be a <b>swiss army knife for
+compilation/installation</b> of software projects. The focus here
+lies on <b>hands-on use</b> - it is a toolset project and has to
+offer code/functionality that helps solve certain computer-related
+tasks.
 
-The rewrite of the RBT project in February 2024
-In February 2024 it was decided to rewrite the RBT project, yet again.
+## The rewrite of the RBT project in February 2024
+
+In <b>February 2024</b> it was decided to rewrite the RBT project, yet again.
 
 This subsection will briefly explain why.
 
-There were various smaller reasons - a few bugs, a few things that have to be improved, and so forth. Some of these bugs were very old, and I haven't gotten around to fixing them, so this provided an opportunity here.
+There were various smaller reasons - a few bugs, a few things that
+have to be improved, and so forth. Some of these bugs were very
+old, and I haven't gotten around to fixing them, so this provided
+an opportunity here.
 
-But, the biggest reason for the rewrite was something else: I wanted to transition into well-defined actions for the RBT project. Other subsections of this document will explain the rationale behind well-defined actions more; suffice to say that I wanted to have all important, actionable activities tied together and have them be usable via the commandline as well. This would allow me to tap into the RBT project without having to rely solely on classes and methods - instead I can use actions to do individual steps, such as symlinking files, copying files, performing post-installation steps and so forth. If I want to apply some patches automatically then I could do so too, such as:
+But, the biggest reason for the rewrite was something else: I wanted
+to transition into <b>well-defined actions</b> for the RBT project.
+Other subsections of this document will explain the rationale
+behind <b>well-defined actions</b> more; suffice to say that I
+wanted to have all important, actionable activities tied together
+and have them be usable via the commandline as well. This would
+allow me to tap into the RBT project without having to rely solely on
+classes and methods - instead I can use actions to do individual steps,
+such as symlinking files, copying files, performing post-installation
+steps and so forth. If I want to apply some patches automatically then
+I could do so too, such as:
 
-rbt sed --apply-the-patch
+    rbt sed --apply-the-patch
+
 Or, via actions, from the commandline:
 
-rbt_action apply_the_patch sed
-Yes, there is not much difference between these two variants, but the above entry-point, via rbt_action, allows us to think in terms of actions first, rather than the program name first. Plus, I could provide specific individual actions in a specific order, which I can not easily do via commandline --flags.
+    rbt_action apply_the_patch sed
 
-A theoretical remark from potential users of the RBT suite: „But the RBT suite is so gigantic! I will never need all of it.“
-That's right - you may only need a small subset of the RBT suite, and that's ok. The RBT suite attempts to cover different use cases and needs, so it is highly likely that not every user needs to use all of the RBT suite.
+Yes, there is not much difference between these two variants, but the above
+entry-point, via rbt_action, allows us to think in terms of actions first,
+<b>rather</b> than the program name first. Plus, I could provide specific
+individual actions in a specific order, which I can not easily do via
+commandline --flags.
 
-However had, even if a user does not intend to install or compile anything through RBT, many different programs are registered in this project, which may be of (indirect) help in some other ways. For instance, if a user desires to determine which particular binary on a given Linux system belongs to which particular application, or if the user intends to implement a package manager on his or her own, then the RBT suite may be useful, as it allows such potential users to query this through the RBT suite.
+## A theoretical remark from potential users of the RBT suite: „But the RBT suite is so gigantic! I will never need all of it.“
 
-The dataset for the standalone programs is available under the namespace RBT::Cookbooks. For a list of all registered programs, you can simply query the toplevel-method called RBT.available_programs?.
+That's right - you may only need a small subset of the RBT suite, and
+that's ok. The RBT suite attempts to cover different use cases and
+needs, so it is highly likely that not every user needs to use <b>all</b>
+of the RBT suite.
 
-Related to this question of "How do users benefit from the RBT suite?", one part of the RBT suite deals with statistics. Support for this is somewhat minimalistic right now, but will be extended in the future. One script reports some statistics, such as how many of the registered projects depend on cmake, or meson, or GNU configure, or a Makefil and so forth. You can query their percentage value, and thus gain a little insight into how different projects make use of which particular build tool. That is an example for statistical information.
+However had, even if a user does not intend to install or compile anything
+through RBT, many different programs are registered in this project,
+which may be of (indirect) help in some other ways. For instance, if a
+user desires to <b>determine which particular binary on a given Linux system
+belongs to which particular application</b>, or if the user intends to
+implement a package manager on his or her own, then the RBT suite may
+be useful, as it allows such potential users to query this through the
+RBT suite.
 
-This part about statistics will be slowly extended over the coming years, but it is not the primary use case for the RBT suite - just something that I found to be interesting to know, how many different projects out there depend on which compilation strategy, and how this may change over the years. Presently, in the year 2024, many projects still depend on GNU autoconfigure/configure. cmake comes second, meson/ninja comes third. I found that monitoring the rise of meson/ninja to be quite interesting, and I expect that this trend will continue. Of course the subset that is registered in RBT is not the full picture, so the statistics are only valid in regards to the RBT suite itself. Globally we may see a completely different picture, but the statistics shown by RBT are correct when it comes to the programs registered in the RBT suite.
+The dataset for the standalone programs is available under the namespace
+<b>RBT::Cookbooks</b>. For a list of all registered programs, you can
+simply query the toplevel-method called <b>RBT.available_programs?</b>.
 
-The primary core functionality of the RBT project, however had, will remain on compiling programs from source, as this is what I use RBT for on an almost daily basis. It also was the original reason why the RBT project was started many years ago.
+Related to this question of "<i>How do users benefit from the RBT suite?</i>",
+one part of the RBT suite deals with <b>statistics</b>. Support for this is
+somewhat minimalistic right now, but will be extended in the future. One script
+reports some statistics, such as <b>how many of the registered projects depend
+on cmake, or meson, or GNU configure, or a Makefile and so forth</b>. You can
+query their percentage value, and thus gain a little insight into how
+different projects make use of which particular build tool. That is an example
+for statistical information. 
 
-How do I use the RBT project personally?
-How do I use the rbt project primarily, on my Linux systems, but also on windows?
+This part about statistics will be slowly extended over the coming years, but
+it is not the primary use case for the RBT suite - just something that I found
+to be interesting to know, how many different projects out there depend on
+which compilation strategy, and how this may change over the years. Presently,
+in the year 2024, many projects still depend on GNU autoconfigure/configure.
+cmake comes second, meson/ninja comes third. I found that monitoring the rise
+of meson/ninja to be quite interesting, and I expect that this trend will
+continue. Of course the subset that is registered in RBT is not the 
+<b>full</b> picture, so the statistics are only valid <b>in regards to
+the RBT suite itself</b>. Globally we may see a completely different picture,
+but the statistics shown by RBT are correct when it comes to the programs
+registered in the RBT suite.
 
-This paragraph, added in January of 2023 and extended in February of 2024, will try to give a useful answer to this question in a unified manner - hence its own subsection here.
+The <b>primary core functionality</b> of the RBT project, however
+had, will remain on <b>compiling programs from source</b>, as this is
+what I use RBT for on an almost daily basis. It also was the original
+reason why the RBT project was started many years ago.
 
-Other users of the RBT suite may understand the goals of the RBT suite better after such an explanation was given to them - a more thorough overview of the RBT project, from a "my point of view". That way, hopefully, other users can learn from how I approach problems that the RBT project tries to solve for you.
+## How do I use the RBT project personally?
 
-This subsection attempts to helpfully explain how I use the RBT project most of the time, as that may give some indication how the RBT project could be used by other people as well. We must define and declare a few things next.
+How do I use the <b>rbt project</b> primarily, on my <b>Linux</b> systems,
+but also on windows?
 
-I use linux as my main operating system, so Linux is the primary operating system for the code offered by the rbt gem, as was already pointed out elsewhere in this document. While I try to support windows as well, windows at this point in time is a second-class citizen. At a later moment in time this may change, but as of 2023 and 2024, this is still the case so. Some things may not work well on windows, whereas they may work well on Linux.
+This paragraph, added in <b>January of 2023</b> and extended in
+<b>February of 2024</b>, will try to give a useful answer to this
+question in a unified manner - hence its own subsection here.
 
-On Linux, I often found to have a need to quickly compile some software, such as when a new release of a given project occurs. For example, say that there is a new php source archive released.
+Other users of the RBT suite may understand the goals of the RBT
+suite better after such an explanation was given to them - a
+more thorough overview of the RBT project, from a "<b>my point
+of view</b>". That way, hopefully, other users can learn from
+how I approach problems that the RBT project tries to solve for
+you.
 
-So, what do I do in this case when I want to compile php from source?
+This subsection attempts to helpfully explain <b>how I use the RBT
+project most of the time</b>, as that may give some indication how
+the RBT project could be used by other people as well. We must
+define and declare a few things next.
 
-Well, first, I have to update the local version of php.yml, with the new URL to the latest tarball of PHP. This is also stored in that .yml file (aka php.yml, under the url1 entry there.
+I use <b>linux</b> as my main operating system, so Linux is the
+primary operating system for the code offered by the rbt gem, as
+was already pointed out elsewhere in this document. While I try
+to support windows as well, windows at this point in time is a
+second-class citizen. At a later moment in time this may change,
+but as of 2023 and 2024, this is still the case so. Some things
+may not work well on windows, whereas they may work well on
+Linux.
+
+On Linux, I often found to have a need to quickly compile some software,
+such as when a new release of a given project occurs. For example, say
+that there is a new <b>php</b> source archive released.
+
+So, what do I do in this case when I want to compile php from
+source?
+
+Well, first, I have to update the local version of <b>php.yml</b>,
+with the new URL to the latest tarball of PHP. This is also
+stored in that <b>.yml</b> file (aka <b>php.yml</b>, under the
+<b>url1</b> entry there.
 
 How is the content of said .yml file then updated?
 
-I usually start by navigating to the php/ subdirectory first, of the directory where I keep all source directories, which is /home/x/src/ on my home setup.
+I usually start by navigating to the <b>php/</b> subdirectory first, of
+the directory where I keep all source directories, which is <b>/home/x/src/</b>
+on my home setup.
 
-Strictly speaking this cd-operation (change directory) is not necessary; the RBT scripts will work fine from other directories too. But I found it is easier if I first go to the directory where I keep the corresponding source archive. In the context of this paragraph, php could then be found in the subdirectory at /home/x/src/php/. I follow the "one directory per program" rule - it is a very simple approach.
+Strictly speaking this cd-operation (<b>change directory</b>) is not necessary;
+the RBT scripts will work fine from other directories too. But I found it is
+easier if I first go to the directory where I keep the corresponding source
+archive. In the context of this paragraph, php could then be found in the
+subdirectory at <b>/home/x/src/php/</b>. I follow the "one directory
+per program" rule - it is a very simple approach.
 
-Now that I have (hopefully) managed to navigate to the source directory at hand (/home/x/src/php/), I can then run the following command on the commandline:
+Now that I have (hopefully) managed to navigate to the source directory at hand
+(<b>/home/x/src/php/</b>), I can then run the following command on the commandline:
 
-incrementversion
-incr # ← or just this alias to the above ^^^ instead
-This command will actually invoke class RBT::Cookbooks::IncrementProgramVersion which will try to find a new upstream release tarball, using curl or wget to check if such a remote tarball exists.
+    incrementversion
+    incr # ← or just this alias to the above ^^^ instead
 
-Note that I use many aliases on my home system; all aliases are kept in another gem, called rcfiles.
+This command will actually invoke class
+<b>RBT::Cookbooks::IncrementProgramVersion</b> which will
+try to find a new upstream release tarball, using <b>curl</b>
+or <b>wget</b> to check if such a remote tarball exists.
+ 
+Note that I use many aliases on my home system; all aliases are kept in
+another gem, called <b>rcfiles</b>.
 
-Now, if the remote file specified at url1 in the file called php.yml exists then it will be downloaded the moment I try to compile the program at hand (in this case php).
+Now, if the remote file specified at <b>url1</b> in the file called
+<b>php.yml</b> exists then it will be <b>downloaded</b> the moment I
+try to compile the program at hand (in this case php).
 
 So, via the commandline, I can simply type this:
 
-rbt php
-If things go alright from that point forward - which they tend to do, at the least for php and many other programs that can be compiled - then php will have been compiled and installed afterwards into the /usr/ prefix, or the AppDir prefix on my home system, which would be /home/Programs/Php/8.3.3/ in this case, for instance. That's it for the most part: I just compiled a program from source, and all I had to do was to type rbt php. \o/
+    rbt php
 
-(Actually, for historic reasons, I use "ry" rather than "rbt", so the real command is even shorter.)
+<b>If</b> things go alright from that point forward - which they tend to
+do, at the least for php and many other programs that can be compiled - 
+then php will have been compiled and installed afterwards into the
+<b>/usr/</b> prefix, or the <b>AppDir prefix</b> on my home system,
+which would be <b>/home/Programs/Php/8.3.3/</b> in this case,
+for instance. That's it for the most part: <b>I just compiled a
+program from source</b>, and all I had to do was to type
+<b>rbt php</b>. \o/
 
-At any rate, as can be seen, using rbt php is quite simple. I purposely did not want to make this more complicated than that.
+(Actually, for historic reasons, I use "ry" rather than "rbt", so
+the real command is even shorter.)
 
-In fact: on my home system I further simplify the above, by using the alias "trad", which will first update the program at hand (in this case php), by incrementing the version number (of php), then try to download the actual source archive, extract the source archive and then compile php into the /usr/ prefix, which is the "traditional" prefix (hence the abbrevation "trad" I am using here). Of course you can do something different, such as using usr as an alias rather than trad; my brain is just so used to trad as invocation example that I keep on using that.
+At any rate, as can be seen, using <b>rbt php</b> is quite simple.
+I purposely did not want to make this more complicated than that.
+
+In fact: on my home system I further simplify the above, by using
+the alias "<b>trad</b>", which will first update the program
+at hand (in this case php), by incrementing the version number
+(of php), then try to download the actual source archive, extract
+the source archive and then compile php into the <b>/usr/</b>
+prefix, which is the "traditional" prefix (hence the abbrevation
+"trad" I am using here). Of course you can do something different,
+such as using <b>usr</b> as an alias rather than <b>trad</b>;
+my brain is just so used to <b>trad</b> as invocation example
+that I keep on using that.
 
 A little historic detour comes next ...
 
-From a historic point of view, it was somewhat too tedious for me to keep on compiling things manually, via the old "./configure; make; make install" route, so it made sense to me to create some scripts in ruby that could simplify this for me. Back in 2004 when I was using Linux, I discovered GoboLinux, which was a great distribution, with an excellent philosophy. I did not understand the shell scripts they used, though, so I tried to write (and re-create) the logic behind it in ruby.
+From a historic point of view, it was somewhat too tedious for me
+to keep on compiling things manually, via the old <b>"./configure; make;
+make install"</b> route, so it made sense to me to create some scripts
+in ruby that could simplify this for me. Back in 2004 when I was
+using Linux, I discovered <b>GoboLinux</b>, which was a great
+distribution, with an excellent philosophy. I did not understand the
+shell scripts they used, though, so I tried to write (and re-create)
+the logic behind it in <b>ruby</b>.
 
-This goal of making RBT compatible with GoboLinux still exists as of today: the RBT project must work on GoboLinux, out of the box. I have not tested this in quite some time, though ... need to do so eventually. Unfortunately GoboLinux is also no longer really developed actively anymore, so this goal is no longer as important. Nonetheless, should GoboLinux ever make a comeback, I'll retain this objective, and try to write code in a flexible manner to help support this goal.
+This goal of making RBT compatible with GoboLinux still exists as of
+today: the RBT project must work on GoboLinux, out of the box. I have
+not tested this in quite some time, though ... need to do so
+eventually. Unfortunately GoboLinux is also no longer really developed
+actively anymore, so this goal is no longer as important. Nonetheless,
+should GoboLinux ever make a comeback, I'll retain this objective,
+and try to write code in a flexible manner to help support this
+goal.
 
-Having different goals, as part of the RBT suite, reinforces the statement that RBT tries to remain flexible. This flexibility should then allow different use cases, subsequently allowing users of the RBT suite to repurpose this project to their own needs.
+Having different goals, as part of the RBT suite, reinforces the
+statement that RBT tries to <b>remain flexible</b>. This flexibility
+should then allow different use cases, subsequently allowing 
+users of the RBT suite to repurpose this project to their own
+needs.
 
-As already stated elsewhere in this project, I really want to be able to use the project on linux, on windows, on mac OS X, on the various BSDs, ideally also on HaikuOS and so forth one day. One project to rule them all! \o/
+As already stated elsewhere in this project, I really want to be
+able to use the project on linux, on <b>windows</b>, on
+<b>mac OS X</b>, on the various BSDs, ideally also on HaikuOS
+and so forth one day. <b>One project to rule them all!</b> \o/
 
-This means that RBT has to remain sufficiently flexible, as much as that is possible. It has to be adaptable to different operating systems on the fly; or at the least easily.
+This means that <b>RBT</b> has to remain sufficiently flexible, as
+much as that is possible. It has to be adaptable to different
+operating systems on the fly; or at the least easily.
 
-Additionally, I want to be able to use different prefixes. Most existing package managers make it hard to install applications into a particular prefix, and have things work from there. They tend to assume that the only prefix that is valid is the /usr/ directory.
+Additionally, <b>I want to be able to use different prefixes</b>.
+Most existing package managers make it hard to install applications
+into a particular prefix, and have things work from there. They
+tend to assume that the only prefix that is valid is the
+<b>/usr/</b> directory.
 
-For instance: debian does not allow you to use a layout similar to how GoboLinux works, by default. I don't know why they do not allow for it - probably because nobody wrote the code in dpkg/apt to handle different prefixes. I dislike that we do not enjoy this flexibility here.
+For instance: <b>debian</b> does not allow you to use a layout similar
+to how GoboLinux works, by default. I don't know why they do not allow
+for it - probably because nobody wrote the code in dpkg/apt to handle
+different prefixes. I dislike that we do not enjoy this flexibility
+here.
 
-From that original goal that was historically the bootstrap phase of the RBT project, I added more and more code over time. I did want to provide better error messages as well, and hints how to resolve something whenever a problem happens - way before StackOverflow existed. The goal here was to try to automatically solve problems, if the RBT suite has enough information available to do so.
+From that original goal that was historically the <b>bootstrap phase</b>
+of the RBT project, I added more and more code over time. I did want
+to provide better error messages as well, and hints how to resolve
+something whenever a problem happens - way before <b>StackOverflow</b>
+existed. The goal here was to try to automatically solve problems,
+if the RBT suite has enough information available to do so.
 
-Most compile-related errors are actually quite useless and cryptic to newcomers, but also to more experienced users; sometimes they are even bogus and misleading and flat out incorrect. Newcomers often do not understand the problem domain, so RBT also tries to help users in that regard. Errors may be collected, and then something useful is displayed on the commandline - at the least that is one goal for the RBT project. This may not always be very useful or work in a reliable manner, but at the least that is one goal for the RBT suite. The code for this is not ideal; I am slowly rewriting it since as of March 2020. (Actually, I think I may have to rewrite the whole project past 2021 one day; but I delay this for now. I want to be better prepared before I rewrite it. In February 2024 I finally hit the bullet and started the rewrite.)
+Most <b>compile-related errors</b> are actually quite useless and cryptic
+to newcomers, but also to more experienced users; sometimes they are
+even bogus and misleading and flat out incorrect. Newcomers often do not
+understand the problem domain, so RBT also tries to help users in that
+regard. Errors may be collected, and then something useful is displayed
+on the commandline - at the least that is one goal for the RBT project.
+This may not always be very useful or work in a reliable manner, but at
+the least that is one goal for the RBT suite. The code for this is not
+ideal; I am slowly rewriting it since as of <b>March 2020</b>. (Actually,
+I think I may have to rewrite the whole project past 2021 one day; but
+I delay this for now. I want to be better prepared before I rewrite
+it. In <b>February 2024</b> I finally hit the bullet and started the rewrite.)
 
-The programs that are part of the RBT project I can usually compile by just issuing any of the following commands:
+The programs that are part of the RBT project I can usually compile by
+just issuing any of the following commands:
 
-rbt NAME
-rbt php
-rbt python
-and so forth, so this is really convenient for me. I don't depend on another package manager that upstream developers control.
+    rbt NAME
+    rbt php
+    rbt python
 
-What follows next is, more or less, a description of generic use cases that I may face on a daily basis.
+and so forth, so this is really convenient for me. I don't depend on
+another package manager that upstream developers control.
 
-When I compile a (new) program via RBT, such as by issuing "compile htop" or "rbt htop" or "ry htop" (I make use of aliases a lot), then the RBT-scripts will (try to) compile the program htop for me, as specified by the corresponding "htop.yml" file, which is part of the RBT project - within the Cookbooks namespace. Hence, within RBT::Cookbooks.
+What follows next is, more or less, a description of generic use
+cases that I may face on a daily basis.
 
-If I need to make a change to the compilation process, such as by using a different default prefix, then I simply edit the htop.yml file, change, add or remove the corresponding entry, and things will (should) work past this point - but I can also override the settings from the commandline, so I have all the flexibility required available.
+When I compile a (new) program via <b>RBT</b>, such as by issuing "<b>compile
+htop</b>" or "<b>rbt htop</b>" or "<b>ry htop</b>" (I make use of aliases a lot),
+then the <b>RBT-scripts</b> will (try to) compile the program **htop** for
+me, as specified by the corresponding "htop.yml" file, which is part of
+the RBT project - within the **Cookbooks** namespace. Hence, within
+<b>RBT::Cookbooks</b>.
 
-Defined actions in the RBT suite - well-defined, actionable components
-A defined action, in regards to the RBT project, refers to an action that will always "stay the same". Such actions yield reproducible results. They also should not require of the user of the RBT project to know the class-name or the file-name (of the .rb file that handles this task) as such whatsoever - this is a detail that is not necessary to know. It is thus some kind of abstraction.
+If I need to make a change to the compilation process, such as by
+using a different default <b>prefix</b>, then I simply edit the
+<b>htop.yml</b> file, change, add or remove the corresponding entry,
+and things will (should) work past this point - but I can also
+override the settings from the commandline, so I have all the
+flexibility required available.
+
+## Defined actions in the RBT suite - well-defined, actionable components
+
+A <b>defined action</b>, in regards to the RBT project, refers to an
+action that will <b>always</b> "<i>stay the same</i>". Such actions
+yield <b>reproducible results</b>. They also should not require of the
+user of the RBT project to know the class-name or the file-name (of
+the .rb file that handles this task) as such whatsoever - this is a
+detail that is not necessary to know. It is thus some kind of 
+abstraction.
 
 Some of these action allow for some flexibility.
 
-For instance, the extract-action handles input with a leading : character as if a full path was desired by the user.
+For instance, the <b>extract-action</b> handles input with a leading
+<b>:</b> character as if a full path was desired by the user.
 
 So, take this commandline invocation:
 
-action_extract :htop
-actionextract :htop
-This will be just about identical to, for instance, the following variant:
+    action_extract :htop
+    actionextract :htop
 
-actionextract /home/x/src/htop/htop-3.2.3.tar.xz
-If you compare these two invocation examples of the extract-action then you can see that in the first variant you can omit many characters, as it is much shorter - and thus more convenient on the commandline.
+This will be just about identical to, for instance, the following
+variant:
 
-Of course certain classes, such as class RBT::Action::SoftwareManager, will extract the source archive for you anyway, but I wanted to have individual actions, such as the extract-action, also available as a singular, actionable entry point from the commandline.
+    actionextract /home/x/src/htop/htop-3.2.3.tar.xz
 
-Note that this only works if you have already downloaded the source archive, and moved it to its corresponding location (which class RBT::Action::SoftwareManager) will also do, by default.
+If you compare these two invocation examples of the <b>extract-action</b>
+then you can see that in the first variant you can omit many characters,
+as it is much shorter - and thus more convenient on the commandline.
+
+Of course certain classes, such as class <b>RBT::Action::SoftwareManager</b>,
+will extract the source archive for you anyway, but I wanted to have
+individual actions, such as the extract-action, also available as a
+singular, actionable entry point from the commandline.
+
+Note that this only works if you have already downloaded the source
+archive, and moved it to its corresponding location (which class
+RBT::Action::SoftwareManager) will also do, by default.
 
 This can be done manually, for instance, via:
 
-rbt --download=htop
-I control most of what I compile via .yml files, first and foremost - a simple text file. Other package managers do something similar if you look at them. Arch, for instance, makes use of PKG_BUILD or some file like that; gentoo uses ebuilds, debian also uses some designated files, slackware uses its own minimalistic package manager, and so forth.
+    rbt --download=htop
 
-The "default settings" that I may use for these programs go into a specific .yml file, whereas the commandline switches allow me to specifically override or cherry-pick other settings, based on the machine that I am working with. For example, on GoboLinux the AppDir prefix makes a lot of sense. On slackware on the other hand I may decide to just use /usr as option given to --prefix=.
+I control most of what I compile via .yml files, first and foremost - a
+simple text file. Other package managers do something similar if you look
+at them. Arch, for instance, makes use of <b>PKG_BUILD</b> or some file
+like that; gentoo uses <b>ebuilds</b>, debian also uses some designated
+files, slackware uses its own minimalistic package manager, and so forth.
 
-On traditional linux distributions, /usr as prefix is not the only possibility of course. Another popular way is to compile into the user's home directory. A commandline switch exists for the latter, for the RBT project, called --home-directory. This is equivalent to whatever the user's home directory ought to be, such as /home/debug/ or /home/joe/. (I typically have a user account called debug on my systems, which is mostly concerned with debugging something on the target computer.)
+The "default settings" that I may use for these programs go into 
+a specific .yml file, whereas the **commandline switches** allow
+me to specifically override or cherry-pick other settings, based
+on the machine that I am working with. For example, on **GoboLinux**
+the AppDir prefix makes a lot of sense. On **slackware** on the
+other hand I may decide to just use **/usr** as option given
+to **--prefix=**.
 
-So, --home-directory for the user joe would be equivalent to --prefix=/home/joe/.
+On <b>traditional</b> linux distributions, **/usr** as prefix is
+not the only possibility of course. Another popular way is to
+compile into the <b>user's home directory</b>. A commandline switch
+exists for the latter, for the RBT project, called **--home-directory**.
+This is equivalent to whatever the user's home directory ought to
+be, such as **/home/debug/** or **/home/joe/**. (I typically have
+a user account called **debug** on my systems, which is mostly
+concerned with debugging something on the target computer.)
 
-This is useful in the sense that, ideally, I can get away with only passing the name of the program that is to be compiled, without needing to change anything. It allows me to be lazy - and just get things to "work", when they are compiled (if the compilation process itself will work).
+So, --home-directory for the user joe would be equivalent to
+<b>--prefix=/home/joe/</b>.
 
-Code conventions for the RBT suite
-The RBT suite contains quite a lot of ruby code. Over time, in particular when I have not worked on rbt for weeks or even months, I tend to forget some of the simpler conventions. Thus, this subsection helps me remember some of these conventions. It may also serve as an additional documentation for the project.
+This is useful in the sense that, ideally, I can get away with only
+passing the name of the program that is to be compiled, without
+needing to change anything. It allows me to be lazy - and
+just get things to "work", when they are compiled (if the compilation
+process itself will work).
+
+## Code conventions for the RBT suite
+
+The RBT suite contains quite a lot of ruby code. Over time, in particular
+when I have not worked on rbt for weeks or even months, I tend to forget
+some of the simpler conventions. Thus, this subsection helps me remember
+some of these conventions. It may also serve as an additional
+documentation for the project.
 
 Without further ado:
 
-absolute_path: This can be used as a replacement for File.absolute_path().
-               Not only is it a bit shorter, but it will also ensure
-               that there is a trailing '/' character. 
-Time investment into the RBT suite
-Time is a finite resource of us humans. Naturally there is a limit how much code we can maintain - and how much time we can invest into a given project.
+    absolute_path: This can be used as a replacement for File.absolute_path().
+                   Not only is it a bit shorter, but it will also ensure
+                   that there is a trailing '/' character. 
 
-In September 2021 I decided to cut back on time investment for the RBT project. This is mostly because other projects take away more of my time, including non-computer centric activites. I won't abandon rbt, but it should be pointed out that most of the time I am now doing maintenance work, fixing some problems here and there, polishing this or that - but the RBT suite is still rather of beta-ish quality, and I can not make any guarantee that the project will ever leave its beta-ish roots.
+## Time investment into the RBT suite
 
-In February 2024 I invested more time into the project by rewriting it again - and polishing it while doing so. While I can not guarantee to invest as much time into the project, every once in a while I will probably fix lots of small and also larger things in the project.
+Time is a finite resource of us humans. Naturally there is a limit
+how much code we can maintain - and how much time we can invest
+into a given project.
 
-Most recent release series (some kind of "changelog" entry)
-I no longer keep detailed changelog entries, as they are too much effort to maintain. Instead I will use the time to improve the documentation of existing code.
+In <b>September 2021</b> I decided to cut back on time investment
+for the RBT project. This is mostly because other projects
+take away more of my time, including non-computer centric activites.
+I won't abandon rbt, but it should be pointed out that most of the
+time I am now doing maintenance work, fixing some problems here and
+there, polishing this or that - but the RBT suite is still rather
+of beta-ish quality, and I can not make any guarantee that the
+project will ever leave its beta-ish roots.
 
-The future outlook for the RBT project past June 2023
-Some time ago I realised that the RBT project is not "ideally setup". What does this mean?
+In <b>February 2024</b> I invested more time into the project by
+rewriting it again - and polishing it while doing so. While I can
+not guarantee to invest as much time into the project, every
+once in a while I will probably fix lots of small and also
+larger things in the project.
 
-Well - there are various big classes, such as class RBT::Action::SoftwareManager. It works fairly ok-ish, but in May 2023 I noticed that it suddenly reported errors when there were only warnings shown before. This then led to failure of installation.
+## Most recent release series (some kind of "changelog" entry)
 
-I know how to fix that bug (may take me two hours or so, which I simply don't always have), but ... that's just one bug. There are several additional bugs like that, and I often seem to invest time merely to deal with architectural deficits. Time is a finite resource, so I can not always invest the time to fix messy code.
+I no longer keep detailed changelog entries, as they are too much
+effort to maintain. Instead I will use the time to improve the
+documentation of existing code.
 
-Meanwhile I started to use actions - such as stored in RBT.action() - and I believe this to be the future of the RBT project. I simply want to capture ALL actionable events through a unified handler - in this case, as mentioned, via RBT.action().
+## The future outlook for the RBT project past June 2023
 
-For instance, sometimes on a new computer system, I want to compile sed statically into an appdir prefix such as /home/Programs/Sed/4.11. But it may fail and then give a bogus error. I want to be able to do step-wise actions here, and check each one in its own right - a bit like the GNU gdb debugger, so that I can see where the problem is, and work around it. In classical GNU configure-based projects I may have to sift through a file called config.log. I don't like that. I want error messages to be instantly useful, or even be resolved automatically.
+Some time ago I realised that the RBT project is not "ideally setup".
+What does this mean?
 
-So I decided that I will eventually transition into a fully actionable-setup of the rbt gem. I will still maintain RBT::Action::SoftwareManager and improve it, but at the same time I will transition towards actionable snippets. I will use them kind of like individual components/objects, until the whole rbt suite becomes more reliable. I want it to automatically update a computer from zero-to-hero, without having to care much about the oddities of each individual component.
+Well - there are various big classes, such as class <b>RBT::Action::SoftwareManager</b>.
+It works fairly ok-ish, but in May 2023 I noticed that it suddenly
+reported errors when there were only warnings shown before. This then
+led to failure of installation.
 
-In the long run we will move some of the functionality found within RBT::Action::SoftwareManager into actions, and subsequently replace the logic stored in class RBT::Action::SoftwareManager with those actionable callbacks. So, one distant future, class RBT::Action::SoftwareManager may just be the general wrapper over all actions. This will take quite some time, a few years perhaps, so do not expect anything to work in the nearby future, for now.
+I know how to fix that bug (may take me two hours or so, which I simply
+don't always have), but ... that's just one bug. There are several
+additional bugs like that, and I often seem to invest time merely to
+deal with architectural deficits. Time is a finite resource, so I can
+not always invest the time to fix messy code.
 
-Conventions and Aliases used for the purpose of this document as well as the RBT project in general
-Commands that you can typically use on the commandline, such as via the bash shell on Linux, are shown with an indent of four ' ' space character on the left hand side.
+Meanwhile I started to use <b>actions</b> - such as stored in RBT.action() -
+and I believe this to be the future of the RBT project. I simply want
+to capture ALL actionable events through a unified handler - in
+this case, as mentioned, via RBT.action().
+
+For instance, sometimes on a new computer system, I want to 
+compile sed statically into an appdir prefix such as 
+/home/Programs/Sed/4.11. But it may fail and then give a bogus
+error. I want to be able to do step-wise actions here, and check
+each one in its own right - a bit like the GNU gdb debugger,
+so that I can see where the problem is, and work around it.
+In classical GNU configure-based projects I may have to sift
+through a file called config.log. I don't like that. I want
+error messages to be instantly useful, or even be resolved
+automatically.
+
+So I decided that I will eventually transition into a fully
+actionable-setup of the rbt gem. I will still maintain 
+RBT::Action::SoftwareManager and improve it, but at the same time I will
+transition towards actionable snippets. I will use them
+kind of like individual components/objects, until the
+whole rbt suite becomes more reliable. I want it to 
+automatically update a computer from zero-to-hero, without
+having to care much about the oddities of each individual
+component.
+
+In the long run we will move some of the functionality
+found within <b>RBT::Action::SoftwareManager</b> into actions, and subsequently
+replace the logic stored in class RBT::Action::SoftwareManager with
+those actionable callbacks. So, one distant future, 
+class RBT::Action::SoftwareManager may just be the general wrapper over
+all actions. This will take quite some time, a few years
+perhaps, so do not expect anything to work in the nearby
+future, for now.
+
+## Conventions and Aliases used for the purpose of this document as well as the RBT project in general
+
+Commands that you can typically use on the commandline, such as
+via the <b>bash</b> shell on Linux, are shown with an indent
+of four ' ' space character on the left hand side.
 
 Example:
 
-rbt htop # ← This would try to compile the program called htop.
-Here, rbt refers to bin/rbt, as part of the RBT project.
+    rbt htop # ← This would try to compile the program called htop.
 
-Note that on my home system I have aliased ry to rbt, so that is why all the examples below this paragraph will actually use ry; mostly because it is more convenient for me to use ry rather than rbt. Either way, some of the old documentation may use either ry or rbt, both of which is equivalent.
+Here, <b>rbt</b> refers to bin/rbt, as part of the RBT project.
 
-By default the programs that are part of RBT will make use of colours. You can disable this in general via the commandline flag --disable-colours.
+Note that on my home system I have aliased **ry** to **rbt**,
+so that is why all the examples below this paragraph will actually
+use **ry**; mostly because it is more convenient for me to use 
+**ry** rather than **rbt**. Either way, some of the old
+documentation may use either <b>ry</b> or <b>rbt</b>, both
+of which is equivalent.
 
-The class name will typically be shown on the commandline; primarily to let the user know which class is handling a specific step of the installation/compiling process.
+By default the programs that are part of RBT will make use of
+colours. You can disable this in general via the commandline
+flag <b>--disable-colours</b>.
 
-The class name will typically be shown via :: such as RBT::Action::SoftwareManager.
+The class name will typically be shown on the commandline;
+primarily to let the user know which class is handling a
+specific step of the installation/compiling process.
 
-If an external class is called then the arrow symbol → will be used.
+The class name will typically be shown via :: such as
+<b>RBT::Action::SoftwareManager</b>.
+
+If an external class is called then the arrow symbol
+→ will be used.
 
 The following picture shows this:
 
+<img src="https://i.imgur.com/j54KXl1.png" style="margin:1em">
 
+## Copying the expanded directory
 
-Copying the expanded directory
-It may be helpful if you simply copy the expanded cookbooks directory after you installed the gem.
+It may be helpful if you simply copy the expanded cookbooks
+directory after you installed the gem.
 
 This can be done via:
 
-rbt --copy-expanded-directory
-# or
-# installer --copy-expanded-directory
-You can also generate the expanded dataset anew, or use the SQLite wrapper, but in general using the above option is faster and easier for most (new) users.
+    rbt --copy-expanded-directory
+    # or
+    # installer --copy-expanded-directory
 
-Once that has been done you should be able to compile programs from source.
+You can also generate the expanded dataset anew, or use
+the SQLite wrapper, but in general using the above 
+option is faster and easier for most (new) users.
 
-Keep in mind that currently you have to maintain the dataset by yourself, or default to the changed dataset every now and then. The good news is that the .yml files are rarely changing in format, so you can easily "plug in" or remove new/old .yml files here.
+Once that has been done you should be able to compile
+programs from source.
 
-Background explanation: FAQ entry "Why a new project rather than extending existing code?"
-This is a valid question - why not contribute to an existing project rather than create a new project from scratch? There are a few problems with the existing projects out there, though.
+Keep in mind that currently you have to maintain the
+dataset by yourself, or default to the changed dataset
+every now and then. The good news is that the .yml
+files are rarely changing in format, so you can
+easily "plug in" or remove new/old .yml files here.
 
-The scope of these projects is fairly often limited. For example: mac homebrew is a package manager, but other than that it isn't doing that much; and it does not work that well on linux or windows - I tried it in 2019 on linux and it did not work for me. Perhaps things improved since then, but since I felt that linux is a second-class citizen in homebrew, I did not invest more time into the issues I had faced with homebrew back then.
+## Background explanation: FAQ entry "Why a new project rather than extending existing code?"
 
-Another reason is that I do want to have a project that works as well as ruby does on any given operating system, as long as ruby is supported. I want to use it on windows, on haiku, on the BSDs, solaris, for cross-compilation targets and so forth.
+This is a valid question - why not <b>contribute to an existing project</b>
+rather than create a new project from scratch? There are a few
+problems with the existing projects out there, though.
 
-But there are API-differences as well and the way how these systems are used. For example, the classical package managers on linux do not allow you to easily use another prefix.
+The scope of these projects is fairly often limited. For example:
+mac **homebrew** is a package manager, but other than that it isn't
+doing that much; and it does not work that well on linux or windows -
+I tried it in <b>2019</b> on linux and it did not work for me. Perhaps
+things improved since then, but since I felt that linux is a
+second-class citizen in homebrew, I did not invest more time
+into the issues I had faced with homebrew back then.
 
-Most of them, at the least on linux, assume that /usr/ is the only prefix that is to be used (or /usr/cellar or something like this). I do not like this restriction - I want more flexibility, and complete control over the prefix in use at all times. I want to be able to use a hybrid system too - partially using /usr/ as prefix, and partially using versioned AppDirs such as into my home directory.
+Another reason is that I do want to have a project that works as
+well as ruby does on any given operating system, as long as ruby
+is supported. I want to use it on windows, on haiku, on the BSDs,
+solaris, for cross-compilation targets and so forth.
 
-With most package managers I would be forced into using just /usr/ as the global prefix - no alternatives to this approach.
+But there are **API-differences** as well and the way how these systems
+are used. For example, the classical **package managers** on linux <b>do
+not allow you to easily use another prefix</b>.
 
-I absolutely dislike this restriction. Some of them even split it into /usr/ and /usr/local - for example, debian has python, perl and ruby packages under /usr/local/. What is this madness? Why do I need to bother with it? How can I easily change it? Why is there no consistency in this? The "explanation" they try to give is a joke. In general the whole FHS is a mess - and a joke. It makes no sense.
+Most of them, at the least on linux, assume that **/usr/** is the
+only prefix that is to be used (or /usr/cellar or something like
+this). I do not like this restriction - I want more flexibility,
+and complete control over the prefix in use <b>at all times</b>. I
+want to be able to use a hybrid system too - partially using
+/usr/ as prefix, and partially using **versioned AppDirs**
+such as into my home directory.
 
-Debian in general is a total mess. Let me show you a single entry as example demonstrating why, as taken from the following webpage:
+With most package managers I would be forced into using just
+/usr/ as the global prefix - no alternatives to this approach.
+
+I absolutely dislike this restriction. Some of them even split
+it into /usr/ and /usr/local - for example, debian has python,
+perl and ruby packages under <b>/usr/local/</b>. What is this
+madness? Why do I need to bother with it? How can I easily
+change it? Why is there no consistency in this? The "explanation"
+they try to give is a joke. In general the whole FHS is a mess -
+and a joke. It makes no sense.
+
+Debian in general is a total mess. Let me show you a single
+entry as example demonstrating why, as taken from the
+following webpage:
 
 https://wiki.debian.org/PerlFAQ
 
 So they ask the question:
 
-What if you want to install an updated version of perl in /usr/local for experimental work but keep the Debian/Release version in usr?
+<b>What if you want to install an updated version of perl
+in /usr/local for experimental work but keep the
+Debian/Release version in usr?</b>
 
 And they answer it via:
 
-"This setup may not work out well with the Debian Perl package for Sarge since it has its own ideas about Perl stuff in /usr/local/."
+"This setup may not work out well with the Debian Perl
+package for Sarge since it has its own ideas about
+Perl stuff in <b>/usr/local/</b>."
 
-I mean, seriously? Perl is so outdated that they don't even know how to install packages? So /usr/lib/ becomes an eternal struggle with /usr/local/lib/? What the actual ...
+I mean, seriously? Perl is so outdated that they don't
+even know how to install packages? So /usr/lib/
+becomes an eternal struggle with /usr/local/lib/?
+What the actual ... 
 
-As far as I am aware, there is no trivial way to change any of that once you are using a distribution. They expect things to be a certain way.
+As far as I am aware, there is no trivial way to change 
+any of that once you are using a distribution. They
+expect things to be a certain way.
 
-This above listing of reasons can be extended really, and you can find numerous more issues - but ultimately it was less of an issue here to create a new project that has these different goals in mind, rather than try to retrofit existing code bases out there towards my own use cases.
+This above listing of reasons can be extended really, and
+you can find numerous more issues - but ultimately it was
+less of an issue here to create a new project that has these 
+different goals in mind, rather than try to retrofit
+existing code bases out there towards my own use cases.
 
-I also preferred to use ruby rather than perl or python, so the number of available package managers was even more limited here.
+I also preferred to use ruby rather than perl or python,
+so the number of available package managers was even
+more limited here.
 
-Package Users
-The concept behind package users is fairly simple to understand:
+## Package Users
 
-Every package belongs to a certain user.
+The concept behind <b>package users</b> is fairly simple to
+understand:
 
-So, for instance, the program called evince (a .pdf reader) would belong to a user called Evince, or perhaps with some prefix, such as UserEvince, if we have to avoid name collision.
+<b>Every package belongs to a certain user.</b>
 
-This way you can immediately identify which file on your computer system belongs to which package, if the underlying operating system supports this - which linux does.
+So, for instance, the program called <b>evince</b> (a 
+.pdf reader) would belong to a user called Evince, or
+perhaps with some prefix, such as UserEvince, if we
+have to avoid name collision.
 
-By default this setting is turned off though. I am not entirely certain whether RBT should support this - but it is here mentioned in this document to demonstrate that some thought has been given about this feature/functionality. I first read it when someone wanted to do a BLFS build (Beyond Linux From Scratch).
+This way you can immediately identify which file
+on your computer system belongs to which package,
+if the underlying operating system supports this -
+which linux does.
 
-PDF Generation for users of the RBT suite
-If you want to generate PDF files which you can print or distribute anyway you see fit, have a look at the PdfGenerator.rb script. Note though, right now the output is a bit ugly... I will look into this again at a later point in time.
+By default this setting is <b>turned off</b> though. I
+am not entirely certain whether RBT should support
+this - but it is here mentioned in this document
+to demonstrate that some thought has been given
+about this feature/functionality. I first read it
+when someone wanted to do a BLFS build (Beyond
+Linux From Scratch).
 
-The above is fairly old content - generation of pdf-files may not work properly anymore. It is not so important, though, as the RBT suite's primary objective is to support compilation of programs, from source.
+## PDF Generation for users of the RBT suite
 
-Determining the version of the RBT suite
-You can issue the following from the commandline to determine the version of the RBT suite:
+If you want to generate PDF files which you can print or distribute
+anyway you see fit, have a look at the PdfGenerator.rb script.
+Note though, right now the output is a bit ugly... I will look into
+this again at a later point in time.
 
-rbt --version?
-The version is kept in the file rbt/version/version.rb.
+The above is fairly old content - generation of pdf-files 
+may not work properly anymore. It is not so important, though,
+as the RBT suite's primary objective is to support compilation
+of programs, from source.
+
+## Determining the version of the RBT suite
+
+You can issue the following from the commandline to determine
+the version of the RBT suite:
+
+    rbt --version?
+
+The version is kept in the file <b>rbt/version/version.rb</b>.
 
 You can also query it from within ruby via:
 
-require 'rbt'
-RBT.version?
-Viewing all packages
+    require 'rbt'
+    RBT.version?
+
+## Viewing all packages
+
 To view a list of all packages on your system, do this:
 
-rbt php packages?
-rbt python packages?
+    rbt php packages?
+    rbt python packages?
+
 The result would be something like this:
 
-["/Depot/Packages/Python-2.5.tar.bz2"]
-Simulate running a program of the RBT suite
-This option - also known as no harm Option, allows you to run the RBT Scripts in a simulation mode.
+    ["/Depot/Packages/Python-2.5.tar.bz2"]
+
+## Simulate running a program of the RBT suite
+
+This option - also known as <b>no harm</b> Option, allows you
+to run the RBT Scripts in a simulation mode.
 
 This works like so:
 
-rbt php simulate
-rbt php --simulate
-class IncrementProgramVersion
-This class can be used to automatically try to find whether any given program was upgraded.
+    rbt php simulate
+    rbt php --simulate
 
-This assumes that programs are numbered in a semantic version scheme.
+## class IncrementProgramVersion
 
-Extended cookbooks
-You can require the cookbooks submodule in an extended variant, such as via the following instruction:
+This class can be used to automatically try to find
+whether any given program was upgraded.
 
-require 'rbt/module_programs'
-The functionality is assumed to extend the RBT namespace directly. In the past the file was simply called extended.rb, but the name module_programs is more logical, so it was renamed to module_programs.rb some years ago.
+This assumes that programs are numbered in a
+semantic version scheme.
+  
+## Extended cookbooks
 
-This is also called "modular apps". The idea is that the dataset can be queried from the toplevel namespace RBT directly.
+You can require the <b>cookbooks</b> submodule in an
+extended variant, such as via the following instruction:
 
-After having done the above require statement, you can then tap into this functionality allowing you to directly call the dataset via the individual name, such as by issuing:
+    require 'rbt/module_programs'
 
-RBT.ruby
-RBT.htop
-RBT.python
+The functionality is assumed to <b>extend</b> the
+RBT namespace directly. In the past the file was
+simply called <b>extended.rb</b>, but the name
+<b>module_programs</b> is more logical, so it was
+renamed to <b>module_programs.rb</b> some years
+ago.
+
+This is also called "modular apps". The idea is that
+the dataset can be queried from the toplevel namespace
+<b>RBT</b> directly.
+
+After having done the above require statement, you can
+then tap into this functionality allowing you to
+directly call the dataset via the individual name, such
+as by issuing:
+
+    RBT.ruby
+    RBT.htop
+    RBT.python
+
 Now you can see the data for ruby, htop, python and so forth.
 
-Personally I do not recommend that users of the rbt gem should use this functionality - it was mostly added to offer that functionality syntax-wise, so that you can just type the RBT namespace, and then the program name. Either way, you decide whether you want to use it or not; I only wanted to make sure that this functionality is possible for RBT as well.
+Personally I do not recommend that users of the rbt gem should
+use this functionality - it was mostly added to offer that
+functionality syntax-wise, so that you can just type the RBT
+namespace, and then the program name. Either way, you decide whether
+you want to use it or not; I only wanted to make sure that this
+functionality is possible for RBT as well.
 
-The history and philosophy of the RBT Project - philosophic considerations
-This subsection in this README-document (autogenerated as README.md) contains some information as to how the RBT project was initially started, and how it has changed over the course of time. Additionally some of the philosophy behind the RBT project will be explained, as well as some conventions and the terminology used by RBT.
+## The history and philosophy of the RBT Project - philosophic considerations
 
-The RBT project in itself started out initially as means to re-create the shell scripts' logic, and functionality, used in GoboLinux, several years ago. I do not recall the exact starting year, but I believe it must have been in the year 2005 or so, give or take; perhaps 2006 at the latest.
+This subsection in this README-document (autogenerated as **README.md**)
+contains some information as to **how the RBT project was initially started**,
+and how it has changed over the course of time. Additionally some of the
+**philosophy** behind the RBT project will be explained, as well as some
+conventions and the terminology used by **RBT**.
 
-I was already using Ruby at that time and I did not understand the shell scripts that were used in GoboLinux.
+The **RBT project** in itself started out initially as means to
+<b>re-create the shell scripts' logic</b>, and functionality,
+used in <b>GoboLinux</b>, several years ago. I do not recall the
+exact starting year, but I believe it must have been in the year
+<b>2005</b> or so, give or take; perhaps 2006 at the latest.
+    
+I was already using **Ruby** at that time and I did not understand the
+shell scripts that were used in **GoboLinux**.
 
-Shell scripts can be quite confusing and difficult to read; parameters do typically not go into a regular function via a function/method signature, but instead are accessed as special semi-global variables such as $1 or $2 within the function body. I find this extremely unintuitive, confusing - and quite ugly. I would not mind it so much if it could be used in addition to regular syntax, but if you look at most shell scripts out there available on the world wide web, you will see how unbelievably ugly these are. It's spaghetti code with tons of syntax noise.
+Shell scripts can be quite confusing and difficult to read; parameters
+do typically <b>not</b> go into a **regular function** via a function/method
+signature, but instead are accessed as special **semi-global variables**
+such as **$1** or **$2** within the function body. I find this
+**extremely unintuitive**, confusing - and quite ugly. I would not mind
+it so much if it could be used in addition to regular syntax, but if you
+look at most shell scripts out there available on the world wide web, you
+will see how unbelievably ugly these are. It's spaghetti code with tons of
+syntax noise.
 
-The more code you write that way in this way, the harder it becomes to untangle that spaghetti mess. To be fair: GoboLinux had one of the prettiest shell script-based code out there, so I have to give the GoboLinux authors credit. It is actually quite readable compared to a lot of other shell code in the www. But, even then, I still think that well-written ruby code is so much prettier and easier to read. (Of course you can write horrible ruby code too, but I am not referring to such cases. By and large, I found it to be true that well-written ruby code tends to be a lot better to read/maintain/change than well-written shell code, for the equivalent functionality.)
+The more code you write that way in this way, the harder it becomes to
+untangle that spaghetti mess. To be fair: **GoboLinux** had one of the
+prettiest shell script-based code out there, so I have to give the
+**GoboLinux** authors credit. It is actually quite readable compared
+to a lot of other shell code in the www. But, even then, I still think
+that well-written ruby code is so much prettier and easier to read. (Of
+course you can write horrible ruby code too, but I am not referring
+to such cases. By and large, I found it to be true that well-written
+ruby code tends to be a lot better to read/maintain/change than
+well-written shell code, for the **equivalent functionality**.)
 
-So, the seemingly logical thing to do here for me was to re-create the functionality that GoboLinux offered, in Ruby, as I find well-written ruby code much simpler and easier to read and understand than shell scripts - at the least the functionality that these shell scripts try to offer.
+So, the seemingly logical thing to do here for me was to <b>re-create the
+functionality that GoboLinux offered</b>, in **Ruby**, as I find well-written
+ruby code **much** simpler and easier to read and understand than shell
+scripts - at the least the functionality that these shell scripts try to
+offer.
 
-At the least for me personally, I have a hard time trying to understand what shell scripts do in general, even though the shell scripts used in GoboLinux are one of the easiest and nicest to read, in my opinion. The GNU Sorcery distribution also had some good shell scripts, but the GoboLinux scripts were better written, in my opinion. Anyways.
+At the least for me personally, I have a hard time trying to understand
+what shell scripts do in general, even though the shell scripts used in
+GoboLinux are one of the easiest and nicest to read, in my opinion.
+The GNU Sorcery distribution also had some good shell scripts, but the
+GoboLinux scripts were better written, in my opinion. Anyways.
 
-Still, shell scripts are difficult to understand, and not very elegant, and elegance/beauty, which is a subjective metric, was one important reason as to why I did want to use ruby rather than shell scripts. I prefer using elegant systems. Both GoboLinux, from a conceptual point of view, and Ruby, are elegant systems/technologies, so it made sense to want to combine different ideas.
+Still, shell scripts are difficult to understand, and not very elegant,
+and elegance/beauty, which is a subjective metric, was one important
+reason as to why I did want to use ruby rather than shell scripts. I
+prefer using elegant systems. Both GoboLinux, from a conceptual point
+of view, and Ruby, are elegant systems/technologies, so it made sense
+to want to combine different ideas.
 
-Elegance/beauty/symmetry in style helps ease the flow of mind in some ways. Why make something complicated if you can keep it simple?
+Elegance/beauty/symmetry in style helps ease the **flow of mind** in
+some ways. Why make something complicated if you can keep it simple?
 
-People who may have been using other languages, such as PHP or perl, may agree with this e. g. when comparing these languages to, say, ruby or python. I do not think python could have been so dominating among the 'scripting' programming languages if it would have had a syntax like perl.
+People who may have been using other languages, such as PHP or perl,
+may agree with this e. g. when comparing these languages to, say, 
+ruby or python. I do not think python could have been so dominating
+among the 'scripting' programming languages if it would have had a
+syntax like perl.
 
-Anyway. This was sort of the initial impetus for creating the RBT project. Lots of years have gone by since then ... well over a decade, really. I can not even pinpoint to a single year when the RBT project was started, since it started out as a set of semi-random .rb files/scripts, but I think the rbt project was created, through the old cookbooks project, in the year 2005, give or take. The file called cookbook_statistics.md keeps some old entries. For example, in late October in the year 2005, the old Cookbooks project, which was eventually changed into RBT, already had 274 programs registered, so it had to have been started prior to October 2005. For comparison - in the ~middle of May 2019, 3593 programs were already integrated into the RBT project. In January 2021 3724 programs are now registered - it keeps on growing, slowly, but steadily. (And yes, sometimes old programs that were not updated in decades, are removed as well. I try to keep the registered programs count for projects that, with some patches, could be adapted to the modern era.)
+Anyway. This was sort of **the initial impetus** for creating the
+**RBT project**. Lots of years have gone by since then ... well over a
+decade, really. I can not even pinpoint to a single year when the RBT
+project was started, since it started out as a set of semi-random .rb
+files/scripts, but I think the rbt project was created, through
+the old cookbooks project, in the year **2005**, give or take. The
+file called **cookbook_statistics.md** keeps some old entries. For
+example, in late October in the year **2005**, the old Cookbooks project,
+which was eventually changed into RBT, already had **274 programs registered**,
+so it had to have been started prior to October 2005. For comparison -
+in the ~middle of **May 2019**, **3593 programs** were already integrated
+into the **RBT project**. In **January 2021** **3724 programs** are
+now registered - it keeps on growing, slowly, but steadily. (And yes,
+sometimes old programs that were not updated in decades, are removed
+as well. I try to keep the registered programs count for projects
+that, with some patches, could be adapted to the modern era.)
 
-Naturally if you have a project that is that old, a lot of things change. This was also the case for the RBT project, in particular the scope of the project has expanded since then.
+Naturally if you have a project that is that old, a lot of things
+change. This was also the case for the **RBT project**, in particular
+the scope of the project has expanded since then.
 
-The primary focus for the RBT project still focuses on compile-related activities. I use the RBT project almost daily in order to get something to compile/install. At a later point, RBT became more of a toolset project.
+The **primary focus** for the **RBT project** still focuses on compile-related
+activities. I use the RBT project almost daily in order to get something to
+compile/install. At a later point, **RBT** became more of a toolset project.
 
-In some ways, this implies that one secondary goal of the RBT project is to be able to build a LFS ("Linux from Scratch") system from scratch, but not every functionality within the RBT project is equally well polished or battle-tested, so manual intervention is still necessary for the time being. The long-term goal is to be able to build a fully automated LFS, though. For example, the option rbt --intelligent-bootstrap taps into this, even though it does not work perfectly well yet; the idea is to simply perform a "bootstrap" operation, de novo, and let ruby figure out what is all necessary. This is akin to the ALFS project, aka automated LFS.
+In some ways, this implies that one secondary goal of the RBT project is
+to be able to build a **LFS** ("Linux from Scratch") system from scratch, 
+but not every functionality within the RBT project is equally well
+polished or battle-tested, so manual intervention is still necessary
+for the time being. The long-term goal is to be able to build a fully
+automated LFS, though. For example, the option **rbt --intelligent-bootstrap**
+taps into this, even though it does not work perfectly well yet; the
+idea is to simply perform a "bootstrap" operation, de novo, and
+let ruby figure out what is all necessary. This is akin to the
+ALFS project, aka **automated LFS**.
 
-Without buzzword talk, RBT itself is in many ways just a large, happy hackish project, rather than something that has a great, perfect design. While a good design is immensely useful, it is not quite how I approached the problem domain originally, nor was it possible for me to do so, since RBT* is ultimately a hobby project; I more try to solve a given problem at hand, and then move on to do other things. Of course I do try to keep the code clean and well documented, but you know how it goes for any hobby project. Sometimes you have more time (and motivation) and sometimes you lack both. I try to remain motivated; otherwise projects may be abandoned suddenly, which isn't great.
+Without buzzword talk, RBT itself is in many ways just a large, happy
+hackish project, rather than something that has a great, perfect design.
+While a good design is immensely useful, it is not quite how I approached 
+the problem domain originally, nor was it possible for me to do so, since 
+*RBT** is ultimately a hobby project; I more try to solve a given problem
+at hand, and then move on to do other things. Of course I do try to keep
+the code clean and well documented, but you know how it goes for any
+hobby project. Sometimes you have more time (and motivation) and
+sometimes you lack both. I try to remain motivated; otherwise projects
+may be abandoned suddenly, which isn't great.
 
-As a rule of thumb, though - the simpler the task that you may want to achieve through RBT, in an automatic, scripted way, the easier it should be for RBT to be of help here.
+As **a rule of thumb**, though - **the simpler the task** that you may
+want to achieve through RBT, in an automatic, scripted way, the easier
+it should be for RBT to be of help here.
 
-As it was already mentioned, in the past there used to be a separate project called Cookbooks, the predecessor to RBT::Cookbooks. That project specifically handled the recipes for the programs, that is, how to install or compile something specifically. In the year 2018 the Cookbooks project has been fully merged into the RBT project, primarily to make syncing the code easier. The RBT::Cookbooks namespace handles the source files' logic, whereas RBT itself handles how to interprete this information, in particular through the main class to use for compiling something, which is the class RBT::Action::SoftwareManager. (The old class RBT::Compile has been deprecated in 2022.)
+As it was already mentioned, in the past there used to be a separate
+project called **Cookbooks**, the predecessor to **RBT::Cookbooks**.
+That project specifically handled the recipes for the programs, that
+is, **how to install or compile something specifically**. In the year
+**2018** the Cookbooks project has been fully merged into the RBT
+project, primarily to make syncing the code easier. The **RBT::Cookbooks**
+namespace handles the source files' logic, whereas RBT itself handles
+how to interprete this information, in particular through the main
+class to use for compiling something, which is the class
+<b>RBT::Action::SoftwareManager</b>. (The old class RBT::Compile has been
+deprecated in <b>2022</b>.)
 
-When you have a look at the RBT project, including the documentation on the homepage of the RBT gem, you may notice that the documentation is quite detailed and will explain quite a bit of the internals, that is, of the internal code used in RBT. This code base is predominantly written in ruby. As such, the whole RBT project caters heavily towards people who already use ruby as their main language of choice.
+When you have a look at the RBT project, including the documentation
+on the homepage of the RBT gem, you may notice that the documentation
+is quite detailed and will explain quite a bit of the **internals**,
+that is, of the internal code used in RBT. This code base is
+predominantly written in ruby. As such, the whole RBT project caters
+**heavily** towards people who already use ruby as their main language
+of choice.
 
-Why did I decide to also document and explain some internals? After all this will lead to a lengthier documentation. Now, there are two main reasons for this:
+Why did I decide to also document and explain some internals? After all
+this will lead to a lengthier documentation. Now, there are two main
+reasons for this:
 
-• The first reason is that it actually helps me remember when I made a specific decision, and why. When looking back at it, perhaps even years lateron, I need to understand why I did choose to go to a particular route.
+• The **first reason** is that it actually helps me remember when I made a
+specific decision, and why. When looking back at it, perhaps even years
+lateron, I need to understand why I did choose to go to a particular
+route.
 
-• The second reason, and more important one, is that I want to treat users as intelligent people, so I will try to explain to them how some of the RBT internals work. Naturally not all of RBT will be explained that way, but more important parts, such as e. g. RBT::Action::SoftwareManager in particular, will have several entries that will explain what is done, and why. My ideal aim would be to actually write a specification as a text, and then let ruby simply parse and evaluate that text - that would be the best. For now, though, the logic simply is hardcoded in the various .rb files, as-is.
+• The **second reason**, and more important one, is that I want to treat
+users as intelligent people, so I will try to explain to them how 
+some of the RBT internals work. Naturally not all of RBT will be
+explained that way, but more important parts, such as e. g. <b>RBT::Action::SoftwareManager</b>
+in particular, will have several entries that will explain what is
+done, and why. My ideal aim would be to actually write a specification
+as a text, and then let ruby simply parse and evaluate that text -
+that would be the best. For now, though, the logic simply is hardcoded
+in the various .rb files, as-is.
 
-I am aware that not everyone using RBT may use ruby. For example, you may use python as your primary language rather than ruby, but would still like to make use of the yaml files in the RBT project.
+I am aware that not everyone using RBT may use ruby. For example, you
+may use python as your primary language rather than ruby, but would 
+still like to make use of the **yaml files** in the RBT project.
 
-I will try to keep the yaml files and format well-documented and well-written; this is an ongoing effort, though. Keep in mind that some entries are literally very very old by now. (You can also compare this to the old GoboLinux recipes, which you can find on Github. Several of these projects no longer exist.)
+I will try to keep the yaml files and format well-documented and
+well-written; this is an ongoing effort, though. Keep in mind that some
+entries are literally very very old by now. (You can also compare this
+to the old GoboLinux recipes, which you can find on Github. Several
+of these projects no longer exist.)
 
-You can generate a sanitized variant of these yaml files from ruby, and then just keep on using these .yml files in other projects - after all that is one advantage of yaml, that we are freed from any single programming language (such as e. g. hardcoding information into a .rb file or a .py file). If you wish to generate these expanded yaml files, you can use rbt --expand-cookbooks, but you may wish to set to another temporary directory before doing this - see other parts of this document for how to do so. Note that the expanded .yml files are also distributed with the rbt gem; this was done to allow for faster bootstrap-like operations. People can just take the dataset from the .yml file and work on it, even without using ruby. See the subdirectory at rbt/cookbooks/expanded_cookbook/ for this.
+You can generate a sanitized variant of these yaml files from ruby, and
+then just keep on using these .yml files in other projects - after
+all that is **one advantage of yaml**, that we are freed from any 
+single programming language (such as e. g. hardcoding information
+into a **.rb file** or a **.py file**). If you wish to generate these
+**expanded yaml files**, you can use **rbt --expand-cookbooks**, but
+you may wish to **set to another temporary directory** before doing
+this - see other parts of this document for how to do so. Note
+that the expanded .yml files are also distributed with the rbt
+gem; this was done to allow for faster bootstrap-like operations.
+People can just take the dataset from the .yml file and work on
+it, even without using ruby. See the subdirectory at
+**rbt/cookbooks/expanded_cookbook/** for this.
 
-That still leaves some room to explain some of the philosophy of the RBT project.
+That still leaves some room to explain some of **the philosophy of
+the RBT project**.
 
 There are different philosophies, but to name a few key ones:
 
-Try best to solve the use cases that the user at hand has, without getting into the way or preventing specific actions if a user really wants to do so.
+- Try best to solve the use cases that the user at hand has, without
+getting into the way or preventing specific actions if a user really
+wants to do so.
 
-Try to be "apolitical", "agnostic" and as flexible as possible. For example, while I personally do not use systemd, the RBT project in itself has to be as flexible to allow those who use/depend on systemd the use of RBT.
+- Try to be "apolitical", "agnostic" and as flexible as possible. For
+example, while I  personally do not use systemd, the RBT project in
+itself has to be as flexible to allow those who use/depend on systemd
+the use of RBT.
 
-Try to provide the most common functionality through RBT, as much as that is useful, including acting as a (surrogate) package manager or as a set of tools to auto-generate files. For instance, RBT includes one class that can modify the PREFIX variable in a Makefile. That way people can easily change the target prefix of a Makefile without having to use any other commandline options.
+- Try to provide the most common functionality through RBT, as much
+as that is useful, including acting as a (surrogate) package manager
+or as a set of tools to auto-generate files. For instance, RBT 
+includes one class that can modify the PREFIX variable in a Makefile.
+That way people can easily change the target prefix of a Makefile
+without having to use any other commandline options.
 
-Focus on Linux as a first-class citizen but do not exclude any other operating system, if possible. Primary testing will happen on Linux but other operating systems should be supported whenever we can (if ruby works on these systems that is; but I will also keep in mind resource-constrained systems, e. g. small/embedded systems; for example, the RBT project can also autogenerate shell scripts, so this could in theory be extended to work on systems that only have shell scripts rather than ruby installed. Do note, though, that for small systems, it is often better to compile on a larger desktop machine than on such a small constrained device; compiling on a raspberry may take even days.)
+- Focus on Linux as a first-class citizen but do not exclude any
+other operating system, if possible. Primary testing will happen
+on Linux but other operating systems should be supported whenever
+we can (if ruby works on these systems that is; but I will also
+keep in mind resource-constrained systems, e. g. small/embedded
+systems; for example, the RBT project can also autogenerate
+shell scripts, so this could in theory be extended to work on
+systems that only have shell scripts rather than ruby installed.
+Do note, though, that for small systems, it is often better
+to compile on a larger desktop machine than on such a small
+constrained device; compiling on a raspberry may take even
+days.)
 
-Do note that in early 2020 I decided to partially abandon the GoboLinux scheme. The RBT project will retain the focus on GoboLinux, if only for compatibility - but other than that, the project attempts to be standalone and general-purpose, not coupled to any single distribution as such. This also means that alternative approaches will be explored.
+Do note that in early **2020** I decided to partially abandon
+the GoboLinux scheme. The RBT project will retain the focus on
+GoboLinux, if only for compatibility - but other than that,
+the project attempts to be standalone and general-purpose,
+not coupled to any single distribution as such. This also 
+means that alternative approaches will be explored.
 
-Current status of the RBT project
-The following subsection was added in March 2020, in particular because new users may be overwhelmed about the level of detail and options available in the RBT project. In January 2021 this section was updated, as well as in September 2021, to explain that the project is in maintenance mode mostly.
+## Current status of the RBT project
 
-I understand that the complexity of the RBT project can be a problem for newcomers. Furthermore, the RBT project differs in quality - some parts of it work really well, whereas other parts have bugs. I am aware of many smaller bugs, and a few larger bugs, and while I do happen to eventually fix one or the other, RBT is ultimately only a hobby project; time is limited so I can not necessarily fix all bugs in a short amount of time. Sometimes later code changes lead to regressions, or other parts of the project no longer working correctly.
+The following subsection was added in **March 2020**, in particular
+because new users may be overwhelmed about the level of detail
+and options available in the **RBT project**. In **January 2021**
+this section was updated, as well as in **September 2021**, to
+explain that the project is in maintenance mode mostly.
 
-The complexity of the RBT project can be an obstacle for newcomers in general.
+I understand that the complexity of the RBT project can be a problem
+for newcomers. Furthermore, the RBT project differs in quality - some
+parts of it work really well, whereas other parts have bugs. I am 
+aware of many smaller bugs, and a few larger bugs, and while I do
+happen to eventually fix one or the other, RBT is ultimately only a
+hobby project; time is limited so I can not necessarily fix all bugs
+in a short amount of time. Sometimes later code changes lead to
+regressions, or other parts of the project no longer working correctly.
 
-Historically the RBT project has been growing a LOT in the last some years. While some functionality could be removed, I believe that at the end of the day, the project will always be somewhat complex and allow for a lot of flexibility to exist - thus, it will always be a somewhat complex project.
+The complexity of the RBT project can be an obstacle for **newcomers**
+in general.
 
-Different people have different use cases as well, so this is quite difficult to want to change, without losing benefits from having the code in the first place, such as for supporting specific functionality that may be useful to some users, depending on the circumstances.
+Historically the RBT project has been growing a LOT in the last some
+years. While some functionality could be removed, I believe that at
+the end of the day, the project will always be somewhat complex and
+allow for a lot of flexibility to exist - thus, it will always be
+a somewhat complex project.
 
-If the goal is to allow for easy compilation and installation, then code has to exist that achieves precisely this outcome - and this will unavoidadbly lead to some necessary complexity.
+Different people have different use cases as well, so this is quite
+difficult to want to change, without losing benefits from having the
+code in the first place, such as for supporting specific functionality
+that may be useful to some users, depending on the circumstances.
 
-Still, I understand that new users may struggle with the amount of information, which could lead to confusion and frustration, so this subsection tries to explain at the least a few things in addition to other subsections here that do so as well, as-is.
+**If** the goal is to allow for easy compilation and installation,
+then code has to exist that achieves precisely this outcome -
+and this will unavoidadbly lead to some **necessary
+complexity**.
 
-In January 2023 this subsection was changed; the "How I use the RBT project" was added as a separate subsection closer to the top of this page. That way new users can quickly read and learn how I use the RBT project.
+Still, I understand that new users may struggle with the amount
+of information, which could lead to confusion and frustration, 
+so this subsection tries to explain at the least a few things
+in addition to other subsections here that do so as well, as-is.
 
-New users and how to "onboard" them, as far as the RBT project is concerned: policy and strategy
-This subsection was added in March 2023, as one tiny step towards trying to teach newcomers how to use the RBT project.
+In January 2023 this subsection was changed; the "How I use
+the RBT project" was added as a separate subsection closer
+to the top of this page. That way new users can quickly
+read and learn how I use the RBT project.
 
-This subsection only explains a few policies, though - the background context, so to say.
+## New users and how to "onboard" them, as far as the RBT project is concerned: policy and strategy
 
-The subsection before pointed out that the rbt gem is quite complex, and to some extent complicated. In the past the rbt gem was even more complicated - and this was one primary reason as to why this subsection was added. I want to keep things simple, at the least for new users; to some extent also at a later time.
+This subsection was added in <b>March 2023</b>, as one tiny step
+towards trying to teach newcomers how to use the RBT project.
 
-At any rate, before March 2023 the rbt gem made use of various add-ons, such as ccache or porg. In the event that you do not know projects like these: ccache is useful when you have to compile many different programs from source. It will use a cache, which can really help speed up subsequent recompilation efforts - very useful really. porg on the other hand can be used to trace as to which files are installed onto the target computer. This functionality is especially useful when you wish to be able to provide a package manager, e. g. by providing an uninstall functionality.
+This subsection only explains a few policies, though - the background
+context, so to say.
 
-So, before March 2023, the configuration I would use for the rbt gem, typically mandated that porg and ccache are to be used - and the assumption here was that both projects are installed on the target computer, and that they will work, too. These assumptions may turn out to be incorrect. I noticed this problem in particular when I set up a new computer with a semi-broken toolchain. I can typically "uncripple" this eventually, by recompiling what I need, but how should a new user know any of this? That takes experience and at the least a bit of knowledge.
+The subsection before pointed out that the <b>rbt gem</b> is quite complex,
+and to some extent complicated. In the past the rbt gem was even
+more complicated - and this was one primary reason as to why this
+subsection was added. I want to keep things simple, at the least
+for new users; to some extent also at a later time.
 
-Thus, as I realised that mandating ccache and porg "out of the box" isn't that useful for new users, on a freshly installed (random) computer system, I decided that a new policy had to be added for RBT. This policy states that the rbt gem will try to be minimal, whenever possible, in regards to depending on external projects such as ccache or porg. That way the rbt gem no longer distributes configuration settings that are not so useful for new users.
+At any rate, before <b>March 2023</b> the rbt gem made use of various
+add-ons, such as <b>ccache</b> or <b>porg</b>. In the event that you
+do not know projects like these: ccache is useful when you have to
+compile many different programs from source. It will use a cache,
+which can really help speed up subsequent recompilation efforts -
+very useful really. <b>porg</b> on the other hand can be used to
+trace as to which files are installed onto the target computer.
+This functionality is especially useful when you wish to be able
+to provide a package manager, e. g. by providing an <b>uninstall</b>
+functionality.
+
+So, before <b>March 2023</b>, the configuration I would use for the
+rbt gem, typically mandated that porg and ccache are to be used -
+and the assumption here was that both projects are installed on
+the target computer, and that they will work, too. These assumptions
+may turn out to be incorrect. I noticed this problem in particular
+when I set up a new computer with a semi-broken toolchain. I can
+typically "uncripple" this eventually, by recompiling what I need,
+but how should a new user know any of this? That takes experience
+and at the least a bit of knowledge.
+
+Thus, as I realised that mandating ccache and porg "out of the
+box" isn't that useful for new users, on a freshly installed
+(random) computer system, I decided that a new policy had to be
+added for RBT. This policy states that the rbt gem will try to
+be <b>minimal</b>, whenever possible, in regards to depending
+on external projects such as ccache or porg. That way the rbt
+gem no longer distributes configuration settings that are not
+so useful for new users.
 
 What is the long term benefit of this approach?
 
-It is hoped that this new policy in place will make it easier for genuinely new users to give the project a try. As it is, the project is catering too much to my own use cases - while that is acceptable for a project that has not yet reached a stable release, I believe we should slowly begin to help new users more, should they wish to make use of the rbt gem. Less frustration, more happiness. \o/
+It is hoped that this new policy in place will make it easier
+for genuinely new users to give the project a try. As it is,
+the project is catering too much to my own use cases - while
+that is acceptable for a project that has not yet reached
+a stable release, I believe we should slowly begin to help
+new users more, should they wish to make use of the rbt
+gem. Less frustration, more happiness. \o/
 
-@source_base_directory
-The very important instance variable @source_base_directory, defined at the toplevel module RBT, can be used to denote the directory where archives of different programs are to be kept (or are already kept).
+## @source_base_directory
 
-For example, on my home system I store the source code to many different programs in the directory /home/x/src/. That name emerged mostly due to historic reasons, as the user "x" was just a generic name I would use for various different tasks, including making regular backups. (I did not want to type too much when doing a backup, hence why just one letter was used there.)
+The very important instance variable **@source_base_directory**, defined
+at the toplevel **module RBT**, can be used to **denote the directory
+where archives of different programs are to be kept** (or are
+already kept).
 
-As other users of the RBT project may wish to use another directory rather than the one listed above, such as a directory like /Files/Archives/ or /Depot/Archive/ or anything like that, there are essentially three different ways how to define your own target directory for keeping such source archives:
+For **example**, on my home system I store the source code to many
+different programs in the directory **/home/x/src/**. That name 
+emerged mostly due to historic reasons, as the user "x" was just
+a generic name I would use for various different tasks, including
+making regular backups. (I did not want to type too much when
+doing a backup, hence why just one letter was used there.)
 
-(1) Simply set a new target altogether, via the toplevel-method called RBT.set_source_base_directory(). A shorter API exists as well, an alias to this method, called RBT.set_source_directory().
+As other users of the **RBT** project may wish to use another
+directory rather than the one listed above, such as
+a directory like <b>/Files/Archives/</b> or **/Depot/Archive/**
+or anything like that, there are essentially **three different
+ways** how to define your own target directory for keeping
+such <b>source archives</b>:
 
-You can also use RBT.source_directory = path, if you would like to.
+(**1**) Simply set a new target altogether, via the **toplevel-method**
+called **RBT.set_source_base_directory()**. A shorter API exists
+as well, an alias to this method, called **RBT.set_source_directory()**.
 
-As argument to this method, simply pass in the path to the directory that you wish to use, such as /opt/ or /home/src/ or any other location that you may wish to use.
+You can also use **RBT.source_directory = path**, if you would like to.
 
-Explicit examples for the API that was mentioned above, will be shown next:
+As **argument** to this method, simply pass in **the path to the
+directory** that you wish to use, such as **/opt/** or **/home/src/** or
+any other location that you may wish to use.
 
-RBT.set_source_directory('/opt')
-RBT.set_source_base_directory('/opt')
-RBT.source_directory = '/opt'
+Explicit examples for the API that was mentioned above, will be shown
+next:
 
-# Or for the target /Depot/Archive/
+    RBT.set_source_directory('/opt')
+    RBT.set_source_base_directory('/opt')
+    RBT.source_directory = '/opt'
+    
+    # Or for the target /Depot/Archive/
 
-RBT.set_source_directory '/Depot/Archive/'
-Note that this method will ensure that a trailing '/' token will be the last character here. (Directories should end with a trailing / - it makes the subsequent code easier to handle when we can assume that this is always the case. I am not entirely sure why Linux/UNIX does not seem to share the same notion, but this may be due to a POSIX requirement perhaps, and a way how the filesystem is addressed in general, such as via ./.)
+    RBT.set_source_directory '/Depot/Archive/'
 
-The method call to RBT.set_source_directory() will not make the above directory persistent, mind you, so you may want to read on for option (2).
+Note that this method will **ensure** that a trailing '/' token will be
+the last character here. (Directories should end with a trailing **/** -
+it makes the subsequent code easier to handle when we can assume that
+this is always the case. I am not entirely sure why Linux/UNIX does
+not seem to share the same notion, but this may be due to a POSIX
+requirement perhaps, and a way how the filesystem is addressed in
+general, such as via **./**.)
 
-(2) Another option is to use a setting in the main configuration file, typically a yaml file called source_base_directory.yml, the path to the source directory can be set as well. This is the method that I use primarily, since I keep the same base directory all the time.
+The method call to **RBT.set_source_directory()** will **not** make
+the above directory persistent, mind you, so you may want to read
+on for option (**2**).
 
-In the directory of the RBT project where the configuration files are stored, you can simply use the target directory, by putting the path to the source archives into that file.
+(2) Another option is to use a setting in the main **configuration file**,
+typically a yaml file called **source_base_directory.yml**, the path to
+the source directory can be set as well. This is the method that I use
+primarily, since I keep the same base directory all the time.
 
-You can also use environment variables in this file - simply use ALL_CAPS to make use of such environment variables. (This won't work in all settings, e. g. for .cgi files it may not work since .cgi files may use fewer environment variables. But for regular commandline-work, this works fine. I may use an ALL CAPS constant such as MY_SRC_DIR there in this file.)
+In the directory of the RBT project where the configuration files are
+stored, you can simply use the target directory, by putting the path 
+to the source archives into that file.
 
-(3) Not everyone will be able to modify the directory where the configuration of RBT is kept, so a third way has to exist, using the environment variable called RBT_SOURCE_DIRECTORY.
+You can also use **environment variables** in this file - simply 
+use ALL_CAPS to make use of such environment variables. (This
+won't work in all settings, e. g. for **.cgi files** it may not
+work since .cgi files may use fewer environment variables. But
+for regular commandline-work, this works fine. I may use an
+ALL CAPS constant such as MY_SRC_DIR there in this file.)
 
-In general, RBT may use environment variables that have a leading RBT_ as prefix. Simply define the variable called RBT_SOURCE_DIRECTORY for your shell, pointing to the directory that you wish to use, and it should work just fine:
+(3) Not everyone will be able to modify the directory where the
+configuration of RBT is kept, so a third way has to exist, using
+the **environment variable** called **RBT_SOURCE_DIRECTORY**.
 
-export RBT_SOURCE_DIRECTORY=/Files/Archives
-The last option may work for you if option (2) is not available or not possible.
+In general, RBT may use environment variables that have a leading
+**RBT_** as prefix. Simply define the variable called
+**RBT_SOURCE_DIRECTORY** for your shell, pointing to the
+directory that you wish to use, and it should work just
+fine:
 
-Return an Array of programs from a remote URL
-In the RBT project there is code that allows us to query the remote programs listed on an URL.
+    export RBT_SOURCE_DIRECTORY=/Files/Archives
 
-This was a necessary addition because there are some websites that have made available several programs on the same URL - think of the GNOME project here, or the KDE project, or the LFS/BLFS project page. Their remote websites, typically as a FTP-listing, all list several programs there.
+The last option may work for you if **option (2)** is not available
+or not possible.
 
-The basic API for obtaining an array of programs from a remote URL is the following:
+## Return an Array of programs from a remote URL
 
-RBT.return_programs_from_this_url
-RBT.return_program_from_this_url('https://download.kde.org/stable/plasma/5.10.5/')
-array = RBT.return_program_from_this_url('https://download.kde.org/stable/plasma/5.17.5/'); pp array.size # => 46
-This will, if all goes well, return an Array of programs available at that site, if it can be found.
+In the **RBT project** there is code that allows us to query the
+remote programs listed on an URL.
 
-psych or syck
-You can determine which yaml-engine to use, as far as the RBT project is concerned.
+This was a necessary addition because there are some websites that
+have made available several programs on the same URL - think of
+the **GNOME project** here, or the **KDE project**, or the
+LFS/BLFS project page. Their remote websites, typically as a
+FTP-listing, all list several programs there.
 
-In the past, the RBT project would try to make use of the syck engine, but since psych has become the default since some years, RBT will try to make use of psych by default. This can be changed via the configuration file use_psych_or_syck.yml that resides at rbt/yaml/configuration/use_psych_or_syck.yml.
+The basic API for obtaining an **array of programs** from a remote
+URL is the following:
 
-A top-level API also exists to query which yaml-engine is currently used:
+    RBT.return_programs_from_this_url
+    RBT.return_program_from_this_url('https://download.kde.org/stable/plasma/5.10.5/')
+    array = RBT.return_program_from_this_url('https://download.kde.org/stable/plasma/5.17.5/'); pp array.size # => 46
 
-RBT.yaml_engine?
-If, for some reason, you have to or want to modify this, you can use the following API to toggle any other yaml engine:
+This will, if all goes well, return an Array of programs available
+at that site, if it can be found.
 
-RBT.yaml_engine=
-RBT.set_yaml_engine
-I am using psych these days, though, so this is only kept as a legacy option. It will probably be retained for the full "lifetime" of the RBT project, but I myself no longer need this really - psych has replaced all my yaml needs.
+## psych or syck
 
-Configuration of the RBT project
-Most of the configuration for the RBT project is done through yaml files (.yml). These individual yaml files are normally kept under the subdirectory rbt/yaml/configuration/ of this gem.
+You can determine **which yaml-engine to use**, as far as the
+**RBT project** is concerned.
 
-For example, a file called be_verbose.yml can be found in that subdirectory. This file determines as to whether the scripts are verbose by default or as to whether they are not. You can use shortcuts here, such as "t" which stands for true, or "f" which stands for false. Of course you can also use true and false, as content of said file. Additionally you can use "yes" or "no" if you prefer these instead.
+In the past, the **RBT project** would try to make use of the syck
+engine, but since psych has become the default since some years,
+RBT will try to make use of psych by default. This can be changed
+via the configuration file **use_psych_or_syck.yml** that
+resides at **rbt/yaml/configuration/use_psych_or_syck.yml**.
 
-So, if you put the string no, without quotes, into the file called be_verbose.yml then the RBT scripts will not be verbose by default. This means less output on the commandline, for example.
+A top-level API also exists to query which yaml-engine is
+currently used:
 
-Similar possibilities exist for the other files that accept a Boolean value (true/false aka yes/no). Obviously this would not work when you are expected to input a file path, such as the path to a certain directory. In this case you simply have to provide a string to the path in question - but you can also use environment variables if you have defined them. For example, I keep an environment variable called $MY_PROGRAMS, so I can input that String ($MY_PROGRAMS) into the file called programs_directory.yml and all RBT scripts will refer to that as the main /Programs/ directory (it is indeed usually /Programs/ but it could also point to my home directory or any other target; since as of January 2020 I actually use /home/Programs/ as I sometimes do not have access to the / directory, or may have to relocate this into my user directory anyway.).
+    RBT.yaml_engine?
 
-How does the format of a cookbook recipe, the respective .yml file, look like?
-Each cookbook entry is just an individual yaml file, with the extension name being .yml. For example, information about the programming language ruby will be stored in the file called ruby.yml; information about the programming language python will be stored in the file python.yml; information about the mate-desktop will be stored in the file matedesktop.yml. If there are any "-" tokens as part of the name, then these will be removed when rbt tries to determine the filename.
+If, for some reason, you have to or want to modify this, you can
+use the following API to toggle any other yaml engine:
 
-This yaml file should contain all the required information to get that particular program to install on a given system.
+    RBT.yaml_engine=
+    RBT.set_yaml_engine
 
-Additional information can be added as well, such as maintainer(s), extra information of the program at hand, tips and hints in how to install or use the program, sed-modifications, pkgconfig files (aka .pc files) that are installed alongside with, patchsets that are to be applied, binaries, headers and libraries and so on and so forth.
+I am using psych these days, though, so this is only kept as
+a legacy option. It will probably be retained for the full
+"lifetime" of the RBT project, but I myself no longer need
+this really - psych has replaced all my yaml needs.
 
-It can be a quite detailed file, mostly due to being able to allow some flexibility during installation.
+## Configuration of the RBT project
 
-Many programs "out in the wild" are well-behaving and will honour a --prefix variable given (or -DCMAKE_INSTALL_PREFIX=, such as in use by programs that depend on cmake, for compilation). Such programs usually require little to no modification.
+Most of the configuration for the **RBT project** is done through
+yaml files (**.yml**). These individual yaml files are normally
+kept under the subdirectory **rbt/yaml/configuration/** of
+this gem.
+         
+For example, a file called **be_verbose.yml** can be found in
+that subdirectory. This file determines as to whether the scripts 
+are verbose by default or as to whether they are not. You can use 
+shortcuts here, such as "t" which stands for true, or "f" which 
+stands for false. Of course you can also use true and false, 
+as content of said file. Additionally you can use "yes" or "no"
+if you prefer these instead.
 
-Unfortunately, some other programs come with flawed installation scripts, hardcoded paths or workarounds that have to be employed to get these to work - very often sed-operations, such as done in the LFS project. Some programs may also have already become obsoleted, due to changes e. g. in glibc/gcc and other programs. If there is no maintainer of the downstream package then this normally means that other people have to either maintain that package; or provide patches to get this projects to work again.
+So, if you put the string **no**, without quotes, into the file called
+**be_verbose.yml** then the RBT scripts will not be verbose by
+default. This means less output on the commandline, for example.
 
-As a reference project, the LFS project provides a lot of useful information in how to get many programs to work. I consider the LFS project to be hugely important for the whole Linux ecosystem, much more important than the various different distributions.
+Similar possibilities exist for the other files that accept a **Boolean
+value** (true/false aka yes/no). Obviously this would not work when you
+are expected to input a **file path**, such as the path to a certain
+directory. In this case you simply have to provide a string to the
+path in question - but you can also use environment variables if you
+have defined them. For example, I keep an environment variable called
+$MY_PROGRAMS, so I can input that String (**$MY_PROGRAMS**) into the
+file called **programs_directory.yml** and all RBT scripts will refer
+to that as the main /Programs/ directory (it is indeed usually 
+**/Programs/** but it could also point to my home directory or
+any other target; since as of January 2020 I actually use
+**/home/Programs/** as I sometimes do not have access to the
+**/** directory, or may have to relocate this into my user
+directory anyway.).
 
-At any rate, let's now have a look at the fish.yml recipe, to give a specific example and explain that.
+## How does the format of a cookbook recipe, the respective .yml file, look like?
 
-This fish.yml file will look like this, as of August 2018:
+Each **cookbook entry** is just an **individual yaml file**, with the extension
+name being **.yml**. For example, information about the programming language
+**ruby** will be stored in the file called **ruby.yml**; information about the
+programming language **python** will be stored in the file **python.yml**;
+information about the **mate-desktop** will be stored in the file
+**matedesktop.yml**. If there are any "-" tokens as part of the name, then
+these will be removed when rbt tries to determine the filename. 
 
-fish:
- binaries:
- - fish
- - fish_indent
- - fish_key_reader
- short_description: |
-  FISH is an interactive (commandline) shell.
- description: |
-  FISH is the Friendly Interactive Shell, a smart and user-friendly
-  command line shell for macOS, Linux, and the rest of the family.
- url1: https://github.com/fish-shell/fish-shell/releases/download/2.7.1/fish-2.7.1.tar.gz
- url2: http://fishshell.com/files/2.1.0
- url3: http://sourceforge.net/projects/fish/
- homepage: http://fishshell.com/
- tags:
- - shell
- prefix: f
- keep_extracted: t
- last_update: 08 Jan 2018
-The very first entry, on top, is the name of the program itself, in this case, fish.
+This **yaml file** should contain all the required information to get that
+particular program to install on a given system.
 
-While this part could in theory be omitted (since the name of the program is already stored as the first part of the very filename), I found that it is useful to have this entry within the file, primarily as a visual identifier if you work with it in an editor. It helps me a lot, for instance.
+Additional information can be added as well, such as **maintainer**(s),
+**extra information** of the program at hand, tips and hints in how to install
+or use the program, sed-modifications, pkgconfig files (aka .pc files) that are
+installed alongside with, patchsets that are to be applied, binaries, headers
+and libraries and so on and so forth.
 
-Note that no - or _characters are allowed there in this entry - it is really a stripped down name of the program at hand only.
+It can be a quite detailed file, mostly due to being able to allow some flexibility
+during installation.
 
-If the name would be e. g. "gtk-doc", with an URL such as http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.26/gtk-doc-1.26.tar.xz, then the name there for the gtkdoc.yml file would have to be gtkdoc: - thus, all '-' were removed. The name that appears there is also the name of the .yml file at hand. The .yml files may also not include any '-' or '' characters. Do also note that while I am following this convention since many years, it may one day be changed to allow for '-' and ''. But for the time being, the strict requirement is that we may not have '-' or '_' characters there.
+Many programs "out in the wild" are **well-behaving** and will honour a 
+**--prefix** variable given (or **-DCMAKE_INSTALL_PREFIX=**, such as in
+use by programs that depend on **cmake**, for compilation). Such programs
+usually require **little to no modification**.
 
-Next, let's look at the entry binaries:. This entry tells us which binaries/executables this particular program will install. This also allows us to remove binaries in the /usr/bin/ hierarchy, if you compiled into an AppDir prefix - for more information here, see class RBT::PurgeBinariesOfThisProgram.
+Unfortunately, some other programs come with **flawed installation scripts**,
+hardcoded paths or workarounds that have to be employed to get these to work -
+very often sed-operations, such as done in the LFS project. Some programs
+may also have already become obsoleted, due to changes e. g. in glibc/gcc
+and other programs. If there is no maintainer of the downstream package
+then this normally means that other people have to either maintain that
+package; or provide patches to get this projects to work again.
 
-The next entry is short_description, which is e. g. equivalent to slackware's pkg-format, as introduction to the specific program at hand, in a short notation.
+As **a reference project**, the **LFS project** provides a **lot** of useful
+information in how to get many programs to work. I consider the **LFS
+project** to be hugely important for the whole Linux ecosystem, much more
+important than the various different distributions.
 
-Then we have the entry main description, followed by several url entries. The first url entry, aptly named url1, is the most important entry. It tells us where to find the archive to the program at hand. This is ideal the URL to an existing archive, but it could also be a github repository, in principle.
+At any rate, let's now have a look at the **fish.yml** recipe, to give
+a specific example and explain that.
 
-Then we also have the homepage entry, which denotes the homepage of the program (or any other webpage that has relevant information, in the event that there no homepage entry exists for that particular program).
+This **fish.yml** file will look like this, as of **August 2018**:
 
-Then we have tags: which just groups the program into popular tag-classifiers, such as "shell" in this case. Then the prefix in use, which is f for false, meaning "non-traditional" aka "appdir" prefix such as GoboLinux makes use of. Then there is the keep_extracted setting, which tells us whether to keep the archive extracted or not after extracting/compiling it. Last but not least, the last_update tag tells us when this program was last updated. The default format here is dd.mm.yyy, but shortcuts are allowed. For example, Oct, for October, can be used rather than 10, and so on.
+    fish:
+     binaries:
+     - fish
+     - fish_indent
+     - fish_key_reader
+     short_description: |
+      FISH is an interactive (commandline) shell.
+     description: |
+      FISH is the Friendly Interactive Shell, a smart and user-friendly
+      command line shell for macOS, Linux, and the rest of the family.
+     url1: https://github.com/fish-shell/fish-shell/releases/download/2.7.1/fish-2.7.1.tar.gz
+     url2: http://fishshell.com/files/2.1.0
+     url3: http://sourceforge.net/projects/fish/
+     homepage: http://fishshell.com/
+     tags:
+     - shell
+     prefix: f
+     keep_extracted: t
+     last_update: 08 Jan 2018
 
-The next entry is prefix. This one is mostly synonymous for the --prefix= option given to GNU autoconfigure based projects. A prefix value of t means true, which stands for /usr/. A prefix value of f means false, which stands for the particular AppDir-like prefix. In the case here, for fish, this would expand to /Programs/Fish/2.7.1. GoboLinux uses a very similar AppDir layout by default, although with slightly different program names that can also be upcased, e. g. "KDE-Libs" and so forth. (RBT will offer both variants here; the GoboLinux naming scheme, and the simpler scheme where only the first character is upcased, and the other characters are all downcased.)
+The very first entry, on top, is the name of the program itself, in this
+case, **fish**.
 
-There are many more entries, most of which should be documented under the doc/ subdirectory of this gem. What follows next are some more mentions of important (and less important) entries.
+While this part could in theory be omitted (since the name of the program
+is already stored as the first part of the very filename), I found that it
+is useful to have this entry within the file, primarily as a visual identifier
+if you work with it in an editor. It helps me a lot, for instance.
 
-The entry configure_base_dir: unix determines which base directory is to be used. In the above example, RBT would cd into the directory called unix/. This is important for some programs such as tk or xvid - have a look at their directory structure to understand this setting.
+Note that no **-** or **_**characters are allowed there in this entry - it is
+really a stripped down name of the program at hand only.
 
-Since as of December 2018 it is possible to use github URL that are truncated. Take the program conky as an example. It has an url like the following:
+If the name would be e. g. "gtk-doc", with an URL such as
+**http://ftp.gnome.org/pub/gnome/sources/gtk-doc/1.26/gtk-doc-1.26.tar.xz**,
+then the name there for the gtkdoc.yml file would have
+to be **gtkdoc:** - thus, all '-' were removed. The name that appears there
+is also the name of the .yml file at hand. The .yml files may also not 
+include any '-' or '_' characters. Do also note that while I am following
+this convention since many years, it may one day be changed to allow for
+'-' and '_'. But for the time being, the strict requirement is that we may
+not have '-' or '_' characters there.
 
-https://github.com/brndnmtthws/conky/archive/v1.11.0.tar.gz
-This will now be automatically expanded into the correct naming scheme, aka conky-1.11.0. No idea why GitHub is not doing so on their own automatically; the tarball is even wrongly built, since it extracts to precisely that name after download. But anyway, ask GitHub about this, not me.
+Next, let's look at the entry **binaries:**. This entry tells us which
+binaries/executables this particular program will install. This also
+allows us to remove binaries in the /usr/bin/ hierarchy, if you compiled
+into an AppDir prefix - for more information here, see class
+**RBT::PurgeBinariesOfThisProgram**.
 
-The content of these individual .yml files is essentially just a Hash that describes the various attributes of the given project at hand (and some additional information when it is required for installing/compiling this program).
+The next entry is **short_description**, which is e. g. equivalent
+to slackware's pkg-format, as introduction to the specific program
+at hand, in a short notation.
 
-Note that since as of January 2020, you can also just provide a new URL and register a program this way anew.
+Then we have the entry **main description**, followed by several **url**
+entries. The first url entry, aptly named **url1**, is the most important
+entry. It tells us where to find the archive to the program at hand.
+This is ideal the URL to an existing archive, but it could also be
+a github repository, in principle.
+
+Then we also have the **homepage** entry, which denotes the homepage of
+the program (or any other webpage that has relevant information, in the
+event that there no homepage entry exists for that particular program).
+
+Then we have **tags**: which just groups the program into popular
+**tag-classifiers**, such as "shell" in this case. Then the prefix in
+use, which is f for false, meaning "non-traditional" aka "appdir" prefix
+such as GoboLinux makes use of. Then there is the keep_extracted 
+setting, which tells us whether to keep the archive extracted or not
+after extracting/compiling it. Last but not least, the last_update
+tag tells us when this program was last updated. The default format
+here is dd.mm.yyy, but shortcuts are allowed. For example, Oct, for
+October, can be used rather than 10, and so on. 
+
+The next entry is <b>prefix</b>. This one is mostly synonymous for
+the --prefix= option given to GNU autoconfigure based projects.
+A prefix value of t means true, which stands for /usr/. A prefix
+value of f means false, which stands for the particular AppDir-like
+prefix. In the case here, for fish, this would expand to
+<b>/Programs/Fish/2.7.1</b>. GoboLinux uses a very similar AppDir
+layout by default, although with slightly different program names
+that can also be upcased, e. g. "KDE-Libs" and so forth. (RBT will
+offer both variants here; the GoboLinux naming scheme, and the
+simpler scheme where only the first character is upcased, and
+the other characters are all downcased.)
+
+There are many more entries, most of which should be documented
+under the doc/ subdirectory of this gem. What follows next are
+some more mentions of important (and less important) entries.
+
+The entry **configure_base_dir: unix** determines which base
+directory is to be used. In the above example, RBT would
+cd into the directory called unix/. This is important for some
+programs such as **tk** or **xvid** - have a look at their
+directory structure to understand this setting.
+
+Since as of December 2018 it is possible to use github URL that
+are truncated. Take the program **conky** as an example. It
+has an url like the following:
+
+    https://github.com/brndnmtthws/conky/archive/v1.11.0.tar.gz
+
+This will now be automatically expanded into the correct 
+naming scheme, aka **conky-1.11.0**. No idea why GitHub is not
+doing so on their own automatically; the tarball is even 
+wrongly built, since it extracts to precisely that name 
+after download. But anyway, ask GitHub about this, not me.
+
+The content of these individual .yml files is essentially just
+a Hash that describes the various attributes of the given
+project at hand (and some additional information when it is
+required for installing/compiling this program).
+
+Note that since as of January 2020, you can also just provide
+a new URL and register a program this way anew.
 
 Commandline Example for this:
 
-rbt http://ftp.gnu.org/pub/gnu/kawa/kawa-3.1.tar.gz
-/home/Programs/ versus /Programs/
-On GoboLinux, the main application directory is at /Programs/.
+    rbt http://ftp.gnu.org/pub/gnu/kawa/kawa-3.1.tar.gz
 
-For RBT, the default since a few years is /home/Programs/. Now - the user can set any other application directory anyway, so this subsection explains mostly my own use case.
+## /home/Programs/ versus /Programs/
 
-I was following the /Programs/ hierarchy for some years, but eventually changed to /home/Programs/.
+On GoboLinux, the main application directory is at **/Programs/**.
+
+For RBT, the default since a few years is **/home/Programs/**.
+Now - the user can set any other application directory anyway,
+so this subsection explains mostly my own use case.
+
+I was following the **/Programs/** hierarchy for some years,
+but eventually changed to **/home/Programs/**.
 
 There are two reasons as to why:
 
-(1) It makes backups a bit simpler, since I just copy all that may be in the /home/ directory, so I don't forget. And then I copy it onto the target system - job done.
+(1) It makes backups a bit simpler, since I just copy all
+that may be in the /home/ directory, so I don't forget.
+And then I copy it onto the target system - job done.
 
-(2) In particular on Fedora, /home/Programs/ seems to work better than just /Programs/, e. g. due to the default splitting of the filesystem. Since I did not want to bother researching sanitizing the filesystem, I simply decided to go with /home/Programs/ rather than /Programs/.
+(2) In particular on Fedora, /home/Programs/ seems to 
+work better than just /Programs/, e. g. due to the default
+splitting of the filesystem. Since I did not want to 
+bother researching sanitizing the filesystem, I simply
+decided to go with /home/Programs/ rather than /Programs/.
 
 So, my two major reasons are convenience and laziness.
 
-Of course I think /Programs/ is more elegant, but I get around this by just using a symlink anyway, pointing from /Programs/ -> /home/Programs/.
+Of course I think /Programs/ is more elegant, but I get
+around this by just using a symlink anyway, pointing
+from /Programs/ -> /home/Programs/.
 
-Cookbooks - Recipes to install programs from source
-The Cookbooks module, part of module RBT and thus residing under the RBT::Cookbooks namespace, attempts to collect recipes and instructions that allow you to install programs from source (primarily).
+## Cookbooks - Recipes to install programs from source
 
-This project has well over 3350 programs registered so far - and that number continues to grow slowly.
+The **Cookbooks module**, part of **module RBT** and thus residing
+under the **RBT::Cookbooks** namespace, attempts to collect recipes
+and instructions that allow you to **install programs** from source
+(primarily).
 
-If you are interested in seeing the specific programs and the associated programs versions and URLs, have a look at the side pane on the right hand side, at Available program versions.
+This project has well over 3350 programs registered so far - and that
+number continues to grow slowly.
 
-What is the use case for this project? How could this project help you?
+If you are interested in seeing the specific programs and the associated
+programs versions and URLs, have a look at the side pane on the right
+hand side, at __**Available program versions**__.
 
-The use case for the Cookbooks component, part of the RBT project, is to provide the necessary instructions for compilation/installation of programs. These instructions will be primarily stored in yaml files.
+**What is the use case for this project? How could this project help you?**
 
-For example, the text-editor called nano will have some information that details how it should be compiled, in the file called nano.yml.
+The use case for the Cookbooks component, part of the RBT project, is
+to **provide the necessary instructions for compilation/installation of
+programs**. These instructions will be primarily stored in <b>yaml</b>
+files.
 
-This is valid for all programs that are registered, by the way - for each program, there will be a single .yml file that describes that program in question.
+For example, the text-editor called <b>nano</b> will have some information
+that details how it should be compiled, in the file called <b>nano.yml</b>.
+
+This is valid for all programs that are registered, by the way - for each
+program, there will be a single .yml file that describes that program
+in question.
 
 Now, how could this be of help to you or anyone else?
 
-This of course depends on your use case at hand, but say that you may want to compile a linux from scratch system and then a beyond linux from scratch system on top of it. You can - and should - follow the official instructions of course, but once you understand the basic concepts, perhaps you may want to have more control over the programs at hand or wish to compile/install more programs, including their dependencies. That's exactly one use case for the RBT project, through its Cookbooks subcomponent.
+This of course depends on your use case at hand, but say that you may want
+to compile a <b>linux from scratch</b> system and then a <b>beyond linux
+from scratch</b> system on top of it. You can - and should - follow the
+official instructions of course, but once you understand the basic concepts,
+perhaps you may want to have more control over the programs at hand or
+wish to compile/install more programs, including their dependencies.
+That's exactly one use case for the **RBT project**, through its
+Cookbooks subcomponent.
 
-There are more use cases of course, such as updating your programs from source quickly. Keep in mind that a lot of information is stored in all the yaml files together - describing the program at hand, where to find the source, how to install it, and so forth. This information may always be helpful to some people. Many yaml files include the homepage link, so rather than having to use google, one can quickly jump to the registered homepage at hand (the entry in the .yml file will be called homepage:).
+There are more use cases of course, such as updating your programs
+from source quickly. Keep in mind that a lot of information is stored
+in all the yaml files together - describing the program at hand, where
+to find the source, how to install it, and so forth. This information
+may always be helpful to some people. Many yaml files include the
+homepage link, so rather than having to use google, one can quickly
+jump to the registered homepage at hand (the entry in the .yml file
+will be called <b>homepage:</b>).
 
-The Cookbooks project is a component of the RBT (Ruby Build Tools) project. The latter project, aka rbt, is the one that formally integrates the dataset provided by the module Cookbooks part, into general compile/install related activities. I use rbt to compile programs from source or otherwise install them.
+The **Cookbooks project** is a component of the **RBT** (Ruby Build Tools)
+project. The latter project, aka <b>rbt</b>, is the one that formally
+integrates the dataset provided by the module Cookbooks part, into
+general compile/install related activities. I use rbt to compile
+programs from source or otherwise install them. 
 
-If the cookbooks project and the RBT project are used in combination, then they are in some ways similar to the MacOSX homebrew project or the fpm project - sort of.
+If the cookbooks project and the RBT project are used in <b>combination</b>,
+then they are in **some** ways similar to the **MacOSX homebrew project**
+or the **fpm project** - sort of.
 
-There may be some philosophical differences between these projects, but the cookbooks project and the RBT project will attempt very hard to provide similar functionality as fpm and mac homebrew do, too, in the long run. Please do keep in mind that this is a hobby project here, and as a consequence, it may not move as fast as homebrew does.
+There may be some philosophical differences between these projects, but
+the cookbooks project and the RBT project will attempt very hard to provide
+similar functionality as fpm and mac homebrew do, too, in the long run.
+Please do keep in mind that this is a hobby project here, and as a consequence,
+it may not move as fast as <b>homebrew</b> does.
 
-The similarity towards fpm is that the cookbooks project will also attempt to allow you to interconvert the registered dataset into .deb or .rpm files or gobolinux files or snapcraft files - or even homebrew formulas. But that functionality is very limited (as of in 2018). It will definitely become better over time. The slackware support is a bit better since I myself mostly use slackware and GoboLinux, but the slackware support in cookbooks/rbt still requires quite some more polish and clean-up before it can be easily used.
+The similarity towards **fpm** is that the cookbooks project will also attempt
+to allow you to **interconvert** the registered dataset into .deb or .rpm files
+or gobolinux files or snapcraft files - or even homebrew formulas. But that
+functionality is very limited (as of in 2018). It will definitely become better
+over time. The slackware support is a bit better since I myself mostly use
+slackware and GoboLinux, but the slackware support in cookbooks/rbt still
+requires quite some more polish and clean-up before it can be easily used.
 
-The RBT project is in some ways similar to the LFS/BLFS project in that it attempts to put together information that would be useful for when a user wishes to compile some program from source, in particular when these programs are requiring modifications to their build system, such as when "sed" is used - but the RBT project could also be used when installing a binary program. In doing so, the RBT project can also be used as a basic building block for creating package managers or other compile-tools in Ruby. If you have a project like this and may want to make use RBT, and require some modification, let me know - I will try to adapt the project to make them useful for these cases as well.
+The <b>RBT project</b> is in some ways similar to the LFS/BLFS project
+in that it attempts to put together information that would be useful for
+when a user wishes to compile some program from source, in particular
+when these programs are requiring modifications to their build system,
+such as when "sed" is used - but the RBT project could also be used
+when installing a binary program. In doing so, the RBT project can
+also be used as a basic **building block** for creating package managers
+or other compile-tools in Ruby. If you have a project like this and may
+want to make use RBT, and require some modification, let me know - I will
+try to adapt the project to make them useful for these cases as well.
 
-Now - let us have a look as to how information is stored in the RBT project.
+Now - let us have a look as to **how information is stored** in the
+**RBT project**.
 
-The information for the respective programs is stored in yaml files by default, largely due to convenience and "historic reasons". Taken together, we could call the collection of yaml files a "yaml database" - even though it is not a real database, per se.
+The information for the respective programs is stored in yaml files by
+default, largely due to convenience and "historic reasons". Taken together,
+we could call the collection of yaml files a "yaml database" - even though
+it is not a real database, per se.
 
-These individual .yml files, by default, reside in the subdirectory called yaml/individual_cookbooks/ of this gem. The .yml files usually also make use of shortcuts and abbreviations, which will be sanitized when the specific yaml file is loaded by the Cookbooks project.
+These individual .yml files, by default, reside in the subdirectory called
+**yaml/individual_cookbooks/** of this gem. The .yml files usually also
+make use of shortcuts and abbreviations, which will be sanitized when
+the specific yaml file is loaded by the Cookbooks project.
 
 For example, a common entry point may be like so:
 
-"keep_extracted: t"
-The "t" at the end is a shortcut for "true". The entry keep_extracted means that, after an archive is extracted, it will be kept rather than removed, after compilation has finished.
+    "keep_extracted: t"
 
-The Cookbooks project operates under the assumption that all archives that the user will use, are put into a certain base directory, which, for the purpose of this file here, will be called the archive directory.
+The "t" at the end is a shortcut for "true". The entry **keep_extracted** 
+means that, after an archive is extracted, it will be kept rather than
+removed, after compilation has finished.
 
-This is the directory where your archives should reside. You can ultimately decide which directory that shall be.
+The Cookbooks project operates under the assumption that all archives that
+the user will use, are put into a certain base directory, which, for the
+purpose of this file here, will be called the **archive directory**.
 
-On my home system, this archive directory is at /home/x/src/, mostly due to historic reasons how I kept making backups. On GoboLinux, you may want to use perhaps /Files/Archives/ or /Depot/Backup/ or something similar. You can query the current archive directory in use by issuing this command:
+This is the directory where your archives should reside. You can ultimately
+decide which directory that shall be.
 
-cookbooks --archive-directory?
-There, source files can be stored, such as htop-2.0.2.tar.xz or ruby-2.4.1.tar.gz and so forth.
+On my home system, this archive directory is at **/home/x/src/**, mostly
+due to historic reasons how I kept making backups. On GoboLinux, you may
+want to use perhaps /Files/Archives/ or /Depot/Backup/ or something 
+similar. You can query the current archive directory in use by issuing
+this command:
 
-Since many other users may wish to use another base directory for their archives, you can define another archive directory on the commandline like so:
+    cookbooks --archive-directory?
 
-cookbooks --permanently-set-base-directory-to=/opt
-The above would assume that all source archives will be stored within the /opt/ hierarchy.
+There, source files can be stored, such as **htop-2.0.2.tar.xz**
+or <b>ruby-2.4.1.tar.gz</b> and so forth.
+
+Since many other users may wish to use another base directory for
+their archives, you can define another archive directory on the
+commandline like so:
+
+    cookbooks --permanently-set-base-directory-to=/opt
+
+The above would assume that all source archives will be stored
+within the **/opt/** hierarchy.
 
 Or use the more prevalent rbt name:
 
-rbt --permanently-set-base-directory-to=/Mount/USB1/last_backup/src/
-rbt --permanently-set-source-archive=/Mount/USB1/last_backup/src/
-rbt --set-source-dir=/Mount/USB1/last_backup/src/
-rbt --set-source-dir==/Files/Archive/
-The above would assume that all source archives will be stored within the /Mount/USB1/last_backup/src/ hierarchy.
+    rbt --permanently-set-base-directory-to=/Mount/USB1/last_backup/src/
+    rbt --permanently-set-source-archive=/Mount/USB1/last_backup/src/
+    rbt --set-source-dir=/Mount/USB1/last_backup/src/
+    rbt --set-source-dir==/Files/Archive/
 
-Since as of April 2019, the following shorter variant can also be used instead:
+The above would assume that all source archives will be stored
+within the <b>/Mount/USB1/last_backup/src/</b> hierarchy.
 
-rbt --source-dir=/SRC
-I added this primarily because typing the longer variants above, on a freshly set-up computer, is somewhat cumbersome. So the shorter variant should do fine in these cases.
+Since as of April 2019, the following shorter variant can also be used
+instead:
 
-Within that archive directory, subdirectories have to be created for the respective program at hand.
+    rbt --source-dir=/SRC
 
-Actually, ruby may already do this for you, via the rbt project; but I recommend that you first start slowly and manually create directories for now.
+I added this primarily because typing the longer variants above, on a
+freshly set-up computer, is somewhat cumbersome. So the shorter variant
+should do fine in these cases.
 
-So, pick just some program, anyone will do fine as long as it is registered in the RBT project. Create that archive directory if it does not yet exist, cd into it, create the directory of the program which is the program name (downcased, and without any '-' or '_' tokens).
+Within that archive directory, subdirectories have to be created
+for the respective program at hand.
 
-Let's break this down and use specific examples, to illustrate what is meant - we wil pick the program "htop" as example.
+Actually, ruby may already do this for you, via the **rbt project**;
+but I recommend that you first start slowly and manually create
+directories for now.
 
-First, create a subdirectory called "htop/", within the source archive directory that you picked.
+So, pick just some program, anyone will do fine as long as it is
+registered in the RBT project. Create that archive directory if
+it does not yet exist, cd into it, create the directory of the
+program which is the program name (downcased, and without any
+'-' or '_' tokens).
 
-On any linux/unix system, "mkdir" should be able to allow you to do that - but you could also use Ruby's fileutils class to do so, via FileUtils.mkdir_p().
+Let's break this down and use specific examples, to illustrate
+what is meant - we wil pick the program "htop" as example.
 
-Next, download the remote source for this program locally (you can also use the rbt project to do so for you: "rbt htop --download-source" but for the first steps, again, I recommend to do these steps manually instead).
+First, create a subdirectory called "htop/", within the source
+archive directory that you picked.
 
-wget http://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz
-More specifically, on my home system, I'd do the following things manually (but keep in mind that ruby does this for me automatically):
+On any linux/unix system, "mkdir" should be able to allow you to do
+that - but you could also use Ruby's fileutils class to do so, via
+**FileUtils.mkdir_p()**.
 
-mkdir /home/x/src/htop
-cd /home/x/src/htop
-wget http://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz
-If you, for instance, want to store multiple versions of GLib, then a downcased directory called glib/ has to exist within that source archive directory - just as the example above shows for htop.
+Next, download the remote source for this program locally (you can
+also use the rbt project to do so for you: **"rbt htop --download-source"**
+but for the first steps, again, I recommend to do these steps manually
+instead).
 
-Different versions of GLib can then be stored in that directory.
+    wget http://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz
+
+More specifically, on my home system, I'd do the following things manually
+(but keep in mind that ruby does this for me automatically):
+
+    mkdir /home/x/src/htop
+    cd /home/x/src/htop
+    wget http://hisham.hm/htop/releases/2.0.2/htop-2.0.2.tar.gz
+
+If you, for instance, want to store multiple versions of GLib, then
+a downcased directory called glib/ has to exist within that 
+source archive directory - just as the example above shows for
+htop.
+
+Different versions of **GLib** can then be stored in that directory.
 
 The path would, in my case, be:
 
-/home/x/src/glib/
+    /home/x/src/glib/
+
 That's it, essentially!
 
-Past this point, the cookbooks project - or rather, the Cookbooks submodule of the RBT namespace - can feedback some information about htop via the executable called "scookie".
+Past this point, the cookbooks project - or rather, the Cookbooks
+submodule of the RBT namespace - can feedback some information
+about htop via the executable called "scookie".
 
-For example, to use scookie (bin/scookie) and thus display information about a program in a colourized manner, on the commandline, do:
+For example, to use scookie (<b>bin/scookie</b>) and thus display
+information about a program in a colourized manner, on the
+commandline, do:
 
-scookie glib
-scookie htop
-By default this will truncate too many entries (e. g. more than 5 entries for libraries, headers, and binaries). If you would rather not want scookie to truncate, you can pass the commandline flag --do-not-truncate, like so:
+    scookie glib
+    scookie htop
 
- scookie glibc --do-not-truncate
- scookie htop --do-not-truncate
-Take note that you can enable this functionality also through bin/rbt (aka rbt on the commandline) as well, such as in the following examples:
+By default this will truncate too many entries (e. g. more than 5
+entries for libraries, headers, and binaries). If you would rather
+not want scookie to truncate, you can pass the commandline flag
+**--do-not-truncate**, like so:
 
-rbt --scookie=glib
-rbt --scookie=htop
-The associated .yml file is always available anyway, with or without the archive being available locally as well. So you can always query the information stored in these .yml files the moment you install the rbt project; it can thus function as a weak "database". (I will at some point add SQL instructions in how to create a SQL database and use it with the RBT project. But note that the .yml way will most likely remain the default way; primary reason being out of convenience, since it is so trivial to edit a single text file such as .yml files.)
+     scookie glibc --do-not-truncate
+     scookie htop --do-not-truncate
 
-If you are wondering why the name "scookie" was picked - it originated from the sanitize_cookbook_dataset functionality, which ensures that the dataset is correct. I was using the abbreviation "scook" to refer to sanitize_cookbook_dataset, but I found that "scookie" is easier to remember. Everyone likes cookies, right?
+Take note that you can enable this functionality also through **bin/rbt**
+(aka **rbt** on the commandline) as well, such as in the **following
+examples**:
 
-The cookbooks project should now be usable to display information about this project - provided that it has been registered of course. If it is not yet registered, then someone has to register it; there are some helper scripts that can aid you there, but as a rule of thumb, I'll add new program entries when needed. They are essentially just a single .yml file.
+    rbt --scookie=glib
+    rbt --scookie=htop
 
-Currently, there are more than 3000 programs that are registered in the Cookbooks project; almost 3200 already and this number is very slowly continuing to grow.
+The associated .yml file is always available anyway, with or without the
+archive being available locally as well. So you can always query the
+information stored in these .yml files the moment you install the
+**rbt project**; it can thus function as a weak "database". (I will
+at some point add **SQL instructions** in how to create a SQL database
+and use it with the RBT project. But note that the .yml way will
+most likely remain the default way; primary reason being out of
+convenience, since it is so trivial to edit a single text file such
+as .yml files.)
 
-Cookbooks may also keep track of information such as whether a given progam at hand will install a .pc file (pkgconfig file). This may help if you are on a non-GoboLinux system and wish to find out which particular program installed which specific .pc file, too. (On GoboLinux this is trivial to find out since it keeps AppDir-related and versioned programs, whereas on the traditional FHS preferring /usr prefix, the individual .pc files would usually reside under /usr/lib/pkgconfig/, without always giving you a simple way to ind out as to where they came from.)
+If you are wondering why the name "scookie" was picked - it originated
+from the **sanitize_cookbook_dataset** functionality, which ensures
+that the dataset is correct. I was using the abbreviation "scook" to
+refer to sanitize_cookbook_dataset, but I found that "scookie" is
+easier to remember. Everyone likes cookies, right?
 
-You can query this by using "scookie", which will show this, and more, in a colourized manner.
+The **cookbooks project** should now be usable to display information
+about this project - provided that it has been registered of
+course. If it is not yet registered, then someone has to register
+it; there are some helper scripts that can aid you there, but as
+a rule of thumb, I'll add new program entries when needed. They
+are essentially just a single .yml file.
+
+Currently, there are more than 3000 programs that are registered
+in the Cookbooks project; almost 3200 already and this number is
+very slowly continuing to grow.
+
+Cookbooks may also keep track of information such as whether
+a given progam at hand will install a .pc file (pkgconfig file).
+This may help if you are on a non-GoboLinux system and wish to
+find out which particular program installed which specific
+.pc file, too. (On GoboLinux this is trivial to find out since
+it keeps AppDir-related and versioned programs, whereas on
+the traditional FHS preferring /usr prefix, the individual 
+.pc files would usually reside under /usr/lib/pkgconfig/, 
+without always giving you a simple way to ind out as to where
+they came from.)
+
+You can query this by using "scookie", which will show this, and
+more, in a colourized manner.
 
 An example follows:
 
-scookie libvorbis
-If you wish to support this project, for now please just test it and report any bugs or report inadequate or confusing documentation.
+    scookie libvorbis
 
-The project is still in a beta stage and it will take quite a long while before it can leave that beta stage.
+If you wish to support this project, for now please just test it and
+report any bugs or report inadequate or confusing documentation.
 
-Obtaining the number of registered programs
-You can obtain the number of registered programs from the commandline by issuing any of the following:
+The project is still in a beta stage and it will take quite a long
+while before it can leave that beta stage.
 
-cookbooks --registered_programs?
-cookbooks --n_programs?
-cookbooks registered_programs?
-The number of registered programs can be queried via the commandline as well, like in this way:
+## Obtaining the number of registered programs
 
-rbt --n_programs?
+You can obtain the **number of registered programs** from the
+commandline by issuing any of the following:
+
+    cookbooks --registered_programs?
+    cookbooks --n_programs?
+    cookbooks registered_programs?
+
+The number of registered programs can be queried via the
+commandline as well, like in this way:
+
+    rbt --n_programs?
+
 Although the output may be a little bit different.
 
 This would then output something such as this:
 
-→ 3330 programs registered as of 30 January 2018.
-→ 3414 programs registered as of 18 September 2018.
-→ 3635 programs registered as of 01 December 2019.
-→ 3656 programs registered as of 12 January 2020.
-(The format may be a bit different to the above, but the information content is the same.)
+    → 3330 programs registered as of 30 January 2018.
+    → 3414 programs registered as of 18 September 2018.
+    → 3635 programs registered as of 01 December 2019.
+    → 3656 programs registered as of 12 January 2020.
 
-Optional dependencies for the RBT gem
-The wget gem is recommended as an optional dependency for the RBT gem, but you can also use the RBT project without the wget gem just fine. In that case, if the wget gem is not available, the RBT project will attempt to use the wget binary via a system()-call, hence an "external" program, to ruby.
+(The format may be a bit different to the above, but the
+information content is the same.)
 
-This requires the installation of wget e. g. from this URL (or from your package manager's repository), unless wget is already available on your local computer system:
+## Optional dependencies for the RBT gem
+
+The **wget gem** is recommended as an optional dependency for the
+RBT gem, but you can also use the RBT project without the wget
+gem just fine. In that case, if the wget gem is not available, the
+RBT project will attempt to use the wget binary via a
+**system()**-call, hence an "external" program, to ruby.
+
+This requires the installation of **wget** e. g. from this URL (or
+from your package manager's repository), unless wget is already
+available on your local computer system:
 
 http://ftp.gnu.org/pub/gnu/wget/?C=M;O=D
 
-Of course, most Linux systems will have "wget" available by default, so the above more applies towards operating systems such as windows (although more recent windows versions also include a linux-subsystem including bash, the WSL, so this should also not be a problem).
+Of course, most Linux systems will have "wget" available by default,
+so the above more applies towards operating systems such as windows
+(although more recent windows versions also include a linux-subsystem
+including bash, the **WSL**, so this should also not be a problem).
 
-Increment Program Version
-class RBT::Cookbooks::IncrementProgramVersion, stored in the file rbt/utility_scripts/increment_program_version.rb, can be used to automatically update a local program version to a newer version, provided that the new version can be "guessed" by the script.
+## Increment Program Version
 
-Let's use a specific example, because it wil be easier to explain this when we can be specific.
+class **RBT::Cookbooks::IncrementProgramVersion**, stored in the
+file **rbt/utility_scripts/increment_program_version.rb**, can be
+used to **automatically update a local program version** to a
+newer version, provided that the new version can be "guessed"
+by the script.
 
-Take the program called wget. Let's say that we wish to increment the program version of wget to a more recent one.
+Let's use a specific example, because it wil be easier to explain
+this when we can be specific.
 
-An older version, as a tarball release, may exist at a remote location such as this one here:
+Take the program called **wget**. Let's say that we wish to
+increment the program version of wget to a more recent one.
 
-ftp://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.gz
-The (more recent) version in use may be for version 1.19.2.
+An **older version**, as a tarball release, may exist at
+a remote location such as this one here:
 
-class IncrementProgramVersion will first test whether a remote URL such as:
+    ftp://ftp.gnu.org/gnu/wget/wget-1.19.1.tar.gz
 
-ftp://ftp.gnu.org/gnu/wget/wget-1.19.2.tar.gz
-exists. If it does exist, it will be downloaded and the new program version will be changed towards wget 1.19.2.
+The (more recent) version in use may be for version
+<b>1.19.2</b>.
 
-This can be done for all programs, and it allows a simple update-mechanism for individual programs.
+**class IncrementProgramVersion** will first test whether a
+remote URL such as:
 
-If you have to or want to batch-update several programs, this is also possible for some of the *nix stack. For example, there are some classes that can download the whole KDE5 stack; have a look at the KDE entry or the mate-desktop entry, in this (autogenerated) README.md file here.
+    ftp://ftp.gnu.org/gnu/wget/wget-1.19.2.tar.gz
 
-Since as of November 2020, this also works for github-based URLs. I needed this functionality because there are more and more packages that are published only on github these days.
+**exists**. If it does exist, it will be downloaded and the
+new program version will be changed towards **wget 1.19.2**.
 
-Commandline ways to manipulate the dataset
-There are some classes that can be used to manipulate the dataset stored in the individual cookbooks files (the corresponding .yml file). This is presently quite limited, though.
+This can be done for all programs, and it allows a simple
+update-mechanism for individual programs.
 
-The only commandline-manipulation that is currently available, is done by class RBT::Cookbooks::ToggleKeepExtractedValue.
+If you have to or want to batch-update several programs,
+this is also possible for some of the *nix stack. For example,
+there are some classes that can download the whole KDE5 stack;
+have a look at the KDE entry or the mate-desktop entry, in
+this (autogenerated) README.md file here.
 
-This acts as a toggle-switch. If you invoke the class, and pass the name of the program at hand, then the keep_extracted: value will be toggled, from false to true and from true to false.
+Since as of **November 2020**, this also works for github-based
+URLs. I needed this functionality because there are more and more
+packages that are published only on github these days.
 
-Additional information
-Consider having a look at the doc/ subdirectory of this project's gem, for some more information. Another useful subdirectory may be the lib/yaml/ subdirectory, which also contains some specifications such as specification_of_registered_cookbook_entries.yml.
+## Commandline ways to manipulate the dataset
 
-Stable software versus Unstable software
-This subsection here explains how the RBT project currently (in January 2019) views stable and unstable software releases upstream - that is, by other developers, companies and so forth.
+There are some classes that can be used to manipulate the dataset
+stored in the individual cookbooks files (the corresponding .yml
+file). This is presently quite limited, though.
 
-From my own experience, unstable releases may bring in new features, but this often comes at a cost. Compilation errors may happen; bugs may happen while running the software. What is even worse is that other software may depend on functionality that may be changed during an unstable release. (While it may also be changed in a stable release eventually, stable releases in general often have problems fixed whereas unstable releases often do not.)
+The only commandline-manipulation that is currently available,
+is done by **class RBT::Cookbooks::ToggleKeepExtractedValue**.
 
-In particular the latter is one reason why I focus on stable releases - there will be fewer issues in the long run, thus easening the maintenance burden. That also means that the Cookbook projects tries to be moderately conservative - stable releases are favoured, unstable releases are often skipped. For example, I skip odd-versioned releases of the GNOME project and also of the KDE project. Waiting for stable releases just a little bit longer is worth the time, IMO.
+This acts as a **toggle-switch**. If you invoke the class, and pass
+the name of the program at hand, then the keep_extracted: value
+will be toggled, from false to true and from true to false.
+    
+## Additional information
 
-This is a loose philosophy, not a strict policy, so expect some deviations - but in general, as a rule of thumb, there will be stable releases preferentially in the RBT project. (In the future we may have to change the cookbook entries to denote whether a release is stable or unstable, but for now, in the beginning of the year 2019, this is how the RBT project will handle updates of any its registered programs.)
+Consider having a look at the **doc/ subdirectory** of this project's
+gem, for some more information. Another useful subdirectory may be the
+**lib/yaml/** subdirectory, which also contains some specifications
+such as **specification_of_registered_cookbook_entries.yml**.
 
-The difference between "build tools" and a "package manager"
-A package manager allows you to handle packages in one way or another; installing, removing, tweaking, changing, activating, selecting software. Things like that. As such, a package manager is very useful in itself - it can help keep your system up-to-date with new, or patched, packages.
+## Stable software versus Unstable software
 
-Build tools in this context, though, are much more general. The above description of a package manager can easily fit into a set of build tools as well, but the scope of "build tools" is overall simply larger and more inclusive.
+This subsection here explains how the RBT project currently (in
+January 2019) views stable and unstable software releases
+**upstream** - that is, by other developers, companies and so forth.
 
-Build tools may also include helper code that can fix build-related problems, problems in Makefiles, act as sed-wrapper, and so on and so forth. A package manager on the other hand rarely needs to tamper with sed instructions, since that should have already been handled by the developers who maintain the packages for a particular distribution.
+From my own experience, unstable releases may bring in new features,
+but this often comes at a cost. Compilation errors may happen; bugs
+may happen while running the software. What is even worse is that
+other software may depend on functionality that may be changed 
+during an unstable release. (While it may also be changed in a 
+stable release eventually, stable releases in general often have
+problems fixed whereas unstable releases often do not.)
 
-So the scope of the build tools is larger and not as narrowly defined as just a "mere package manager" alone. Another good comparison here is the ublock origin extension or the adblock plus extension - the latter wants to block only or primarily ads. The former allows you to act as a "general content blocker" under your control, which CAN include ads but can also block generic content, which makes it a lot more powerful and flexible in its approach.
+In particular the latter is one reason why I focus on stable 
+releases - there will be fewer issues in the long run, thus 
+easening the maintenance burden. That also means that the Cookbook
+projects tries to be **moderately conservative** - stable releases
+are favoured, unstable releases are often skipped. For example, 
+I skip odd-versioned releases of the GNOME project and also of
+the KDE project. Waiting for stable releases just a little bit
+longer is worth the time, IMO.
 
-I consider the approach taking up by ublock origin option to be far more useful to users in general, so this is in some ways how one could look at the difference between a "package manager" per se, and "build tools" on the other hand, too.
+This is a loose philosophy, not a strict policy, so expect some
+deviations - but in general, as a rule of thumb, there will be
+stable releases preferentially in the RBT project. (In
+the future we may have to change the cookbook entries to denote
+whether a release is stable or unstable, but for now, in the
+beginning of the year 2019, this is how the RBT project will
+handle updates of any its registered programs.) 
 
-Build tools could easily include a package manager but a package manager will probably never include build-tools related helper scripts as its primary means to go about handling anything. The RBT project is going the "build tools" route - it attempts to collect code that can help with building, installing, compiling packages in general, but also automatic patching and automatic generation of files, and so forth.
+## The difference between "build tools" and a "package manager"
 
-If you wish to install the rbt project, via RubyGems, you can issue the following command:
+A **package manager** allows you to handle packages in one way or 
+another; installing, removing, tweaking, changing, activating,
+selecting software. Things like that. As such, a package manager
+is very useful in itself - it can help keep your system up-to-date
+with new, or patched, **packages**.
 
-gem install rbt
-Do note that some functionality can work outside of the RBT::Cookbooks namespace, such as RBT::Libtool related actions.
+**Build tools** in this context, though, are much more general. The
+above description of a package manager can easily fit into a set of
+build tools as well, but the scope of "build tools" is overall 
+simply larger and more inclusive.
 
-Now, when the above installation method has worked - and if it has not, please do consider reporting this - you should be able to compile something via the RBT scripts.
+**Build tools** may also include helper code that can fix build-related
+problems, problems in Makefiles, act as sed-wrapper, and so on and
+so forth. A **package manager** on the other hand rarely needs to
+tamper with sed instructions, since that should have already been
+handled by the developers who maintain the packages for a particular
+distribution.
 
-Let's start with "htop" as example, a useful program written by one of the original creators of the GoboLinux project:
+So the scope of the build tools is larger and not as narrowly defined as
+just a "mere package manager" alone. Another good comparison here is the
+**ublock origin** extension or the **adblock plus** extension - the
+latter wants to block only or primarily ads. The former allows you to act
+as a "general content blocker" under your control, which CAN include 
+ads but can also block generic content, which makes it a lot more powerful
+and flexible in its approach.
 
-rbt htop
-This should, if everything works fine, download htop, extract and compile it.
+I consider the approach taking up by **ublock origin** option to be far more
+useful to users in general, so this is in some ways how one could look at
+the difference between a "package manager" per se, and "build tools" on
+the other hand, too.
+
+**Build tools** could easily include a package manager but a package manager
+will probably never include build-tools related helper scripts as its primary
+means to go about handling anything. The RBT project is going the "build
+tools" route - it attempts to collect code that can help with building,
+installing, compiling packages in general, but also automatic patching
+and automatic generation of files, and so forth.
+
+If you wish to install the **rbt** project, via RubyGems, you can issue
+the following command:
+
+    gem install rbt
+
+Do note that some functionality can work outside of the RBT::Cookbooks
+namespace, such as <b>RBT::Libtool</b> related actions.
+
+Now, when the above installation method has worked - and if it has not,
+please do consider reporting this - you should be able to compile
+something via the RBT scripts.
+
+Let's start with "htop" as example, a useful program written by
+one of the original creators of the **GoboLinux** project:
+
+    rbt htop
+
+This should, if everything works fine, download htop, extract
+and compile it.
 
 If you wish to use another prefix, such as:
 
-/Programs/Htop/2.0.1
+    /Programs/Htop/2.0.1
+
 you can do this:
 
-rbt htop --appdir
-rbt htop non-traditional
-rbt htop ntrad
-ntrad stands for "non-traditional". Note that the entry is NOT hardcoded towards /Programs/ - you can define your own app-dir prefix and even make use of $SHELL variables. For example, I point to this directory via a custom variable called $MY_PROGRAMS, which is stored in the file programs_dir.yml that is part of the RBT project. More about this elsewhere though - for now just keep in mind that this will install into a versioned AppDir directory, but you can of course use any other variant such as "/pkg" or "/Programme" or "/opt" - whatever. Note that you can omit the trailing '/' there, so "/Programs/" is the very same as "/Programs" - the RBT scripts will internally make sure that this will be a directory anyway, and thus have a trailing / character.
+    rbt htop --appdir
+    rbt htop non-traditional
+    rbt htop ntrad
 
-AppDirs, for the purpose of this document, means that what belongs to one program, goes into the same, versioned directory.
+ntrad stands for "non-traditional". Note that the entry is **NOT**
+hardcoded towards **/Programs/** - you can define your own app-dir
+prefix and even make use of $SHELL variables. For example, I point
+to this directory via a custom variable called $MY_PROGRAMS, which
+is stored in the file programs_dir.yml that is part of the RBT
+project. More about this elsewhere though - for now just keep in
+mind that this will install into a versioned AppDir directory, but
+you can of course use any other variant such as "/pkg" or "/Programme"
+or "/opt" - whatever. Note that you can omit the trailing '/'
+there, so "/Programs/" is the very same as "/Programs" -
+the RBT scripts will internally make sure that this will be
+a directory anyway, and thus have a trailing **/** character.
 
-You can also use another prefix, in particular /usr. This is called the "traditional" prefix. In the respective yaml file, the cookbook file at hand, this entry is called "prefix: ".
+**AppDirs**, for the purpose of this document, means that what belongs
+to one program, goes into the same, versioned directory.
 
-If you see a "t" there then this is short for "traditional", and it will be expanded towards "/usr" when used. Whereas the character "f" will be expanded to mean "non-traditional", thus AppDir prefix. Do note that you can also use other shortcuts there and absolute targets as well - the reason why single characters are used is largely to save me, but also others, some typing work. If you want to use the longer variants, you can do so just fine, but I assume that after some typing work, you may be bored of having to make use of long words and consider using abbreviations instead. :)
+You can also use another prefix, in particular **/usr**. This
+is called the "traditional" prefix. In the respective yaml file,
+the cookbook file at hand, this entry is called "prefix: ".
 
-Anyway, here is the example to use /usr as prefix:
+If you see a "t" there then this is short for "traditional",
+and it will be expanded towards "/usr" when used. Whereas
+the character "f" will be expanded to mean "non-traditional",
+thus AppDir prefix. Do note that you can also use other
+shortcuts there and absolute targets as well - the reason why
+single characters are used is largely to save me, but also
+others, some typing work. If you want to use the longer
+variants, you can do so just fine, but I assume that after
+some typing work, you may be bored of having to make use of 
+long words and consider using abbreviations instead. :)
 
-rbt htop --traditional
-rbt htop --trad
-rbt htop trad
-Use any variant there. I prefer the last one, "trad", because it is shorter to type.
+Anyway, here is the example to use **/usr** as prefix:
 
-If you wish to look at the available help options that are available for rbt, do:
+    rbt htop --traditional
+    rbt htop --trad
+    rbt htop trad
 
-rbt --help
-Note that this will showcase mostly just the more common ones. There are many more options that can be used.
+Use any variant there. I prefer the last one, "trad", because
+it is shorter to type.
 
-There is a fairly large tutorial available as well. I have to publish it in .pdf format eventually.
+If you wish to look at the available help options that are
+available for rbt, do:
 
-(Auto)Registering problems
-The RBT suite attempts to identify errors, register them and sometimes report these problems. The main idea behind this is twofold:
+    rbt --help
 
-(a) To be able to auto-correct reported (and registered)
-    problems.
+Note that this will showcase mostly just the more common
+ones. There are many more options that can be used.
 
-(b) To notify the user and optionally provide information
-    as to why the error happens and how it could be fixed.
-Ideally, autocorrecting would work to the extent that all problems that occur, could be automatically solved. But this is not trivial; while some problems can be quite easily autocorrect, others can not. And sometimes there is ambiguity so only the user can decide which variant is the correct one.
+There is a fairly large tutorial available as well. I 
+have to publish it in .pdf format eventually.
 
-This is why the notification part is more important than the auto-correct part. See the next subsection for some autocorrection that can be done.
+## (Auto)Registering problems
 
-Finding all programs that start with a specific letter
-If you wish to find all registered programs that start with a specific letter, such as k, do this:
+The RBT suite attempts to identify errors, register them and
+sometimes report these problems. The main idea behind this is
+twofold:
 
-rbt k*
-This will output all programs that start with k and also tell you how many programs with that letter exist.
+    (a) To be able to auto-correct reported (and registered)
+        problems.
 
-Base subclass
-The RBT project has a base subclass, residing at rbt/base/base.rb.
+    (b) To notify the user and optionally provide information
+        as to why the error happens and how it could be fixed.
+
+Ideally, autocorrecting would work to the extent that all
+problems that occur, could be automatically solved. But
+this is not trivial; while some problems can be quite easily
+autocorrect, others can not. And sometimes there is ambiguity
+so only the user can decide which variant is the correct one.
+
+This is why the **notification part** is more important than the
+**auto-correct part**. See the next subsection for some
+autocorrection that can be done.
+
+## Finding all programs that start with a specific letter
+
+If you wish to find all registered programs that start with
+a specific letter, such as k, do this:
+
+    rbt k*
+
+This will output all programs that start with k and also
+tell you how many programs with that letter exist.
+
+## Base subclass
+
+The **RBT project** has a **base subclass**, residing at **rbt/base/base.rb**.
 
 Most classes in the RBT namespace will inherit from this base class.
 
-There is another class, called prototype.rb, which is pulled in by base.rb. The reason why prototype.rb was needed is to avoid circular dependency warnings - prototype.rb is much smaller than base.rb and provides mostly just the core functionality that is sufficiently useful for several classes.
+There is another class, called prototype.rb, which is pulled in by
+base.rb. The reason why prototype.rb was needed is to avoid circular
+dependency warnings - prototype.rb is much smaller than base.rb and
+provides mostly just the core functionality that is sufficiently
+useful for several classes.
 
-Show the last configure option
-Since as of January 2018, a way exists to show the last configure option used for a given program. This depends on the file configure_command_database.yml.
+## Show the last configure option
 
-If this file exists, and if the sought program has been compiled before (meaning that RBT has stored the configure command used in that .yml ile) - say, the program attica was compiled, then you can query this information from the commandline, via:
+Since as of January 2018, a way exists to show the last configure
+option used for a given program. This depends on the file
+<b>configure_command_database.yml</b>.
 
-rbt attica --show-last-configure-option
-This could then be used to copy/paste, or modify if you experience some problems related to compiling a program from source, for instance.
+If this file exists, and if the sought program has been compiled
+before (meaning that RBT has stored the configure command used
+in that .yml ile) - say, the program <b>attica</b> was compiled,
+then you can query this information from the commandline, via:
 
-Of course you can also always peek into that .yml file on your own. Thankfully yaml is sufficiently readable, more so than big, clunky XML files.
+    rbt attica --show-last-configure-option
 
-Timing of the compilation (duration)
-Since as of January 2018, code exists to tell us how long it took to compile a given program at hand.
+This could then be used to copy/paste, or modify if you experience
+some problems related to compiling a program from source, for
+instance.
 
-This requires the configuration option time_compilation set to true it the corresponding yaml file (within the configuration/ subdirectory).
+Of course you can also always peek into that .yml file on your
+own. Thankfully yaml is sufficiently readable, more so than
+big, clunky XML files.
 
-If this setting is set to true, then RBT::Action::SoftwareManager will show, on the commandline, how long it took to compile a program, in seconds (and also in minutes). The default for this setting is true as of January 2018.
+## Timing of the compilation (duration)
 
-Note that the time it took to compile the given program at hand will only be shown if there was no proble/error during the compilation process. This may be fine-tuned at a later time, but for now, the functionality at the least exists as part of RBT::Action::SoftwareManager.
+Since as of January 2018, code exists to tell us how long it
+took to compile a given program at hand.
 
-The time it took, in seconds, will also be stored in the file called database_storing_compile_times.yml, in a simple key-value hash. (This file will be generated into the rbt_logs/ subdirectory. On my home system this file will thus be at /home/Temp/rbt/database_storing_compile_times.yml)
+This requires the configuration option time_compilation set to
+true it the corresponding yaml file (within the <b>configuration/</b>
+subdirectory).
 
-If you compiled several programs via rbt, you can also show how long it took to compile these programs.
+If this setting is set to <b>true</b>, then RBT::Action::SoftwareManager will show, on the
+commandline, how long it took to compile a program, in seconds (and also
+in minutes). The default for this setting is <b>true</b> as of <b>January
+2018</b>.
+
+Note that the time it took to compile the given program at hand will
+only be shown if there was no proble/error during the compilation
+process. This may be fine-tuned at a later time, but for now, the
+functionality at the least exists as part of <b>RBT::Action::SoftwareManager</b>.
+
+The time it took, in seconds, will also be stored in the file
+called <b>database_storing_compile_times.yml</b>, in a simple key-value
+hash. (This file will be generated into the <b>rbt_logs/</b>
+subdirectory.
+On my home system this file will thus be at 
+**/home/Temp/rbt/database_storing_compile_times.yml**)
+
+If you compiled several programs via rbt, you can also show how 
+long it took to compile these programs.
 
 The commandline option for this is:
 
-rbt --show-compile-time-statistics
-Packaging the RBT scripts
-You can package all the latest RBT Scripts by using a commandline flag such as this:
+    rbt --show-compile-time-statistics
 
-rbt package_cookbooks
-rbt --package_cookbooks
-This will create a directory in /Depot/Archives/ and package the RBT Scripts into that directory.
+## Packaging the RBT scripts
 
-Of course you can do so manually as well, but I wanted to have this functionality at the least available for when a user is on windows and may need to transfer the files, for whatever the reason(s).
+You can package all the latest RBT Scripts by using a commandline
+flag such as this:
 
-systemd
-I personally do not like systemd in the slightest nor can I align with the, in my opinion, absolutely unnecessary and constantly changing goals of the ever-expanding systemd project or the attitude of the main systemd developers. It seems as if systemd's primary job is not to solve any user-related problems, but instead to be of the main benefit to those who wrote, created and maintain it, primarily.
+    rbt package_cookbooks
+    rbt --package_cookbooks
 
-This subsection here is, however had, not about projecting my personal opinions about systemd onto others - this subsection is how systemd relates to RBT, if it does so at all.
+This will create a directory in <b>/Depot/Archives/</b> and package
+the RBT Scripts into that directory.
 
-The RBT project is "apolitical", that is - it is for the people who use it, the users. If users want to use systemd then this is fine. And if users do not want to use systemd then this is fine as well.
+Of course you can do so manually as well, but I wanted to have
+this functionality at the least available for when a user is
+on windows and may need to transfer the files, for whatever
+the reason(s).
 
-Note that the LFS (linux from scratch) project follows a similar philosophy. It has a non-systemd and a systemd variant, so you can pick either variant at your own discretion.
+## systemd
 
-Compiling and installing programs should work at every moment in time, as far as the RBT project itself is concerned. At the least RBT will attempt to make things work and aid a user in precisely that way.
+I personally do not like systemd in the slightest nor can I align
+with the, in my opinion, absolutely unnecessary and constantly
+changing goals of the ever-expanding systemd project or the attitude
+of the main systemd developers. It seems as if systemd's primary job
+is not to solve any user-related problems, but instead to be of the
+main benefit to those who wrote, created and maintain it, primarily.
 
-However had, the RBT scripts are predominantly tested on non-systemd linux systems, so it may be that parts of RBT have to be changed/adjusted if you are using the RBT project on a systemd-dependent setup.
+This subsection here is, however had, not about projecting my personal
+opinions about systemd onto others - this subsection is **how systemd
+relates to RBT**, if it does so at all.
 
-I will accept bug fixes and behaviour changes in regards to compliance with systemd systems IF non-systemd systems can continue to work just fine as-is. That is, changes may not happen in an exclusive manner - changes that do will be rejected. They will of course be accepted if it does not break this assumption and if they are in the spirit of the RBT project itself.
+The RBT project is "apolitical", that is - it is for the people who
+use it, the **users**. If users want to use systemd then this is
+fine. And if users do not want to use systemd then this is fine as
+well.
 
-The primary reason for this here does not relate to my personal opinion either, but the simple question of the amount of time that is available to me, which I invest into various projects already. (RBT is only one project among many more; and that's just computer-related projects. I have many non-computer related projects, hobbies and things that require time investment.)
+Note that the <b>LFS</b> (linux from scratch) project follows a similar
+philosophy. It has a non-systemd and a systemd variant, so you can pick
+either variant **at your own discretion**.
 
-Subversion
-You can try to download from SVN sources, by issuing the following command:
+Compiling and installing programs should work at every moment
+in time, as far as the **RBT project** itself is concerned. At
+the least RBT will attempt to **make things work** and aid a
+user in precisely that way.
 
-rbt dosbox svn # This would download dosbox using svn
-Note that this depends on the setting svn_url in the respective cookbook file (in this case dosbox.yml).
+However had, the **RBT scripts** are predominantly tested on
+non-systemd linux systems, so it may be that parts of RBT
+have to be changed/adjusted if you are using the RBT project
+on a systemd-dependent setup.
 
-The svn_url setting must be specified, as otherwise RBT can not download the code via svn.
+I will accept bug fixes and behaviour changes in regards to
+compliance with systemd systems **IF** non-systemd systems
+can continue to work just fine as-is. That is, **changes may
+not happen in an exclusive manner** - changes that do will be
+rejected. They will of course be accepted if it does not 
+break this assumption and if they are in the spirit of the
+RBT project itself.
+
+The primary reason for this here does not relate to my 
+personal opinion either, but the simple question of the
+amount of time that is available to me, which I invest
+into various projects already. (RBT is only one project
+among many more; and that's just computer-related
+projects. I have many non-computer related projects,
+hobbies and things that require time investment.)
+
+## Subversion
+
+You can try to download from SVN sources, by issuing the
+following command:
+
+    rbt dosbox svn # This would download dosbox using svn
+
+Note that this depends on the setting <b class="color: royalblue">svn_url</b>
+in the respective cookbook file (in this case dosbox.yml).
+
+The <b>svn_url</b> setting must be specified, as otherwise RBT
+can not download the code via svn.
 
 It is quite rare that source archives depend on svn nowadays, though.
 
-Creating a .yml yaml file for a specific program
-If you modify a .yml file, from the rbt project, and then wish to autogenerate a new expanded cookbook dataset, then you can use this commandline switch from within rbt to do so, too:
+## Creating a .yml yaml file for a specific program
 
-rbt --create-yaml-file-for=subversion
+If you modify a .yml file, from the rbt project,
+and then wish to autogenerate a new expanded cookbook
+dataset, then you can use this commandline switch from
+within rbt to do so, too:
+
+    rbt --create-yaml-file-for=subversion
+
 This requires the cookbooks gem to be installed.
 
-You can do so from the rbt project already as-is, so why was this functionality added to rbt?
+You can do so from the rbt project already as-is, so
+why was this functionality added to rbt?
 
-Mostly out of convenience. I feel that it may be simpler to make available functionality that is somewhat common between the two projects (cookbooks and rbt) from rbt itself too. After all, rbt is the project that sort of builds upon - and thus extends - the cookbooks project.
+Mostly out of convenience. I feel that it may be simpler 
+to make available functionality that is somewhat common
+between the two projects (cookbooks and rbt) from rbt
+itself too. After all, rbt is the project that sort of
+builds upon - and thus extends - the cookbooks project.
 
-Issues and Problems with Compiling in general
-This subsection is not extensive; it only provides some information for somewhat advanced users. In other words, for those people who already have compiled some programs more or less successfully.
+## Issues and Problems with Compiling in general
 
-Some programs may fail due to various reasons, some of which may be hard to debug.
+This subsection is **not extensive**; it only provides some
+information for somewhat advanced users. In other words, for
+those people who already have compiled some programs more
+or less successfully.
 
-For example, perhaps you may run into a "bad file descriptor" problem one day. I did so in March 2018. The fix for me here was to change the $PATH setting.
+Some programs may fail due to various reasons, some of
+which may be hard to debug.
+
+For example, perhaps you may run into a "bad file descriptor"
+problem one day. I did so in March 2018. The fix for me
+here was to change the $PATH setting.
 
 You can modify the $PATH setting for rbt too at runtime.
 
-For example, to prioritize on /usr/bin/, you can use this commandline switch:
+For example, to prioritize on <b>/usr/bin/</b>, you can use
+this commandline switch:
 
-rbt --traditional-path
-Of course you can also change the $PATH variable on your own permanently - environment variables are in general available in ENV, in ruby files.
+    rbt --traditional-path
 
-RBT_SOURCE_DIRECTORY
-Since as of April 2018, there is a way to specify another target for the SRC_DIRECTORY, that is - the directory under which all other local source-archives reside.
+Of course you can also change the $PATH variable on your own
+permanently - environment variables are in general available
+in ENV, in ruby files.
 
-On my home system, the source directory resides under /home/x/src/.
+## RBT_SOURCE_DIRECTORY
 
-If there is an environment variable called RBT_SOURCE_DIRECTORY defined on your system, then this is the variable that we will use across RBT for the source directory.
+Since as of <b>April 2018</b>, there is a way to specify
+another target for the <b>SRC_DIRECTORY</b>, that is - the
+directory under which all other local source-archives reside.
 
-If there is no such variable then, by default, we will use the setting specified by the Cookbooks project, if it is available.
+On my home system, the source directory resides under
+<b>/home/x/src/</b>.
 
-Do note that the variable RBT_SOURCE_DIRECTORY will overrule every other setting, except for values set from the commandline to RBT::Action::SoftwareManager, such as via --use-this-source-directory= - so use this variable with care. If you do not need it, I recommend to simply not set it at all; it really only exists in the event that there are no better alternative ways, or because the alternative ways may be too cumbersome to use.
+If there is an environment variable called <b>RBT_SOURCE_DIRECTORY</b>
+defined on your system, then this is the variable that we will
+use across RBT for the source directory.
 
-If you wish to find out the current source directory used by RBT then you can use either one of the following commandline flags:
+If there is no such variable then, by default, we will use
+the setting specified by the <b>Cookbooks</b> project, if it
+is available.
 
-rbt --source-dir?
-rbt --source-archive?
-Prefixes to use
-The most common (default) prefix on most linux systems will be /usr/ or /usr/local/.
+Do note that the variable <b>RBT_SOURCE_DIRECTORY</b> will
+<b>overrule every other setting</b>, except for values
+set from the commandline to RBT::Action::SoftwareManager, such as via
+<b>--use-this-source-directory=</b> - so use this variable
+with care. If you do not need it, I recommend to simply not
+set it at all; it really only exists in the event that
+there are no better alternative ways, or because the 
+alternative ways may be too cumbersome to use.
 
-That is, if a program is compiled from source, and no explicit --prefix is used, then most programs will default towards /usr/local/ as prefix.
+If you wish to find out the current **source directory** used by
+**RBT** then you can use either one of the following commandline
+flags:
 
-Sometimes /opt/ is also used as prefix; and sometimes we can use versioned AppDirs (Application Directories) or compile into the home directory. The latter two ways were what the GoboLinux creators used on university clusters.
+    rbt --source-dir?
+    rbt --source-archive?
 
-Some convenient shortcuts exist here, in order to make working with prefixes simpler:
+## Prefixes to use
 
-rbt m4 ULOCAL
-This will use the --prefix=/usr/local/ setting, so it is exactly the same as if you would have been issuing this instruction:
+The most common (default) prefix on most linux systems will be **/usr/**
+or **/usr/local/**.
 
-rbt m4 --prefix=/usr/local/
-So the only real benefit of using upcased ULOCAL is that you save a few keystrokes - which is a real benefit for people who like to type as little as possible. :-)
+That is, if a program is compiled from source, and no explicit --prefix
+is used, then most programs will default towards **/usr/local/** as
+prefix. 
 
-Do note that if the user provides a specific --prefix= setting on the commandline then this setting will overrule every other means of setting the target prefix at hand. The reason for this is that RBT assumes of the user to know what he or she wants to do - thus, the commandline must be useful for overruling other settings. User decisions have a higher priority than other settings.
+Sometimes **/opt/** is also used as prefix; and sometimes we can use
+versioned AppDirs (Application Directories) or compile into the home
+directory. The latter two ways were what the GoboLinux creators used
+on university clusters.
+
+Some convenient shortcuts exist here, in order to make working with
+prefixes simpler:
+
+    rbt m4 ULOCAL
+
+This will use the **--prefix=/usr/local/** setting, so it is
+<b>exactly</b> the same as if you would have been issuing this
+instruction:
+
+    rbt m4 --prefix=/usr/local/
+
+So the only real benefit of using upcased ULOCAL is that you save
+a few keystrokes - which is a real benefit for people who like
+to type as little as possible. :-)
+
+Do note that if the user provides a specific **--prefix=** setting
+on the commandline then this setting will overrule **every**
+other means of setting the target prefix at hand. The reason for
+this is that RBT assumes of the user to know what he or she wants
+to do - thus, the commandline must be useful for overruling 
+other settings. User decisions have a higher priority than
+other settings.
 
 Let's look at another example:
 
-rbt m4 --opt_prefix
-This will use --prefix=/opt/.
+    rbt m4 --opt_prefix
 
-If you want to, you can also compile into your $HOME directory and build up an AppDir layout; this is how GoboLinux has been created actually, a long time ago:
+This will use **--prefix=/opt/**.
 
-rbt htop --appdir-into-home-dir
-If you only wish to compile into the home directory, without using the AppDir approach, then you can use the following invocation:
+If you want to, you can also compile into your $HOME directory
+and build up an AppDir layout; this is how **GoboLinux** has
+been created actually, a long time ago:
 
-rbt htop --compile-into-home-dir
-Do note that since as of the 26.01.2019 (26th January 2019) you can also use RBT::CompileIntoHomeDir.new if you wish to compile into your home directory. There is also a bin/ executable available, called home_dir, so if you wish to compile htop into your home dir, via proper prefix, you could use:
+    rbt htop --appdir-into-home-dir
 
-home_dir htop
+If you only wish to compile into the home directory, without
+using the AppDir approach, then you can use the following
+invocation:
+
+    rbt htop --compile-into-home-dir
+
+Do note that since as of the 26.01.2019 (26th January 2019) you
+can also use **RBT::CompileIntoHomeDir.new** if you wish to
+compile into your home directory. There is also a bin/ executable
+available, called **home_dir**, so if you wish to compile htop
+into your home dir, via proper prefix, you could use:
+
+    home_dir htop
+
 This is functionally equivalent to:
 
-rbt htop --prefix=/root/
+   rbt htop --prefix=/root/
 
-if you are the superuser; and if you are a regular user then of course it will use your default HOME_DIR setting (usually somewhere under /home/).
+if you are the **superuser**; and if you are a regular user then of
+course it will use your default **HOME_DIR** setting (usually
+somewhere under **/home/**).
 
-You can also use numbers instead of the target program, for home_dir. This will use the file installation_procedure.yml, and the entries in 'default'. Example:
+You can also use numbers instead of the target program, for
+**home_dir**. This will use the file **installation_procedure.yml**,
+and the entries in 'default'. Example:
 
-home_dir 1 # compiles ccache
-home_dir 3 # compiles libgpgerror
-Note that the last prefix that was used for any given compilation, is always stored on the module RBT "namespace", that is, the toplevel RBT.
+    home_dir 1 # compiles ccache
+    home_dir 3 # compiles libgpgerror
+
+Note that **the last prefix** that was **used** for any given compilation,
+is always stored on the module RBT "namespace", that is, the toplevel RBT.
 
 You can query its value through the following ruby code:
 
-RBT.last_prefix_used?
-This will either return nil, if no prefix was used yet (which is the case on startup of the RBT project, for example), or it will be a String that points to the last prefix that was in use. That way, if other projects want to find out what prefix was used in the RBT project, they can do so through using the above method invocation.
+    RBT.last_prefix_used?
 
-Do note that using a --prefix setting is not mandatory, and it can be disabled, for the current run, via --no-prefix or --noprefix.
+This will either return nil, if no prefix was used yet (which
+is the case on startup of the RBT project, for example), or
+it will be a String that points to the last prefix that was
+in use. That way, if other projects want to find out what
+prefix was used in the RBT project, they can do so through
+using the above method invocation.
+
+Do note that using a --prefix setting is **not** mandatory,
+and it can be disabled, for the current run, via **--no-prefix**
+or **--noprefix**.
 
 Example:
 
-rbt htop --noprefix
-Determine how many core/processors the computer has
-If you wish to find out how many processors/core a target machine has, you can use any of the following two invocation examples:
+    rbt htop --noprefix
 
-rbt --n-processors?
-rbt --n-cores?
-The code for this resides in the method try_to_output_how_many_processors_this_computer_has, which is part of class RBT::Action::SoftwareManager. (This statement is correct at the least for October 2018).
+## Determine how many core/processors the computer has
 
-Compile/Installation shell
-Since as of January 2018, code exists that allows us to batch-compile programs, via a shell-input. It also allows us to query installation options and scan for what is installed, where these programs are installed exactly as well, and so forth.
+If you wish to find out how many processors/core a target
+machine has, you can use any of the following two invocation
+examples:
 
-This is experimental - do not expect for this to work very well as of yet.
+    rbt --n-processors?
+    rbt --n-cores?
 
-The future goal is that we can use this special shell to easily install/remove any given software on any given computer system at hand.
+The code for this resides in the method
+**try_to_output_how_many_processors_this_computer_has**, which
+is part of **class RBT::Action::SoftwareManager**. (This statement is correct at
+the least for **October 2018**).
 
-The namespace for this code currently resides under RBT::Compile::Shell.
+## Compile/Installation shell
 
-For the available options of the compile-shell, input "help" for help (or just "h").
+Since as of <b>January 2018</b>, code exists that allows us to
+**batch-compile programs**, via a shell-input. It also allows
+us to query installation options and scan for what is
+installed, where these programs are installed exactly as
+well, and so forth.
 
-The general idea behind the compile-shell is that we can not only batch-compile, or easily compile one program after the other - but that we can also modify and control the compilation process via a shell-like interface, sort of like an interface to customize the target computer system at hand.
+This is <b>experimental</b> - do not expect for this to
+work very well as of yet.
 
-If you wish to change the prefix for compilation, this can also be done, e. g. via:
+The future goal is that we can use this <b>special shell</b>
+to easily install/remove any given software on any given
+computer system at hand.
 
-gmp trad
-This would compile GMP with the traditional prefix aka /usr/ prefix.
+The <b>namespace</b> for this code currently resides
+under <b>RBT::Compile::Shell</b>.
 
-If you want to find out which were the last n programs that were updated, say n = 35, then you can do this in the compile-shell interface:
+For **the available options of the compile-shell**, input
+"help" for help (or just "h").
 
-last_update? 35
-The idea is to also have the compile-shell as some kind of guide or tutor that can properly explain some cave-eats or problems and make some "semi-seducated guesses", in order to fix this. But this is a long-term goal - for now, the primary purpose of the compile-shell is to aid in batch-compiling programs.
+The general idea behind the compile-shell is that we can not
+only batch-compile, or easily compile one program after the
+other - but that we can also modify and control the compilation
+process via a shell-like interface, sort of like an interface
+to customize the target computer system at hand.
 
-Since as of March 2018, an autocompile-option exists in the shell. This is currently unfinished but in the future the idea is to allow us to automatically compile to the most recent program versions, without necessiting user input. This would then allow us to update a linux-system to the most current program versions - stay tuned for more improvements here in the future.
+If you wish to change the prefix for compilation, this can
+also be done, e. g. via:
 
-You can also edit the cookbooks, if you have the cookbooks gem installed, from within the compile-shell, via:
+    gmp trad
 
-edit bluefish
-edit vim
-edit ruby
-And so forth. This is only useful if you have the cookbooks gem, since all modifications will take place on the Cookbooks namespace there, rather than RBT.
+This would compile GMP with the traditional prefix
+aka <b>/usr/</b> prefix.
+
+If you want to find out which were the last n programs
+that were updated, say n = 35, then you can do this in
+the <b>compile-shell</b> interface:
+
+    last_update? 35
+
+The idea is to also have the compile-shell as some kind
+of guide or tutor that can properly explain some cave-eats
+or problems and make some "semi-seducated guesses", in
+order to fix this. But this is a long-term goal - for
+now, the primary purpose of the compile-shell is to aid
+in <b>batch-compiling programs</b>.
+
+Since as of March 2018, an autocompile-option exists in
+the shell. This is currently unfinished but in the future
+the idea is to allow us to automatically compile to the
+most recent program versions, without necessiting user
+input. This would then allow us to update a linux-system
+to the most current program versions - stay tuned for
+more improvements here in the future.
+
+You can also edit the cookbooks, if you have the cookbooks
+gem installed, from within the compile-shell, via:
+
+    edit bluefish
+    edit vim
+    edit ruby
+
+And so forth. This is only useful if you have the cookbooks
+gem, since all modifications will take place on the <b>Cookbooks</b>
+namespace there, rather than <b>RBT</b>.
 
 You can query the main prefix in use via:
 
-prefix?
-To set a new global prefix, do something like this:
+    prefix?
 
-set_prefix=/usr/local
-Auto-resolve compile-related problems
-Note that since as of September 2017, the RBT scripts can also give some advice how to resolve some compile-related problems.
+To set a new **global prefix**, do something like this:
 
-This is currently fairly minimal, but it will be extended subsequently in the future. It was also a reason why the namespace Libtool has been integrated into RBT, as RBT::Libtool. This allows us to auto-correct some libtool-related problems and keep all libtool-related code within that namespace.
+    set_prefix=/usr/local
 
-Available programs and the corresponding program version
-Every time the cookbooks gem is updated, a .html file is created and uploaded at this location:
+## Auto-resolve compile-related problems
 
-http://shevegen.square7.ch/programs_version.html
-This remote .html file will show which programs are registered, part of the RBT project, and what the corresponding program versions are.
+Note that since as of September 2017, the **RBT scripts** can also
+give some advice how to resolve some compile-related problems.
 
-Note that you can also generate a .html page for some select programs, via the commandline. For instance, if you wish to show ruby, python and php, then you can use this commandline invocation:
+This is currently fairly minimal, but it will be extended 
+subsequently in the future. It was also a reason why the namespace
+Libtool has been integrated into RBT, as **RBT::Libtool**. This allows
+us to auto-correct some libtool-related problems and keep all
+libtool-related code within that namespace.
 
-rbt --create-html-page-for-these-programs=ruby,python,php
-The input program names should be separated via , and not include any '-' or '_' character. There are also some ways to display the full, e. g. KDE stack. More on this in another section of this README file.
+## Available programs and the corresponding program version
+
+Every time the cookbooks gem is updated, a .html file is created
+and uploaded at this location:
+
+    http://shevegen.square7.ch/programs_version.html
+
+This remote .html file will show which programs are registered, part of
+the RBT project, and what the corresponding program versions are.
+
+Note that you can also generate a .html page for some select programs,
+via the commandline. For instance, if you wish to show ruby, python
+and php, then you can use this commandline invocation:
+
+    rbt --create-html-page-for-these-programs=ruby,python,php
+
+The input program names should be separated via **,** and not 
+include any '-' or '_' character. There are also some ways to
+display the full, e. g. **KDE stack**. More on this in another
+section of this README file.
 
 To query all available programs, do:
 
-rbt --all_available_programs?
-installer --all_available_programs? # or use RBT::Action::SoftwareManager.
-Checking for binary duplicates
-If you ever want to find out whether you have binary duplicates at two different locations, such as at /System/Index/bin/ and at the more traditional /usr/bin/ location, then you can use the following method:
+    rbt --all_available_programs?
+    installer --all_available_programs? # or use RBT::Action::SoftwareManager.
 
-RBT.check_for_binary_duplicates()
-The code to this method resides in the file rbt/toplevel_methods/check_for_binary_duplicates.rb.
+## Checking for binary duplicates
+
+If you ever want to find out whether you have **binary duplicates**
+at two different locations, such as at **/System/Index/bin/**
+and at the more traditional **/usr/bin/** location, then you can
+use the following method:
+
+    RBT.check_for_binary_duplicates()
+
+The code to this method resides in the file
+**rbt/toplevel_methods/check_for_binary_duplicates.rb**.
 
 You can also invoke this from the commandline, of course.
 
 Usage examples for the commandline invocation:
 
-rbt --check-for-binary-duplicates
-rbt --binary-duplicates
-rbt --report-binary-duplicates
-rbt --report-duplicates
-Compile hooks
-Compile hooks are defined in the rbt gem, in the file compile_hooks.yml
+    rbt --check-for-binary-duplicates
+    rbt --binary-duplicates
+    rbt --report-binary-duplicates
+    rbt --report-duplicates
 
-Via that file you can hook the compilation of some programs to the compilation of other programs.
+## Compile hooks
 
-This is somewhat similar to the chained programs feature - a chained program means that several programs will be compiled one after the other, sort of like a dependency chain.
+**Compile hooks** are defined in the **rbt gem**, in the file
+**compile_hooks.yml**
 
-For example, if you compile ffmpeg, and have mpv installed, then a new compilation of ffmpeg will trigger the re-compilation of mpv. This will only be done if you have mpv installed at $PROGRAMS/Mpv though.
+Via that file you can *hook* the compilation of some programs to
+the compilation of other programs.
 
-Be careful with this functionality - it can lead to problems, in particular when compilation may fail. I do not know whether I will keep this functionality (as of the year 2018); the future will tell. It does add some complexity after all, and I am not sure if it is a good idea to have this.
+This is somewhat similar to the chained programs feature - 
+a chained program means that several programs will be
+compiled one after the other, sort of like a <b>dependency
+chain</b>.
 
-For now I recommend to use this feature only sparingly, if at all. Manual control over the process may be simpler in the long run since you are sitting in the driver seat and can decide what you need and what you don't need.
+For example, if you compile <b>ffmpeg</b>, and have <b>mpv</b>
+installed, then a new compilation of ffmpeg will trigger the
+re-compilation of mpv. This will only be done if you have
+mpv installed at $PROGRAMS/Mpv though.
 
-Advanced usage of the RBT project - helpful information
-This subsection here will explain how to use rbt on a linux system - at the least how I use it.
+<b>Be careful with this functionality</b> - it can lead to problems,
+in particular when compilation may fail. I do not know whether
+I will keep this functionality (as of the year 2018); the
+future will tell. It does add some complexity after all, and
+I am not sure if it is a good idea to have this.
 
-The subsection will also give some advice and it is intended largely for somewhat more advanced users that may already know a thing or two about ruby and linux systems.
+For now I recommend to use this feature only sparingly, if at all.
+Manual control over the process may be simpler in the long run
+since you are sitting in the driver seat and can decide what 
+you need and what you don't need.
+    
+## Advanced usage of the RBT project - helpful information
 
-The whole RBT project is somewhat inspired by the Linux from scratch project.
+This **subsection** here will explain **how to use rbt on a linux
+system** - at the least how I use it.
 
-That is, people who may want to maintain their own system, the way they want to. This is also one focus that the RBT project has - to be able to compile any program and have things work as-is. The fpm project, for example, also follows that general philosophy to some extent as well, by the way; you can use fpm to create packages specific for a particular distribution.
+The subsection will also give some advice and it is intended largely
+for somewhat more advanced users that may already know a thing or
+two about ruby and linux systems.
+
+The whole RBT project is somewhat inspired by the **Linux from scratch**
+project.
+
+That is, people who may want to maintain their own system, the way they
+want to. This is also one focus that the RBT project has - to be able
+to compile any program and <b>have things work</b> as-is. The fpm
+project, for example, also follows that general philosophy to some
+extent as well, by the way; you can use **fpm** to create packages
+specific for a particular distribution.
 
 So what can - or should - be done on a Linux system?
 
-Well - this of course depends on what YOU want to have and need, and what kind of base system you may want to use. Perhaps you have full superuser access - but perhaps you may be in a more restricted cluster-environment where you only have full access to your home directory; the latter may be the case if you work on an university campus site. Either way, the RBT project attempts to be useful in both cases.
+Well - this of course depends on what YOU want to have and need, and what
+kind of base system you may want to use. Perhaps you have full superuser
+access - but perhaps you may be in a more restricted cluster-environment
+where you only have full access to your home directory; the latter may be
+the case if you work on an university campus site. Either way, the RBT
+project attempts to be useful in both cases.
 
-Let's first start with a linux desktop system, since that is the one that I am using most of the time.
+Let's first start with a **linux desktop system**, since that is the one
+that I am using most of the time.
 
-I would recommend that you first compile your own version of a core linux software stack. This will help in bootstrapping immensely.
+I would recommend that you first compile your own version of a **core linux
+software stack**. This will help in bootstrapping immensely.
 
-The following command should suffice - but review this list on your own before you use it; as a first step, it may be simpler to compile step-by-step, rather than all in one giant step.
+The following command should suffice - but **review this list on your own
+before you use it**; as a first step, it may be simpler to compile
+step-by-step, rather than all in one giant step.
 
-rbt make sed awk coreutils utillinux gawk m4
-(Note that the above may no longer work; you may have to be more explicit like so:)
+    rbt make sed awk coreutils utillinux gawk m4
 
-rbt --compile-these-programs=make,sed,awk,coreutils,utillinux,gawk,m4
-I recommend that, if possible, compile as many of these programs as a static binary. That way, if you somehow break a dependent shared library the tools will still continue to work.
+(Note that the above may no longer work; you may have to be more
+explicit like so:)
 
-Having the application called busybox installed, in a static manner, helps too - more on this on a separate section.
+    rbt --compile-these-programs=make,sed,awk,coreutils,utillinux,gawk,m4
 
-At any rate - once you have that set going, you should try to compile your own version of GCC, ideally a recent GCC if that is possible.
+I recommend that, if possible, compile as many of these programs
+as a static binary. That way, if you somehow break a dependent
+shared library the tools will still continue to work.
 
-This probably takes longer than the steps above and may require a few more programs on top of that. Make sure to have enabled C and C++ as languages for GCC, and perhaps a few more languages, should you need them (the programming language R requires fortran, I believe, as example).
+Having the application called **busybox** installed, in a static manner,
+helps too - more on this on a separate section.
+
+At any rate - once you have that set going, you should try to compile
+your own version of **GCC**, ideally a recent GCC if that is possible.
+
+This probably takes longer than the steps above and may require a few
+more programs on top of that. Make sure to have enabled C and C++ as
+languages for GCC, and perhaps a few more languages, should you need
+them (the programming language R requires fortran, I believe, as
+example).
 
 Invocation examples:
 
-rbt mpfr
-rbt gmp
-rbt mpcr
-rbt gcc
-Keep in mind that you can also use the LFS/BLFS instructions. They are available via the "blfs" entry in the respective .yml cookbook file.
+    rbt mpfr
+    rbt gmp
+    rbt mpcr
+    rbt gcc
 
-Glibc is obviously also a target candidate that could/should be upgraded eventually, but this is a rather delicate step - many programs have to be recompiled if your glibc version changed.
+Keep in mind that you can also use the LFS/BLFS instructions. They
+are available via the "blfs" entry in the respective .yml cookbook
+file.
 
-My best advice here is to compile glibc into a versioned AppDir (directory, such as /Programs/Glibc/2.30/) but to NOT symlink it yet.
+<b>Glibc</b> is obviously also a target candidate that could/should
+be upgraded eventually, but this is a rather delicate step - many
+programs have to be recompiled if your glibc version changed.
+
+My best advice here is to compile glibc into a versioned AppDir
+(directory, such as **/Programs/Glibc/2.30/**) but to NOT symlink
+it yet.
 
 An invocation example follows here:
 
-rbt glibc ntrad --do-not-symlink
-Or use another --prefix, such as /opt/glibc/2.30 or just /opt/glibc or your home directory.
+    rbt glibc ntrad --do-not-symlink
 
-Since different people may want to tell RBT to compile a subsystem for linux, a commandline option exists to allow us to compile the core programs here.
+Or use another --prefix, such as /opt/glibc/2.30 or just
+/opt/glibc or your home directory.
+
+Since different people may want to tell RBT to compile a 
+subsystem for linux, a commandline option exists to allow
+us to compile the core programs here.
 
 Invoke it like so:
 
-rbt --compile-base-system
-rbt --compile-basic-system
-The exact programs that will be compiled may change from time to time. If you need a commandline result of the programs that will be compiled that way, simply append a '?' character to the above way to compile the base system, such as:
+    rbt --compile-base-system
+    rbt --compile-basic-system
 
-rbt --compile-base-system?
-rbt --compile-basic-system?
-If everything works here then you should have several "linux" programs under the /Programs/ hierarchy installed.
+The exact programs that will be compiled may change from time to
+time. If you need a commandline result of the programs that will
+be compiled that way, simply append a '?' character to the above
+way to compile the base system, such as:
 
-Of course /Programs/ can be changed to any other prefix that you may want to use. I myself make use of /home/Programs/ since a few years - primary reason being that I have more control over /home/ typically. An even better prefix may be your user's personal /home/ account. It all depends on your use case evidently.
+    rbt --compile-base-system?
+    rbt --compile-basic-system?
+
+If everything works here then you should have several 
+"linux" programs under the **/Programs/** hierarchy installed.
+
+Of course **/Programs/** can be changed to any other prefix
+that you may want to use. I myself make use of **/home/Programs/**
+since a few years - primary reason being that I have more
+control over /home/ typically. An even better prefix may be
+your user's personal /home/ account. It all depends on your
+use case evidently.
 
 Do note that RBT tries to sanitize the given input a little.
 
 For example, the following would work:
 
-rbt libcryptsetup
-even though there is no program called libcryptsetup registered. The real name is actually cryptsetup, but the philosophy of RBT is to try to guess that the user just wanted to compile/install libcryptsetup, so rather than stopping and notifying the user about this, the current RBT philosophy is to try to find something that makes sense, and continue.
+    rbt libcryptsetup
 
-This may not always be wanted, but I believe the advantages (convenience) outweigh the disadvantage (less stringent usage policy). If both cases are equally valid then I will add a configuration setting and a commandline flag to allow the user to decide which behaviour is to be used - but for the time being (February 2020) the described behaviour is the only valid way.
+even though there is no program called **libcryptsetup** registered.
+The real name is actually **cryptsetup**, but the philosophy
+of RBT is to try to guess that the user just wanted to 
+compile/install libcryptsetup, so rather than stopping and
+notifying the user about this, the current RBT philosophy
+is to try to find something that makes sense, and continue.
 
-RBT project will install these executables
-The RBT project will install the following executables in the bin/ directory:
+This may not always be wanted, but I believe the advantages
+(convenience) outweigh the disadvantage (less stringent
+usage policy). If both cases are equally valid then I will
+add a configuration setting and a commandline flag to allow
+the user to decide which behaviour is to be used - but for
+the time being (February 2020) the described behaviour is
+the only valid way.
 
-all_urls
-appdir
-appdir_prefix
-autosymlink
-autoupdate_this_program
-batch_validate_the_cookbook_recipes
-beautify_configure_help_output
-binary_of
-blfs
-build_detector
-chainer
-chroot_compile
-colour_make
-colour_make_install
-compile_in_traditional_manner
-compile_strategies
-compile_the_python_addons
-compile_these_programs
-compile_via_appdir_prefix_without_symlinking
-cookbooks
-copy_these_archives
-create_app_dir_skeleton
-create_html_page_for_these_programs
-create_new_cookbook
-create_pkgconfig_file
-create_registered_tags
-create_snapcraft_file
-custom_toolchain
-dual_compile
-expand_cookbooks
-extra_information
-feedback_all_available_formats
-feedback_description_of
-feedback_program_description
-find_all_archive_types
-find_alternative_archive
-find_url_for
-force
-generate_all_slack_desc_files
-gitty
-highest
-home_dir
-home_dir_without_symlinking
-homepage
-infer_build_system
-make_app_prefix
-manual_steps
-meson_appdir_prefix
-mirror
-multi_url_displayer
-ntrad
-parse_help
-paste_blfs
-query_file_association
-rbt
-rbt_action
-rbt_config
-rbt_download
-rbt_make
-rbt_test_alias
-remove_symlinks
-report_host_cpu
-report_mate_desktop_version
-report_total_size_of_all_archives
-root_prefix
-ruby_libtool
-run_make_then_make_install
-scookie
-search_for_tags
-show_all_about
-show_compile_chain
-show_configuration_options
-show_versions_of_these_programs
-simple_appdir_configure
-software_manager
-store_abbreviations
-suggest_cookbook_for
-symlink_from_to_current
-to_current
-toolchain
-uchroot
-update_all_ruby_gems
-update_entry
-update_kde_applications
-url_action
-Mate-desktop
-You can try to update some of the mate-desktop components.
+## RBT project will install these executables
+
+The RBT project will install the following executables in the **bin/**
+directory:
+
+    all_urls
+    appdir
+    appdir_prefix
+    autosymlink
+    autoupdate_this_program
+    batch_validate_the_cookbook_recipes
+    beautify_configure_help_output
+    binary_of
+    blfs
+    build_detector
+    chainer
+    chroot_compile
+    colour_make
+    colour_make_install
+    compile_in_traditional_manner
+    compile_strategies
+    compile_the_python_addons
+    compile_these_programs
+    compile_via_appdir_prefix_without_symlinking
+    cookbooks
+    copy_these_archives
+    create_app_dir_skeleton
+    create_html_page_for_these_programs
+    create_new_cookbook
+    create_pkgconfig_file
+    create_registered_tags
+    create_snapcraft_file
+    custom_toolchain
+    dual_compile
+    expand_cookbooks
+    extra_information
+    feedback_all_available_formats
+    feedback_description_of
+    feedback_program_description
+    find_all_archive_types
+    find_alternative_archive
+    find_url_for
+    force
+    generate_all_slack_desc_files
+    gitty
+    highest
+    home_dir
+    home_dir_without_symlinking
+    homepage
+    infer_build_system
+    make_app_prefix
+    manual_steps
+    meson_appdir_prefix
+    mirror
+    multi_url_displayer
+    ntrad
+    parse_help
+    paste_blfs
+    query_file_association
+    rbt
+    rbt_action
+    rbt_config
+    rbt_download
+    rbt_make
+    rbt_test_alias
+    remove_symlinks
+    report_host_cpu
+    report_mate_desktop_version
+    report_total_size_of_all_archives
+    root_prefix
+    ruby_libtool
+    run_make_then_make_install
+    scookie
+    search_for_tags
+    show_all_about
+    show_compile_chain
+    show_configuration_options
+    show_versions_of_these_programs
+    simple_appdir_configure
+    software_manager
+    store_abbreviations
+    suggest_cookbook_for
+    symlink_from_to_current
+    to_current
+    toolchain
+    uchroot
+    update_all_ruby_gems
+    update_entry
+    update_kde_applications
+    url_action
+
+## Mate-desktop
+
+You can try to update some of the **mate-desktop components**.
 
 In order to do this, call either of the following variants.
 
-rbt --update-mate
-rbt --update-mate-desktop
-rbt --check-for-mate-updates
-rbt --check-for-mate-desktop-updates
-rbt --check-for-mate-desktop
-rbt --check-for-matedesktop
-The first variant is the shortest, whereas the second one is the main entry point in the case/when setup.
+    rbt --update-mate
+    rbt --update-mate-desktop
+    rbt --check-for-mate-updates
+    rbt --check-for-mate-desktop-updates
+    rbt --check-for-mate-desktop
+    rbt --check-for-matedesktop
 
-This instruction will check for new updates to the mate-desktop releases and download them when found. Note that presently, any more recent version is preferred, so unstable versions will often be downloaded (since e. g. 1.19.1 is a higher version than e. g. 1.18.0).
+The first variant is the **shortest**, whereas the second one is
+the main entry point in the **case/when** setup.
 
-Similar to the various KDE components (look at the KDE entry in this file), if you wish to compile the mate-desktop components then you can also use a simplified scheme, using "mate1", "mate2" and so forth, in linear order. This will be replaced with the registered name of the mate-desktop component.
+This instruction will check for new updates to the mate-desktop
+releases and download them when found. Note that presently, any
+more recent version is preferred, so unstable versions will often
+be downloaded (since e. g. 1.19.1 is a higher version than e. g.
+1.18.0).
+
+Similar to the various KDE components (look at the KDE entry in this
+file), if you wish to compile the **mate-desktop components** then
+you can also use a simplified scheme, using "mate1", "mate2" and
+so forth, in linear order. This will be replaced with the
+registered name of the mate-desktop component.
 
 Invocation example:
 
-rbt mate1
-rbt mate2
-rbt mate3
-rbt mate4
+    rbt mate1
+    rbt mate2
+    rbt mate3
+    rbt mate4
+
 This is the very same as doing e. g.:
 
-rbt mate-desktop
-rbt libmatemixer
-and so on. Using numbers may be simpler, though, as you do not have to remember the names as-is, while still being able to use the correct compilation order.
+    rbt mate-desktop
+    rbt libmatemixer
 
-If you want to compile all mate-components into their own standalone prefix via an environment value, you can use the following list:
+and so on. Using **numbers** may be simpler, though, as you do not
+have to remember the names as-is, while still being able to use
+the correct compilation order.
 
-env_compile_via_prefix matedesktop MATE_DESKTOP
-env_compile_via_prefix libmatemixer MATE_DESKTOP
-env_compile_via_prefix libmateweather MATE_DESKTOP
-env_compile_via_prefix matemenus MATE_DESKTOP
-env_compile_via_prefix matepanel MATE_DESKTOP
-env_compile_via_prefix matenetbook MATE_DESKTOP
-env_compile_via_prefix matemedia MATE_DESKTOP
-env_compile_via_prefix marco MATE_DESKTOP
-env_compile_via_prefix matesettingsdaemon MATE_DESKTOP
-env_compile_via_prefix libmatekbd MATE_DESKTOP
-env_compile_via_prefix matecontrolcenter MATE_DESKTOP
-env_compile_via_prefix matesensorsapplet MATE_DESKTOP
-env_compile_via_prefix caja MATE_DESKTOP
-env_compile_via_prefix cajaextensions MATE_DESKTOP
-env_compile_via_prefix engrampa MATE_DESKTOP
-env_compile_via_prefix eom MATE_DESKTOP
-env_compile_via_prefix mateutils MATE_DESKTOP
-env_compile_via_prefix pluma MATE_DESKTOP
-env_compile_via_prefix mateterminal MATE_DESKTOP
-Module programs (the extended cookbook dataset)
-Module programs refers to the ability to access all registered programs at the toplevel "RBT." namespace. In other words, we can "copy" the program names onto the RBT top-level module "namespace".
+If you want to compile all mate-components into their own standalone
+prefix via an environment value, you can use the following list:
 
-For instance, htop would be available at
+    env_compile_via_prefix matedesktop MATE_DESKTOP
+    env_compile_via_prefix libmatemixer MATE_DESKTOP
+    env_compile_via_prefix libmateweather MATE_DESKTOP
+    env_compile_via_prefix matemenus MATE_DESKTOP
+    env_compile_via_prefix matepanel MATE_DESKTOP
+    env_compile_via_prefix matenetbook MATE_DESKTOP
+    env_compile_via_prefix matemedia MATE_DESKTOP
+    env_compile_via_prefix marco MATE_DESKTOP
+    env_compile_via_prefix matesettingsdaemon MATE_DESKTOP
+    env_compile_via_prefix libmatekbd MATE_DESKTOP
+    env_compile_via_prefix matecontrolcenter MATE_DESKTOP
+    env_compile_via_prefix matesensorsapplet MATE_DESKTOP
+    env_compile_via_prefix caja MATE_DESKTOP
+    env_compile_via_prefix cajaextensions MATE_DESKTOP
+    env_compile_via_prefix engrampa MATE_DESKTOP
+    env_compile_via_prefix eom MATE_DESKTOP
+    env_compile_via_prefix mateutils MATE_DESKTOP
+    env_compile_via_prefix pluma MATE_DESKTOP
+    env_compile_via_prefix mateterminal MATE_DESKTOP
 
-RBT.htop
+## Module programs (the extended cookbook dataset)
+
+**Module programs** refers to the ability to access all registered programs at
+the **toplevel** "RBT." namespace. In other words, we can "copy" the program
+names onto the RBT top-level module "namespace".
+
+For instance, **htop** would be available at
+
+    RBT.htop
+
 if it is called as a "module program".
 
-Note that this is NOT the default. By default the above way to call the method .htop() on RBT would not work.
+Note that this is **NOT** the default. By default the above way to call the
+method .htop() on RBT would not work.
 
-The program binutils would, as module program, be available at:
+The program **binutils** would, as module program, be available at:
 
-RBT.binutils
-And so on, and so forth. No "-" characters are allowed there, as these are not allowed in methods written in ruby.
+    RBT.binutils
 
-Note that this will return a sanitized Hash that holds all the information required to compile the given program from source - this dataset thus describes these programs. That information may still have to be interpreted by a program, of course.
+And so on, and so forth. No "-" characters are allowed there, as these
+are not allowed in methods written in ruby.
+
+Note that this will return a sanitized Hash that holds all the information
+required to compile the given program from source - this dataset thus
+describes these programs. That information may still have to be interpreted
+by a program, of course.
 
 Simply require the necessary file for this:
 
-require 'rbt/module_programs'
-After that, the above methods will work. Let's see a few more examples for this:
+    require 'rbt/module_programs'
 
-RBT.wayland
-RBT.ruby
-RBT.php
-RBT.gnomemimedata
-RBT.evince
-Note that reader methods via '?' character are available too, although this could be toggled. The '?' will access the datastructure as a Hash rather than a specialized object.
+After that, the above methods will work. Let's see a few more examples
+for this:
+
+    RBT.wayland
+    RBT.ruby
+    RBT.php
+    RBT.gnomemimedata
+    RBT.evince
+    
+Note that **reader methods** via '?' character are available too,
+although this could be toggled. The '?' will access the datastructure
+as a **Hash** rather than a specialized object.
 
 Invoke it like so:
 
-RBT.htop? # => {"archive_size"=>323560, "short_description"=>"ncurses-based interactive process viewer.", "github"=>nil, "set_env_variables"=>{"LDFLAGS"=>"-ltinfow"}, "homepage"=>"http://hisham.hm/htop/", "binaries"=>["htop"], "headers"=>[], "libraries"=>[], "postinstall"=>[], "pre_make_commands"=>[], "required_deps_on"=>["glibc => 2.3.2", "ncurses => 5.6"], "tags"=>[], "pkgconfig_files"=>[], "program_path"=>"/home/x/SRC/htop/htop-2.0.2.tar.xz", "program_full_name"=>"htop-2.0.2.tar.xz" ... and so forth }
-This functionality exists primarily because it may be easier for you to use the above API calls. Internally though, the RBT project will prefer API calls such as RBT::Cookbooks::Cookbook.new :htop instead.
+    RBT.htop? # => {"archive_size"=>323560, "short_description"=>"ncurses-based interactive process viewer.", "github"=>nil, "set_env_variables"=>{"LDFLAGS"=>"-ltinfow"}, "homepage"=>"http://hisham.hm/htop/", "binaries"=>["htop"], "headers"=>[], "libraries"=>[], "postinstall"=>[], "pre_make_commands"=>[], "required_deps_on"=>["glibc => 2.3.2", "ncurses => 5.6"], "tags"=>[], "pkgconfig_files"=>[], "program_path"=>"/home/x/SRC/htop/htop-2.0.2.tar.xz", "program_full_name"=>"htop-2.0.2.tar.xz" ... and so forth }
 
-Note that the above works without any '-' as part of the name, so there will not be RBT.gnome-mime-data() - it would be RBT.gnomemimedata().
+This functionality exists primarily because it may be easier for you
+to use the above API calls. Internally though, the RBT project
+will prefer API calls such as **RBT::Cookbooks::Cookbook.new :htop**
+instead.
 
-When may you want to use this? Well, it could be used if you do want to use a simpler API. It is very easy to remember, too: just use "RBT." followed by the name of the program, without any '-' or '_' characters there.
+Note that the above works without any '-' as part of the name, so
+there will not be **RBT.gnome-mime-data()** - it would be
+**RBT.gnomemimedata()**.
 
-Showing the last 750 updated programs
-You can show the last updated programs, currently, by default, being 750 programs, like this:
+When may you want to use this? Well, it could be used if you do want
+to use a simpler API. It is very easy to remember, too: just use
+"RBT." followed by the name of the program, without any '-' or
+'_' characters there.
 
-rbt --show-last-updated-programs
-rbt --slu
-RBT::Cookbooks::ShowConfigurationOptions
-If you want to show the default configure options for a program on the commandline, then consider making use of class RBT::Cookbooks::ShowConfigurationOptions.
+## Showing the last 750 updated programs
 
-I have it aliased to sco, for convenience.
+You can show the last updated programs, currently, by default, being
+750 programs, like this:
+
+    rbt --show-last-updated-programs
+    rbt --slu
+
+## RBT::Cookbooks::ShowConfigurationOptions
+
+If you want to show the default configure options for a program
+on the commandline, then consider making use of class
+<b>RBT::Cookbooks::ShowConfigurationOptions</b>.
+
+I have it aliased to <b>sco</b>, for convenience.
 
 Then I can do the following, in a GCC extracted directory for instance:
 
-sco gcc --ntrad
+    sco gcc --ntrad
+
 This will show the following String on the commandline:
 
-./configure --prefix=/home/Programs/Gcc/10.3.0 --enable-languages=c,c++,d,fortran,objc,obj-c++ --disable-bootstrap --disable-libstdcxx-pch --disable-multilib 
+    ./configure --prefix=/home/Programs/Gcc/10.3.0 --enable-languages=c,c++,d,fortran,objc,obj-c++ --disable-bootstrap --disable-libstdcxx-pch --disable-multilib 
+
 I can then use this string to compile GCC 10.3.0 from scratch.
 
-I needed this so that I can more easily ad-hoc compile programs from source as well.
+I needed this so that I can more easily ad-hoc compile
+programs from source as well.
 
-Since as of February 2024 a standalone .sh file will also be created. That way you can invoke it without having to type anything manually. I needed this in the event that I could not start the xorg-server but had to compile LLVM specifically.
+Since as of February 2024 a standalone .sh file will also be
+created. That way you can invoke it without having to type
+anything manually. I needed this in the event that I could
+not start the xorg-server but had to <b>compile LLVM</b> 
+specifically.
 
-Auto-removing .la files
-If you do not like .la files (libtool files), you can set the configure option called delete_libtool_files to true. Then, if a program has been successfully compiled into an AppDir prefix, such as /Programs/Libcanberra/0.30/ and at the least one .la file has been found under the lib/ subdirectory, then these .la files will be removed. That is, deleted.
+## Auto-removing .la files
 
-That way .la files do not taint the given host system any longer (or at the least will be removed after having been created).
+If you do not like **.la files** (libtool files), you can set the configure
+option called **delete_libtool_files** to **true**. Then, if a program
+has been successfully compiled into an **AppDir prefix**, such as 
+**/Programs/Libcanberra/0.30/** and at the least one .la file has been
+found under the **lib/** subdirectory, then these .la files will be removed.
+That is, **deleted**.
 
-If, for some reason, you rather want to NOT remove .la files for the current compilation run, you can always use the following commandline flag:
+That way .la files do not taint the given host system any longer (or at the
+least will be removed after having been created).
 
---keep-la-files
-You can also purge all .la files manually, via the commandline.
+If, for some reason, you rather want to **NOT** remove .la files for the
+current compilation run, you can always use the following commandline
+flag: 
 
-class RBT::Libtool::RemoveLibtoolFiles is able to do. Simply pass to it the path of the directory that contains these .la files, and that class will eliminate all these .la files. (Be sure to know exactly what you are doing before doing so on a directory such as /usr/lib/ - if in doubt, always keep full backups of directories like this.)
+    --keep-la-files
 
-During normal compilation, class RBT::Libtool::RemoveLibtoolFiles is invoked if you compile a program with an AppDir prefix into something such as the /Programs/ hierarchy, as value to --prefix.
+You can also **purge all .la files** manually, via the commandline.
 
-Informally I myself call this class a standalone libtool killer.
+**class RBT::Libtool::RemoveLibtoolFiles** is able to do. Simply pass
+to it the **path** of the directory that contains these .la files, and
+that class will eliminate all these .la files. (Be sure to know 
+exactly what you are doing before doing so on a directory such as
+**/usr/lib/** - if in doubt, always keep full backups of directories 
+like this.)
 
-If you want to use a top-level API instead, consider the following variant:
+During normal compilation, class RBT::Libtool::RemoveLibtoolFiles
+is invoked if you compile a program with an AppDir prefix into something
+such as the **/Programs/** hierarchy, as value to **--prefix**.
 
-RBT.remove_libtool_files_from(this_directory = '')
-RBT.remove_libtool_files_from()
-Again, pass in the path to the local directory that contains these .la files.
+Informally I myself call this class a **standalone libtool killer**.
 
-Since as of September 2018, the last faulty .la file will also be registered in a local .md file. You can then let the RBT::Libtool namespace fix the last faulty .la file via:
+If you want to use a top-level API instead, consider the following
+variant:
 
- rubylibtool --remove-from-file
- rubylibtool --remove-from-stored-file
-The reason why this exists is because I sometimes found myself without a running xorg-server. Copy/pasting then was difficult with the mouse (and I dislike gpm). So I wanted a way how to fix these faulty .la files without requiring the mouse - thus the idea was to store the last faulty .la file into a local file). The usual location for this would be at /Depot/Temp/rbt/libtool/ but this of course depends on where your temp-directory is set at.
+    RBT.remove_libtool_files_from(this_directory = '')
+    RBT.remove_libtool_files_from()
 
-You can also use rbt directly to remove a faulty .la file, by passing in the path, such as:
+Again, pass in the path to the local directory that contains these
+.la files.
 
-rbt /usr/lib/libpango-1.0.la
-Working with (debian) .deb files
-This subsection has been added mostly because one goal of the RBT project is to handle .deb files in one way or another - so I wanted to collect useful information in one place.
+Since as of September 2018, the last faulty .la file will also be
+registered in a local .md file. You can then let the RBT::Libtool
+namespace fix the last faulty .la file via:
 
-If you wish to create .deb files on your own, you may need the dpkg-dev package. The following syntax should allow for this:
+     rubylibtool --remove-from-file
+     rubylibtool --remove-from-stored-file
 
-apt-get install dpkg-dev
+The reason why this exists is because I sometimes found myself
+without a running xorg-server. Copy/pasting then was difficult
+with the mouse (and I dislike **gpm**). So I wanted a way how
+to fix these faulty .la files without requiring the mouse -
+thus the idea was to store the last faulty .la file into a local
+file). The usual location for this would be at
+**/Depot/Temp/rbt/libtool/** but this of course depends on
+where your **temp-directory** is set at.
+
+You can also use **rbt** directly to remove a faulty .la
+file, by passing in the path, such as:
+
+    rbt /usr/lib/libpango-1.0.la
+
+## Working with (debian) .deb files
+
+This subsection has been added mostly because one goal of the RBT project
+is to handle .deb files in one way or another - so I wanted to collect
+useful information in one place.
+
+If you wish to create **.deb** files on your own, you may need the **dpkg-dev
+package**. The following syntax should allow for this:
+
+    apt-get install dpkg-dev
+
 apt will handle the necessary dependencies.
 
-Sed operations
-The binary called sed is well known - and often used - on *nix operating systems. The primary reason for this is, most likely, that sed is so useful and versatile. You can replace text very efficiently via sed.
+## Sed operations
 
-If you look at the LFS/BLFS homepage (the "Linux from Scratch" or the "Beyond Linux from Scratch" homepage), sed is often used to change settings in various programs, before compilation begins.
+The binary called <b>sed</b> is well known - and often used -
+on *nix operating systems. The primary reason for this is, most
+likely, that <b>sed</b> is so useful and versatile. You can 
+replace text very efficiently via sed.
 
-The RBT project also supports sed-related changes to programs. The sed-operations have to be defined in the individual yaml file that stores the instructions in how to compile a program from source, which is part of the Cookbooks gem.
+If you look at the <b>LFS/BLFS homepage</b> (the "Linux from
+Scratch" or the "Beyond Linux from Scratch" homepage), **sed**
+is often used to change settings in various programs, before
+compilation begins.
 
-So for example, the yaml file for a given program simply has a tag called sed:, which specifies an Array, and also it specifies which sed operations are to be run, in a linear order. The first entry is processed, then the second entry, and so forth (if there are several entries that is).
+The **RBT project** also supports sed-related changes to programs.
+The sed-operations have to be defined in the individual yaml file
+that stores the instructions in how to compile a program from
+source, which is part of the Cookbooks gem.
 
-RBT will then apply these sed-modifications by default.
+So for example, the <b>yaml file</b> for a given program simply
+has a tag called <b>sed:</b>, which specifies an <b>Array</b>, and
+also it specifies which sed operations are to be run, in a linear
+order. The first entry is processed, then the second entry, and
+so forth (if there are several entries that is).
 
-(Internally there is even a SedWrapper class that can be used as replacement for GNU sed - but it has a few bugs and is mildly deprecated. Perhaps one day I may fix it, but for the time being it will stay as it is. We will default to GNU sed as far as RBT itself is concerned.)
+<b>RBT</b> will then apply these sed-modifications by default.
 
-If you do not need this for a given program then you can disable this behaviour on the commandline, you can disable it via the following commandline flag:
+(Internally there is even a SedWrapper class that can be used
+as replacement for GNU sed - but it has a few bugs and is
+mildly deprecated. Perhaps one day I may fix it, but for
+the time being it will stay as it is. We will default
+to GNU sed as far as RBT itself is concerned.)
 
-rbt htop --disable-sed
-rbt htop --disable-sed-modifications
-Note that there are essentially two ways as to how to use sed-operations, as far as RBT is concerned. One is by simply using the binary called "sed"; and the other is to use class SedWrapper. That class is unfortunately a little buggy as of February 2018 (and beyond) for some sed-operations.
+If you do not need this for a given program then you can
+<b>disable</b> this behaviour on the <b>commandline</b>,
+you can disable it via the following commandline flag:
 
-So for the time being, RBT will default to the system binary called "sed". If this is not available, then RBT may default to class SedWrapper, which is a pure-ruby variant.
+    rbt htop --disable-sed
+    rbt htop --disable-sed-modifications
 
-Most Linux systems will have a sed binary, so this should work fine on these systems; should also work fine on Windows under the WSL subsystem these days.
+Note that there are essentially **two** ways as to how to use 
+sed-operations, as far as <b>RBT</b> is concerned. One is by
+simply using the binary called "sed"; and the other is to use
+<b>class SedWrapper</b>. That class is unfortunately a little
+buggy as of February 2018 (and beyond) for some sed-operations.
 
-If you want to query whether the internal sed wrapper is used in general, as-is, then use the following commandline option:
+So for the time being, RBT will <b>default</b> to the system
+binary called "sed". If this is not available, then RBT may
+default to <b>class SedWrapper</b>, which is a pure-ruby
+variant.
 
-rbt --use-the-internal-sed-wrapper?
-The sed-operations are run by class RBT::ApplySedOperations. This class can also be used standalone, that is, from the commandline. Or you can invoke them from within rbt itself.
+Most Linux systems will have a <b>sed</b> binary, so this should
+work fine on these systems; should also work fine on Windows
+under the WSL subsystem these days. 
+
+If you want to query whether the internal sed wrapper is used
+in general, as-is, then use the following commandline option:
+
+    rbt --use-the-internal-sed-wrapper?
+
+The sed-operations are run by class RBT::ApplySedOperations.
+This class can also be used standalone, that is, from the
+commandline. Or you can invoke them from within rbt itself.
 
 Example:
 
-rbt htop --only-sed # only apply the sed-operations, then exit.
-If you wish to simply run the sed-operations registered in a cookbook .yml file, then you can invoke:
+    rbt htop --only-sed # only apply the sed-operations, then exit.
 
-RBT::ApplySedOperations.new
-RBT::ApplySedOperations.new :glibc
-RBT::ApplySedOperations.new :htop
-RBT::ApplySedOperations.new 'coreutils'
-Compiling a random program
-If, for whatever the reason, you want to compile a random program, then you can use a commandline switch such as the following:
+If you wish to simply run the sed-operations registered in
+a cookbook .yml file, then you can invoke:
 
-rbt --random-program
-# or if you aliased "compile" onto "rbt"
+    RBT::ApplySedOperations.new
+    RBT::ApplySedOperations.new :glibc
+    RBT::ApplySedOperations.new :htop
+    RBT::ApplySedOperations.new 'coreutils'
+    
+## Compiling a random program
 
-compile RANDOM
-compile random
-Upgrading programs through a file
-You can read in input from a file, aka programs that have to be compiled, stored in a file.
+If, for whatever the reason, you want to compile a random
+program, then you can use a commandline switch such
+as the following:
 
-The default name for this file will be these_programs_can_be_upgraded.yml, but you can also use another name. The file has to exist, obviously.
+    rbt --random-program
+    # or if you aliased "compile" onto "rbt"
+    
+    compile RANDOM
+    compile random
+
+## Upgrading programs through a file
+
+You can read in input from a file, aka programs that have to be
+compiled, stored in a file.
+
+The default name for this file will be
+**these_programs_can_be_upgraded.yml**, but you can also use
+another name. The file has to exist, obviously.
 
 Invocation examples:
 
-rbt --upgrade-from-this-file=these_programs_can_be_upgraded.yml
-rbt --upgrade-from-this-file=:default
-rbt --upgrade-from-this-file=:def
-:default or :def will refer to the file these_programs_can_be_upgraded.yml.
+    rbt --upgrade-from-this-file=these_programs_can_be_upgraded.yml
+    rbt --upgrade-from-this-file=:default
+    rbt --upgrade-from-this-file=:def
 
-The reason why a default filename exists is so that other projects can auto-generate such a file, which we can then use for RBT.
+:default or :def will refer to the file **these_programs_can_be_upgraded.yml**.
 
-Compiling the dependencies of a program as well - handling dependencies via the RBT gem
-You can compile the dependencies of a program if you want to, via a commandline instruction such as:
+The reason why a default filename exists is so that other projects
+can auto-generate such a file, which we can then use for **RBT**.
 
-rbt kbreakout --compile-dependencies-as-well # verbose, but good to read, in my opinion
-rbt kbreakout --with-deps                    # shorter and easier to type
-rbt php with-deps                            # this should work as well, but using -- is recommended
-rbt gcc3 wdeps                               # similar as above
-rbt feh wdeps                                # and yet another example
-Note that this will try to compile all the dependencies AND the program as well, with the dependencies first, and the program that was given as argument coming last.
+## Compiling the dependencies of a program as well - handling dependencies via the RBT gem
 
-This presently (as of October 2018) works in a brute-force manner, meaning that it will compile the dependencies even if they are already installed.
+You can <b>compile the dependencies</b> of a program if you want to,
+via a commandline instruction such as:
 
-In the future, this behaviour may change, and code may be added to check which dependencies are met and which ones are not met, but for the time being, that has to suffice (the feature is thus somewhat experimental right now; it has to be tested further). It may be simpler to not use this feature for now, and instead compile programs on an individual basis instead.
+    rbt kbreakout --compile-dependencies-as-well # verbose, but good to read, in my opinion
+    rbt kbreakout --with-deps                    # shorter and easier to type
+    rbt php with-deps                            # this should work as well, but using -- is recommended
+    rbt gcc3 wdeps                               # similar as above
+    rbt feh wdeps                                # and yet another example
 
-Do note that since as of March 2020 you can display all programs that depend on another program whose name is known.
+Note that this will try to compile <b>all</b> the dependencies AND the
+program as well, with the dependencies first, and the program that
+was given as argument coming last.
 
-For example, if you wish to find out which programs all depend on cmake then you can use the following commandline flag:
+This presently (as of <b>October 2018</b>) works in a brute-force manner,
+meaning that it will compile the dependencies even if they are already
+installed.
 
-rbt --show-programs-with-this-as-dependency=cmake
-You can use a slightly shorter variant since as of the year 2022 as well:
+In the future, this behaviour may change, and code may be added to
+check which dependencies are met and which ones are not met, but for
+the time being, that has to suffice (the feature is thus somewhat
+<b>experimental</b> right now; it has to be tested further). It may
+be simpler to not use this feature for now, and instead compile
+programs on an individual basis instead.
 
-rbt --dependencies-on=cmake
-rbt --dependencies-on=kio
-Just make sure that you pass in a registered program as name; otherwise rbt can not show the dependencies.
+Do note that since as of March 2020 you can display all programs
+that depend on another program whose name is known.
+
+For example, if you wish to find out which programs all depend
+on <b>cmake</b> then you can use the following commandline
+flag:
+
+    rbt --show-programs-with-this-as-dependency=cmake
+
+You can use a slightly shorter variant since as of the year **2022** 
+as well:
+
+    rbt --dependencies-on=cmake
+    rbt --dependencies-on=kio
+
+Just make sure that you pass in **a registered program** as name;
+otherwise rbt can not show the dependencies.
 
 Likewise, to display all programs that depend on ruby, do this:
 
-rbt --show-programs-with-this-as-dependency=ruby
-Since as of July 2022 you can also calculate a dependency chain, via the toplevel API RBT.dependency_chain().
+    rbt --show-programs-with-this-as-dependency=ruby
 
-This currently does not work that well (it will only traverse two layers, for instance), but if you just want to get an estimate then this may suffice.
+Since as of <b>July 2022</b> you can also calculate a 
+dependency chain, via the toplevel API <b>RBT.dependency_chain()</b>.
+
+This currently does not work that well (it will only traverse
+two layers, for instance), but if you just want to get an
+estimate then this may suffice.
 
 Usage example:
 
-dependencies = RBT.dependency_chain(%w( php ruby python )) # => ["httpd", "libxml2 >= 2.6.31", "mysql", "sqlite3", and more ...
-So you get an Array back, telling you which programs are the dependencies of these three programs (the Array that contains php, ruby and python).
+    dependencies = RBT.dependency_chain(%w( php ruby python )) # => ["httpd", "libxml2 >= 2.6.31", "mysql", "sqlite3", and more ...
 
-Dependencies can be specified as ranged, which means that they will be valid only under some conditions.
+So you get an Array back, telling you which programs are the
+dependencies of these three programs (the Array that contains
+php, ruby and python).
 
-For example, consider the following entry which you can find in some entries of the individual cookbooks (the corresponding .yml files):
+Dependencies can be specified as <b>ranged</b>, which means that
+they will be valid only under some conditions.
 
-glib2 >= 2.17.6
-This entry means that the program requires glib2 of at least version 2.17.6 or higher.'
+For example, consider the following entry which you can
+find in some entries of the individual cookbooks (the corresponding
+.yml files):
 
-The Ruby Build Tools will notify the user if the dependency does not match. The default compilation mode will be to interrupt compilation when a dependency is not met.
+    glib2 >= 2.17.6
 
-Games support
-Similar as to how it has been done for KDE and mate-desktop, you can use numbers to compile a particular game too.
+This entry means that the program requires glib2 of at least
+version 2.17.6 or higher.'
+
+The <b>Ruby Build</b> Tools will notify the user if the dependency
+does not match. The default compilation mode will be to interrupt
+compilation when a dependency is not met. 
+
+## Games support
+
+Similar as to how it has been done for KDE and mate-desktop, you
+can use numbers to compile a particular game too.
 
 For example:
 
-rbt game3
-rbt game5
-rbt game6
+    rbt game3
+    rbt game5
+    rbt game6
+
 And so forth.
 
 You can also compile all games, e. g. by doing this:
 
-rbt --compile-this-tag=games
+    rbt --compile-this-tag=games
+
 Or, even simpler:
 
-rbt --compile-all-games
-(And I also did set an alias at home, to invoke this via compile_all_games).
+    rbt --compile-all-games
 
-All binaries of every registered program
-If you wish to determine the binaries of every registered program then you can use the following top-level API:
+(And I also did set an alias at home, to invoke
+this via **compile_all_games**).
 
-RBT.all_binaries?
-This will return a Hash, where the keys constitute all binaries that belong to a particular program at hand.
+## All binaries of every registered program
 
-For example, the two binaries xzcmp and xzcat both point to the main program xz (such as is available on an URL like https://tukaani.org/xz/xz-5.2.4.tar.xz). The Hash will store this association. Another example is the binary xtrapproto*, which will point towards the program called **xtra ( "xtrapproto"=>"xtrap")
+If you wish to determine the binaries of every registered program
+then you can use the following **top-level API**:
+
+    RBT.all_binaries?
+
+This will return a **Hash**, where the keys constitute all binaries
+that belong to a particular program at hand.
+
+For example, the two binaries **xzcmp** and **xzcat** both point
+to the main program **xz** (such as is available on an URL like
+https://tukaani.org/xz/xz-5.2.4.tar.xz). The Hash will store
+this association. Another example is the binary **xtrapproto*,
+which will point towards the program called **xtra** (
+"xtrapproto"=>"xtrap")
 
 How may this functionality be useful?
 
-This depends; if you ever want to find out to which particular program a given binary belongs too, you could try to use this API (or ask your package manager instead, of course).
+This depends; if you ever want to find out to which particular
+program a given binary belongs too, you could try to use this
+API (or ask your package manager instead, of course).
 
-You can also use the following top-level API to find out whether a binary is registered within the RBT project or whether it is not:
+You can also use the following **top-level API** to find out
+whether a binary is registered within the RBT project or
+whether it is not:
 
-RBT.has_this_binary? 'xzcmp' # => true
-This will return a boolean value - true if it is registered and false otherwise.
+    RBT.has_this_binary? 'xzcmp' # => true
 
-You can also gather some "statistical" information, such as through how many binaries are registered in the RBT project, via this method:
+This will return a boolean value - **true** if it is registered
+and **false** otherwise.
 
-RBT.report_how_many_binaries_are_registered
-If you only want to see which binaries are registered in all the registered programs of the RBT project, then you can use this commandline:
+You can also gather some "statistical" information, such as
+through how many binaries are registered in the RBT project,
+via this method:
 
-rbt --all-binaries?
-The mate-desktop
-If you wish to compile the components of the mate-desktop, you can try:
+    RBT.report_how_many_binaries_are_registered
 
-rbt --compile-mate-desktop
-Note that this presently (July 2018) does not handle the dependencies correctly, so there is a very high chance of failure, unless you already have the dependencies installed on your system.
+If you only want to see which binaries are registered in
+all the registered programs of the RBT project, then you
+can use this commandline:
 
-You can also compile all of the mate-desktop into a standalone directory, such as /Programs/Mate/1.12/.
+    rbt --all-binaries?
+
+## The mate-desktop
+
+If you wish to compile the components of the mate-desktop,
+you can try:
+
+    rbt --compile-mate-desktop
+
+Note that this presently (July 2018) does not handle the dependencies
+correctly, so there is a very high chance of failure, unless you
+already have the dependencies installed on your system.
+
+You can also compile all of the mate-desktop into a standalone
+directory, such as **/Programs/Mate/1.12/**.
 
 Issue the following command for this:
 
-rbt --mate-desktop-into-standalone-dir
-Purging traditional FHS binaries and FHS libraries
-The RBT scripts support hybrid systems, that is, systems that both use the legacy/traditional prefix at /usr, and also GoboLinux-style AppDirs such as /Programs/PROGRAM_NAME/PROGRAM_VERSION or similar layouts. For example, php-7.2.1 would reside at /Programs/PHP/7.2.1/ (or /Programs/Php/7.2.1/ - all depending on which naming scheme is used precisely).
+    rbt --mate-desktop-into-standalone-dir
 
-This may lead to having e. g. binaries duplicated, first at /usr/bin/, and then also in the respective AppDir bin/ directory.
+## Purging traditional FHS binaries and FHS libraries
 
-If you then wish to get rid of the old /usr/bin/ binary of a specific program, you can issue the following commands:
+The <b>RBT scripts</b> support hybrid systems, that is, systems that both
+use the legacy/traditional prefix at <b>/usr</b>, and also GoboLinux-style
+AppDirs such as /Programs/PROGRAM_NAME/PROGRAM_VERSION or similar layouts.
+For example, php-7.2.1 would reside at <b>/Programs/PHP/7.2.1/</b> (or
+<b>/Programs/Php/7.2.1/</b> - all depending on which naming scheme is
+used precisely).
 
-rbt --purge-traditional-binaries-from=xscreensaver
-rbt --purge-traditional-binaries-of=gnupg
-The last entry is the program at hand, in these two examples xscreensaver or gnugp.
+This may lead to having e. g. binaries duplicated, first at /usr/bin/,
+and then also in the respective AppDir bin/ directory.
 
-Be sure to really want to do so before invoking this functionality. It is mostly a convenience functionality, avoiding some manual removal of these binaries from the commandline.
+If you then wish to get rid of the old /usr/bin/ binary of a specific
+program, you can issue the following commands:
 
-A similar functionality exists for libraries. So if you want to purge libaries at /usr/lib/, you can do this:
+    rbt --purge-traditional-binaries-from=xscreensaver
+    rbt --purge-traditional-binaries-of=gnupg
 
-rbt --purge-traditional-libraries-from=libva
-rbt --purge-traditional-libraries-of=libva
-The relevant entries for binaries and libraries can be found in the individual .yml cookbook - have a look at the binaries: and libraries: entries of the particular .yml file at hand.
+The last entry is the program at hand, in these two examples
+**xscreensaver** or **gnugp**.
 
-Since as of November 2018, an additional way exists to remove binaries:
+Be sure to **really want to do so** before invoking this functionality.
+It is mostly a convenience functionality, avoiding some manual 
+removal of these binaries from the commandline.
 
-rbt poppler --purge-its-binaries
-This will currently (November 2018) only remove binaries found under the /usr/bin/ hierarchy. In the future /usr/sbin/ may be scanned as well, but for the time being only /usr/bin/ is targeted.
+A similar functionality exists for **libraries**. So if you want to
+purge libaries at **/usr/lib/**, you can do this:
 
-Remember to do so only if you are sure that you want to do this.
+    rbt --purge-traditional-libraries-from=libva
+    rbt --purge-traditional-libraries-of=libva
 
-Autoswitching python version
+The relevant entries for binaries and libraries can be found in
+the individual .yml cookbook - have a look at the **binaries:**
+and **libraries:** entries of the particular .yml file at hand.
+
+Since as of November 2018, an additional way exists to remove
+binaries:
+
+    rbt poppler --purge-its-binaries
+
+This will currently (November 2018) only remove binaries found
+under the **/usr/bin/** hierarchy. In the future **/usr/sbin/**
+may be scanned as well, but for the time being only
+**/usr/bin/** is targeted.
+
+**Remember to do so only if you are sure that you want to do this.**
+
+## Autoswitching python version
+
 There is a configuration setting, stored in the file autoswitch_python.yml.
 
-This can hold true or false (or yes or no). If set to true, then it means that RBT will attempt to autoswitch the python version, e. g. version 2 to version 3, if a program at compile-time depends on the other python version.
+This can hold true or false (or yes or no). If set to true, then it
+means that RBT will attempt to autoswitch the python version, e. g.
+version 2 to version 3, if a program at compile-time depends on
+the other python version.
 
 This allows us to try to recompile the program at hand.
 
-This will be tried only once, though, in order to avoid infinite loops.
+This will be tried only once, though, in order to avoid infinite
+loops.
 
-Do note that this functionality currently will only be used if the RBT scripts run on "roebe", which is my home system. This may also be enabled for all users one day in the future, but for now it is mostly experimental on my home system. (You can of course also enable "is on roebe"; I use an environment setting for this.)
+Do note that this functionality currently will only be used if
+the RBT scripts run on "roebe", which is my home system. This may
+also be enabled for all users one day in the future, but for now
+it is mostly experimental on my home system. (You can of course
+also enable "is on roebe"; I use an environment setting for
+this.)
 
-The directory /System/Tags/ and registered tags in the RBT project
-The directory at /System/Tags/ can be used to store tag-related binaries. Other entries, such as in a lib/ subdirectory, will be ignored.
+## The directory /System/Tags/ and registered tags in the RBT project
 
-For example, take the game called wesnoth, which may, as a binary, reside at a path such as /Programs/Wesnoth/Current/bin/wesnoth.
+The directory at **/System/Tags/** can be used to store **tag-related
+binaries**. Other entries, such as in a **lib/** subdirectory, will
+be ignored.
 
-This binary may then be symlinked into a path such as /System/Tags/Games/wesnoth. Note that this resides under the /System/Tags/ hierarchy. This functionality thus effectively allows you to quickly look at which application types you may have installed on your computer system. All compiled/installed games that have been registered with the tag "game" will then reside in the subdirectory called Games/. It provides an overview over the system and I think that this is of some use, since different tags are used to describe the various programs at hands.
+For example, take the game called **wesnoth**, which may, as a
+binary, reside at a path such as **/Programs/Wesnoth/Current/bin/wesnoth**.
 
-If you need an overview over all registered tags, from the commandline, try to issue this command:
+This binary may then be **symlinked** into a path such as
+**/System/Tags/Games/wesnoth**. Note that this resides under the 
+**/System/Tags/** hierarchy. This functionality thus effectively allows
+you to quickly look at which application types you may have installed
+on your computer system. All compiled/installed games that have been
+registered with the tag "game" will then reside in the subdirectory
+called **Games/**. It provides an overview over the system and I think
+that this is of some use, since different tags are used to describe
+the various programs at hands.
 
-rbt --available-tags?
-This only works for programs that are installed into the /Programs/ hierarchy for the time being. (Remember that /Programs/ is not hardcoded as such but can be changed by the user; it just happens to be /Programs/ on my system, but you could take any other name too, such as /pkg/ or /home/programs/ and so forth.)
+If you need an overview over all registered tags, from the commandline,
+try to issue this command:          
 
-class RBT::CleanupSystemTags can eliminate stray (non-existing) symlinks, and it is invoked from class RBT::Action::SoftwareManager, so the directory at /System/Tags/ will be guaranteed to not have any stray symlinks whenever RBT::Action::SoftwareManager is run. (This is checked in the post-installation part of class RBT::Action::SoftwareManager.)
+    rbt --available-tags?
 
-The class RegisteredTags can be used to register all available tags in a .yml "database".
+This **only** works for programs that are installed into the **/Programs/**
+hierarchy for the time being. (Remember that /Programs/ is not hardcoded
+as such but can be changed by the user; it just happens to be /Programs/
+on my system, but you could take any other name too, such as /pkg/ or
+/home/programs/ and so forth.)
 
-Simply run this file to register every available tag into a yaml file, which we can then load if we are to search for registered tags, rather than relying on "grep" itself. Thus, searching for tags will now be available as well without grep - you have to run it once to register the available programs before you can use it.
+<b>class RBT::CleanupSystemTags</b> can eliminate stray (non-existing)
+symlinks, and it is invoked from <b>class RBT::Action::SoftwareManager</b>, so the
+directory at **/System/Tags/** will be guaranteed to <b>not</b> have
+any stray symlinks whenever RBT::Action::SoftwareManager is run. (This
+is checked in the <b>post-installation</b> part of class
+RBT::Action::SoftwareManager.)
 
-Guessing the build-type of a source package
+The class **RegisteredTags** can be used to register all available
+tags in a .yml "database".
+
+Simply run this file to register every available tag into a yaml file,
+which we can then load if we are to search for registered tags, rather
+than relying on "grep" itself. Thus, searching for tags will now be
+available as well without grep - you have to run it once to register 
+the available programs before you can use it.
+
+## Guessing the build-type of a source package
+
 You can try to guess the build type of a source directory.
 
-First, extract the source tarball, such as for zsh (the URL may be: http://www.zsh.org/pub/zsh-5.6.2.tar.xz).
+First, extract the source tarball, such as for **zsh** (the
+URL may be: http://www.zsh.org/pub/zsh-5.6.2.tar.xz).
 
 Next, cd into that extracted directory and do:
 
-rbt --guess-build-type
+  rbt --guess-build-type
 
-This will return a String (or Symbol), such as "configure" or "cmake" and so forth.
+This will return a String (or Symbol), such as "configure" or
+"cmake" and so forth.
 
-The functionality was needed so that RBT can make a guess when information is otherwise unavailable about a given program at hand (e. g. not yet registered in a .yml file).
+The functionality was needed so that RBT can **make a guess**
+when information is otherwise unavailable about a given 
+program at hand (e. g. not yet registered in a .yml file).
+      
+## Everything about symlinking
 
-Everything about symlinking
-This subsection contains some information about how symlinking is handled by the RBT project.
+This subsection contains some information about how symlinking is
+handled by the RBT project.
 
-In general, the main functionality resides in the file rbt/toplevel_methods/symlink.rb. When it comes to class RBT::Action::SoftwareManager then the file is rbt/compile/symlink.rb.
+In general, the main functionality resides in the file
+**rbt/toplevel_methods/symlink.rb**. When it comes to class
+**RBT::Action::SoftwareManager then the file is rbt/compile/symlink.rb**.
 
-Certain settings in the cookbook .yml files can be used to do some trivial symlinking jobs, such as symlinking lib64/ to lib/. The boolean setting autosymlink_lib64 handles this. If you need such a symlink-job during post-installation, then set this entry to true in the respective .yml file, such as for the program called poppler and the associated poppler.yml file:
+Certain settings in the cookbook .yml files can be used to do
+some trivial symlinking jobs, such as symlinking **lib64/** to
+<b>lib/</b>. The boolean setting **autosymlink_lib64** handles this.
+If you need such a symlink-job during post-installation, then
+set this entry to true in the respective .yml file, such as for
+the program called **poppler** and the associated **poppler.yml**
+file:
 
-autosymlink_lib64: t
-Note that presently (November 2018) this is only honoured if we compile in an AppDir-like manner.
+    autosymlink_lib64: t
 
-If you wish to remove all symlinks under the /Programs/ hierarchy, or wherever you have your own particular equivalent of this main Application directory set to, then you can use the following commandline switch:
+Note that presently (November 2018) this is only honoured if
+we compile in an **AppDir-like manner**.
 
-rbt --remove-all-symlinks
-rbt --remove-all-symlinks
+If you wish to remove all symlinks under the **/Programs/** hierarchy,
+or wherever you have your own particular equivalent of this main
+**Application directory** set to, then you can use the following
+**commandline switch**:
+
+    rbt --remove-all-symlinks
+    rbt --remove-all-symlinks
+
 (ry is an alias on my system towards rbt)
 
 Why was this commandline flag added?
 
-I needed to test the re-creation of symlinks, so I had to add the functionality to also remove all symlinks prior to testing this functionality.
+I needed to **test the re-creation of symlinks**, so I had to add
+the functionality to also remove all symlinks prior to testing this
+functionality.
 
-Exiting at the "make" or "make install" stage
-If you wish to instantly exit when reaching the "make install" stage, you can use the following commandline for this:
+## Exiting at the "make" or "make install" stage
 
-rbt htop --stop-at-make-install-stage
+If you wish to instantly exit when reaching the "make install" stage,
+you can use the following commandline for this:
+
+    rbt htop --stop-at-make-install-stage
+
 Something similar exists for the "make" stage:
 
-rbt htop --stop-at-make-stage
-class RBT::SymlinkIntoUsrLibDirectory
-class RBT::SymlinkIntoUsrLibDirectory can be used to symlink content into the /usr/lib/ directory. The name for this class is fairly unwieldy, but I needed the functionality in a specific .rb file that I could call from the commandline.
+    rbt htop --stop-at-make-stage
 
-By default, RBT::Action::SoftwareManager does not make use of this class, but you can enable it via any of the following commandline flags:
+## class RBT::SymlinkIntoUsrLibDirectory
 
-rbt gtk+ --symlink-into-usr-lib-dir
-rbt gtk+ --symlink-into-lib-dir
-rbt gtk+ --symlink-lib-dir
-rbt gtk+ --symlink-libs
+class **RBT::SymlinkIntoUsrLibDirectory** can be used to symlink content
+into the /usr/lib/ directory. The name for this class is fairly unwieldy,
+but I needed the functionality in a specific .rb file that I could
+call from the commandline.
+
+By default, RBT::Action::SoftwareManager does **not** make use of this class, but you
+can enable it via any of the following commandline flags:
+
+    rbt gtk+ --symlink-into-usr-lib-dir
+    rbt gtk+ --symlink-into-lib-dir
+    rbt gtk+ --symlink-lib-dir
+    rbt gtk+ --symlink-libs
+
 Why may this functionality be useful to have?
 
-For practical purposes it may be better to use a hybrid linux system, e. g. one that has versioned AppDirs under /Programs/, but also keeps symlinks at /usr/lib/. A similar approach is used by the program stow, for example. Once you understand how stow works, it is quite easy to realize that this functionality is useful to be had, so RBT also has the same or at the least a similar functionality.
+For practical purposes it may be better to use a hybrid linux system,
+e. g. one that has versioned AppDirs under /Programs/, but also keeps
+symlinks at /usr/lib/. A similar approach is used by the program
+**stow**, for example. Once you understand how stow works, it is 
+quite easy to realize that this functionality is useful to be had,
+so RBT also has the same or at the least a similar functionality.
 
-Furthermore you can also call this class from the commandline, by simply calling the .rb file at hand.
+Furthermore you can also call this class from the commandline, by
+simply calling the .rb file at hand.
 
-Batch compiling all locally existing archives of a given program at hand
-Since as of 23.11.2018 (23rd November 2018) it is possible to batch-compile programs that reside locally, if they differ in their versions, into an AppDir-like prefix.
+## Batch compiling all locally existing archives of a given program at hand
 
-This sounds difficult, so let's show an example to make this easier to understand.
+Since as of **23.11.2018** (23rd November 2018) it is possible to
+batch-compile programs that reside locally, if they differ in their
+versions, into an AppDir-like prefix.
 
-Say that you have a directory called /home/x/SRC/libsigc++/. In this directory you store source archives such as the following ones:
+This sounds difficult, so let's show an example to make this easier
+to understand.
 
-libsigc++-2.10.1.tar.xz
-libsigc++-2.6.2.tar.xz
-libsigc++-2.8.0.tar.xz
-libsigc++-2.9.3.tar.xz
-libsigc++-2.99.11.tar.xz
-Now you may wish to compile all these, into their proper prefix, such as that libsigc++-2.10.1 will end up in /Programs/Libsigc++/2.10.1/ and so forth. In fact, this is precisely why I added this functionality. I needed to be able to compile different versions, including old versions, into the corresponding hierarchy under /Programs/.
+Say that you have a directory called **/home/x/SRC/libsigc++/**.
+In this directory you store source archives such as the following
+ones:
+
+    libsigc++-2.10.1.tar.xz
+    libsigc++-2.6.2.tar.xz
+    libsigc++-2.8.0.tar.xz
+    libsigc++-2.9.3.tar.xz
+    libsigc++-2.99.11.tar.xz
+
+Now you may wish to compile all these, into their proper prefix,
+such as that <b>libsigc++-2.10.1</b> will end up in **/Programs/Libsigc++/2.10.1/**
+and so forth. In fact, this is precisely why I added this functionality.
+I needed to be able to compile different versions, including old versions,
+into the corresponding hierarchy under **/Programs/**.
 
 The commandline for this is something like:
 
-rbt libsigc++ --compile-all-available-local-versions
-rbt libsigc++ --all-available-local-versions
+    rbt libsigc++ --compile-all-available-local-versions
+    rbt libsigc++ --all-available-local-versions
+
 This is a convenience feature.
 
-Check for duplicate binaries
-class RBT::CheckForDuplicateBinaries can check for binaries that are a duplicate. By default, this class will scan for the /usr/bin/ hierarchy, but you can specify other target directories. If a duplicate was found, the user is notified.
+## Check for duplicate binaries
 
-That way you, as the end user, can decide how to proceed - for example, I needed this class so I can find out which files I can remove on a hybrid system.
+class RBT::CheckForDuplicateBinaries can check for binaries that
+are a duplicate. By default, this class will scan for the /usr/bin/
+hierarchy, but you can specify other target directories. If a 
+duplicate was found, the user is notified.
 
-If you have aliased this class to check_for_duplicate_binaries then you can invoke it like so, with another target directory:
+That way you, as the end user, can decide how to proceed - for
+example, I needed this class so I can find out which files
+I can remove on a **hybrid system**.
 
-check_for_duplicate_binaries --dir=/usr/local/bin/
-check_for_duplicate_binaries --pwd
-check_for_duplicate_binaries PWD # Is the same as the above ^^^ variant.
-If you only want to check for the current working directory, you can use the bin/rbt executable as well, via:
+If you have aliased this class to <b>check_for_duplicate_binaries</b>
+then you can invoke it like so, with another target directory:
 
-rbt --check-for-binary-duplicates
-rbt --check-for-duplicates
-rbt --duplicates-in-pwd?
-Determine to which particular program a specific binary name belongs to
-If you wish to find out to which program, e. g., the binary called "shar" belongs to, then you can query this from the commandline via:
+    check_for_duplicate_binaries --dir=/usr/local/bin/
+    check_for_duplicate_binaries --pwd
+    check_for_duplicate_binaries PWD # Is the same as the above ^^^ variant.
 
-rbt --this-binary?=shar
+If you only want to check for the current working directory, you
+can use the bin/rbt executable as well, via:
+
+    rbt --check-for-binary-duplicates
+    rbt --check-for-duplicates
+    rbt --duplicates-in-pwd?
+
+## Determine to which particular program a specific binary name belongs to
+
+If you wish to find out to which program, e. g., the binary called
+"shar" belongs to, then you can query this from the commandline
+via:
+
+    rbt --this-binary?=shar
+
 Alternatively you can use this:
+    
+    rbt --binary=env
 
-rbt --binary=env
 The output of these would be:
 
-RBT::BinaryNameBelongsToWhichProgram: The binary called `shar` belongs to the program `sharutils`.
-RBT::BinaryNameBelongsToWhichProgram: The binary called `env` belongs to the program `coreutils`.
-That is the main purpose of class RBT::BinaryNameBelongsToWhichProgram.
+    RBT::BinaryNameBelongsToWhichProgram: The binary called `shar` belongs to the program `sharutils`.
+    RBT::BinaryNameBelongsToWhichProgram: The binary called `env` belongs to the program `coreutils`.
 
-Since as of June 2019, an executable exists under bin/ that can be used for this task, the name being binary_of - mostly for convenience.
+That is the main purpose of **class RBT::BinaryNameBelongsToWhichProgram**.
+
+Since as of June 2019, an executable exists under **bin/** that can be used for
+this task, the name being **binary_of** - mostly for convenience.
 
 Example equivalent to the two above commands:
 
-binary_of shar
-binary_of env
-Binaries installed by a given program
-Several programs (cookbooks) that are registered in this gem will install binaries/executables under a bin/ subdirectory. This will usually be at the prefix /usr/bin/ or at the prefix /usr/local/bin/, for most programs on a Linux system. How does the RBT project handle these executables?
+    binary_of shar
+    binary_of env
 
-In the rbt project, in the respective .yml files, there will be an (optional) entry called "binaries:", followed by an Array of binaries that this program will install.
+## Binaries installed by a given program
 
-So, for example, take the file called binutils.yml.
+Several programs (cookbooks) that are registered in this gem
+will install binaries/executables under a bin/ subdirectory.
+This will usually be at the prefix /usr/bin/ or at the prefix
+/usr/local/bin/, for most programs on a Linux system. How does
+the RBT project handle these executables?
 
-Binutils will, by default, install the following binaries/executables when you compile it from source (actually a few more, but we will only show the following listing for the purpose of this document here):
+In the **rbt project**, in the respective .yml files, there
+will be an (optional) entry called "binaries:", followed by an
+Array of binaries that this program will install.
 
-addr2line
-ar
-as
-c++filt
-gprof
-ld
-nm
-objcopy
-objdump
-ranlib
-readelf
-size
-strings
-strip
-libiberty
-libbfd
-libopcodes
-If you want to find out how many binaries are registered in the cookbooks project so far, in total, then you can invoke the bin/rbt executable like in the following manner:
+So, for example, take the file called **binutils.yml**.
 
-rbt --n-binaries?
+Binutils will, by default, install the following **binaries/executables**
+when you compile it from source (actually a few more, but we will
+only show the following listing for the purpose of this document
+here):
+
+    addr2line
+    ar
+    as
+    c++filt
+    gprof
+    ld
+    nm
+    objcopy
+    objdump
+    ranlib
+    readelf
+    size
+    strings
+    strip
+    libiberty
+    libbfd
+    libopcodes
+
+If you want to find out how many binaries are registered in the
+cookbooks project so far, in total, then you can **invoke the 
+bin/rbt executable** like in the following manner:
+
+    rbt --n-binaries?
+
 The result will then be something like this:
 
-RBT: There are 4102 registered binaries in all cookbook files.
-RBT: There are 5745 registered binaries in all cookbook files. # This one in April 2023, so RBT
-                                                               # tracks more and more binaries
-Suggest the content of a cookbook .yml file
-If you compile a program from source successfully, say glib, into an AppDir prefix such as /Programs/Glib/2.58.1/, then you may use class RBT::SuggestCookbookFor to display the content of a .yml file for glib. This is obviously not perfectly accurate, but may help to get things started when you wish to create your own .yml files.
+    RBT: There are 4102 registered binaries in all cookbook files.
+    RBT: There are 5745 registered binaries in all cookbook files. # This one in April 2023, so RBT
+                                                                   # tracks more and more binaries
+
+## Suggest the content of a cookbook .yml file
+
+If you compile a program from source successfully, say **glib**,
+into an AppDir prefix such as **/Programs/Glib/2.58.1/**, then
+you may use class **RBT::SuggestCookbookFor** to display the
+content of a .yml file for glib. This is obviously not perfectly
+accurate, but may help to get things started when you wish to
+create your own .yml files.
 
 Invocation examples from the commandline:
 
-rbt --suggest-cookbook-for=glib
-rbt --suggest-cookbook-for=htop
-rbt --suggest-cookbook-for=pango
-Note that this depends on these programs being installed in the programs_directory?, which on my system is equal to /Programs/. See elsewhere in this document how to set this value to some other target location.
+    rbt --suggest-cookbook-for=glib
+    rbt --suggest-cookbook-for=htop
+    rbt --suggest-cookbook-for=pango
 
-Do note that class RBT::SuggestCookbookFor is also used to indicate (to me) if a specific .yml file needs to be updated, in regards to libraries. As of 28th December 2018 this is experimental; but I may need to extend this eventually, and also include headers and binaries in this. The win-win situation here would be that the .yml files that are part of the RBT project, may become better and more complete in the long run.
+**Note** that this depends on these programs being installed
+in the **programs_directory?**, which on my system is equal
+to **/Programs/**. See elsewhere in this document how to set
+this value to some other target location.
 
-Querying the host system
+Do note that class **RBT::SuggestCookbookFor** is also used
+to indicate (to me) if a specific .yml file needs to be 
+updated, in regards to libraries. As of 28th December 2018
+this is experimental; but I may need to extend this eventually,
+and also include headers and binaries in this. The win-win
+situation here would be that the .yml files that are part
+of the RBT project, may become better and more complete
+in the long run.
+
+## Querying the host system
+
 The host system can be queried from within RBT via:
 
-rbt --host-system
-Inferring the build system that a particular program uses
-If you look at different programs, they may use GNU configure, meson, python setup.rb files, scons, cmake, waf and so forth - in short, a vast array of different build systems.
+    rbt --host-system
 
-The toplevel method called RBT.infer_build_system() can be used to determine which build system is assumed, by RBT, to be used. It will return a one-word String such as meson or configure. Do note that this is NOT perfect - you should not absolutely rely on this method, but for most programs this should work fine.
+## Inferring the build system that a particular program uses
 
-The code for this resides in the file rbt/toplevel_methods/infer_build_system.rb.
+If you look at different programs, they may use GNU configure,
+meson, python setup.rb files, scons, cmake, waf and so forth -
+in short, a vast array of different build systems.
 
-Some projects may use more than one build system, e. g. harfbuzz would allow you to use either configure or meson. In this case, what should the method RBT.infer_build_system() return? It could return an Array of both build systems, or that method could just "pick" one variant and return it. The latter is presently (January 2019) the current default. A yaml file keeps track of which build system is prioritized by default.
+The toplevel method called **RBT.infer_build_system()** can be
+used to determine which build system is assumed, by RBT, to
+be used. It will return a one-word **String** such as **meson**
+or **configure**. Do note that this is NOT perfect - you should
+not absolutely rely on this method, but for most programs this
+should work fine.
 
-(Note that in February 2024 this is currently broken; I'll rewrite it eventually and probably split up the functionality into two separate methods.)
+The code for this resides in the file
+<b>rbt/toplevel_methods/infer_build_system.rb</b>.
 
-The RBT project supports colours on the commandline.
-By default, the scripts available within module RBT support colours on the commandline. Colours may help put proper focus on what is important and what is not.
+Some projects may use more than one build system, e. g. harfbuzz
+would allow you to use either **configure** or **meson**. In
+this case, what should the method **RBT.infer_build_system()**
+return? It could return an Array of both build systems, or that
+method could just "pick" one variant and return it. The latter
+is presently (January 2019) the current default. A yaml file
+keeps track of which build system is prioritized by default.
 
-If, for any reason, you do not want to use colours, you can disable them either via the configuration (in the .yml file), or use this toplevel API to disable colours:
+(Note that in February 2024 this is currently broken; I'll
+rewrite it eventually and probably split up the functionality
+into two separate methods.)
 
-RBT.disable_colours
-RBT.disable_colors # ← This works as well, of course.
-The above method-call will completely disable colours for the whole RBT namespace.
+## The RBT project supports colours on the commandline.
 
-The configuration file that is used to determine whether to use colours is called use_colours.yml. Since not everyone may be able to modify the .yml file, depending on the host setup (such as in a restricted environment like at a university campus site), a commandline flag is also available:
+By default, the scripts available within <b>module RBT</b> support
+colours on the commandline. Colours may help put proper focus
+on what is important and what is not.
 
-rbt htop --disable-colours
-Disabling colours
-If you dont want to display or use colours, either disable them globally in the config.yml file (the entry is called use_colours_output there) or pass --nocolor (or --nocol or --nocolour) on the commandline, like this:
+If, for any reason, you do <b>not</b> want to use colours, you can
+disable them either via the **configuration** (in the .yml file), or use
+this toplevel API to disable colours:
 
-rbt libmemcached --nocolor
-rbt libmemcached --nocolor
-rbt libmemcached --nocolour
-rbt libmemcached --nocolours
-rbt libmemcached nocolours
-Note that you can also change the colours. For this, edit the file colours.yml
+    RBT.disable_colours
+    RBT.disable_colors # ← This works as well, of course.
 
-The above will, however had, only disable the colours for the current run.
+The above method-call will completely disable colours for the whole
+RBT namespace.
 
-You can find out whether you use colours specifically or not, by issuing this command:
+The <b>configuration file</b> that is used to determine whether to use
+colours is called <b>use_colours.yml</b>. Since not everyone may
+be able to modify the .yml file, depending on the host setup (such
+as in a restricted environment like at a university campus site), a
+**commandline flag** is also available:
 
-rbt --use-colours?
-You can also permanently disable the colours by issuing the following command:
+    rbt htop --disable-colours
 
-rbt --permanently-disable-colours
-Auto-updating libraries installed under a versioned AppDir
-You can auto-update the "libraries:" entry in a given .yml file, but this is usually only useful when I do so. I update the libraries entry; and eventually I will upload a new version of RBT.
+## Disabling colours
 
-If you, for any reason, wish to try to do so too, you can do so via any of the following invokation ways:
+If you dont want to display or use colours, either disable
+them globally in the config.yml file (the entry is called 
+`use_colours_output` there) or pass --nocolor (or --nocol or
+--nocolour) on the commandline, like this:
 
-rbt --update-libraries-of=poppler
-rbt --update-libraries-for=poppler
-This would then update the file called poppler.yml, after making a backup of the old poppler.yml file first. (Make sure to have set the environment variable called IS_ROEBE to a value of 1).
+    rbt libmemcached --nocolor
+    rbt libmemcached --nocolor
+    rbt libmemcached --nocolour
+    rbt libmemcached --nocolours
+    rbt libmemcached nocolours
 
-RBT::Cookbooks::CheckForInvalidEntriesInThisCookbook
-class RBT::Cookbooks::CheckForInvalidEntriesInThisCookbook can be used to check that only valid entries are registered in a cookbook file.
+Note that you can also change the colours. For this, edit the
+file <b>colours.yml</b>
 
-It can be found under the subdirectory rbt/validation/.
+The above will, however had, only disable the colours for the
+<b>current</b> run.
+
+You can find out whether you use colours specifically or
+not, by issuing this command:
+
+    rbt --use-colours?
+
+You can also <b>permanently disable the colours</b> by issuing
+the following command:
+
+    rbt --permanently-disable-colours
+
+## Auto-updating libraries installed under a versioned AppDir
+
+You can auto-update the "libraries:" entry in a given .yml file,
+but this is usually only useful when I do so. I update the
+libraries entry; and eventually I will upload a new version of
+RBT.
+
+If you, for any reason, wish to try to do so too, you can do
+so via any of the following invokation ways:
+
+    rbt --update-libraries-of=poppler
+    rbt --update-libraries-for=poppler
+
+This would then update the file called **poppler.yml**, 
+after making a backup of the old **poppler.yml** file first.
+(Make sure to have set the environment variable called
+**IS_ROEBE** to a value of 1).
+
+## RBT::Cookbooks::CheckForInvalidEntriesInThisCookbook
+
+**class RBT::Cookbooks::CheckForInvalidEntriesInThisCookbook** can be
+used to check that only valid entries are registered in a cookbook
+file.
+
+It can be found under the subdirectory **rbt/validation/**.
 
 You can also batch-invoke all validations via.
 
-rbt --validate-entries
-However had, this is mostly for me, to assure quality control; regular users don't really need this (and it is a bit buggy as well).
+    rbt --validate-entries
 
-The log directory
-The log directory for RBT is the directory into which RBT can store various files. This directory will also be used for storing extract archives, so the name log directory is a bit of a misnomer - it simply is the main directory that RBT will use to keep stuff stored that may be useful for compilation, or created during a compilation/installation process.
+However had, this is mostly for me, to assure quality control;
+regular users don't really need this (and it is a bit buggy
+as well).
+    
+## The log directory
 
-On my home system this defaults to the directory /home/Temp/rbt/ but for other Linux systems this may typically be /tmp/ or /tmp/rbt/.
+The **log directory** for RBT is the directory into which RBT can
+store various files. This directory will also be used for storing
+extract archives, so the name **log directory** is a bit of a
+misnomer - it simply is the main directory that RBT will use to
+keep stuff stored that may be useful for compilation, or created
+during a compilation/installation process.
 
-You can also generate this log directory from the commandline via either of the following commandline invocation ways:
+On my home system this defaults to the directory
+**/home/Temp/rbt/** but for other Linux systems this
+may typically be **/tmp/** or **/tmp/rbt/**.
 
-rbt --create-log-dir
-rbt --create-log-directory
-Usefulness of this project
-If you may wonder how this project may be useful to you, well - I think the main target audience will be fairly small, mostly only more experienced users at best, in particular linux users. These people often already know a lot about, not only linux, but also programming - and may, ironically enough, not even have a real need for the RBT project.
+You can also generate this log directory from the commandline via
+either of the following commandline invocation ways:
 
-While I will continually improve the documentation so that novice users can understand what the RBT project is doing as well, to the point of everyone being easily able to use the project, I think that there will not be many novice users who are even interested in such a project in the first place these days. People just tend to install a linux distribution and let the distribution handle everything e. g. automatic updates and what not.
+    rbt --create-log-dir
+    rbt --create-log-directory
 
-So, the RBT project should perhaps be seen as a "complementary" project to the LFS/BLFS project (Linux from Scratch etc..) - or for smaller linux distributions as an additional set of scripts that aid in managing a distribution, to some extent. After all you do not have to use all the scripts that are part of the RBT project - only pick those that may be of benefit to your use case(s). The RBT project is purposely not focused on only one particular mind set or strategy; it attempts to remain flexible and useful for many different use cases.
+## Usefulness of this project
 
-At the very least, the programs found in rbt project have a description, so this alone can be of help to distribution-creators. And there are some classes that focus on validation the dataset, so that people who use the project can be reasonable sure that everything is in proper order. For example, I can use the RBT project to autogenerate slackware packages or GoboLinux recipes (although this may require the removal of a few bugs here and there still).
+If you may wonder how this project may be **useful** to you, well -
+I think the **main target audience** will be fairly small, mostly
+only more experienced users at best, in particular linux users.
+These people often already know a lot about, not only linux, but
+also programming - and may, ironically enough, not even have a
+real need for the RBT project.
 
-Obtaining the main URL for a given program
-The method RBT.return_url1_of_this_program() can be used to return, as String, the remote URL to a program, also called "url1". This entry usually denotes the path to a tarball/archive that can be downloaded from the commandline.
+While I will continually **improve the documentation** so that novice
+users can understand what the **RBT project** is doing as well,
+to the point of everyone being easily able to use the project, I think
+that there will not be many novice users who are even interested in
+such a project in the first place these days. People just tend to
+install a linux distribution and let the distribution handle everything
+e. g. automatic updates and what not.
 
-If you need to determine the URL from the commandline, you can try this:
+So, the RBT project should perhaps be seen as a "complementary" project
+to the LFS/BLFS project (Linux from Scratch etc..) - or for smaller
+linux distributions as an additional set of scripts that aid in
+managing a distribution, to some extent. After all you do not have
+to use all the scripts that are part of the RBT project - only pick
+those that may be of benefit to your use case(s). The RBT project is
+purposely not focused on only one particular mind set or strategy;
+it attempts to remain flexible and useful for many different use
+cases.
 
-rbt --show-url=readline
-rbt --show-url=php
-rbt --show-url=ruby
-rbt --show-url=python
-Note that you can also query whether a remote URL exists, if you have wget available.
+At the very least, the programs found in rbt project have a
+**description**, so this alone can be of help to
+**distribution-creators**. And there are some classes that 
+focus on validation the dataset, so that people who use the
+project can be reasonable sure that everything is in proper
+order. For example, I can use the RBT project to autogenerate
+slackware packages or GoboLinux recipes (although this may
+require the removal of a few bugs here and there still).
+
+## Obtaining the main URL for a given program 
+
+The method **RBT.return_url1_of_this_program()** can be used
+to return, as String, the remote URL to a program, also called
+"url1". This entry usually denotes the path to a tarball/archive
+that can be downloaded from the commandline.
+
+If you need to determine the URL from the commandline, you can
+try this:
+
+    rbt --show-url=readline
+    rbt --show-url=php
+    rbt --show-url=ruby
+    rbt --show-url=python
+
+Note that you can also query whether a remote URL exists, if
+you have wget available.
 
 Example:
 
-i = 'https://github.com/linuxwacom/libwacom/releases/download/libwacom-1.6/libwacom-1.6.tar.bz2'
-RBT.does_this_remote_url_exist? i
-Report the status of the project
+    i = 'https://github.com/linuxwacom/libwacom/releases/download/libwacom-1.6/libwacom-1.6.tar.bz2'
+    RBT.does_this_remote_url_exist? i
+
+## Report the status of the project
+
 You can report the status of the project via:
 
-rbt --report-status
-This actually means which target directories will be used by the RBT project mostly.
+    rbt --report-status
 
-ColourMake and ColourMakeInstall
-If you wish to use some colours when doing "make" or "make install" then you can use bin/colour_make and bin/colour_make_install, like in this way:
+This actually means which target directories will be used by the
+RBT project mostly.
 
-colour_make
-colour_make_install
-You can also tap into this code from the commandline, through the bin/rbt interface, such as in this way:
+## ColourMake and ColourMakeInstall
 
-rbt --colour_make
-rbt --colour_make_install
+If you wish to use some colours when doing "make" or "make install"
+then you can use **bin/colour_make** and **bin/colour_make_install**,
+like in this way:
+
+    colour_make
+    colour_make_install
+
+You can also tap into this code from the commandline, through the
+**bin/rbt** interface, such as in this way:
+
+    rbt --colour_make
+    rbt --colour_make_install
+
 Of course the slightly shorter variants work too:
 
-rbt --colourmake
-rbt --colourmakeinstall
+    rbt --colourmake
+    rbt --colourmakeinstall
+
 And this as well:
 
-rbt --colour-make
-rbt --colour-make-install
-RBT::ShowAllAbout
-You can quickly show all about a given program at hand, via the class RBT::ShowAllAbout. I have aliased this class to show_all_about, so then I can do:
+    rbt --colour-make
+    rbt --colour-make-install
 
-show_all_about ruby
-show_all_about make
-This will show the content of the .yml file at hand. In order for this to work, the Cookbooks project has to be available - and that particular program has to exist, too. Thus meaning, that a .yml file must exist, such as ruby.yml and so forth.
+## RBT::ShowAllAbout
+
+You can quickly show all about a given program at hand, via the
+class **RBT::ShowAllAbout**. I have aliased this class to
+**show_all_about**, so then I can do:
+
+    show_all_about ruby
+    show_all_about make
+
+This will show the content of the .yml file at hand. In order for
+this to work, the Cookbooks project has to be available - and that
+particular program has to exist, too. Thus meaning, that a .yml file
+must exist, such as ruby.yml and so forth.
 
 You can also invoke the above from the commandline, by issuing:
 
-rbt --show-all-about=ruby
-rbt --show-all-about=php
-In these two cases, we would query the content of the two yaml files called ruby.yml and php.yml.
+    rbt --show-all-about=ruby
+    rbt --show-all-about=php
+
+In these two cases, we would query the content of the two yaml files
+called <b>ruby.yml</b> and <b>php.yml</b>.
 
 You can also use the current working directory as "input", via:
 
-rbt --show-all-about-this-dir
-For example, if the directory name is /Depot/Temp/xcb-util-xrm-1.0/, then calling rbt via the --show-all-about-this-dir flag will assume to be the same as if you would have done:
+    rbt --show-all-about-this-dir
 
-rbt --show-all-about=xcb-util-xrm
-This allows you to type a little less (and not have to think about the name of the program at hand, since you are just using the working directory as the "input" / argument).
+For example, if the directory name is **/Depot/Temp/xcb-util-xrm-1.0/**,
+then calling rbt via the **--show-all-about-this-dir** flag will
+assume to be the same as if you would have done:
 
-Running strip on binaries
-You can use strip to reduce the size of the binaries in general. This is often done on programs written in the C programming language.
+    rbt --show-all-about=xcb-util-xrm
 
-You can also invoke the command called "strip" on binaries (executables), from within rbt too.
+This allows you to type a little less (and not have to think about
+the name of the program at hand, since you are just using the working
+directory as the "input" / argument).
 
-A simple way to do so is to first navigate to a bin/ directory, and then invoke the following command:
+## Running strip on binaries
 
-rbt --strip-binaries
-But be careful before running the above - this will really run "strip" on every file found in the current working directory.
+You can use <b>strip</b> to reduce the size of the binaries in
+general. This is often done on programs written in the C programming
+language.
 
-Only do so when you are sure you want to invoke strip there.
+You can also invoke the command called "strip" on binaries
+(**executables**), from within **rbt** too.
 
-You can also specifically strip only the binaries that belong to a certain program, such as through:
+A simple way to do so is to first navigate to a bin/ directory,
+and then invoke the following command:
 
-rbt --strip-binaries-of=htop
-The configuration option called use_strip will determine whether the RBT-project does so automatically.
+    rbt --strip-binaries
 
-If this configuration option is set to true, then we will run "strip --strip-unneeded" by default.
+But be careful **before** running the above - this will really
+run "strip" on every file found in the current working directory.
 
-On my home system this defaults to true.
+Only do so when you are sure you want to invoke **strip** there.
 
-Available utility scripts of the RBT project
-There is a large collection of small scripts available in the subdirectory called rbt/utility_scripts/ - you can either go into that directory to have a look, or show a summary by calling:
+You can also specifically strip only the binaries that belong
+to a certain program, such as through:
 
-RBT.show_utility_scripts
-Each .rb file there should have a small header that explains what the respective .rb file will do. You may want to check these out.
+    rbt --strip-binaries-of=htop
 
-Commandline examples for rbt
-This subsection here has a few examples how I use rbt every now and then. I will try to expand this subsection with useful snippets in the long run, but they will not be explained in this subsection - see for other parts of the README.me file here for explanations, or use "rbt --help".
+The **configuration option** called **use_strip** will determine
+whether the RBT-project does so automatically.
 
-rbt gdkpixbuf --home-dir --use-meson
-Show everything about a given program (show all)
-There is a class called ShowAllAbout, which will simply show the whole .yml entry of a given program.
+If this configuration option is set to **true**, then we will
+run "strip --strip-unneeded" by default.
+
+On my home system this defaults to **true**.
+
+## Available utility scripts of the RBT project
+
+There is a large collection of small scripts available in the 
+subdirectory called **rbt/utility_scripts/** - you can either
+go into that directory to have a look, or show a summary by
+calling:
+  
+    RBT.show_utility_scripts
+
+Each .rb file there should have a small header that explains
+what the respective .rb file will do. You may want to check
+these out.
+
+## Commandline examples for rbt
+
+This subsection here has a few examples how I use rbt every now
+and then. I will try to expand this subsection with useful
+snippets in the long run, but they will not be explained in
+this subsection - see for other parts of the README.me file
+here for explanations, or use "rbt --help".
+
+    rbt gdkpixbuf --home-dir --use-meson
+
+## Show everything about a given program (show all)
+
+There is a class called ShowAllAbout, which will simply show
+the whole .yml entry of a given program.
 
 I aliased this on my system to "show_all", so then I can type:
 
-show_all htop
-And the content of the .yml file is shown. This is convenient because you can quickly view the content of the yaml file at hand.
+    show_all htop
 
-Note that there exists another way as well, via scookie, but scookie does not necessarily show all information, whereas class ShowAllAbout will do so.
+And the content of the .yml file is shown. This is convenient
+because you can quickly view the content of the yaml file
+at hand.
 
-A commandline variant also exists via cookbooks itself:
+Note that there exists another way as well, via scookie, but
+scookie does not necessarily show all information, whereas
+class ShowAllAbout will do so.
 
-cookbooks --show-all-about=htop
-cookbooks --show-all=htop
-cookbooks --show-file=htop
-Of course this works through rbt as well:
+A commandline variant also exists via **cookbooks** itself:
 
-rbt --show-all-about=htop
-rbt --show-all=htop
-rbt --show-file=htop
-Postinstallation steps
+    cookbooks --show-all-about=htop
+    cookbooks --show-all=htop
+    cookbooks --show-file=htop
+
+Of course this works through **rbt** as well:
+
+    rbt --show-all-about=htop
+    rbt --show-all=htop
+    rbt --show-file=htop
+
+## Postinstallation steps
+
 First, we have to define the "postinstallation phase".
 
-The Postinstall-Phase will begin after compilation has finished. This also means that the postinstall step can only happen if the compilation procedure was successful - at the least from a technical point of view. We could assume that a post-install step must always happen, but then we should not call it post-installation step.
+The <b>Postinstall-Phase</b> will begin after compilation has 
+finished. This also means that the postinstall step can only happen
+if the compilation procedure was successful - at the least from
+a technical point of view. We could assume that a post-install
+step must always happen, but then we should not call it
+post-installation step.
 
-If you compile a program from source, sometimes there may be post-installation steps that may have to occur after the program has been compiled. For example, if you wish to symlink cc to point to gcc, then we need to have this specified in the corresponding file called gcc.yml. The class that handles these postinstallation tasks is called class RBT::PostInstall.
+If you **compile a program from source**, sometimes there may be post-installation
+steps that may have to occur after the program has been compiled. For example,
+if you wish to **symlink** **cc** to point to **gcc**, then we need to have
+this specified in the corresponding file called **gcc.yml**. The class that
+handles these **postinstallation tasks** is called **class RBT::PostInstall**.
 
-You can invoke this class manually too, if you want to - I aliased the name "post_install" to point to the file in question. This I needed because I sometimes need to perform post-installation steps through the commandline, so it was simpler to have this a standalone, separate class.
+You can invoke this class manually too, if you want to - I aliased the name
+"<b>post_install</b>" to point to the file in question. This I needed because
+I sometimes need to perform post-installation steps through the commandline,
+so it was simpler to have this a standalone, separate class.
 
-Note that postinstallation steps can become quite complex, which is why RBT tries to simplify some of the steps by using shortcuts.
+Note that **postinstallation steps** can become quite complex, which is why
+RBT tries to simplify some of the steps by using shortcuts.
 
-For example, say that you wish to copy several files to another location automatically after compilation has finished.
+For example, say that you wish to **copy several files** to another location
+automatically after compilation has finished.
 
-You can do so via the copy_files instruction. Let's show a specific example for doing so:
+You can do so via the **copy_files** instruction. Let's show a specific
+example for doing so:
 
-- copy_files { VERSION,assembly,common,eclipse,epub,epub3,extensions,fo,highlighting,html,htmlhelp,images,javahelp,lib,manpages,params,profiling,roundtrip,slides,template,tests,tools,webhelp,website,xhtml,xhtml-1_1,xhtml5 } /usr/share/xml/docbook/xsl-stylesheets-PROGRAM_VERSION
-The leading ' - ' in the line above is for YAML and it denotes an entry that is to be kept as an Array. The rest of this Array is quite easy to understand. The instruction copy_files will simply copy several files; and these files are denoted within the square brackets { }. These entries can b a file or a directory and RBT::Action::SoftwareManager will correctly handle these.
+    - copy_files { VERSION,assembly,common,eclipse,epub,epub3,extensions,fo,highlighting,html,htmlhelp,images,javahelp,lib,manpages,params,profiling,roundtrip,slides,template,tests,tools,webhelp,website,xhtml,xhtml-1_1,xhtml5 } /usr/share/xml/docbook/xsl-stylesheets-PROGRAM_VERSION
 
-The very LAST entry is the target location that you wish to copy these files to, which in the above case is at /usr/share/xml/docbook/xsl-stylesheets-PROGRAM_VERSION.
+The leading ' - ' in the line above is for **YAML** and it denotes an entry that
+is to be kept as an Array. The rest of this Array is quite easy to understand.
+The instruction <b>copy_files</b> will simply copy several files; and these files
+are denoted within the **square brackets { }**. These entries can b a file or a
+directory and **RBT::Action::SoftwareManager** will correctly handle these.
 
-Note that the upcased word PROGRAM_VERSION is considered a MACRO and will automatically be expanded to the current program version at hand, e. g. the one that is inferred or specified within the specific cookbook .yml file.
+The very **LAST entry** is the target location that you wish to copy these
+files to, which in the above case is at
+**/usr/share/xml/docbook/xsl-stylesheets-PROGRAM_VERSION**.
 
-You can have as many postinstallation steps as you want to, in the specific .yml file. The entry that is important here is called postinstall.
+Note that the upcased word PROGRAM_VERSION is considered a MACRO and will
+automatically be expanded to the current program version at hand, e. g.
+the one that is inferred or specified within the specific cookbook .yml
+file.
 
-Of course you can use more commands than "just" copy_files; another example would be the command create_pkgconfig_file, such as in this way.
+You can have as many postinstallation steps as you want to, in the
+specific .yml file. The entry that is important here is called
+**postinstall**.
 
-postinstall:
-- create_pkgconfig_file
-This would automatically try to create a pkgconfig .pc file under the pkgconfig/ directory. The file libmad.yml needs this.
+Of course you can use more commands than "just" copy_files; another
+example would be the command **create_pkgconfig_file**, such as
+in this way.
 
-Some programs may require a post-install symlink step, such as vte. vte will install a file called bin/vte-2.91. It is easier to approach this file as bin/vte so a symlink option is used in the file vte.yml.
+    postinstall:
+    - create_pkgconfig_file
 
-The corresponding entry in the postinstall section of that .yml file is any of the following two:
+This would automatically try to create a pkgconfig .pc file under
+the **pkgconfig/** directory. The file **libmad.yml** needs this.
 
-symlink_binary
-symlink_this_binary
-Have a look at the file called vte.yml for a complete example.
+Some programs may require a post-install symlink step, such as
+**vte**. **vte** will install a file called **bin/vte-2.91**.
+It is easier to approach this file as **bin/vte** so a symlink
+option is used in the file **vte.yml**.
+
+The corresponding entry in the postinstall section of that .yml
+file is any of the following two:
+
+    symlink_binary
+    symlink_this_binary
+
+Have a look at the file called **vte.yml** for a complete example.
 
 Various additional macros exist that can be used in this regard.
 
-For instance, to create a directory in the app-dir prefixed target, one can use this:
+For instance, to create a directory in the app-dir prefixed
+target, one can use this:
 
-postinstall:
-- mkdir APPDIR_INSTALLATION_PREFIX/logs/
-This requires that the program is to be compiled via an appdir prefix (such as via --ntrad or --apdir on the commandline, to RBT::Action::SoftwareManager).
+    postinstall:
+    - mkdir APPDIR_INSTALLATION_PREFIX/logs/
 
-Since as of June 2022 you can also invoke the postinstall action from the commandline.
+This requires that the program is to be compiled via an
+appdir prefix (such as via --ntrad or --apdir on the
+commandline, to <b>RBT::Action::SoftwareManager</b>).
+
+Since as of June 2022 you can also invoke the postinstall
+action from the commandline.
 
 Example for this:
 
-rbt --postinstall-for=docbookxsl
-rbt --postinstall-for=littleutils
-This was added in particular because docbook is quite painful to install.
+    rbt --postinstall-for=docbookxsl
+    rbt --postinstall-for=littleutils
 
-Usually, via postinstall actions, you can do something like remove certain directories or files, create new files or new directories, handle symlinks and similar actions. It is quite rarely needed, but at least this functionality exists whenever you need it.
+This was added in particular because docbook is quite painful
+to install.
 
-You can of course disable this behaviour if you want to, at run-time.
+Usually, via <b>postinstall actions</b>, you can do something like
+remove certain directories or files, create new files or new
+directories, handle symlinks and similar actions. It is quite
+rarely needed, but at least this functionality exists
+whenever you need it.
+
+You can of course disable this behaviour if you want to, 
+at run-time.
 
 Use something like this:
 
-rbt htop --no-postinstall
-The $PATH variable
-You can put /usr/bin/ at the beginning of $PATH, via:
+    rbt htop --no-postinstall
 
-rbt --traditional-path
-This may be useful if you ever run into some PATH-related problems, such as when you mix different paths. I have had an issue with bash once, which is why I added the above flag to resolve this issue.
+## The $PATH variable
 
-Of course other ways may be to simply change PATH in your shell, such as in bash:
+You can put <b>/usr/bin/</b> at the beginning of $PATH, via:
 
-export PATH="/usr/bin:$PATH"
-This is probably the best, as in most reliable way. Remember that within ruby, PATH is available under:
+    rbt --traditional-path
 
-ENV['PATH']
-Autogen
-Some programs require a (very old) program called "autogen". This refers to GNU autogen; if you wish to read up more about autogen then you could do so here:
+This may be useful if you ever run into some PATH-related
+problems, such as when you mix different paths. I have had
+an issue with bash once, which is why I added the
+above flag to resolve this issue.
+
+Of course other ways may be to simply change <b>PATH</b> in
+your shell, such as in <b>bash</b>:
+
+    export PATH="/usr/bin:$PATH"
+
+This is probably the best, as in most reliable way. Remember
+that within **ruby**, PATH is available under:
+
+    ENV['PATH']
+
+## Autogen
+
+Some programs require a (very old) program called "autogen".
+This refers to <b>GNU autogen</b>; if you wish to read up more about
+<b>autogen</b> then you could do so here:
 
 https://www.gnu.org/software/autogen/
 
-In the respective cookbook file, as far as the RBT gem is concerned, support for autogen will be handled via the corresponding entry called use_autogen.
+In the respective cookbook file, as far as the RBT gem is concerned,
+support for autogen will be handled via the corresponding entry
+called <b>use_autogen</b>.
 
-If this entry is set to true (or yes), then RBT::Action::SoftwareManager will invoke autogen for that particular program, before trying to run ./configure.
+If this entry is set to **true** (or **yes**), then **RBT::Action::SoftwareManager**
+will <b>invoke autogen</b> for that particular program, before
+trying to run <b>./configure</b>.
 
-If you want to find out whether a program, such as "pacman", requires the use of autogen, you can use this query to find out on the commandline:
+If you want to find out whether a program, such as "<b>pacman</b>",
+requires the use of autogen, you can use this query to find
+out on the commandline:
 
-rbt pacman --use-autogen?
+    rbt pacman --use-autogen?
+
 The result may be output like this:
 
-RBT::Action::SoftwareManager: No, autogen will NOT be used for the program pacman.
-To specifically enable autogen for the current invocation run you can use:
+    RBT::Action::SoftwareManager: No, autogen will NOT be used for the program pacman.
 
-rbt htop --enable-autogen
-Conversely, you can also specifically disable autogen, via --disable autogen. This is only necessary in rare cases when you do not wish to have autogen to be run. Only a few programs will require autogen normally.
+To specifically enable autogen for the current invocation
+run you can use:
 
-Example to disable autogen for the current invocation run:
+    rbt htop --enable-autogen
 
-rbt htop --disable-autogen
-hebang Fixing
+Conversely, you can also specifically disable autogen, via
+--disable autogen. This is only necessary in rare cases
+when you do not wish to have autogen to be run. Only a
+few programs will require autogen normally.
+
+Example to disable autogen for the current invocation
+run:
+
+    rbt htop --disable-autogen
+
+## hebang Fixing
+
 You can fix all Shebangs of the RBT scripts by issuing:
 
-rbt --shebang
-Use with care, though. Most users will never need to use this functionality.
+    rbt --shebang
 
-Picking a specific program version
+Use with care, though. Most users will never need to
+use this functionality.
+    
+## Picking a specific program version
+
 You can e. g. select a local version via:
 
-rbt python --2
-This will only work if you have a python version available locally in the right directory, starting with the version number 2.
+    rbt python --2
+
+This will only work if you have a python version available locally
+in the right directory, starting with the version number **2**. 
 
 You can also use specific versions, such as in this way:
 
-rbt caja 1.21.4 --trad
-This latter example would require a tarball archive, a file, such as caja-1.21.4.tar.xz, to exist in the main directory for caja/. I tend to have multiple versions for many programs stored locally, for added flexibility.
+    rbt caja 1.21.4 --trad
 
-Snapcraft files
-Since as of June 2018, the RBT project can also autogenerate the necessary information for an (ubuntu) snapcraft file.
+This latter example would require a tarball archive, a file, such
+as **caja-1.21.4.tar.xz**, to exist in the main directory
+for **caja/**. I tend to have multiple versions for many programs
+stored locally, for added flexibility.
 
-The class that handles this file-creation is called RBT::Cookbooks::CreateSnapcraftFile. It can be found at the path rbt/utility_scripts/create_snapcraft_file.rb within the RBT gem.
+## Snapcraft files
 
-Note that the functionality is currently very limited; not every aspect of a snapcraft file is presently supported. But if you only need a very simple snapcraft file, or want to auto-generate one and then improve on it manually, then this may be useful for you to make use of.
+Since as of **June 2018**, the **RBT project** can also autogenerate
+the necessary information for an (_ubuntu_) **snapcraft file**.
 
-The argument to class RBT::Cookbooks::CreateSnapcraftFile should be the name of the program that you wish to generate a snapcraft.yml file for, such as "m4" or "php" or "ruby" and so forth.
+The class that handles this file-creation is called
+<b>RBT::Cookbooks::CreateSnapcraftFile</b>. It can be found
+at the path **rbt/utility_scripts/create_snapcraft_file.rb**
+within the RBT gem.
 
-There are essentially two different ways how to go about creating this snapcraft file:
+Note that the functionality is currently **very limited**; not every
+aspect of a _snapcraft_ file is presently supported. But if you only
+need a very simple snapcraft file, or want to auto-generate one and
+then improve on it manually, then this may be useful for you to
+make use of.
 
-(a) Either from within ruby code, you can do this:
+The **argument** to class <b>RBT::Cookbooks::CreateSnapcraftFile</b>
+should be **the name of the program** that you wish to generate a
+**snapcraft.yml** file for, such as "m4" or "php" or "ruby" and so
+forth.
 
-require 'rbt/utility_scripts/create_snapcraft_file.rb'
+There are essentially **two different ways** how to go about creating
+this snapcraft file:
 
-RBT::Cookbooks::CreateSnapcraftFile.new('m4')
-or, via a toplevel API:
+(**a**) Either from within ruby code, you can do this:
 
-RBT.create_snapcraft_file('m4')
-RBT.snapcraft_file('m4')
+    require 'rbt/utility_scripts/create_snapcraft_file.rb'
+
+    RBT::Cookbooks::CreateSnapcraftFile.new('m4')
+
+or, via a **toplevel API**:
+
+    RBT.create_snapcraft_file('m4')
+    RBT.snapcraft_file('m4')
+
 or
 
-(b)
+(**b**)
 
-from the commandline, do:
+from the <b>commandline</b>, do:
 
-cookbooks --create-snapcraft-for=NAME_OF_THE_PROGRAM_HERE
-cookbooks --create-snapcraft-for=ruby
-cookbooks --create-snapcraft-for=m4
-cookbooks --create-snapcraft-for=php
-cookbooks --create_snapcraft_for=php,ruby,m4
-The last variant allows you to use a ',' separated list for several programs.
+    cookbooks --create-snapcraft-for=NAME_OF_THE_PROGRAM_HERE
+    cookbooks --create-snapcraft-for=ruby
+    cookbooks --create-snapcraft-for=m4
+    cookbooks --create-snapcraft-for=php
+    cookbooks --create_snapcraft_for=php,ruby,m4
 
-The toplevel API exists mostly due to convenience; the commandline variant may be the simplest to do so, though.
+The last variant allows you to use a ',' separated list for
+several programs.
 
-If you wish to look at the official documentation for a snapcraft.yaml file, look here:
+The toplevel API exists mostly **due to convenience**; the commandline
+variant may be the simplest to do so, though.
 
-https://docs.snapcraft.io/snapcraft-yaml-reference/4276
-Colours used by the RBT project
-By default, the rbt project will use lots of different colours on the commandline.
+If you wish to look at the official documentation for a
+**snapcraft.yaml** file, look here:
 
-These colours are usually used on a KDE Konsole or a mate-terminal, on my home system - and they work best with a black background in these terminals.
+    https://docs.snapcraft.io/snapcraft-yaml-reference/4276
 
-If the default colours are to your dislike or do not work with your given setup, you can always disable them via an option such as "--disable-colours" or "--disable-colors", if you prefer the US spelling.
+## Colours used by the RBT project
+
+By default, the **rbt project** will use lots of different colours
+on the commandline.
+
+These colours are usually used on a **KDE Konsole** or a mate-terminal,
+on my home system - and they work best with a **black background** in
+these terminals.
+
+If the default colours are to your dislike or do not work with your
+given setup, you can always disable them via an option such as
+"--disable-colours" or "--disable-colors", if you prefer the US
+spelling.
 
 Examples:
 
-rbt htop --disable-colours
-rbt htop --disable-colors
-This would try to compile htop while disabling colour support for the current compilation-run.
+    rbt htop --disable-colours
+    rbt htop --disable-colors
+
+This would try to compile htop while disabling colour support for
+the current compilation-run.
 
 More shortcuts exist as well, such as "nocolours" and so forth.
 
-If you want to permanently disable the colours, use a commandline variant such as the following:
+If you want to **permanently disable the colours**, use a commandline
+variant such as the following:
 
-rbt --permanently-disable-colours
-This will modify the file 'use_colours.yml' in the yaml/ subdirectory of the RBT project, which is the file that determines whether RBT will use any colours or not. By default, colours will be used.
+    rbt --permanently-disable-colours
 
-In the future I may provide colour support for users who prefer a white or light background, but I would need a specific suggestion and a name for this colour "scheme". Then I can add more colours and even colour schemes for use here.
+This will modify the file '<b>use_colours.yml</b>' in the 
+**yaml/** subdirectory of the RBT project, which is the file
+that determines whether RBT will use any colours or not. By
+default, colours will be used.
 
-Note that you can customize the colours a little bit, via the .yml file called colours.yml. The content of that .yml file may look like this:
+In the future I may provide colour support for users who prefer
+a white or light background, but I would need a specific suggestion
+and a name for this colour "scheme". Then I can add more colours
+and even colour schemes for use here.
 
-information: lightblue  # 
-warn:        red        # For warnings to the user. 
-error:       red        # 
-file:        magenta    # 
-normal:      green      # The default colour to use.
-important:   brown      # cyan
-directory:   cyan       # brown
-fancy:       teal       # bold green
-Not all output by the RBT project is currently handled via that file, but most output could be customized; and eventually it is planned to allow a user to modify all colours that way. If you want to change the colours in use then you have to modify that .yml file. That file can be found at - you may have to look at your local ruby installation to find out where that .yml file will reside. For instance, on my home system that file, once the rbt gem is installed, can be found here:
+Note that you can customize the colours a little bit, via the
+.yml file called <b>colours.yml</b>. The content of that .yml
+file may look like this:
 
-/home/Programs/Ruby/Current/lib/ruby/site_ruby/3.2.0/rbt/yaml/colours/colours.yml
-For most other users it may be in /root/.gem/gems/ or in another directory.
+    information: lightblue  # 
+    warn:        red        # For warnings to the user. 
+    error:       red        # 
+    file:        magenta    # 
+    normal:      green      # The default colour to use.
+    important:   brown      # cyan
+    directory:   cyan       # brown
+    fancy:       teal       # bold green
 
-Specifying which build system to use
-By default, most .yml files that are part of the RBT project will make use of the GNU configure build system - e. g. configure, make and make install. You can, on the commandline, determine which build system is to be used; and you can also instruct RBT::Action::SoftwareManager to use another build system.
+Not all output by the RBT project is currently handled via that
+file, but most output could be customized; and eventually it
+is planned to allow a user to modify <b>all</b> colours that
+way. If you want to change the colours in use then you have
+to modify that .yml file. That file can be found at 
+<b<rbt/yaml/colours/colours.yml</b> - you may have to look 
+at your local ruby installation to find out where that .yml
+file will reside. For instance, on my home system that
+file, once the rbt gem is installed, can be found here:
 
-For example, if you wish to specifically use configure, then you can do this:
+    /home/Programs/Ruby/Current/lib/ruby/site_ruby/3.2.0/rbt/yaml/colours/colours.yml
 
-rbt htop --use-this-build-system=configure
-Or, if you want to use an even shorter variant, the following example is equivalent to the one issued above:
+For most other users it may be in /root/.gem/gems/ or
+in another directory.
 
-rbt htop --use-configure
-Similarly, for cmake or meson, you could use any of the following variants:
+## Specifying which build system to use
 
-rbt htop --use-this-build-system=cmake
-rbt htop --use-this-build-system=meson
-LXQt
-LXQt is a lightweight desktop environment based on Qt. It may be an alternative if KDE5 plasma is too heavy for a given computer system.
+By default, most **.yml** files that are part of the RBT project will
+make use of the **GNU configure** build system - e. g. **configure**,
+**make** and **make install**. You can, on the commandline, determine
+which build system is to be used; and you can also instruct
+**RBT::Action::SoftwareManager** to **use another build system**.
 
-You can compile individual LXQt components, such as in this convenient way, through rbt:
+For example, if you wish to specifically use **configure**, then
+you can do this:
 
-rbt --lxqt1 # ← This refers to "libqtxdg"
-rbt --lxqt2 # ← This refers to "lxqtbuildtools"
-rbt --lxqt3 # ← This refers to "libsysstat"
-rbt --lxqt4 # ← This refers to "liblxqt"
-rbt --lxqt5 # ← This refers to "lxqtabout"
-rbt --lxqt6 # ← This refers to "lxqtadmin"
-rbt --lxqt7 # ← This refers to "lxqtconfig"
-rbt --lxqt8 # ← This refers to "lxqtglobalkeys"
-rbt --lxqt9 # ← This refers to "lxqtl10n"
+    rbt htop --use-this-build-system=configure
+
+Or, if you want to use an even shorter variant, the following example
+is equivalent to the one issued above:
+
+    rbt htop --use-configure
+
+Similarly, for **cmake** or **meson**, you could use any of the
+following variants:
+
+    rbt htop --use-this-build-system=cmake
+    rbt htop --use-this-build-system=meson
+
+## LXQt
+
+**LXQt** is a lightweight desktop environment based on **Qt**. It may
+be an alternative if **KDE5 plasma** is too heavy for a given
+computer system.
+
+You can compile individual **LXQt components**, such as in this 
+convenient way, through **rbt**:
+
+    rbt --lxqt1 # ← This refers to "libqtxdg"
+    rbt --lxqt2 # ← This refers to "lxqtbuildtools"
+    rbt --lxqt3 # ← This refers to "libsysstat"
+    rbt --lxqt4 # ← This refers to "liblxqt"
+    rbt --lxqt5 # ← This refers to "lxqtabout"
+    rbt --lxqt6 # ← This refers to "lxqtadmin"
+    rbt --lxqt7 # ← This refers to "lxqtconfig"
+    rbt --lxqt8 # ← This refers to "lxqtglobalkeys"
+    rbt --lxqt9 # ← This refers to "lxqtl10n"
+
 and so forth.
 
-Of course passing in the name, rather than these numbers, will also work just fine. The number-based input exists purely due to convenience.
+Of course passing in the **name**, rather than these numbers,
+will also work just fine. The number-based input exists
+purely due to convenience.
 
-Examples for the long names corresponding to --lxqt1, --lxqt2, --lxqt3, --lxqt4, would be:
+Examples for the long names corresponding to **--lxqt1**, **--lxqt2**,
+**--lxqt3**, **--lxqt4**, would be:
 
-rbt libqtxdg        # lxqt1
-rbt lxqtbuildtools  # lxqt2
-rbt libsysstat      # lxqt3
-rbt liblxqt         # lxqt4
-(See the content of the file called chained_programs.yml for the complete listing of all LXQt components.)
+    rbt libqtxdg        # lxqt1
+    rbt lxqtbuildtools  # lxqt2
+    rbt libsysstat      # lxqt3
+    rbt liblxqt         # lxqt4
 
-If you wish to compile all LXQt components, in the order specified by the file chained_programs.yml, then you can use this commandline instruction:
+(See the content of the file called **chained_programs.yml** for
+the complete listing of all LXQt components.)
 
-rbt --compile-lxqt
-You can also manually update lxqt via the following top-level API from within ruby:
+If you wish to compile all LXQt components, in the order specified
+by the file **chained_programs.yml**, then you can use this
+commandline instruction:
 
-RBT.update_lxqt
-(But normally this should not be needed, as long as I maintain the cookbooks-dataset, as I will already do so when a new lxqt release is published.)
+    rbt --compile-lxqt
 
-Generate a .html file for several programs
-A .html file can be generated via the method RBT.create_html_page_for_these_programs().
+You can also **manually update lxqt** via the following **top-level API**
+from within ruby:
 
-The input to this method should be an Array listing the programs that you want to view in that .html file. Alternatively, a String that contains these programs separated via a ',' token can also be used.
+    RBT.update_lxqt
+
+(But normally this should not be needed, as long as I maintain the
+**cookbooks-dataset**, as I will already do so when a new lxqt
+release is published.)
+
+## Generate a .html file for several programs
+
+A **.html file** can be generated via the
+method **RBT.create_html_page_for_these_programs()**.
+
+The input to this method should be an Array listing the
+programs that you want to view in that .html file. Alternatively,
+a String that contains these programs separated via a ',' token
+can also be used.
 
 Example:
 
-"php,ruby,elixir,enchant,m4"
-The code that is part of the above method will generate a .html file that shows some information about these programs, in the given input-output order.
+    "php,ruby,elixir,enchant,m4"
+
+The code that is part of the above method will generate a .html file
+that shows some information about these programs, in the given
+input-output order.
 
 Commandline invocation example:
 
-cookbooks --create_html_page_for_these_programs="php,ruby,elixir,enchant,m4"
+    cookbooks --create_html_page_for_these_programs="php,ruby,elixir,enchant,m4"
+
 Why was this functionality added?
 
-Mostly because I needed a way to autogenerate a .html file that contains information about several programs, such as the whole kde5-set of archives. This then generates a .html file with about ~170 kde5-related programs, and can then be uploaded somewhere for other people to have a look at, not unlike the LFS/BLFS project is doing already so.
+Mostly because I needed a way to autogenerate a .html file that contains
+information about several programs, such as the whole kde5-set of archives.
+This then generates a .html file with about ~170 kde5-related programs, and
+can then be uploaded somewhere for other people to have a look at, not
+unlike the LFS/BLFS project is doing already so.
 
-In fact, if you also want to generate a .html file for the whole KDE toolchain, try this:
+In fact, if you also want to generate a .html file for the **whole
+KDE toolchain**, try this:
 
-cookbooks --create_html_page_for_these_programs=:kde5_toolchain
-You can also autogenerate a set of "homepages" for all programs, via class Cookbooks::GenerateHomepage.
+    cookbooks --create_html_page_for_these_programs=:kde5_toolchain
 
-Either invoke the file directly (cookbooks/utility_scripts/generate_homepage/generate_homepage.rb) or simply use this commandline instruction:
+You can also autogenerate a set of "homepages" for all programs,
+via class <b>Cookbooks::GenerateHomepage</b>.
 
-cookbooks --generate-homepage
-This will generate .html files that are somewhat similar to the LFS/BLFS files.
+Either invoke the file directly (cookbooks/utility_scripts/generate_homepage/generate_homepage.rb)
+or simply use this commandline instruction:
 
-RBT::Make
+    cookbooks --generate-homepage
+
+This will generate .html files that are somewhat similar to the LFS/BLFS
+files.
+
+## RBT::Make
+
 RBT::Make is the main class that may be invoked for make-related actions.
 
 It also supports some toplevel methods such as:
 
-RBT::Make.run
-Additionally it can also be used to run "make install" or even "ninja", the alternative build system.
+    RBT::Make.run
 
-This class exists primarily to make it easier to deal with the "make" and "make install" step. Some instructions can be given to make, such as the -j option, and it is simpler to abstract this away through RBT directly, so that we can use it when compiling any program from source.
+Additionally it can also be used to run "make install" or even "ninja",
+the alternative build system.
 
-The IS_ROEBE environment variable
-The IS_ROEBE environment variable is set to 1, aka true, on my home systems. When this variable exists and is set, then RBT will behave slightly different from the default. For example, on my home system I tend to use a hybrid system between the /usr/ hierarchy and AppDirs under /Programs/. Sometimes it is useful to symlink from /Programs/Foobar/1.0.0/lib/* into /usr/lib/. If the IS_ROEBE environment variable is set to 1, then the RBT scripts will, after compilation has completed successfully, symlink into the /usr/lib/ hierarchy.
+This class exists primarily to make it easier to deal with the "make"
+and "make install" step. Some instructions can be given to make,
+such as the -j option, and it is simpler to abstract this away through
+RBT directly, so that we can use it when compiling any program from
+source.
 
-IS_ROEBE to a value of 1).
+## The IS_ROEBE environment variable
 
-Some options for the individual cookbook files explained
+The **IS_ROEBE environment variable** is set to **1**, aka true, on my home
+systems. When this variable exists and is set, then RBT will behave
+slightly different from the default. For example, on my home system
+I tend to use a hybrid system between the **/usr/** hierarchy and
+AppDirs under **/Programs/**. Sometimes it is useful to symlink from
+/Programs/Foobar/1.0.0/lib/* into **/usr/lib/**. If the IS_ROEBE
+environment variable is set to 1, then the RBT scripts will, after
+compilation has completed successfully, symlink into the
+**/usr/lib/** hierarchy.
+
+**IS_ROEBE** to a value of 1).
+
+## Some options for the individual cookbook files explained
+
 This section will explain some entries in a .yml file.
 
-run_configure:
+**run_configure**:
 
-The option option run_configure is set to true by default. If it is set to false, then RBT will NOT attempt to invoke GNU ./configure.
+The option option **run_configure** is set to true by default.
+If it is set to **false**, then RBT will **NOT** attempt to
+invoke GNU ./configure.
 
-This may be useful for programs that you are certain to not have and use any configure script. The man-pages archive at https://www.kernel.org/pub/linux/docs/man-pages/man-pages-4.16.tar.xz is one such an example. It does not use any configure file, so a configure step would fail. (Note that there may be other ways to do the same, but for the time being, run_configure seems simple and effective.)
+This may be useful for programs that you are certain to not
+have and use any **configure script**. The **man-pages** archive
+at **https://www.kernel.org/pub/linux/docs/man-pages/man-pages-4.16.tar.xz**
+is one such an example. It does not use any configure file, so
+a configure step would fail. (Note that there may be other
+ways to do the same, but for the time being, <b>run_configure</b>
+seems simple and effective.)
 
-Xorg
-The Xorg-Server is the main implementation for the graphical Linux system. It is a display server for the X Window System.
+## Xorg
 
-Some helper-code exists in the RBT project to make compiling xorg-related components somewhat easier. One aspect here is that the RBT project has code that will easily allow you to compile all of the xorg-proto programs.
+The Xorg-Server is the main implementation for the graphical Linux
+system. It is a display server for the X Window System. 
+
+Some helper-code exists in the **RBT** project to make compiling
+xorg-related components somewhat easier. One aspect here is that 
+the RBT project has code that will easily allow you to compile
+all of the **xorg-proto** programs.
 
 To invoke that functionality, do:
 
-rbt --compile-all-protos
-Do note that since some time, at about the year 2018 or so, the individual protos have been bundled into the project called xorg-protos.
+    rbt --compile-all-protos
 
-If you want to display all xorg-related entries on the commandline, do:
+Do note that since some time, at about the year 2018 or so, the
+individual protos have been bundled into the project called
+**xorg-protos**.
 
-rbt --tags=xorg
-You can also compile the xorg components in an ordered fashion, by making use of numbers.
+If you want to display all <b>xorg-related entries on the
+commandline</b>, do:
+
+    rbt --tags=xorg
+
+You can also **compile** the xorg components in an **ordered fashion**,
+by making use of numbers.
 
 Examples:
 
-rbt xorg1
-rbt xorg2
-rbt xorg3
-rbt xorg4
+    rbt xorg1
+    rbt xorg2
+    rbt xorg3
+    rbt xorg4
+
 And so forth.
 
 To batch compile most of these components, try:
 
-rbt xorg1..200
-If you wish to compile post-xorg-server components, that is components that ought to be installed after *xorg-server has been compiled/installed, then the following commandline may be used:
+    rbt xorg1..200
 
-rbt --compile-xorg-server-post
-rbt --post-xorg-server
-If you wish to only compile some of the addons, in particular input-addons related to mouse, keyboard, and a few more entries, then you can issue the following command:
+If you wish to compile post-xorg-server components, that is
+components that ought to be installed after **xorg-server*
+has been compiled/installed, then the following commandline
+may be used:
 
-rbt --compile-mouse-and-keyboard
-If you wish to compile all xorg-libraries, also called as the xorg-base, you can issue any of the following commands:
+    rbt --compile-xorg-server-post
+    rbt --post-xorg-server
 
-rbt --compile-xorg-libraries
-rbt --compile-xorg-base
-Gentoo and ebuilds
-Gentoo's portage software makes use of ebuilds.
+If you wish to only compile some of the addons, in particular
+input-addons related to mouse, keyboard, and a few more
+entries, then you can issue the following command:
 
-In theory, RBT can (auto)generate ebuild files but this has not been tested sufficiently - mostly because I myself do not use Gentoo, so someone else has to do the testing.
+    rbt --compile-mouse-and-keyboard
+
+If you wish to compile all xorg-libraries, also called as
+the **xorg-base**, you can issue any of the following commands:
+
+    rbt --compile-xorg-libraries
+    rbt --compile-xorg-base
+      
+## Gentoo and ebuilds
+
+Gentoo's portage software makes use of **ebuilds**.
+
+In theory, **RBT** can (auto)generate ebuild files but this has not been
+tested sufficiently - mostly because I myself do not use Gentoo, so
+someone else has to do the testing.
 
 You can give the current implementation a try though, via:
 
-rbt ruby --create_ebuild_recipe
-rbt php --create_ebuild_recipe
-rbt perl --create_ebuild_recipe
-rbt python --create_ebuild_recipe
+    rbt ruby --create_ebuild_recipe
+    rbt php --create_ebuild_recipe
+    rbt perl --create_ebuild_recipe
+    rbt python --create_ebuild_recipe
+
 And see which parts aren't working well yet.
 
-YAML Engine
-Ruby itself defaults to psych as its main yaml engine.
+## YAML Engine
 
-When the cookbooks project was started (before it was merged into the RBT project), syck was the main yaml engine.
+Ruby itself defaults to **psych** as its **main yaml engine**.
 
-Since as of January 2018, the RBT project will default to psych. If for some reason you prefer syck, then you can use a commandline switch to denote which yaml engine is to be used.
+When the cookbooks project was started (before it was merged
+into the RBT project), **syck** was the main yaml engine.
 
-To enable syck, do:
+Since as of **January 2018**, the RBT project will default to
+**psych**. If for some reason you prefer syck, then you can use a
+commandline switch to denote which yaml engine is to be used.
 
-cookbooks --use-syck
-To enable psych, do:
+To **enable syck**, do:
 
-cookbooks --use-psych
-This will modify the yaml file called use_psych_or_syck.yml.
+    cookbooks --use-syck
 
-Note that in order to use syck, you may have to install the syck gem first, via:
+To **enable psych**, do:
 
-gem install syck
+    cookbooks --use-psych
+
+This will modify the yaml file called **use_psych_or_syck.yml**.
+
+Note that in order to use **syck**, you may have to install
+the **syck gem** first, via:
+
+    gem install syck
+
 If you want to find out which yaml engine is in use, you can do:
 
-RBT.yaml_engine?
-Both engines should work fine. The reason why I kept on using syck for such a long time was mostly because I used to have some german comments in the various yaml files, which had umlauts in non-UTF encoding. I lateron switched to pure english instead, since it is easier for other people, and since that time, psych works just fine for the RBT project.
+    RBT.yaml_engine?
 
-Otherwise I recommend to default to psych as well, as this may make other things simpler to work with (such as working with UTF-8 / Unicode).
+Both engines should work fine. The reason why I kept on using syck for
+such a long time was mostly because I used to have some german comments
+in the various yaml files, which had umlauts in non-UTF encoding. I
+lateron switched to pure english instead, since it is easier for other
+people, and since that time, psych works just fine for the **RBT 
+project**.
 
-Permanently set to another programs directory
-The default programs directory is at /Programs/. Programs will be installed into that directory.
+Otherwise I recommend to default to psych as well, as this may make other
+things simpler to work with (such as working with **UTF-8 / Unicode**).
 
-If you wish to permanently set to another directory you can use this commandline flag:
+## Permanently set to another programs directory
 
-rbt --permanently_set_programs_dir=/pkg
-rbt --use-this-as-programs-dir=/pkg
-pre_configure_steps
-The entry called pre_configure_steps can be used in a cookbook .yml file. It should be an Array.
+The default programs directory is at **/Programs/**. Programs will be
+installed into that directory.
+
+If you wish to permanently set to another directory you can use this
+commandline flag:
+
+    rbt --permanently_set_programs_dir=/pkg
+    rbt --use-this-as-programs-dir=/pkg
+
+## pre_configure_steps
+
+The entry called **pre_configure_steps** can be used in a cookbook
+.yml file. It should be an Array.
 
 The entries listed there will be run one after the other.
 
 A typical example for this may be like this:
 
-- autoreconf -vfi
-A few GNU configure programs require this step, such as hunspell. Have a look at the hunspell.yml file to find out how this is used.
+    - autoreconf -vfi
 
-Using the DESTDIR variable
-This subsection is just an explanation of a feature of a Makefile.
+A few GNU configure programs require this step, such as **hunspell**.
+Have a look at the **hunspell.yml** file to find out how this is
+used.
 
-If you wish to use a specific --prefix value for a Makefile as well then you can use DESTDIR such as in this way:
+## Using the DESTDIR variable
 
-make DESTDIR=/Programs/Bzip2/1.0.7 install
-class RBT::Cookbooks::ReportTheseProgramsCouldBeUpdated
-class RBT::Cookbooks::ReportTheseProgramsCouldBeUpdated has been added in August (06.08.2019). It is assumed to report, on the commandline, all programs that could be updated.
+This subsection is just an explanation of a feature of a **Makefile**.
 
-In order for this to work, the class will have to check several different remote websites.
+If you wish to use a specific --prefix value for a Makefile as well
+then you can use DESTDIR such as in this way:
 
-Currently (August 2019) the class will only check distrowatch.org, but in the future this will most likely be extended, so that we can use this to update programs from the commandline alone.
+    make DESTDIR=/Programs/Bzip2/1.0.7 install
 
-class RBT::SimplifyRootEntries
-This very specialized class will replace all root:root entries in a file, such as a Makefile, with 0:0 entries.
+## class RBT::Cookbooks::ReportTheseProgramsCouldBeUpdated
 
-The reason why this small class was added was primarily because sometimes the host system may be partially broken, and only display 0:0 rather than root. This may happen more frequently in a chrooted environment.
+**class RBT::Cookbooks::ReportTheseProgramsCouldBeUpdated** has been added
+in August (06.08.2019). It is assumed to report, on the commandline, all
+programs that could be updated.
 
-Since I was tired of makefiles then failing due to this reason, I created that class in August 2019.
+In order for this to work, the class will have to check several different
+remote websites.
 
-configure_command_to_use
-This short subsection is to briefly explain the option called configure_command_to_use that is available for individual cookbook .yml files.
+Currently (August 2019) the class will only check distrowatch.org,
+but in the future this will most likely be extended, so that we can
+use this to update programs from the commandline alone.
 
-By default, this command can be omitted, and will then default to ./configure - aka GNU configure. This should cover most programs.
+## class RBT::SimplifyRootEntries
 
-There are some programs that do not use GNU configure, though, in particular cmake-based projects, scons, waf, meson/ninja and so forth. These are handled separately for the most part.
+This very specialized class will replace all root:root entries in a
+file, such as a Makefile, with 0:0 entries.
 
-There are, however had, also programs that use their own custom and unique build system, often defaulting to some shell script. The RBT project thus has to be flexible here and allow for custom shell scripts to be used as well.
+The reason why this small class was added was primarily because sometimes
+the host system may be partially broken, and only display 0:0 rather
+than root. This may happen more frequently in a chrooted environment.
 
-An example for this can be seen in the file discount.yml for the program discount. If you look at that file you can see the following line:
+Since I was tired of makefiles then failing due to this reason, I 
+created that class in August 2019.
 
-configure_command_to_use: ./configure.sh
-It thus specifies that RBT::Action::SoftwareManager will make use of that configure.sh shell scripts rather than the more generic configure invocation run.
+## configure_command_to_use
 
-Some other programs use other configure_command_to_use settings; a recursive grep can find these, should you be interested in that.
+This short subsection is to briefly explain the option called
+**configure_command_to_use** that is available for individual
+cookbook .yml files.
 
-Some commandline options explained
-If you do not want to pick up the configure options from a specific .yml file, you can pass in the option --dont-use-configure-options to avoid doing so.
+By default, this command can be omitted, and will then default
+to **./configure** - aka **GNU configure**. This should cover
+most programs.
+
+There are some programs that do not use GNU configure, though,
+in particular cmake-based projects, scons, waf, meson/ninja
+and so forth. These are handled separately for the most part.
+
+There are, however had, **also** programs that use their
+own custom and unique build system, often defaulting to some
+shell script. The RBT project thus has to be flexible here
+and allow for custom shell scripts to be used as well.
+
+An example for this can be seen in the file **discount.yml**
+for the program **discount**. If you look at that file
+you can see the following line:
+
+    configure_command_to_use: ./configure.sh
+
+It thus specifies that RBT::Action::SoftwareManager will make use of that
+**configure.sh** shell scripts rather than the more generic
+**configure** invocation run.
+
+Some other programs use other configure_command_to_use settings;
+a recursive grep can find these, should you be interested in
+that.
+
+## Some commandline options explained
+
+If you do not want to pick up the **configure options** from
+a specific .yml file, you can pass in the option
+**--dont-use-configure-options** to avoid doing so.
 
 Examples:
 
-rbt htop --dont-use-configure-options
-rbt glib --user-home-prefix --use-meson --no-configure-options
-rbt ruby --do-not-use-any-configure-options
-This allows you to just use the "barebones" compilation mode; may be helpful if you encounter some errors due to the configure options used.
+    rbt htop --dont-use-configure-options
+    rbt glib --user-home-prefix --use-meson --no-configure-options
+    rbt ruby --do-not-use-any-configure-options
 
-Show the last compiled programs
-If you want to, for example, show the last 8 compiled programs, then the following commandline may be useful:
+This allows you to just use the "barebones" compilation mode;
+may be helpful if you encounter some errors due to the 
+configure options used.
 
-rbt --last-compiled=8
-Note that you first have to have compiled some programs, as otherwise nothing, or less than 8 programs, would be shown.
+## Show the last compiled programs
 
-As of October 2019, another way can also be used, if you wish to show all last compiled programs:
+If you want to, for example, show the last 8 compiled programs,
+then the following commandline may be useful:
 
-rbt --last-compilations?
+    rbt --last-compiled=8
+
+Note that you first have to have compiled some programs, as
+otherwise nothing, or less than 8 programs, would be shown.
+
+As of October 2019, another way can also be used, if you wish
+to show all last compiled programs:
+
+    rbt --last-compilations?
+
 To show only the last compiled program, try this:
 
-rbt --last-compiled-program?
-If you want to find out which were the last 20 programs that were compiled, then you can use this commandline option as shown above:
+    rbt --last-compiled-program?
 
-rbt --last-compiled=20
-Speeding up the compilation
-This subsection deals with speeding up the compilation.
+If you want to find out which were the last 20 programs that were
+compiled, then you can use this commandline option as shown
+above:
 
-make itself accepts a commandline option, through -jN, where N is the number of parallel builds to use.
+    rbt --last-compiled=20
+
+## Speeding up the compilation
+
+This subsection deals with <b>speeding up the compilation</b>.
+
+<b>make</b> itself accepts a commandline option, through
+-jN, where N is the number of parallel builds to use.
 
 For example:
 
-make -j4
-would make use of four parallel builds. This should speed up compilation significantly. Do not put any incorrect number there, such as 0 or some crazy huge number. The maximum number should be the maximum amount of processors that you have, which you can find out via this way, on Linux:
+    make -j4
 
-grep -c '^processor' /proc/cpuinfo
-You can also obtain this from RBT itself, on the commandline, via:
+would make use of <b>four parallel builds</b>. This should
+speed up compilation significantly. Do not put any
+incorrect number there, such as **0** or some crazy huge
+number. The **maximum number** should be the maximum amount
+of processors that you have, which you can find out via
+this way, on <b>Linux</b>:
 
-rbt --n-processors?
-Passing the option -j4 to make means to "spawn off 4 parallel compiling processes". There is actually not a limit for the number of job slots that can be used, but as a rule of thumb, one should not exceed more than twice the number of CPU cores that the local computer system has. So if we have 4 processors, we should never use a number higher than 8 to "make -j".
+    grep -c '^processor' /proc/cpuinfo
 
-Whether this is really true or not, I have absolutely no idea. I think the main message here is to not use any arbitrary high number.
+You can also obtain this from RBT itself, on the commandline,
+via:
 
-If you wish to append the default value to make -j, which is the number of processors that the local computer has, then do this, for example:
+    rbt --n-processors?
 
-rbt flac ntrad --speed-up-the-compilation
-rbt ruby --ntrad --speed-up-the-compilation
-The important option here is --speed-up-the-compilation.
+Passing the option **-j4** to make means to "**spawn off 4 parallel
+compiling processes**". There is actually not a limit for the
+number of job slots that can be used, but as **a rule of thumb**,
+one should not exceed more than twice the number of CPU cores
+that the local computer system has. So if we have 4 processors,
+we should never use a number higher than 8 to "make -j".
 
-Note that you can also directly pass this -j option to rbt, such as exemplified through the following usage example:
+Whether this is really true or not, I have absolutely no idea.
+I think the main message here is to not use any arbitrary high
+number.
 
-rbt lame -j5
-This is the same as doing "make -j5", by the way, during the make step.
+If you wish to append the default value to make -j, which is the
+number of processors that the local computer has, then do
+this, for example:
 
-You may also define this in a cookbook file, by adding a parameter called parameters_to_make. Be careful though, since this may not always be what you may want, in particular if you use different computers. An alternative to this may be to use a yaml file, part of rbt, called use_maximum_speed_for_compilation.yml.
+    rbt flac ntrad --speed-up-the-compilation
+    rbt ruby --ntrad --speed-up-the-compilation
 
-(On a sidenote, if you do not wish to use parameters_to_make then you can use --no-parameters-to-make on the commandline to disable them for the current run.)
+The important option here is <b>--speed-up-the-compilation</b>.
+
+Note that you can also directly pass this -j option to rbt,
+such as exemplified through the following **usage example**:
+
+    rbt lame -j5
+
+This is the same as doing "**make -j5**", by the way, during
+the <b>make step</b>.
+
+You may also define this in a cookbook file, by adding a parameter
+called <b>parameters_to_make</b>. Be careful though, since this
+may not always be what you may want, in particular if you use
+different computers. An alternative to this may be to use a
+yaml file, part of rbt, called 
+<b>use_maximum_speed_for_compilation.yml</b>.
+
+(On a sidenote, if you do not wish to use parameters_to_make
+then you can use **--no-parameters-to-make** on the commandline
+to disable them for the current run.)
 
 This can also be disabled for the individual run, via:
 
- --do-not-use-maximum-speed
- --no-auto-speedup
+     --do-not-use-maximum-speed
+     --no-auto-speedup
+
 More complete example how to disable this from the commandline:
 
-rbt lame --do-not-use-maximum-speed
-rbt xvidcore --ntrad --donot-use-maximum-speed
-It seemed important to provide this option on the commandline because the end user may not want to use maximum speed for compilation, or because some other problem exists on the given computer system that requires the end user to avoid this particular setting.
+    rbt lame --do-not-use-maximum-speed
+    rbt xvidcore --ntrad --donot-use-maximum-speed
 
-Installing libstdc++
-If you wish to install libstdc++, according to http://www.linuxfromscratch.org/lfs/view/development/chapter05/gcc-libstdc++.html, then the method called RBT.install_libstdc_plus_plus() may be of help.
+It seemed important to provide this option on the commandline because
+the end user may **not** want to use maximum speed for compilation,
+or because some other problem exists on the given computer system
+that requires the end user to avoid this particular setting.
+
+## Installing libstdc++
+
+If you wish to install libstdc++, according to
+http://www.linuxfromscratch.org/lfs/view/development/chapter05/gcc-libstdc++.html,
+then the method called **RBT.install_libstdc_plus_plus()** may be of
+help.
 
 Usage example in ruby:
 
-require 'rbt/toplevel_methods/install_libstdc_plus_plus.rb'
+    require 'rbt/toplevel_methods/install_libstdc_plus_plus.rb'
 
-RBT.install_libstdc_plus_plus
+    RBT.install_libstdc_plus_plus
+
 Note that you may have to download gcc prior to invoking this method.
 
-In November 2019, this functionality has been extended. It is now possible to actually compile a fake-libstdc++ program into the /Programs/ hierarchy (or wherever you designated your programs directory to reside on your machine).
+In November 2019, this functionality has been extended. It is now
+possible to actually compile a fake-libstdc++ program into the
+**/Programs/** hierarchy (or wherever you designated your programs
+directory to reside on your machine).
 
-A compile-profile has been created for libstdc++, which resides in the file called libstdc++.md, as part of the RBT project.
+A compile-profile has been created for libstdc++, which resides in
+the file called **libstdc++.md**, as part of the **RBT project**.
 
 Libstdc++ can be compiled into the programs directory, such as:
 
-/home/Programs/Libstdc++/9.2.0
-It can be kept separate from e. g. /home/Programs/Gcc/9.2.0.
+    /home/Programs/Libstdc++/9.2.0
 
-Presently the path for libstdc++ is mostly hardcoded; reason being that it is simpler here, and my use case is only to get it up and running quickly, anyway.
+It can be kept separate from e. g. **/home/Programs/Gcc/9.2.0**.
+
+Presently the path for libstdc++ is mostly hardcoded; reason
+being that it is simpler here, and my use case is only to get
+it up and running quickly, anyway. 
 
 Invocation examples:
 
-rbt --compile-libstdc
-rbt --compile-libstdc++
-rbt --install-libstdc
-rbt --install-libstdc++
-class RBT::ShowDescriptionAndExtraInformation
-class RBT::ShowDescriptionAndExtraInformation is just a little helper class for commandline-use. It can be used to quickly show the description, and the extra_information entry from a cookbooks .yml file.
+    rbt --compile-libstdc
+    rbt --compile-libstdc++
+    rbt --install-libstdc
+    rbt --install-libstdc++
 
-It also uses colours, which was one major reason why I wrote it - sometimes you need to quickly get some helpful information when you compile something; and this class achieves precisely that. (Keep in mind that the extra_information entry has been added for precisely that goal: to show useful additional information about a program, or how to get that program to compile.)
+# class RBT::ShowDescriptionAndExtraInformation
 
-Comments about GCC, the GNU Compiler Suite
-This subsection is mostly just for commenting on random parts of GCC. Evidently GCC is quite critical on a Linux system, together with glibc (or musl), and the binutils.
+**class RBT::ShowDescriptionAndExtraInformation** is just a little
+helper class for commandline-use. It can be used to quickly show
+the description, and the extra_information entry from a cookbooks
+.yml file.
 
-One question that people may have is: which configure settings should I use for GCC? The following subsection will explain some of these; and serve as a mnemonic.
+It also uses colours, which was one major reason why I wrote it -
+sometimes you need to quickly get some helpful information when
+you compile something; and this class achieves precisely that.
+(Keep in mind that the extra_information entry has been added
+for precisely that goal: to show useful additional information
+about a program, or how to get that program to compile.)
+
+## Comments about GCC, the GNU Compiler Suite
+
+This subsection is mostly just for commenting on random parts of
+GCC. Evidently GCC is quite critical on a Linux system, together
+with glibc (or musl), and the binutils.
+
+One question that people may have is: which configure settings 
+should I use for GCC? The following subsection will explain some
+of these; and serve as a mnemonic.
 
 For GCC 8.1.0 I would typically use this configure line:
 
-../configure --prefix=/Programs/Gcc/8.1.0 --enable-languages=c,c++,lto,objc,fortran --enable-shared --disable-static --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux --disable-libunwind-exceptions --enable-bootstrap --enable-linker-build-id
-Not all of these seem to be required, but evidently --enable-languages= is very important.
+    ../configure --prefix=/Programs/Gcc/8.1.0 --enable-languages=c,c++,lto,objc,fortran --enable-shared --disable-static --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux --disable-libunwind-exceptions --enable-bootstrap --enable-linker-build-id
 
-Flexbox
-Until November 2019, the RBT project had class RBT::Infobox. This was moved into the AsciiParadise project in November 2019, and renamed to Flexbox.
+Not all of these seem to be required, but evidently --enable-languages=
+is very important.
 
-Let's next have a look how the new Flexbox looks, on the commandline:
+## Flexbox
 
+Until November 2019, the RBT project had <b>class RBT::Infobox</b>. This
+was moved into the <b>AsciiParadise project</b> in November 2019, and
+renamed to <b>Flexbox</b>.
 
+Let's next have a look how the new Flexbox looks, on the
+<b>commandline</b>:
 
-(Ignore the colour bug in the middle; this may be fixed at a later time. It's just a cosmetic issue, not a functional regression.)
+<img src="https://i.imgur.com/NwC33Gu.png" style="margin: 1em">
 
-The Flexbox can show some information about the program that is to be compiled/installed next - or a program that you may wish to install. It is thus only a visual aid, through colours, and Unicode symbols, on the commandline.
+(Ignore the colour bug in the middle; this may be fixed at a later
+time. It's just a cosmetic issue, not a functional regression.)
 
-For this to work, the program has to be registered prior, as part of the RBT project.
+The **Flexbox** can show some information about the program that is to
+be compiled/installed next - or a program that you may wish to install.
+It is thus only a **visual aid**, through colours, and <b>Unicode
+symbols</b>, on the commandline.
 
-You can specifically tell RBT to only show the Flebox, by making use of the commandline flag called --show-flexbox-only.
+For this to work, the program has to be **registered** prior, as
+part of the <b>RBT project</b>.
+
+You can specifically tell RBT to only show the Flebox, by making use of
+the commandline flag called **--show-flexbox-only**.
 
 Usage examples for this:
 
-rbt ruby --show-flexbox-only
-rbt python --show-flexbox-only
-rbt php --show-flexbox-only
-If you do not wish to see this flexbox (as infobox) during compilation, you can also disable it for the current compilation/installation run, via a commandline flag such as --no-flexbox:
+    rbt ruby --show-flexbox-only
+    rbt python --show-flexbox-only
+    rbt php --show-flexbox-only
 
-rbt ruby --no-flexbox
-rbt python --no-flexbox
-rbt php --no-flexbox
-rbt sed --no-flexbox
-You can also use the flexbox directly, through bin/flexbox if you have the AsciiParadise installed, such as in:
+If you do not wish to see this flexbox (as infobox) during compilation,
+you can also **disable** it for the current compilation/installation
+run, via a commandline flag such as **--no-flexbox**:
 
-flexbox ruby
-flexbox php
-flexbox sed
-Note that this may show slightly different results, as the variant that makes use of rbt will also honour specific configuration settings, whereas the flexbox variant will only try to make use of the dataset stored in the respective .yml file. So if you would like the information displayed to be more accurate, you should use the longer variant with rbt; if you just need some general information then flexbox should do just fine.
+    rbt ruby --no-flexbox
+    rbt python --no-flexbox
+    rbt php --no-flexbox
+    rbt sed --no-flexbox
 
-Since as of May 2019 the flexbox will also show which compiler will be used. Normally this will be GCC, but clang may also be an option here; this information serves to be indicative of that.
+You can also use the flexbox directly, through **bin/flexbox**
+if you have the AsciiParadise installed, such as in:
 
-Since as of June 2019 the Flexbox will try to use Unicode symbols on the commandline, for the outside box. This should look better than using === and | (ASCII characters). Do note that this is work-in-progress and may be subject change until it is consolidated.
+    flexbox ruby
+    flexbox php
+    flexbox sed
 
-Status of the RBT project
-The RBT project is currently (November 2019) in a slighty advanced testing stage, somewhat "semi-complete". Or at the least, "sufficiently useful" for my use cases. Presently (in November 2019) I am working through the existing dataset and clean it up mostly, improving on it.
+Note that this may show slightly different results, as the variant
+that makes use of **rbt** will also honour specific configuration
+settings, whereas the **flexbox** variant will only try to make
+use of the dataset stored in the respective .yml file. So if you
+would like the information displayed to be more accurate, you should
+use the longer variant with **rbt**; if you just need some general
+information then **flexbox <name>** should do just fine. 
 
-Nonetheless I do not recommend anyone to use this project as of yet, but fearless testers could test it and it may even work to some extent.
+Since as of **May 2019** the flexbox will also show **which compiler**
+will be used. Normally this will be **GCC**, but clang may also be
+an option here; this information serves to be indicative of that.
 
-Please be wary when using the RBT project for the time being, as there may be some bugs, but also behaviour that may be surprising to you. The project is not yet on the same level as e. g. homebrew - things will be "cleaned up" more rigorously at a later stage.
+Since as of **June 2019** the Flexbox will try to use Unicode symbols
+on the commandline, for the outside box. This should look better than
+using === and | (ASCII characters). Do note that this is work-in-progress
+and may be subject change until it is consolidated.
 
-The RBT project makes certain assumptions, a certain layout of the filesystem, and so forth. While this can be tweaked by the user, for the time being, it is best to just follow these assumptions for now.
+## Status of the RBT project
 
-Currently compiling programs
+The RBT project is currently (**November 2019**) in a slighty advanced
+testing stage, somewhat "semi-complete". Or at the least, "sufficiently
+useful" for my use cases. Presently (in November 2019) I am working
+through the existing dataset and clean it up mostly, improving on it.
+
+**Nonetheless I do not recommend anyone to use this project as of yet,
+but fearless testers could test it and it may even work to some
+extent**.
+
+Please **be wary** when using the RBT project for the time being,
+as there may be some bugs, but also behaviour that may be
+surprising to you. The project is not yet on the same level as
+e. g. **homebrew** - things will be "cleaned up" more rigorously
+at a later stage.
+
+The RBT project makes **certain assumptions**, a certain layout
+of the filesystem, and so forth. While this can be tweaked by
+the user, for the time being, it is best to just follow these
+assumptions for now. 
+
+## Currently compiling programs
+
 You can query which program(s) are currently compiled by issuing:
 
-rbt currently_compiled?
-Show all statically compiled programs on the given computer system
-If you need to show all statically compiled programs on the given computer system then the following may be of help:
+    rbt currently_compiled?
 
-rbt --static-overview?
-Note that the checks used here are not perfect, so expect some false positives. But for a quick overview this should do fine. The class was added in November 2019 to the rbt project.
+## Show all statically compiled programs on the given computer system
 
-Registering errors during compilation/installation
-Some problems and errors may happen during compilation or installation of programs.
+If you need to show all statically compiled programs on the given
+computer system then the following may be of help:
 
-These are handled internally by RBT::Action::SoftwareManager, but they will also be registered in a module-method onto the RBT Namespace.
+    rbt --static-overview?
+
+Note that the checks used here are not perfect, so expect some
+false positives. But for a quick overview this should do fine.
+The class was added in November 2019 to the rbt project.
+
+## Registering errors during compilation/installation
+
+Some problems and errors may happen during compilation or
+installation of programs.
+
+These are handled internally by RBT::Action::SoftwareManager, but they will
+also be registered in a module-method onto the RBT Namespace.
 
 It is available via the following code:
 
-RBT.error_message?
-Note that this will be reset to nil, its default value, whenever a new program is compiled.
+    RBT.error_message?
 
-Sometimes it is not wanted to stop on errors, in particular if the error reported is not a real error. Thus, the user needs to have a way to overrule this behaviour, which can be done by the following commandline flag:
+Note that this will be reset to nil, its **default value**,
+whenever a new program is compiled.
 
-rbt --dont-stop-on-errors
-rbt --ignore-errors
-This would instruct RBT::Action::SoftwareManager to not stop on errors and instead (try to) continue.
+Sometimes it is not wanted to stop on errors, in particular
+if the error reported is not a real error. Thus, the user
+needs to have a way to overrule this behaviour, which can
+be done by the following commandline flag:
 
-Pre-install actions
-Pre-install actions are actions taken before RBT::Action::SoftwareManager will invoke the configure script, or cmake invokation.
+    rbt --dont-stop-on-errors
+    rbt --ignore-errors
 
-Typically the pre-install action(s) may involve calling a shell script, such as bootstrap, but certain sed-operations may also have to occur.
+This would instruct **RBT::Action::SoftwareManager** to **not** stop on
+errors and instead (try to) continue.
 
-You can pass in which particular pre-install action should be done, via:
+## Pre-install actions
 
-rbt htop --preinstall="sh bootstrap"
-rbt htop --prerun="sh bootstrap"
+<b>Pre-install actions</b> are actions taken before **RBT::Action::SoftwareManager**
+will invoke the configure script, or cmake invokation.
 
-rbt htop --preinstall="sh bootstrap, clear"
-rbt htop --prerun="sh bootstrap; clear"
-As can be seen above, you can separate multiple arguments via either ',' or ';'.
+Typically the pre-install action(s) may involve calling a shell
+script, such as **bootstrap**, but certain sed-operations may
+also have to occur.
 
-Additionally, you can use ruby classes in the preinstall setting, such as:
+You can pass in which particular pre-install action should be
+done, via:
 
-preinstall:
-- ChangeLib64ToLib.new
-In the cookbook file gcc.yml. This will call the respective class and invoke it (the class has to exist of course).
+    rbt htop --preinstall="sh bootstrap"
+    rbt htop --prerun="sh bootstrap"
 
-The reason why the support for .new was added here was because I was tired of the shell scripts used in the LFS/BLFS scripts.
+    rbt htop --preinstall="sh bootstrap, clear"
+    rbt htop --prerun="sh bootstrap; clear"
 
-The classes-approach leads to somewhat more lines of code, but they are easier to read and understand, in my opinion, and they will properly inform the user as to what is done.
+As can be seen above, you can separate multiple arguments via
+either ',' or ';'.
 
-class RBT::MapThisInputToThatRegisteredProgram
-class RBT::MapThisInputToThatRegisteredProgram was added shortly after class RBT::QueryFileAssociation was written.
+Additionally, you can use ruby classes in the preinstall setting,
+such as:
 
-The core idea for class RBT::MapThisInputToThatRegisteredProgram is to translate (user) input into a registered program.
+    preinstall:
+    - ChangeLib64ToLib.new
+
+In the cookbook file **gcc.yml**. This will call the respective
+class and invoke it (the class has to exist of course).
+
+The reason why the support for .new was added here was because
+I was tired of the shell scripts used in the LFS/BLFS scripts.
+
+The classes-approach leads to somewhat more lines of code, but
+they are easier to read and understand, in my opinion, and they
+will properly inform the user as to what is done.
+
+## class RBT::MapThisInputToThatRegisteredProgram
+
+class **RBT::MapThisInputToThatRegisteredProgram** was added
+shortly after class **RBT::QueryFileAssociation** was written.
+
+The core idea for class **RBT::MapThisInputToThatRegisteredProgram**
+is to translate (user) input into a registered program.
 
 So for example:
 
-x11 → libx11
-hto → htop
-udev.h → eudev
-Thus, the idea is to get any input, partial or complete, and find the corresponding program. In the above example, the header file udev.h is part of the program called eudev.
+    x11 → libx11
+    hto → htop
+    udev.h → eudev
 
-The idea here is to remain flexible when it comes to user input. The user would like to compile and install something? Then a partial input should work just fine.
+Thus, the idea is to get any input, partial or complete, and find
+the corresponding program. In the above example, the header
+file **udev.h** is part of the program called **eudev**.
 
-Do note that this is NOT perfect. If in doubt, always input the full program name, as-is, because the class will have to make certain decisions. For example, some .h header files have the same name across different programs, yet class RBT::MapThisInputToThatRegisteredProgram will only pick one of them (always the .first one found in the Array).
+The idea here is to remain flexible when it comes to user
+input. The user would like to compile and install something?
+Then a partial input should work just fine.
 
-That behaviour may also be subject to change in the future, so if in doubt, again - rely mostly on the real name. But if you forgot the name and don't want to look up or can not look up, you can try to leverage class RBT::MapThisInputToThatRegisteredProgram.
+Do note that this is NOT perfect. If in doubt, always input
+the **full program name**, as-is, because the class will
+have to make certain decisions. For example, some .h header
+files have the same name across different programs, yet
+class **RBT::MapThisInputToThatRegisteredProgram** will only
+pick one of them (always the .first one found in the Array).
 
-class RBT::Action::SoftwareManager also makes use of that class if the input is not a registered program.
+That behaviour may also be subject to change in the future,
+so if in doubt, again - rely mostly on the real name. But
+if you forgot the name and don't want to look up or can
+not look up, you can try to leverage class 
+**RBT::MapThisInputToThatRegisteredProgram**.
 
-Configure profiles / decorators
-This subsection is about configure profiles, also called decorators within the context of the RBT project.
+class **RBT::Action::SoftwareManager** also makes use of that class if the
+input is not a registered program.
 
-These profiles (or decorators) allow you to use different configure "profiles", depending on the given context. For example, if you wish to build a LFS system from scratch then the configure option that you may want to use will be different for regular compilation of GCC.
+## Configure profiles / decorators
 
-Thus, a profile exists called gcc_lfs_pass1.md. This file contains the configure options that are normally used for the LFS build, excluding the --prefix switch (because you will still be able to decide which prefix is to be used here, on your own).
+This subsection is about **configure profiles**, also called **decorators**
+within the context of the **RBT project**.
 
-This functionality has been added to the RBT project in June 2019 and is still experimental - use it with care, if you decide to use it at all.
+These **profiles** (or decorators) allow you to use different configure
+"profiles", depending on the given context. For example, if you wish to
+build a LFS system from scratch then the configure option that you may
+want to use will be different for regular compilation of **GCC**.
+
+Thus, a profile exists called **gcc_lfs_pass1.md**. This file contains
+the configure options that are normally used for the LFS build,
+excluding the **--prefix** switch (because you will still be able to
+decide which prefix is to be used here, on your own).
+
+This functionality has been added to the RBT project in **June 2019** and
+is still experimental - use it with care, if you decide to use it at all.
 
 Specific examples follow next.
 
-First, to display an overview of the available profiles, you can issue any of the following commands:
+First, to display an overview of the available profiles, you can issue
+any of the following commands:
 
-rbt --available-profiles
-rbt --profiles?
-In order to use the profile for GCC first pass, as described in the LFS project, use a commandline switch as the following:
+    rbt --available-profiles
+    rbt --profiles?
+    
+In order to use the profile for **GCC first pass**, as described in the
+**LFS project**, use a commandline switch as the following:
 
-rbt gcc --profile=gcc_lfs_pass1
-If you want to compile a minimal GCC, into its versioned AppDir prefix, then you can use the following call:
+    rbt gcc --profile=gcc_lfs_pass1
 
-rbt gcc --profile=gcc-minimal --ntrad
+If you want to compile a minimal GCC, into its versioned AppDir prefix,
+then you can use the following call:
+
+    rbt gcc --profile=gcc-minimal --ntrad
+
 You can also use a slightly more explicit variant:
 
-rbt qt --use-profile=qt
-rbt qt --use-profile=qt --trad
-For some profiles you can also use a shorter variant, such as --basic-gcc for --profile=gcc-minimal:
+    rbt qt --use-profile=qt
+    rbt qt --use-profile=qt --trad
 
-rbt gcc trad --basic-gcc
-In order to see individual profiles based on the program name at hand, such as gcc, you can use this sub-query search:
+For some profiles you can also use a shorter variant, such as 
+**--basic-gcc** for --profile=gcc-minimal:
 
-rbt --show-this-profile=gcc
-rbt --show-these-profiles=gcc
-rbt --profiles-of?=gcc
-Note that in order to display such a profile, it has to exist. If it does not exist for the given program at hand then RBT will notify the user about this fact.
+    rbt gcc trad --basic-gcc
 
-Validating the cookbook recipes and validation within the RBT project as a whole
+In order to see individual profiles based on the program name
+at hand, such as **gcc**, you can use this sub-query search:
+
+    rbt --show-this-profile=gcc
+    rbt --show-these-profiles=gcc
+    rbt --profiles-of?=gcc
+
+Note that in order to display such a profile, it has to exist. If
+it does not exist for the given program at hand then **RBT** will
+notify the user about this fact.
+
+## Validating the cookbook recipes and validation within the RBT project as a whole
+
 You can invoke, from the commandline, the following:
 
-rbt --validate-entries
+    rbt --validate-entries
+
 This will validate the dataset stored in the various .yml files.
 
-It will run the test-code in the validation/ subdirectory.
+It will run the test-code in the **validation/** subdirectory.
 
-This is not so useful for casual users of the RBT project, though, but more interesting for people who may want to contribute recipes and such. That way they can ensure that the recipe that they have created is valid.
+This is not so useful for casual users of the RBT project, though, but
+more interesting for people who may want to contribute recipes and
+such. That way they can ensure that the recipe that they have created
+is valid.
 
-If you wish to validate all cookbook entries then you use the following class:
+If you wish to **validate all cookbook entries** then you use the
+following class:
 
-RBT::Cookbooks::ValidateAllCookbookEntries.new
-This class can validate all cookbook-entries. It will analyse them in detail and report the findings on the commandline.
+    RBT::Cookbooks::ValidateAllCookbookEntries.new
+    
+This class can validate all cookbook-entries. It will analyse them
+in detail and report the findings on the commandline.
 
-Again - this is not so useful for the average user, but it helps me respectively anyone else maintaining the code and cookbook recipes if we seek to maintain a correct, and consistent, dataset.
+Again - this is not so useful for the average user, but it helps
+me respectively anyone else maintaining the code and cookbook
+recipes if we seek to maintain a correct, and consistent,
+dataset.
 
-CreateAppDirSkeleton (RBT::CreateAppDirSkeleton)
-The class RBT::CreateAppDirSkeleton, residing at rbt/create_app_dir_skeleton/create_app_dir_skeleton.rb, prepares a program for installation under the /Programs/ hierarchy.
+## CreateAppDirSkeleton (RBT::CreateAppDirSkeleton)
 
-Keep in mind that the target at /Programs/ can be changed by the user - so the rest of this paragraph should be kept in this context. The main programs directory could be /opt/ or /pkg/ or any other target too.
+The class <b>RBT::CreateAppDirSkeleton</b>, residing at 
+<b>rbt/create_app_dir_skeleton/create_app_dir_skeleton.rb</b>, prepares
+a program for installation under the <b>/Programs/</b> hierarchy.
 
-The behaviour by class RBT::CreateAppDirSkeleton is loosely modelled after the GoboLinux PrepareProgram script. Differences exist mostly in regards to the usage pattern and scope between these two programs; and what is reported to the user.
+Keep in mind that the target at <b>/Programs/</b> can be changed by
+the user - so the rest of this paragraph should be kept in this
+context. The main programs directory could be **/opt/** or 
+**/pkg/** or any other target too.
 
-Here is a link to the GoboLinux program called PrepareProgram:
+The behaviour by class <b>RBT::CreateAppDirSkeleton</b> is loosely
+modelled after the GoboLinux <b>PrepareProgram</b> script.
+Differences exist mostly in regards to the usage pattern and
+scope between these two programs; and what is reported to the
+user.
 
-https://github.com/gobolinux/Documentation/wiki/PrepareProgram
-In order to remain somewhat compatible to the GoboLinux PrepareProgram script, options such as the following will work just fine:
+Here is a link to the **GoboLinux program** called PrepareProgram:
 
-create_program --tree Foo 1.0
-(Here we assume that create_program is an alias to the file rbt/bin/create_app_dir_skeleton).
+    https://github.com/gobolinux/Documentation/wiki/PrepareProgram
 
-The much simpler variant would be to do either one of the following instead, as far as the RBT project is concerned:
+In order to remain somewhat compatible to the **GoboLinux PrepareProgram**
+script, options such as the following will work just fine:
 
-create_program Foo 1.0
-create_program Foo-1.0
-create_program foo-1.0
-I personally prefer the last variant, since it is the simplest one for me to remember - but use whichever variant you prefer. The last one is simple for me because I can sort of copy/paste the directory structure through just one argument, to that class.
+    create_program --tree Foo 1.0
 
-You can also use this from the commandline, if you would like to do so, via rbt like in the following examples:
+(Here we assume that <b>create_program</b> is an alias to the file 
+<b>rbt/bin/create_app_dir_skeleton</b>).
 
-rbt --create-program=foo-1.0
-rbt --create-program=php-7.4.3
-rbt --create-program=python-3.3.3
-Do take note that CreateAppDirSkeleton may be called from some RBT scripts, in particular RBT::Action::SoftwareManager. Some directories will not see that their default symlink (called Current) is removed, such as gcc or binutils, as otherwise subsequent compilation runs would not work to the Current not being set properly.
+The much simpler variant would be to do either one of the following
+instead, as far as the <b>RBT project</b> is concerned:
+
+    create_program Foo 1.0
+    create_program Foo-1.0
+    create_program foo-1.0
+
+I personally prefer the <b>last variant</b>, since it is the simplest
+one for me to remember - but use whichever variant you prefer. The
+last one is simple for me because I can sort of copy/paste the 
+directory structure through just one argument, to that class.
+
+You can also use this from the commandline, if you would like to
+do so, via <b>rbt</b> like in the following examples:
+
+    rbt --create-program=foo-1.0
+    rbt --create-program=php-7.4.3
+    rbt --create-program=python-3.3.3
+
+Do take note that CreateAppDirSkeleton may be called from some RBT scripts,
+in particular **RBT::Action::SoftwareManager**. Some directories will not see that
+their default symlink (called **Current**) is removed, such as gcc or
+binutils, as otherwise subsequent compilation runs would not work
+to the **Current** not being set properly.
 
 You can also use the current working directory as input.
 
-For example, say that you are in a directory called yelp-3.30.2/.
+For example, say that you are in a directory called **yelp-3.30.2/**.
 
-If you wish to make use of that directory, as the input, as if you would have passed the above as String into RBT::CreateAppDirSkeleton.new(), you can use either of the following two variants:
+If you wish to make use of that directory, as the input, as if you
+would have passed the above as String into RBT::CreateAppDirSkeleton.new(),
+you can use either of the following two variants:
 
-rbt --create-program
-rbt --rcp
-Compile statistics
-This subsection shows just a few random programs that were compiled in December 2019, to show how long it took my main computer to compile them. This machine is a fairly cheap one (x86_64, AMD A8-7600 Radeon R7, 10 Compute Cores 4C+6G, 4 CPU cores, RAM (max): 14954 MB) but it is quite fast considering its low cost. For faster machines you will obviously see better results.
+    rbt --create-program
+    rbt --rcp
 
---------------------------------------------------------------------------------
-Name of the program         Compile time in seconds Compile time in minutes File size of the archive
---------------------------------------------------------------------------------
- python:                          316.62 seconds  (5.28 minutes)   17836412 Kb
- rhythmbox:                       248.61 seconds  (4.14 minutes)    6410600 Kb
- ruby:                            203.06 seconds  (3.38 minutes)   11553580 Kb
- mesa:                            128.94 seconds  (2.15 minutes)   11460812 Kb
- postgresql:                       72.63 seconds  (1.21 minutes)   16050068 Kb
- php:                              60.81 seconds  (1.01 minutes)   10232208 Kb
- libogg:                           22.09 seconds  (0.37 minutes)     428696 Kb
- esound:                           20.51 seconds  (0.34 minutes)     327352 Kb
- geoclue:                          19.62 seconds  (0.33 minutes)      86376 Kb
- ncftp:                            18.14 seconds  (0.30 minutes)     420760 Kb
- audiofile:                        16.15 seconds  (0.27 minutes)     530760 Kb
- madplay:                          14.76 seconds  (0.25 minutes)     364040 Kb
-class RBT::SystemCompilePossibilities
-class RBT::SystemCompilePossibilities is on my todo list. It essentially attempts to inform the user of the compile-possibilities of the given system at hand; and will also compile "missing" or outdated programs, optionally. So it works as some sort of information and auto-compile tool.
+## Compile statistics
 
-It is presently (middle of May 2018) in a very early beta stage.
+This subsection shows just a few random programs that were compiled in
+December 2019, to show how long it took my main computer to compile
+them. This machine is a fairly cheap one (x86_64, AMD A8-7600 Radeon R7,
+10 Compute Cores 4C+6G, 4 CPU cores, RAM (max):  14954 MB) but it is
+quite fast considering its low cost. For faster machines you will
+obviously see better results.
 
-Do not consider it to be complete as of yet - I will have to test it extensively yet. The idea is to use this as a basis for an "automatic linux from scratch" system - or to complement the latter.
+    --------------------------------------------------------------------------------
+    Name of the program         Compile time in seconds Compile time in minutes File size of the archive
+    --------------------------------------------------------------------------------
+     python:                          316.62 seconds  (5.28 minutes)   17836412 Kb
+     rhythmbox:                       248.61 seconds  (4.14 minutes)    6410600 Kb
+     ruby:                            203.06 seconds  (3.38 minutes)   11553580 Kb
+     mesa:                            128.94 seconds  (2.15 minutes)   11460812 Kb
+     postgresql:                       72.63 seconds  (1.21 minutes)   16050068 Kb
+     php:                              60.81 seconds  (1.01 minutes)   10232208 Kb
+     libogg:                           22.09 seconds  (0.37 minutes)     428696 Kb
+     esound:                           20.51 seconds  (0.34 minutes)     327352 Kb
+     geoclue:                          19.62 seconds  (0.33 minutes)      86376 Kb
+     ncftp:                            18.14 seconds  (0.30 minutes)     420760 Kb
+     audiofile:                        16.15 seconds  (0.27 minutes)     530760 Kb
+     madplay:                          14.76 seconds  (0.25 minutes)     364040 Kb
 
-class RBT::PurgeIncorrectYamlDirectoriesInTheProgramsHierarchy
-class RBT::PurgeIncorrectYamlDirectoriesInTheProgramsHierarchy can be used to purge incorrect yaml/ directories on the system, under the Programs hierarchy (/home/Programs/ on my system).
+## class RBT::SystemCompilePossibilities
+
+**class RBT::SystemCompilePossibilities** is on my todo list. It 
+essentially attempts to inform the user of the compile-possibilities
+of the given system at hand; and will also compile "missing"
+or outdated programs, optionally. So it works as some sort of
+information and auto-compile tool.
+
+It is presently (middle of **May 2018**) in a very early beta stage.
+
+Do not consider it to be complete as of yet - I will have to test
+it extensively yet. The idea is to use this as a basis for
+an "automatic linux from scratch" system - or to complement
+the latter.
+
+
+
+## class RBT::PurgeIncorrectYamlDirectoriesInTheProgramsHierarchy
+
+class **RBT::PurgeIncorrectYamlDirectoriesInTheProgramsHierarchy** can
+be used to purge incorrect yaml/ directories on the system, under the
+Programs hierarchy (**/home/Programs/** on my system).
 
 To invoke this from the commandline, try either of the following:
 
-rbt --purge-incorrect-yaml-directories-in-the-programs-hierarchy
-rbt --purge-flawed-yaml-directories-in-the-programs-hierarchy
-Do note that this class is largely unnecessary these days - it was created as a quick ad-hoc solution, to work around the buggy behaviour of another class, until that class was fixed.
+    rbt --purge-incorrect-yaml-directories-in-the-programs-hierarchy
+    rbt --purge-flawed-yaml-directories-in-the-programs-hierarchy
 
-class RBT::CreatePkgconfigFile
+Do note that this class is largely unnecessary these days - it was
+created as a quick ad-hoc solution, to work around the buggy
+behaviour of another class, until that class was fixed.
+
+## class RBT::CreatePkgconfigFile
+
 class RBT::CreatePkgconfigFile was added in December 2019.
 
-The idea is to be able to generate, on an ad-hoc basis, .pc files (pkgconfig-files).
+The idea is to be able to generate, on an ad-hoc basis, .pc
+files (pkgconfig-files).
 
-We can tap into the already available existing dataset of the RBT project, so autogenerating the .pc files is trivial - and sometimes necessary, for programs that do not come with their own .pc files.
+We can tap into the already available existing dataset of the
+**RBT project**, so autogenerating the .pc files is trivial -
+and sometimes necessary, for programs that do not come with
+their own .pc files.
 
-On my home system, from the commandline, I tend to invoke this like so:
+On my home system, from the commandline, I tend to invoke this
+like so:
 
-create_pkgconfig :htop
-This means that RBT::Action::SoftwareManager will be used internally, and then generate the file htop.pc. (In this case create_pkgconfig is an alias to bin/create_pkgconfig_file).
+    create_pkgconfig :htop
 
-More commandline examples including a brief tutorial
-This subsection includes different commandline examples, to see how the RBT project can be used. A short explanation will be given for each invocation.
+This means that RBT::Action::SoftwareManager will be used internally, and then
+generate the file **htop.pc**. (In this case create_pkgconfig
+is an alias to **bin/create_pkgconfig_file**).
 
-You can compile a program based on a .pc (pkg-config file) as an input.
+## More commandline examples including a brief tutorial
+
+This subsection includes different commandline examples, to
+see how the RBT project can be used. A short explanation will
+be given for each invocation.
+
+You can compile a program based on a .pc (pkg-config file)
+as an input.
 
 Example:
 
-rbt xau.pc # ← This is equivalent to "ry libxau"
-rbt xscrnsaver.pc --ntrad # ← This will substitute for "libxscrnsaver". You can use .pc files as input arguments.
-You can also compile through registered .h header files such as shown in the following example:
+    rbt xau.pc # ← This is equivalent to "ry libxau"
+    rbt xscrnsaver.pc --ntrad # ← This will substitute for "libxscrnsaver". You can use .pc files as input arguments.
 
-rbt  SMlib.h --ntrad
-If you wish to see a brief introduction on the commandline, issue the following command:
+You can also compile through registered .h header files such 
+as shown in the following example:
 
-cookbooks --tutorial
-This tutorial is really just very short though, and not always up-to-date - the other, more verbose, and lengthy documentation that can be found in this file (README.md) may be sufficiently more useful to users of the RBT project.
+    rbt  SMlib.h --ntrad
 
-Using a different set of configure-options
-Sometimes you may want to overrule, on the commandline, the configure options that are to be used by a program.
+If you wish to see a **brief introduction on the commandline**,
+issue the following command:
 
-You can do so via the switch --use-these-configure-options=.
+    cookbooks --tutorial
+
+This tutorial is really just very short though, and not
+always up-to-date - the other, more verbose, and lengthy
+documentation that can be found in this file (README.md)
+may be sufficiently more useful to users of the **RBT
+project**.
+
+## Using a different set of configure-options
+
+Sometimes you may want to overrule, on the commandline, the configure
+options that are to be used by a program.
+
+You can do so via the switch **--use-these-configure-options=**.
 
 Usage examples:
 
---use-these-configure-options="--enable-shared --enable-bootstrap --enable-languages=c,c++,lto,objc,fortran --enable-threads=posix --enable-checking=release --enable-objc-gc --with-system-zlib --enable-libstdcxx-dual-abi --with-default-libstdcxx-abi=gcc4-compatible --disable-libunwind-exceptions --enable-__cxa_atexit --enable-libssp --enable-lto --disable-install-libiberty --with-gnu-ld --verbose --with-arch-directory=amd64 --disable-gtktest --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux"
+    --use-these-configure-options="--enable-shared --enable-bootstrap --enable-languages=c,c++,lto,objc,fortran --enable-threads=posix --enable-checking=release --enable-objc-gc --with-system-zlib --enable-libstdcxx-dual-abi --with-default-libstdcxx-abi=gcc4-compatible --disable-libunwind-exceptions --enable-__cxa_atexit --enable-libssp --enable-lto --disable-install-libiberty --with-gnu-ld --verbose --with-arch-directory=amd64 --disable-gtktest --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux"
+
 Complete usage example:
 
-rbt gcc --use-these-configure-options="--enable-shared --enable-bootstrap --enable-languages=c,c++,lto,objc,fortran --enable-threads=posix --enable-checking=release --enable-objc-gc --with-system-zlib --enable-libstdcxx-dual-abi --with-default-libstdcxx-abi=gcc4-compatible --disable-libunwind-exceptions --enable-__cxa_atexit --enable-libssp --enable-lto --disable-install-libiberty --with-gnu-ld --verbose --with-arch-directory=amd64 --disable-gtktest --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux"
+    rbt gcc --use-these-configure-options="--enable-shared --enable-bootstrap --enable-languages=c,c++,lto,objc,fortran --enable-threads=posix --enable-checking=release --enable-objc-gc --with-system-zlib --enable-libstdcxx-dual-abi --with-default-libstdcxx-abi=gcc4-compatible --disable-libunwind-exceptions --enable-__cxa_atexit --enable-libssp --enable-lto --disable-install-libiberty --with-gnu-ld --verbose --with-arch-directory=amd64 --disable-gtktest --disable-multilib --target=x86_64-slackware-linux --build=x86_64-slackware-linux --host=x86_64-slackware-linux"
 
-rbt poppler --use-these-configure-options="--enable-xpdf-headers"
-File simple_appdir_configure.rb
-File simple_appdir_configure.rb can be invoked to create an AppDir layout program, for compilation.
+    rbt poppler --use-these-configure-options="--enable-xpdf-headers"
 
-I aliased this file to appconf. Then I can navigate to a directory, and simply invoke appconf - the program will be compiled with the default prefix as-is.
+## File simple_appdir_configure.rb
+
+File **simple_appdir_configure.rb** can be invoked to create an AppDir
+layout program, for compilation.
+
+I aliased this file to **appconf**. Then I can navigate to a directory,
+and simply invoke **appconf** - the program will be compiled with
+the default prefix as-is.
 
 Since as of December 2019, support for cmake is possible as well, via:
 
-appconf --cmake
-Do note that this is just a method right now; in the future this may be changed to become a class, though.
+    appconf --cmake
+
+Do note that this is just a method right now; in the future this may
+be changed to become a class, though.
 
 The full path to the file is at:
 
-rbt/toplevel_methods/simple_appdir_configure.rb
-If you need to use a build directory for this method, you can use this:
+    rbt/toplevel_methods/simple_appdir_configure.rb
 
-appconf --down
-Keeping empty directories in the /Programs/ hierarchy
-By default, class RBT::ToCurrent and class RBT::SymlinkThisProgram will remove empty subdirectories of programs that are installed in an AppDir-like fashion.
+If you need to use a build directory for this method, you can
+use this:
 
-This is not always wanted, though, so a commandline flag exists to disable the auto-removal of empty directories:
+    appconf --down
 
-rbt feh --ntrad --do-not-remove-empty-directories
-Ensuring that all relevant directories exist
-To ensure that all important directories exist you can invoke the following method to do so:
+## Keeping empty directories in the /Programs/ hierarchy
 
-rbt --ensure-all-directories-exist
-class RBT::SymlinkThisProgram
-class RBT::SymlinkThisProgram can be used to symlink an AppDir program into the /usr/ prefix (or another target main prefix in use).
+By default, class **RBT::ToCurrent** and class **RBT::SymlinkThisProgram** will
+remove empty subdirectories of programs that are installed in an
+**AppDir-like** fashion.
 
-You can also decide to only symlink certain subdirectories, such as bin/.
+This is not always wanted, though, so a commandline flag exists to disable
+the auto-removal of empty directories:
+
+    rbt feh --ntrad --do-not-remove-empty-directories
+
+## Ensuring that all relevant directories exist
+
+To ensure that all important directories exist you can invoke
+the following method to do so:
+
+    rbt --ensure-all-directories-exist
+
+## class RBT::SymlinkThisProgram
+
+**class RBT::SymlinkThisProgram** can be used to symlink an AppDir 
+program into the **/usr/** prefix (or another target main prefix
+in use).
+
+You can also decide to only symlink certain subdirectories, such
+as **bin/**.
 
 Example:
 
-cd /home/Programs/Geany/Current # first we cd to this directory
-rnsymc --bin
-# rnsymc --bin/ ← This variant works as well.
-Do note that on my computer system rnsymc is an alias to the executable called symlink_this_program.
+    cd /home/Programs/Geany/Current # first we cd to this directory
+    rnsymc --bin
+    # rnsymc --bin/ ← This variant works as well.
 
-In January 2020 the --force commandline argument was added. This allows us to remove the target files at /usr/bin/, before the symlink-operation is done. Only use this when you are absolutely certain that you wish to remove the target file(s) from there.
+Do note that on my computer system **rnsymc** is an alias
+to the executable called **symlink_this_program**.
 
-class RBT::BuildDetector
-class RBT::BuildDetector is used to determine the build type of a given directory. This should be the extracted archive, such as for htop-1.2.0.tar.xz, the class will expect of the user to have changed the directory into htop-1.2.0/. Then it will try to determine the build type, e. g. configure or cmake or meson/ninja. Note that this may fail, so do not rely too much on it. For most regular software projects out there, this class should work fine, though.
+In January 2020 the --force commandline argument was added. This
+allows us to remove the target files at /usr/bin/, before the
+symlink-operation is done. Only use this when you are absolutely
+certain that you wish to remove the target file(s) from there.
 
-Installing (compiling) the dependencies of a given program at hand
-The required dependencies of a given program at hand can be compiled or installed, respectively, via the following means:
+## class RBT::BuildDetector
 
-rbt rails --install-its-dependencies
-This will NOT install the program itself, though - in this case rails. It is just a quick-and-dirty way to compile dependencies, without any further checking. All entries specified in required_deps_on: will be processed.
+**class RBT::BuildDetector** is used to determine the build type
+of a given directory. This should be the extracted archive,
+such as for htop-1.2.0.tar.xz, the class will expect of the
+user to have changed the directory into **htop-1.2.0/**. Then
+it will try to determine the build type, e. g. configure or
+cmake or meson/ninja. Note that this may fail, so do not rely
+too much on it. For most regular software projects out there,
+this class should work fine, though.
 
-Compiling all programs that belong to a particular tag
-Tags are registered in the individual .yml file of a program, such as htop.yml or poppler.yml.
+## Installing (compiling) the dependencies of a given program at hand
 
-You can also batch-compile these programs, such as the instruction of "compile all programs that belong to the tag called game":
+The required dependencies of a given program at hand can be compiled
+or installed, respectively, via the following means:
 
-rbt --compile-this-tag=game
-rbt --compile-this-tag=gnome
-rbt --compile-tags=pdf
-The tag that you wish to compile has to exist of course, as otherwise no program would be compiled. It has to be registered as part of the .yml file.
+    rbt rails --install-its-dependencies
 
-The functionality exists mostly as a convenience feature, say if you wish to compile all registered games. Presently it does not do any dependency-checking, so it is not sophisticated at all - it was added mostly because I sometimes don't even care about what is done, so I just want to keep on moving forward and compile/install all programs belonging to a particular tag.
+This will NOT install the program itself, though - in this case
+**rails**. It is just a quick-and-dirty way to compile 
+dependencies, without any further checking. All entries specified
+in **required_deps_on:** will be processed.
 
-Querying the program versions available
-The commandline script bin/show_versions_of_these_programs can be used to show the versions of the available programs, if the expanded cookbook dataset is available. (If it is not then you first have to expand it; see other parts of the document here in how to do so.)
+## Compiling all programs that belong to a particular tag
+
+**Tags** are registered in the individual .yml file of a program,
+such as **htop.yml** or **poppler.yml**.
+
+You can also batch-compile these programs, such as the instruction
+of "compile all programs that belong to the tag called game":
+
+    rbt --compile-this-tag=game
+    rbt --compile-this-tag=gnome
+    rbt --compile-tags=pdf
+
+The tag that you wish to compile has to exist of course, as otherwise
+no program would be compiled. It has to be registered as part of
+the **.yml** file.
+
+The functionality exists mostly as a convenience feature, say if
+you wish to compile all registered games. Presently it does not
+do any dependency-checking, so it is not sophisticated at all -
+it was added mostly because I sometimes don't even care about
+what is done, so I just want to keep on moving forward and
+compile/install all programs belonging to a particular tag.
+
+## Querying the program versions available
+
+The commandline script **bin/show_versions_of_these_programs** can be
+used to show the versions of the available programs, if the expanded
+cookbook dataset is available. (If it is not then you first have
+to expand it; see other parts of the document here in how to do so.)
 
 Invocation examples:
 
-show_versions_of_these_programs ruby python # show the version for ruby and python 
-show_versions_of_these_programs atril caja caja-dropbox caja-extensions engrampa eom libmatekbd libmatemixer libmateweather marco mate-applets mate-backgrounds mate-calc mate-common mate-control-center mate-desktop mate-icon-theme mate-indicator-applet mate-media mate-menus mate-netbook mate-notification-daemon mate-panel mate-polkit mate-polkit mate-power-manager mate-screensaver mate-sensors-applet mate-session-manager mate-settings-daemon mate-system-monitor mate-terminal mate-user-guide mate-user-share mate-utils mozo pluma python-caja 
-.gir files
+    show_versions_of_these_programs ruby python # show the version for ruby and python 
+    show_versions_of_these_programs atril caja caja-dropbox caja-extensions engrampa eom libmatekbd libmatemixer libmateweather marco mate-applets mate-backgrounds mate-calc mate-common mate-control-center mate-desktop mate-icon-theme mate-indicator-applet mate-media mate-menus mate-netbook mate-notification-daemon mate-panel mate-polkit mate-polkit mate-power-manager mate-screensaver mate-sensors-applet mate-session-manager mate-settings-daemon mate-system-monitor mate-terminal mate-user-guide mate-user-share mate-utils mozo pluma python-caja 
+
+## .gir files
+
 Several gtk/glib/gnome applications come with .gir files.
 
-These files can then typically be found in this directory - at the least in the year 2020:
+These files can then typically be found in this directory - at the least
+in the year **2020**:
 
-/usr/share/gir-1.0/
-As of 21.02.2020 the RBT project tracks .gir files too. In the long run this will allow us to automatically symlink the .gir files into the proper target, if they are installed via an AppDir prefix. But this functionality will be added at a later time - for now we will just gather information about these files.
+    /usr/share/gir-1.0/
 
-As of 22.02.2020 the RBT project now allows us to symlink .gir files into the corresponding target directory at /usr/share/gir-1.0/, if the proper configuration setting is true, and if the program at hand has at the least one .gir file and is compiled via an AppDir prefix.
+As of **21.02.2020** the RBT project tracks .gir files too. In the long
+run this will allow us to automatically symlink the .gir files into
+the proper target, if they are installed via an AppDir prefix. But
+this functionality will be added at a later time - for now we will just
+gather information about these files.
 
-If you specifically do not want this, then use the commandline flag called --do-not-symlink-gir-file. Example for this:
+As of **22.02.2020** the RBT project now allows us to symlink .gir
+files into the corresponding target directory at **/usr/share/gir-1.0/**,
+if the proper configuration setting is true, and if the program at
+hand has at the least one .gir file and is compiled via an AppDir
+prefix.
 
-rbt upower --ntrad --do-not-symlink-gir-file
-rbt gnomedesktop --ntrad --do-not-symlink-gir-files
-build_systems_priorities.yml
-The file build_systems_priorities.yml, distributed within the rbt gem, simply determines which build systems are to be prioritized over others. The entry on top of that .yml file is the main one that will be used preferentially; then comes the entry at second position, then the entry at third position and so forth.
+If you specifically do not want this, then use the commandline
+flag called **--do-not-symlink-gir-file**. Example for this:
 
-Some programs may come with more than one build system (such as harfbuzz, in February of 2020). This allows the user to pick one way or the other in order to compile the program at hand.
+    rbt upower --ntrad --do-not-symlink-gir-file
+    rbt gnomedesktop --ntrad --do-not-symlink-gir-files
 
-Some of the gnome-related software was using both GNU autoconfigure and meson, but since as of 2020, most of the new releases offer support solely for meson.
+## build_systems_priorities.yml
 
-The reason why the file build_systems_priorities.yml hadto be created was so that we can favour one build tool over the other, without necessarily having to specify this up-front. Some configure-flags are not valid in every build tool or may have to be changed, which is why this yaml file had to be added.
+The file **build_systems_priorities.yml**, distributed within the
+rbt gem, simply determines which build systems are to be prioritized
+over others. The entry on top of that .yml file is the main one that
+will be used **preferentially**; then comes the entry at second
+position, then the entry at third position and so forth.
 
-For example, GNU configure typically uses --foo=bla settings whereas cmake will use ALL_UPCASED entries and meson will prefer variants such as -Ddoc=false. So the rbt project had to be flexible.
+Some programs may come with more than one build system (such as
+harfbuzz, in February of 2020). This allows the user to pick 
+one way or the other in order to compile the program at hand.
 
-To query, on the commandline, which build system will be prioritized you can use any of the following configure switches:
+Some of the gnome-related software was using both GNU autoconfigure
+and meson, but since as of 2020, most of the new releases offer
+support solely for **meson**.
 
-rbt --priorities?
-rbt --build-system-priorities?
-Internally the method RBT.infer_build_system() can be used to try to guess the build system, while also honouring the priorities listed from the file build_systems_priorities.yml, since as of February 2020.
+The reason why the file **build_systems_priorities.yml** hadto
+be created was so that we can favour one build tool over the 
+other, without necessarily having to specify this up-front.
+Some configure-flags are not valid in every build tool or
+may have to be changed, which is why this yaml file had to
+be added.
 
-This code has not been tested very thoroughly yet, though, so expect some improvements in the coming weeks, until it works very fine.
+For example, GNU configure typically uses --foo=bla settings
+whereas cmake will use ALL_UPCASED entries and meson will
+prefer variants such as -Ddoc=false. So the rbt project
+had to be flexible.
 
-Flatpak
-Support for flatpak in RBT is very minimal as of right now (July 2020). This may be improved upon in the future - but for now, it is just minimal.
+To query, on the commandline, which build system will be
+prioritized you can use any of the following configure
+switches:
+
+    rbt --priorities?
+    rbt --build-system-priorities?
+
+Internally the method **RBT.infer_build_system()** can be used
+to try to guess the build system, while also honouring the
+priorities listed from the file **build_systems_priorities.yml**,
+since as of February 2020.
+
+This code has not been tested very thoroughly yet, though, so
+expect some improvements in the coming weeks, until it works
+very fine.
+
+## Flatpak
+
+Support for flatpak in RBT is very minimal as of right now (**July
+2020**). This may be improved upon in the future - but for now, it
+is just minimal.
 
 You can typically install flatpaks in this way on the commandline:
 
-flatpak install --user https://flathub.org/beta-repo/appstream/org.mozilla.firefox.flatpakref
+    flatpak install --user https://flathub.org/beta-repo/appstream/org.mozilla.firefox.flatpakref
+
 This would install firefox.
 
-Because the above is a bit inconvenient to type, the entry flatpak_url: has been added to the cookbooks part of RBT, which allows you to do the above, through *rbt+, in this way:
+Because the above is a bit inconvenient to type, the entry **flatpak_url:**
+has been added to the cookbooks part of RBT, which allows you to do
+the above, through **rbt*+, in this way:
 
-rbt --install-the-flatpak-for=firefox
-rbt --flatpak-for=firefox
-rbt --flaty=firefox
-Either variant will essentially just do the above "flatpak install --user URL" part.
+    rbt --install-the-flatpak-for=firefox
+    rbt --flatpak-for=firefox
+    rbt --flaty=firefox
 
-Checking the validity of the yaml files
-Within the rbt project code exists to ensure that the yaml files are (mostly) valid and correct.
+Either variant will essentially just do the above "flatpak install --user URL"
+part.
 
-Code for this functionality can in general be found under the validation/ subdirectory. Most users will not need to use the files in that directory, though - these scripts are mostly for developers or maintainers of the rbt gem.
+## Checking the validity of the yaml files
 
-The code in the validation/ subdirectory can be thought as some kind of test-code, with the primary focus on ensuring that the cookbook yaml files adhere to the given specification at hand - and are, in general, correct.
+Within the **rbt project** code exists to ensure that the yaml files are
+(mostly) **valid** and **correct**.
 
-If you do happen to want to check the validity of the cookbook files, then the following command can be run:
+Code for this functionality can in general be found under the **validation/**
+subdirectory. Most users will not need to use the files in that directory,
+though - these scripts are mostly for developers or maintainers of the
+**rbt gem**.
 
-cookbooks --validate
-Cookbook entries that are invalid, will eventually be fixed - please be patient (or report the erroneous entry to the lead maintainer(s)).
+The code in the **validation/** subdirectory can be thought as some kind of
+test-code, with the primary focus on ensuring that the cookbook yaml files
+adhere to the given specification at hand - and are, in general, correct.
 
-Class Cookbooks::ScanForIncompleteLastUpdateEntries can be used to ensure that the last_update: entries have a valid date entry. The currently used scheme is for "DD MM YYYY" where DD and YYYY are numbers and MM is the three-letter abbreviation for the month at hand. For example, "22 Mar 2018" means the 22nd of March in the year 2018. In the future I may allow for other formats, but for the time being this is the variant that is to be used (I am open to add automatic display-conversion to any other date format).
+If you do happen to want to check the validity of the cookbook files,
+then the following command can be run:
 
-Since as of May 2020 some code exists to check whether a .yml file has two url1: entries. This is evidently incorrect; usually the second entry should be url2: instead. As I ran into this problem every now and then I decided to fix it. Now this problem has to be corrected before compilation of that program can continue.
+    cookbooks --validate
 
-class RBT::SaveTheAvailableProgramsVersions
-The class SaveTheAvailableProgramsVersions can be used to quickly store all available programs version into a text file (a .md file). This is only useful on my home system though. I use it to quickly store it into the home directory of the RBT project, before I then publish a new gem release.
+Cookbook entries that are invalid, will eventually be fixed - please 
+be patient (or report the erroneous entry to the lead maintainer(s)).
 
-The class was added in May 2020, mostly because the older class was way too slow (a fully fledged object was instantiated upon creation of every new cookbook .yml file; during the rewrite, I switched to using a hash instead, since that is evidently much faster than a large object with lots of methods. That large object still exists, and is used in many other places - but not for this task anymore.)
+Class **Cookbooks::ScanForIncompleteLastUpdateEntries** can be used
+to ensure that the <b>last_update:</b> entries have a valid date
+entry. The currently used scheme is for "DD MM YYYY" where DD and
+YYYY are numbers and MM is the three-letter abbreviation for the
+month at hand. For example, "22 Mar 2018" means the 22nd of
+March in the year 2018. In the future I may allow for other 
+formats, but for the time being this is the variant that is
+to be used (I am open to add automatic display-conversion to
+any other date format).
 
-File errors.yml
-Since 2019/2020 a file called errors.yml has been added to the RBT project.
+Since as of **May 2020** some code exists to check whether a .yml file
+has two **url1:** entries. This is evidently incorrect; usually the
+second entry should be **url2:** instead. As I ran into this problem
+every now and then I decided to fix it. Now this problem has to
+be corrected before compilation of that program can continue.
 
-The general idea is to use that file to register and describe every possible problem that may occur when someone tries to install or compile software from source.
+## class RBT::SaveTheAvailableProgramsVersions
 
-The file was created specifically because in the past, the logic for handling errors was hardcoded directly into different .rb files. This made changes a bit difficult. After a while I also tend to forget what is all done, so I had to refresh my old knowledge, but that was tedious too.
+The class **SaveTheAvailableProgramsVersions** can be used to quickly store
+all available programs version into a text file (a .md file). This is only
+useful on my home system though. I use it to quickly store it into the
+home directory of the RBT project, before I then publish a new gem release.
 
-By having creating this file errors.yml, I expect to describe all possible problems in a neutral format, which can then be used to write specific code that implements the solution.
+The class was added in May 2020, mostly because the older class was way
+too slow (a fully fledged object was instantiated upon creation of 
+every new cookbook .yml file; during the rewrite, I switched to using
+a hash instead, since that is evidently much faster than a large
+object with lots of methods. That large object still exists, and is
+used in many other places - but not for this task anymore.)
 
-Another reason why the file was created was so that we can describe in more detail which particular error happens - and this is resolved in general. This way the RBT project will also attempt to teach and educate people about compile-related problems.
 
-Copying archives to the current working directory
-I sometimes need to be able to copy source archives to the current working directory. One reason as to when this was necessary was when I was about to compile a linux-from-scratch system. There I needed to have all archives available. Another use case I have had was to compile musl in a chrooted environment, and I wanted to only (automatically) copy source archives that I needed, rather than all of them.
+## File errors.yml
 
-Anyway, say that you wish to copy binutils, gcc and ruby, so three different source archives.
+Since 2019/2020 a file called **errors.yml** has been added to the
+RBT project.
+
+The general idea is to use that file to register and describe 
+**every possible problem** that may occur when someone tries to
+install or compile software from source.
+
+The file was created specifically because in the past, the
+logic for handling errors was hardcoded directly into different
+.rb files. This made changes a bit difficult. After a while I
+also tend to forget what is all done, so I had to refresh my
+old knowledge, but that was tedious too.
+
+By having creating this file **errors.yml**, I expect to describe
+all possible problems in a neutral format, which can then be
+used to write specific code that implements the solution.
+
+Another reason why the file was created was so that we can
+describe in more detail which particular error happens -
+and this is resolved in general. This way the RBT project
+will also attempt to teach and educate people about 
+compile-related problems.
+
+## Copying archives to the current working directory
+
+I sometimes need to be able to copy source archives to the current
+working directory. One reason as to when this was necessary was
+when I was about to compile a linux-from-scratch system. There I
+needed to have all archives available. Another use case I have
+had was to compile musl in a chrooted environment, and I wanted
+to only (automatically) copy source archives that I needed, rather
+than all of them.
+
+Anyway, say that you wish to copy <b>binutils</b>, <b>gcc</b> and
+ruby, so three different source archives.
 
 You can do so via the following class:
 
-require 'rbt/utility_scripts/copy_these_archives.rb'
-RBT::CopyTheseArchives.new(%w( binutils gcc ruby ))
-RBT.copy_these_archives(%w( binutils gcc ruby )) # Or use this method instead; it does the same as ^^^ above.
+    require 'rbt/utility_scripts/copy_these_archives.rb'
+    RBT::CopyTheseArchives.new(%w( binutils gcc ruby ))
+    RBT.copy_these_archives(%w( binutils gcc ruby )) # Or use this method instead; it does the same as ^^^ above.
+
 Or invoke it from the commandline, via bin/copy_these_archives:
 
-copy_these_archives binutils gcc ruby
+    copy_these_archives binutils gcc ruby
+
 Since as of March 2024 this is also available via RBT.actions().
 
-The entry-point would be either :copy_these_archives or just :copy. The latter may change (or not); the former, aka :copy_these_archives, will remain as-is. But I don't expect :copy to change either, so you are probably well-off using the shorter :copy.
+The entry-point would be either :copy_these_archives or just
+:copy. The latter may change (or not); the former, aka :copy_these_archives,
+will remain as-is. But I don't expect :copy to change either, so
+you are probably well-off using the shorter :copy.
 
-Simple AppDir confugre
+## Simple AppDir confugre
+
 The following API:
 
-RBT.simple_appdir_configure()
-can be used to quickly compile a program via its default AppDir prefix.
+    RBT.simple_appdir_configure()
 
-For example, for the program htop-2.2.0, the AppDir prefix amy be /Programs/Htop/2.2.0/, or a similar variant.
+can be used to quickly compile a program via its default AppDir
+prefix.
+
+For example, for the program htop-2.2.0, the AppDir prefix amy
+be **/Programs/Htop/2.2.0/**, or a similar variant.
 
 You can invoke this from the commandline via:
 
-simple_appdir_configure
+    simple_appdir_configure
+
 This would be equivalent to these lines in a shell:
 
-./configure --prefix=/Programs/Htop/2.2.0/
-make
-make install
-In other words, it allows us to type less, and still compile a program (from source) into its designated "default" prefix. This was the primary use case why that functionality was added to the toplevel "namespace" of RBT - I was tired of typing the longer prefix on the commandline. Nowadays I just invoke an alias to that bin/simple_appdir_configure instead.
+    ./configure --prefix=/Programs/Htop/2.2.0/
+    make
+    make install
+
+In other words, it allows us to type less, and still compile
+a program (from source) into its designated "default" 
+prefix. This was the primary use case why that functionality
+was added to the toplevel "namespace" of RBT - I was tired
+of typing the longer prefix on the commandline. Nowadays
+I just invoke an alias to that **bin/simple_appdir_configure**
+instead.
 
 You can also append -- options to it.
 
 Example:
 
-cd ncurses-6.2
-appconf --enable-widec
-This would pass --enable-widec to the configure or cmake script, just as you would do normally via ./configure --options-here anyway.
+    cd ncurses-6.2
+    appconf --enable-widec
 
-RBT.configure_appdir_prefix
-If you wish to quickly determine which appdir prefix would be used for ./configure, without actually running it, use this file:
+This would pass --enable-widec to the configure or cmake script,
+just as you would do normally via **./configure --options-here**
+anyway.
+
+## RBT.configure_appdir_prefix
+
+If you wish to quickly determine which appdir prefix would
+be used for **./configure**, without actually running it,
+use this file:
 
 $RBT/toplevel_methods/configure_appdir_prefix.rb
 
 The API would be:
 
-RBT.configure_appdir_prefix 'htop-1.2.3'
-Showing the dependencies of a given program
-class RBT::Cookbooks::ShowDependenciesOf can be used to show the dependencies of a given program. The code for this functionality resides in the file show_dependencies_of.rb.
+    RBT.configure_appdir_prefix 'htop-1.2.3'
+
+## Showing the dependencies of a given program
+
+class **RBT::Cookbooks::ShowDependenciesOf** can be used to show
+the dependencies of a given program. The code for this functionality
+resides in the file **show_dependencies_of.rb**.
 
 API usage from within Ruby:
 
-RBT.show_dependencies_of(ARGV)
-RBT.show_dependencies_of('gtk+')
+    RBT.show_dependencies_of(ARGV)
+    RBT.show_dependencies_of('gtk+')
+
 Invocation example from the commandline:
 
-show_dependencies_of gtk+
-This is currently (February 2020) fairly slow and not very sophisticated. I merely wanted to show that this functionality exists. It can be improved at a later time anyway, but for now I'll just keep it the way it currently is.
+    show_dependencies_of gtk+
 
-Note that this class is a bit similar to debfoster on debian. The general idea here is to quickly show the dependencies of a given program, including derived dependencies.
+This is currently (**February 2020**) fairly slow and not very
+sophisticated. I merely wanted to show that this functionality
+exists. It can be improved at a later time anyway, but for
+now I'll just keep it the way it currently is.
 
-RBT::Linux::RenameSystemMap
-class RBT::Linux::RenameSystemMap can be used to quickly rename the /boot/System.map file. It is probably not very useful to most folks, but I needed this as part of the effort to do an automated build for LFS/BLFS.
+Note that this class is a bit similar to **debfoster** on
+debian. The general idea here is to quickly show the
+dependencies of a given program, including *derived*
+dependencies.
 
-Slackware-specific code in the RBT project
-The RBT project contains some .rb files that specifically deal with packages on slackware.
+## RBT::Linux::RenameSystemMap
 
-One such class is class RBT::Linux::Slackware::InstallThisSlackwarePackage.
+class <b>RBT::Linux::RenameSystemMap</b> can be used to quickly
+rename the /boot/System.map file. It is probably not very
+useful to most folks, but I needed this as part of the effort
+to do an automated build for LFS/BLFS.
 
-class RBT::Linux::Slackware::InstallThisSlackwarePackage can be used to quickly install a slackware package.
+## Slackware-specific code in the RBT project
 
-installpkg works on slackware by default, so why was this class created?
+The RBT project contains some .rb files that specifically deal
+with packages on slackware.
 
-It was created specifically because I wanted to install a slackware-package via an AppDir prefix, rather than use the default /usr/ prefix.
+One such class is **class RBT::Linux::Slackware::InstallThisSlackwarePackage**.
+
+**class RBT::Linux::Slackware::InstallThisSlackwarePackage** can
+be used to **quickly install a slackware package**.
+
+**installpkg** works on slackware by default, so why was this
+class created?
+
+It was created specifically because I wanted to install a
+slackware-package via an **AppDir prefix**, rather than use
+the default **/usr/** prefix.
 
 The AppDir installation can be invoked in this way:
 
-islackware binutils-2.26-x86_64-3.txz --appdir
-Note that this was added on 18.12.2019 and has not been tested extensively yet. I need to test it more thoroughly before declaring this a stable feature. Also note that islackware is simply an alias for the file at rbt/linux/slackware/install_this_slackware_package.rb - perhaps this should be turned into bin/install_this_slackware_package eventually.
+    islackware binutils-2.26-x86_64-3.txz --appdir
 
-Another useful class that may be of help on a slackware system is class RBT::Linux::SlackwareGenerateSlackDescFile.
+Note that this was added on **18.12.2019** and has not been
+tested extensively yet. I need to test it more thoroughly
+before declaring this a stable feature. Also note that
+**islackware** is simply an alias for the file at
+**rbt/linux/slackware/install_this_slackware_package.rb** -
+perhaps this should be turned into **bin/install_this_slackware_package**
+eventually.
+
+Another useful class that may be of help on a slackware system is 
+**class RBT::Linux::SlackwareGenerateSlackDescFile**.
 
 This class can be required as follows:
 
-require 'rbt/linux/slackware/generate_slack_desc_file.rb'
-As argument to that class, provide the name of the program that you wish to generate a slack-desc file for.
+    require 'rbt/linux/slackware/generate_slack_desc_file.rb'
+
+As argument to that class, provide the name of the program that
+you wish to generate a slack-desc file for.
 
 For example, for the program ruby, I do this on the commandline:
 
-slackdescfor ruby
+    slackdescfor ruby
+
 where slackdescfor is an alias to that .rb file.
 
-(Note that this only works for registered programs; the RBT project currently does not allow for unregistered programs to generate a slack-description. This may be extended in the future, but for now we are limited to the some ~3600 programs that are registered in the RBT project.)
+(Note that this only works for registered programs; the RBT project
+currently does not allow for unregistered programs to generate a
+slack-description. This may be extended in the future, but for now
+we are limited to the some ~3600 programs that are registered in
+the RBT project.)
 
-If you ever need to parse a slackware FILELIST.TXT then you can use code like this:
+If you ever need to parse a slackware FILELIST.TXT then you can
+use code like this:
 
-require 'rbt/linux/slackware/filelist_parser.rb'
-RBT::Linux::Slackware::FilelistParser.new('https://slackware.nl/alien-kde/current/latest/x86_64/FILELIST.TXT')
-This was written primarily so that I can compare which programs are missing in the RBT project, but contained in slackware as-is.
+    require 'rbt/linux/slackware/filelist_parser.rb'
+    RBT::Linux::Slackware::FilelistParser.new('https://slackware.nl/alien-kde/current/latest/x86_64/FILELIST.TXT')
 
-If you want to create a slackware-package then you could use this:
+This was written primarily so that I can compare which programs
+are missing in the RBT project, but contained in slackware as-is.
 
-require 'rbt/linux/slackware/create_slackware_package.rb'
-RBT::Linux::Slackware::CreateSlackwarePackage.new(ARGV)
-Unfortunately that class has to be cleaned up, as it is a bit buggy right now.
+If you want to create a slackware-package then you could use
+this:
 
-GoboLinux specific code in the RBT project
-The RBT project was originally created because I did not understand the shell scripts used in GoboLinux. I still don't understand them, by the way. :)
+    require 'rbt/linux/slackware/create_slackware_package.rb'
+    RBT::Linux::Slackware::CreateSlackwarePackage.new(ARGV)
 
-GoboLinux uses its own unique naming scheme. For example, "lib" will become "Lib", "bin" will become "Bin", "info" will become "INFO", "mate-desktop" will become "Mate-Desktop" and so forth.
+Unfortunately that class has to be cleaned up, as it is a bit
+buggy right now.
 
-Additionally, all three character parts, such as "abc-", will also be upcased.
+## GoboLinux specific code in the RBT project
 
-To infer the proper gobolinux name of a program, you can use the following code in RBT:
+The RBT project was originally created because I did not understand
+the shell scripts used in GoboLinux. I still don't understand
+them, by the way. :)
 
-require 'rbt/linux/gobolinux/gobolinux_naming_convention.rb'
-RBT::GobolinuxNamingConvention.new(ARGV)
-Note that this is not quite perfect; some use cases may be missing, but if notified, code will be aded to support this.
+GoboLinux uses its own unique naming scheme. For example, 
+"lib" will become "Lib", "bin" will become "Bin", 
+"info" will become "INFO", "mate-desktop" will become
+"Mate-Desktop" and so forth.
+
+Additionally, all three character parts, such as "abc-", will also
+be upcased.
+
+To infer the proper gobolinux name of a program, you can use
+the following code in RBT:
+
+    require 'rbt/linux/gobolinux/gobolinux_naming_convention.rb'
+    RBT::GobolinuxNamingConvention.new(ARGV)
+
+Note that this is not quite perfect; some use cases may be
+missing, but if notified, code will be aded to support
+this.
 
 If you wish to generate a new gobo-recipe, try:
 
-require 'rbt/linux/gobolinux/create_recipe.rb'
-RBT::Gobolinux::CreateRecipe.new('htop') # <- Name of the program should go in here.
-Copy only the headers
+    require 'rbt/linux/gobolinux/create_recipe.rb'
+    RBT::Gobolinux::CreateRecipe.new('htop') # <- Name of the program should go in here.
+
+## Copy only the headers
+
 If you want to copy only the headers of a program, do this:
 
-rbt gmp only_headers
-rbt gmp --only_headers
-Of course you can do so manually, but in particular on windows I tend to be lazy, so support for this was added. Most users rarely, if ever, will need to do so, though.
+    rbt gmp only_headers
+    rbt gmp --only_headers
 
-Finding headers (.h files) of registered programs
-If you need a toplevel API to determine which .h files belong to a particular program, then you could use this:
+Of course you can do so manually, but in particular on windows
+I tend to be lazy, so support for this was added. Most users
+rarely, if ever, will need to do so, though.
 
-RBT.find_headers 'ruby'
+## Finding headers (.h files) of registered programs
+
+If you need a toplevel API to determine which .h files belong
+to a particular program, then you could use this:
+
+    RBT.find_headers 'ruby'
+
 This will show which .h files belong to that program.
 
-class RBT::AggregateInformationFromTheExpandedCookbooks
-class RBT::AggregateInformationFromTheExpandedCookbooks can be used to merge all individual cookbook .yml files into one file that represents the whole dataset as a big hash. This can then be used to e. g. generate SQL instructions.
+## class RBT::AggregateInformationFromTheExpandedCookbooks
 
-class RBT::FindAlternativeArchive
-This class can be used to find a likely alternative to a given (locally existing) archive.
+**class RBT::AggregateInformationFromTheExpandedCookbooks** can
+be used to merge all individual cookbook .yml files into one
+file that represents the whole dataset as a big hash. This
+can then be used to e. g. generate SQL instructions.
 
-On my home system I have aliased it to faa and can then do this:
+## class RBT::FindAlternativeArchive
 
-faa $MY_SRC/gdkpixbuf/gdk-pixbuf
-This functionality is useful if you wish to gather different versions of programs locally, and still be able to compile them via RBT.
+This class can be used to find a likely alternative to a given
+(locally existing) archive.
 
-You can also use this via a toplevel-method from within the RBT namespace:
+On my home system I have aliased it to faa and can then do
+this:
 
-RBT.find_alternative_archive
-RBT.find_alternative_archive('/home/x/src/gdkpixbuf/gdk-pixbuf')
-The mac-homebrew project
+    faa $MY_SRC/gdkpixbuf/gdk-pixbuf
+
+This functionality is useful if you wish to gather different
+versions of programs locally, and still be able to compile
+them via RBT.
+
+You can also use this via a toplevel-method from within the
+**RBT namespace**:
+
+    RBT.find_alternative_archive
+    RBT.find_alternative_archive('/home/x/src/gdkpixbuf/gdk-pixbuf')
+
+## The mac-homebrew project
+
 The rbt gem has a few code snippets that may be useful for homebrew.
 
-For example, if you wish to find out which programs are exclusively registered in homebrew, but not in rbt, then you can use this toplevel-API:
+For example, if you wish to find out which programs are
+exclusively registered in homebrew, but not in rbt, then
+you can use this toplevel-API:
 
-x = RBT.return_programs_that_are_exlusively_registered_in_the_homebrew_programs
-Updating all registered rubygems
-You can batch-update all registered rubygems via:
+    x = RBT.return_programs_that_are_exlusively_registered_in_the_homebrew_programs
 
-rbt --update-all-gems
-Note that this presently will only work if you use the Cookbooks project. I am open to extend this functionality to allow other projects to use another dataset, though.
+## Updating all registered rubygems
 
-The boolean constant ALSO_AUTOMATICALLY_INSTALL_THE_UPDATED_GEM, defined in class RBT::Action::SoftwareManager, controls whether the updated gems will automatically be installed by the RBT project. If set to true then RBT will not only download the respective gem, but also install it. Since not everyone may want this, the constant handles this case for the time being - I personally like this constant set to true, since it saves me some keystrokes in the long run.
+You can batch-update all <b>registered rubygems</b> via:
 
-If you do not want to, or can not, update all registered .gem entries, yet you still want to install the .gem files that are registered, then you can use this commandline:
+    rbt --update-all-gems
 
-rbt --install-all-rubygems
-This will install all registered .gem files, in an alphabetical manner. Dependencies will not be checked that way, but in principle if all .gem have been properly registered in the Cookbooks project, then this batch-gem installation should work just fine.
+Note that this presently will only work if you use the Cookbooks
+project. I am open to extend this functionality to allow other
+projects to use another dataset, though.
 
-Return the file size of a program
-You can quickly determine the file size of a local program via:
+The boolean constant **ALSO_AUTOMATICALLY_INSTALL_THE_UPDATED_GEM**,
+defined in class RBT::Action::SoftwareManager, controls whether the updated gems
+will automatically be installed by the RBT project. If set to
+true then RBT will not only download the respective gem, but
+also install it. Since not everyone may want this, the constant
+handles this case for the time being - I personally like this
+constant set to true, since it saves me some keystrokes in the
+long run.
 
-RBT.fast_return_file_size_of_this_program "htop" # => 212840
-In order for this to work, the program at hand has to exist locally, e. g. as a file like htop-2.2.0.tar.xz.
+If you do not want to, or can not, update all registered .gem 
+entries, yet you still want to install the .gem files that are
+registered, then you can use this commandline:
 
-Colourizing configure --help related output
+    rbt --install-all-rubygems
+
+This will install all registered .gem files, in an alphabetical
+manner. Dependencies will not be checked that way, but in
+principle if all .gem have been properly registered in the
+Cookbooks project, then this batch-gem installation should
+work just fine.
+
+## Return the file size of a program
+
+You can quickly determine the file size of a local program
+via:
+
+    RBT.fast_return_file_size_of_this_program "htop" # => 212840
+
+In order for this to work, the program at hand has to exist
+locally, e. g. as a file like **htop-2.2.0.tar.xz**.
+
+## Colourizing configure --help related output
+
 If you wish to use colours for whenever you do:
 
-./configure --help
-then this is available via the executable at bin/parse_help.
+    ./configure --help
 
-The class that is doing this is called RBT::ParseConfigureHelp.
+then this is available via the executable at **bin/parse_help**.
 
-Simply invoke it in a directory that can respond to a "./configure --help" output and you'll get some colourization.
+The class that is doing this is called **RBT::ParseConfigureHelp**.
 
-This was added in January 2019, so expect this to not be quite perfect as of yet.
+Simply invoke it in a directory that can respond to a
+"./configure --help" output and you'll get some colourization.
 
-You can also give, as input, an archive, such as foobar.tar.xz; the class will extract this archive before doing a ./configure --help run.
+This was added in January 2019, so expect this to not be quite
+perfect as of yet.
 
-Expanding the cookbook dataset within the RBT project
-By default, the individual yaml files, such as ruby.yml, python.yml, php.yml and so forth, are kept in a minimal state, primarily because it is easier to modify the dataset then, via an editor.
+You can also give, as input, an archive, such as foobar.tar.xz;
+the class will extract this archive before doing a
+**./configure --help** run.
 
-A minimal state also means that the format is not terribly useful by default.
+## Expanding the cookbook dataset within the RBT project
 
-For example, the setting keep_extracted: t is an abbreviated form of the setting keep_extracted: true. (Note that this entry means that the archive will remain extracted after compilation has finished.)
+By default, the individual yaml files, such as **ruby.yml**,
+**python.yml**, **php.yml** and so forth, are kept in a **minimal
+state**, primarily because it is easier to modify the dataset
+then, via an editor.
 
-The setting use_build_directory: can use a value of yes or y rather than t or true for true. The RBT project deliberately tries to remain flexible here, so multiple ways are supported for the end user's convenience.
+A minimal state also means that the format is not terribly useful
+by default.
 
-When such a "minimal" yaml file is loaded up, the RBT project (submodule Cookbooks there) normally has to sanitize that yaml file, which takes a little time. For individual files this is not a huge deal, but sanitizing all ~3600 something .yml files can take quite a long time, so code had to be added to expand this dataset into its "final" variant. This final variant is the variant that has all the information in a ready-to-use format.
+For example, the setting **keep_extracted: t** is an abbreviated
+form of the setting **keep_extracted: true**. (Note that this entry
+means that **the archive will remain extracted after compilation has
+finished**.)
 
-If you do not want to wait, you can speed up this process by running the expand functionality early on, such as after installation of RBT. The expand functionality will expand all yaml files and store them in the expanded (correct) format. Then, when such a yaml file is loaded up lateron, no change has to be made at all, thus no further time has to be spent sanitizing the information since it is already sanitized. This makes things a bit faster in the long run.
+The setting **use_build_directory:** can use a value of **yes**
+or **y** rather than **t** or **true** for true. The RBT project
+deliberately tries to remain flexible here, so multiple ways
+are supported for the end user's convenience.
 
-In order to do so, you can invoke the rbt project via any of the following commandline flag:
+When such a "minimal" yaml file is loaded up, the RBT project
+(submodule Cookbooks there) normally has to sanitize that yaml
+file, which takes a little time. For individual files this is
+not a huge deal, but sanitizing all ~3600 something .yml
+files can take quite a long time, so code had to be added
+to expand this dataset into its "final" variant. This final
+variant is the variant that has all the information in a ready-to-use
+format.
 
-rbt --expand
-rbt --expand-dataset 
-You normally only have to do this once, but it is a purely optional step. It is recommended to do so, though.
+If you do not want to wait, you can speed up this process by running
+the **expand** functionality early on, such as after installation
+of RBT. The **expand** functionality **will expand all yaml files**
+and store them in the **expanded** (correct) format. Then, when
+such a yaml file is loaded up lateron, no change has to be made at
+all, thus no further time has to be spent sanitizing the information
+since it is already sanitized. This makes things a bit faster in
+the long run.
 
-If the expanded dataset is not available then the rbt project may (have to) sanitize the dataset.
+In order to do so, you can invoke the rbt project via any of the
+following **commandline flag**:
 
-(Also note that the expanded dataset could be converted into SQL instructions. I'll still have to add that step at a later time, though.)
+    rbt --expand
+    rbt --expand-dataset 
 
-Since as of June 2019, on my home system, rbt will expand individual entries when no expanded cookbook exists for that given program at hand as of yet.
+You normally only have to do this **once**, but it is a purely
+optional step. It is recommended to do so, though.
 
-Since as of May 2020 the expanded cookbook dataset is also distributed with this gem; this should allow others to make use of the expanded and correct .yml files that fully describe an individual recipe (cookbook). Just look the .yml file and you should have all the data necessary to compile the program at hand - of course you may still need wrapper code that actually makes use of that dataset, such as RBT::Action::SoftwareManager does normally.
+**If** the expanded dataset is not available then the **rbt 
+project** may (have to) sanitize the dataset.
 
-KDE
-Many KDE components (== programs) are registered in the rbt project.
+(Also note that the expanded dataset could be converted into
+**SQL instructions**. I'll still have to add that step at
+a later time, though.)
 
-These programs usually have the registered tag kde or kde5, in the respective .yml file. You can also search for these via class Cookbooks::SearchForTags; just pass in kde or kde5 as argument to that file/class. (I have the file aliased to "stag", so I can just do "stag kde5" quickly.)
+Since as of June 2019, on my home system, rbt will expand
+individual entries when no expanded cookbook exists for
+that given program at hand as of yet.
 
-You can also batch-download KDE components - that is, to download them all to the local filesystem (aka to your local harddisc).
+Since as of May 2020 the expanded cookbook dataset is
+also distributed with this gem; this should allow others
+to make use of the expanded and correct .yml files that
+fully describe an individual recipe (cookbook). Just
+look the .yml file and you should have all the data
+necessary to compile the program at hand - of course
+you may still need wrapper code that actually makes
+use of that dataset, such as **RBT::Action::SoftwareManager** does
+normally.
 
-There are several ways how to achieve this. Either call the respective class directly. These .rb files will reside in the subdirectory check_for_updates/.
+## KDE
 
-Alternatively, you can invoke them directly from the commandline like so:
+Many <b>KDE components</b> (== <b>programs</b>) are registered in the
+**rbt project**.
 
-rbt --update-kde-plasma
-This will download all of the KDE5 plasma components (unless they are already available locally).
+These programs usually have the registered tag **kde** or **kde5**,
+in the respective .yml file. You can also search for these via
+**class Cookbooks::SearchForTags**; just pass in kde or kde5 as
+argument to that file/class. (I have the file aliased to "stag",
+so I can just do "stag kde5" quickly.) 
 
-If you wish to download the KDE5 applications, then you can try this command:
+You can also **batch-download** KDE components - that is, to download
+them all to the local filesystem (aka to your local **harddisc**).
 
-rbt --update-kde-applications
-Aliases exist to the above:
+There are several ways how to achieve this. Either call the respective
+class directly. These .rb files will reside in the subdirectory
+**check_for_updates/**.
 
-rbt --kde-apps
-rbt --compile-kde-apps
-In general, the rbt project attempts to allow aliases, for sake of convenience. The "official" entry points are usually the longer ones though, as they are less likely to conflict with other instructions given on the commandline. ("update kde applications" is more explicit than "kde apps", but the latter is shorter, and thus may be more convenient when used on the commandline).
+Alternatively, you can invoke them directly from the commandline
+like so:
 
-To update the KDE5 Frameworks, do:
+    rbt --update-kde-plasma
 
-rbt --update-kde-framework
-To update the KDE5 porting aids, do:
+This will download all of the KDE5 plasma components (unless they
+are already available locally).
 
-rbt --update-kde-porting-aids
+If you wish to download the **KDE5 applications**, then you can
+try this command:
+
+    rbt --update-kde-applications
+
+**Aliases** exist to the above:
+
+    rbt --kde-apps
+    rbt --compile-kde-apps
+
+In general, the **rbt project** attempts to allow aliases, for
+sake of convenience. The "official" entry points are usually the
+longer ones though, as they are less likely to conflict with
+other instructions given on the commandline. ("update kde 
+applications" is more explicit than "kde apps", but the latter
+is shorter, and thus may be more convenient when used on the
+commandline).
+
+To update the **KDE5 Frameworks**, do:
+
+    rbt --update-kde-framework
+
+To update the **KDE5 porting aids**, do:
+
+    rbt --update-kde-porting-aids
+
 And to then compile them, do:
 
-rbt --compile-porting-aids
-Note that you could also use '_' tokens in the above invocation examples, or omit these, so the following would work just as well:
+    rbt --compile-porting-aids
 
-rbt --update_kde_porting_aids
-rbt --updatekdeportingaids
-rbt --compile_porting_aids
-rbt --compile-porting-aids
-You can also query the KDE "status", that is, which variant is currently the most recent one. Use something like this:
+Note that you could also use '_' **tokens** in the above invocation
+examples, or omit these, so the following would work just as well:
 
-rbt --kde-status
-The output of the above command, on the commandline, would be something like this:
+    rbt --update_kde_porting_aids
+    rbt --updatekdeportingaids
+    rbt --compile_porting_aids
+    rbt --compile-porting-aids
 
-KDE Frameworks version:      5.50
-KDE Applications version: 18.08.1
-KDE Plasma version:        5.13.5
+You can also query the KDE "status", that is, which variant is
+currently the most recent one. Use something like this:
+
+    rbt --kde-status
+
+The output of the above command, on the commandline, would be something
+like this:
+
+    KDE Frameworks version:      5.50
+    KDE Applications version: 18.08.1
+    KDE Plasma version:        5.13.5
+
 Or, in December 2019 on my computer system:
 
-KDE Frameworks version:      5.65
-KDE Applications version: 19.12.0
-KDE Plasma version:        5.17.4
-This information may be useful if you go to the official KDE homepage and want to find out whether there have been any updates recently. Then you can compare your local version to the remote one and see whether you may want to update the KDE components that you are presently using.
+    KDE Frameworks version:      5.65
+    KDE Applications version: 19.12.0
+    KDE Plasma version:        5.17.4
 
-Since as of the year 2018, I am able to compile just about all of the KDE components, through the rbt project (excluding a few troublemakers, in particular of the qt-chromium web-stack)).
+This information may be useful if you go to the official KDE homepage
+and want to find out whether there have been any updates recently.
+Then you can compare your local version to the remote one and see
+whether you may want to update the KDE components that you are
+presently using.
 
-My primary target among these KDE components is usually the KDE konsole ( e. g. at https://download.kde.org/stable/release-service/19.12.0/src/konsole-19.12.0.tar.xz ).
+Since as of the year **2018**, I am able to compile just about all of
+the KDE components, through the **rbt project** (excluding a few 
+troublemakers, in particular of the qt-chromium web-stack)).
 
-If I am able to compile the KDE konsole then I can usually compile the rest of KDE as well. It is a fine konsole; give it a try if you haven't yet.
+My primary target among these KDE components is usually the
+<b>KDE konsole</b> ( e. g. at 
+https://download.kde.org/stable/release-service/19.12.0/src/konsole-19.12.0.tar.xz ).
 
-You can also use a number to compile a particular KDE component.
+If I am able to compile the **KDE konsole** then I can usually compile
+the rest of KDE as well. It is a fine konsole; give it a try if you
+haven't yet.
+
+You can also use a **number** to **compile a particular KDE component**.
 
 For example:
 
-rbt --kde1
-rbt --kde2
-rbt --kde3
-Will compile these registered kde components. The reason as to why this functionality exists is that it makes batch-compiling the KDE components easier. I simply have to increment a number and compile the KDE suite en suite, without having to remember the name (my memory is quite bad, so using numbers is so much easier).
+    rbt --kde1
+    rbt --kde2
+    rbt --kde3
 
-You can drop the -- too, of course:
+Will compile these registered kde components. The reason as to why
+this functionality exists is that it makes batch-compiling the KDE
+components easier. I simply have to increment a number and compile
+the KDE suite en suite, without having to remember the name (my memory
+is quite bad, so using numbers is so much easier).
 
-rbt kde1
-rbt kde2
-rbt kde3
-rbt --kde4 # Using leading -- also works.
+You can drop the **--** too, of course:
+
+    rbt kde1
+    rbt kde2
+    rbt kde3
+    rbt --kde4 # Using leading -- also works.
+
 You can chain these via a range-like syntax:
 
-rbt kde1..100
-This would compile the first 100 KDE components (if all goes well and no errors have occurred).
+    rbt kde1..100
 
-You can also be more verbose, if you'd like to. The following demonstrates this:
+This would compile the first 100 KDE components (if all goes well
+and no errors have occurred).
 
-rbt --kde1..kde250
-The linear order of these numbers can be seen in the file rbt/yaml/chained_programs.yml, under the respective KDE component (kde-plasma, kde-applications and so forth).
+You can also be more verbose, if you'd like to. The following
+demonstrates this:
 
-If you wish to compile all of the KDE5 plasma components, you can use either one of the following variants:
+    rbt --kde1..kde250
 
-rbt --compile-all-kde5-plasma-components
-rbt --compile-plasma
-rbt --compile-all-of-plasma
-This is a convenience-shortcut. Of course the option with --batch= also works.
+The linear order of these numbers can be seen in the file
+**rbt/yaml/chained_programs.yml**, under the respective KDE component
+(kde-plasma, kde-applications and so forth).
+
+If you wish to compile all of the KDE5 plasma components, you can
+use either one of the following variants:
+
+    rbt --compile-all-kde5-plasma-components
+    rbt --compile-plasma
+    rbt --compile-all-of-plasma
+
+This is a convenience-shortcut. Of course the option with --batch=
+also works.
 
 To update all kde-applications you could do the following:
 
-rbt --update-kde-apps
+    rbt --update-kde-apps
+
 To compile all of KDE, try this:
 
-rbt --compile-all-of-kde
-If you wish to compile only the components up to (and including) the KDE konsole, which I often do, then the following invocation should achieve this:
+    rbt --compile-all-of-kde
 
-rbt --compile-all-up-until-konsole
-rbt --compile-towards-konsole # ← This is equivalent to the above ^^^.
-Aliases for program names
-The rbt project makes use of several aliases to program names. This is mostly a convenience feature, to avoid having to type too much or remember the full real name of a program.
+If you wish to compile only the components up to (and including)
+the KDE konsole, which I often do, then the following invocation
+should achieve this:
 
-Sometimes this may lead to unexpected or unwanted results, though, such as when you want to compile program a, but the rbt project renames the program to b instead.
+    rbt --compile-all-up-until-konsole
+    rbt --compile-towards-konsole # ← This is equivalent to the above ^^^.
 
-In order to avoid this, a commandline-option exists for the RBT project that specifically disallows this from happening.
+## Aliases for program names
+
+The **rbt project** makes use of several **aliases** to
+program names. This is mostly a convenience feature, to avoid
+having to type too much or remember the full real name of a
+program.
+
+Sometimes this may lead to unexpected or unwanted results,
+though, such as when you want to compile program **a**, but
+the <b>rbt project</b> renames the program to <b>b</b> instead.
+
+In order to avoid this, a commandline-option exists for
+the RBT project that specifically disallows this from
+happening.
 
 Invoke it like so:
 
-rbt sdlttf --do-not-use-cookbook-aliases
-rbt sdlttf --do-not-use-cookbook-alias  
-This will specifically disable making use of cookbook aliases. (That functionality only works if the Cookbooks gem is used. It resides within the source of the Cookbooks project rather than the RBT project.)
+    rbt sdlttf --do-not-use-cookbook-aliases
+    rbt sdlttf --do-not-use-cookbook-alias  
 
-Downloading in general and downloading a remote URL into a specific local directory
-The rbt project has some code support for downloading a remote archive or any other remote file into the local filesystem/directory. This functionality was added primarily in order to aid the user in setting up the RBT project properly, in particular when the user is before a freshly setup computer system. In other words, to help and support "boostrapping". This is not the only use case, of course; other use cases exist as well as to why this functionality was added to the RBT project.
+This will specifically **disable** making use of <b>cookbook
+aliases</b>. (That functionality only works if the Cookbooks
+gem is used. It resides within the source of the Cookbooks
+project rather than the RBT project.)
 
-If you would like to download an archive from a remote URL into a specific (local) directory, you can use an API such as this here, from the commandline:
+## Downloading in general and downloading a remote URL into a specific local directory
 
-rbt htop --download-into-this-directory=/opt/bla/
-The first argument is the registered program that ought to be used; in this case the program called htop. The second argument specifies the local directory to be used, in this case /opt/bla/. Obviously you could also download first, and then mv the file anyway, but sometimes you may want to do it in one go.
+The **rbt project** has some code support for downloading a remote archive or any
+other remote file into the local filesystem/directory. This functionality was added
+primarily in order to aid the user in setting up the RBT project properly, in
+particular when the user is before a freshly setup computer system. In other words,
+to help and support "boostrapping". This is not the only use case, of course; other
+use cases exist as well as to why this functionality was added to the RBT project.
 
-Note that you can simplify the above if you wish to download into the current working directory. If this is the case, you can use this variant instead:
+If you would like to download an archive from a **remote URL** into a specific
+(local) directory, you can use an **API** such as this here, from the
+commandline:
 
-rbt htop --downloadhere
-rbt htop --dhere # This works too, if you are really laze.
-This command invocation will download the htop archive into the current working directory. Note that this almost exactly identical to wget https://github.com/htop-dev/htop/releases/download/3.1.2/htop-3.1.2.tar.xz.
+    rbt htop --download-into-this-directory=/opt/bla/
 
-If you wish to quickly download e. g. htop or another program, and wish to do so from within ruby itself, you can use the following simpler toplevel API:
+The **first argument** is the registered program that ought to be used; in
+this case the program called **htop**. The second argument specifies the local
+directory to be used, in this case **/opt/bla/**. Obviously you could also
+download first, and then **mv** the file anyway, but sometimes you may want
+to do it in one go.
 
-RBT.download :htop
-This is treated as the very same way as if you would have used the following API with the full URL instead:
+Note that you can simplify the above if you wish to download into the
+current working directory. If this is the case, you can use
+this variant instead:
 
-RBT.download 'http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz'
-Thus, it is simply a convenience feature and works really well in *irb. Obviously "wget http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz" may be even simpler on Linux-based systems, but since RBT makes use of ruby, functionality such as this has to be included. We want to remain flexible and succint whenever that is meaningfully possible in regards to supporting different use cases for the project.
+    rbt htop --downloadhere
+    rbt htop --dhere # This works too, if you are really laze.
 
-You can also use the current directory as input, e. g. if you would first create the directory htop, then cd into it, and then invoke that method:
+This command invocation will download the htop archive into the current
+working directory. Note that this almost exactly identical to <b>wget 
+https://github.com/htop-dev/htop/releases/download/3.1.2/htop-3.1.2.tar.xz</b>.
 
-RBT.download :pwd # the symbol :pwd will be treated as referring to the current working directory
+If you wish to quickly download e. g. htop or another program, and wish
+to do so from within ruby itself, you can use the following simpler
+**toplevel API**:
+
+    RBT.download :htop
+
+This is treated as the very same way as if you would have used
+the following API with the full URL instead:
+
+    RBT.download 'http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz'
+
+Thus, it is simply **a convenience feature** and works really well
+in **irb*. Obviously "wget http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz"
+may be even simpler on Linux-based systems, but since RBT makes
+use of ruby, functionality such as this has to be included. We
+want to remain flexible and succint whenever that is meaningfully
+possible in regards to supporting different use cases for the
+project.
+
+You can also use the current directory as input, e. g. if you
+would first create the directory htop, then cd into it, and
+then invoke that method:
+
+    RBT.download :pwd # the symbol :pwd will be treated as referring to the current working directory
+
 This may save a little bit of typing.
 
-The functionality can also be used from the commandline, through the bin/rbt script, such as in the following examples:
+The functionality can also be used from the **commandline**, through
+the **bin/rbt** script, such as in the following examples:
 
-rbt --download htop
-rbt --download ruby
-rbt --download python
-rbt --download php
-rbt --download m4
-rbt --download=m4 # This variant works too, if you prefer to use =
-This would download htop, or ruby, or python, respectively, into the current working directory. The latter variant, with =, actually downloads into the designated source directory so you do not even have to cd into that directory manually before.
+    rbt --download htop
+    rbt --download ruby
+    rbt --download python
+    rbt --download php
+    rbt --download m4
+    rbt --download=m4 # This variant works too, if you prefer to use =
+
+This would download **htop**, or **ruby**, or **python**, respectively,
+into the **current working directory**. The latter variant, with 
+<b>=</b>, actually downloads into the designated source directory
+so you do not even have to cd into that directory manually before.
 
 Note that the following syntax works as well:
 
-rbt --download=htop
-rbt --download=ruby
-rbt --download=python
-Use whichever syntax you prefer here; both ' ' or '=' work just fine. I recommend to use the '=' all the time since the code checking this is a bit simpler. As argument you can use any registered program in the RBT project - so over 3600 programs.
+    rbt --download=htop
+    rbt --download=ruby
+    rbt --download=python
 
-This commandline option thus allows you to quickly download remote source archives.
+Use whichever syntax you prefer here; both ' ' or '=' work just fine.
+I recommend to use the '=' all the time since the code checking this is
+a bit simpler. As **argument** you can use any registered program
+in the RBT project - so **over 3600 programs**.
 
-If you do not want to type "rbt --download" then you could also use bin/rbt_download instead, aka:
+This commandline option thus allows you to quickly **download remote
+source archives**.
 
-rbt_download
-rbt_download htop
-rbt_download python
-Or put an alias to this to make this even shorter - which is exactly why this oddly named executable was added.
+If you do not want to type "rbt --download" then you could
+also use **bin/rbt_download** instead, aka:
 
-If you wish to find out which programs can be downloaded that way, you could try to issue this command:
+    rbt_download
+    rbt_download htop
+    rbt_download python
 
-rbt --show-downloadable-programs
-This will display all the names of the registered programs, more than 3600 (so it is quite a long output; you may want to pipe the output into more or less on Linux).
+Or put an alias to this to make this even shorter - which is
+exactly why this oddly named executable was added.
 
-You can also download remote programs into the proper local directory. The "proper" directory is the one where RBT expects source archives to reside at.
+If you wish to find out which programs can be downloaded that
+way, you could try to issue this command:
+
+    rbt --show-downloadable-programs
+
+This will display all the names of the registered programs,
+more than 3600 (so it is quite a long output; you may want
+to pipe the output into **more** or **less** on Linux).
+
+You can also download remote programs into the **proper local
+directory**. The "<b>proper</b>" directory is the one where
+RBT expects source archives to reside at.
 
 Examples:
 
-rbt --download-into-proper-directory htop
-rbt --download-proper ruby # ← This variant is significantly shorter
-On my home system, this would download http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz into the local directory /home/x/src/htop/. The exact local position depends on your SRC_DIR (source directory). See elsewhere in this documentation how the source directory can be set for the RBT project.
+    rbt --download-into-proper-directory htop
+    rbt --download-proper ruby # ← This variant is significantly shorter
 
-Do note that since as of April 2019 we can also attempt to download different versions of a given program. As an example, let's say that we wish to download glibc version 2.28. You could use this commandline way in order to achieve this:
+On my home system, this would download
+http://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz into
+the local directory **/home/x/src/htop/**. The exact local
+position depends on your <b>SRC_DIR</b> (source directory).
+See elsewhere in this documentation how the source
+directory can be set for the RBT project.
 
-rbt --download glibc-2.28
-rbt --download glibc-2.27
-rbt --download glibc-2.26
-# and so forth
-This has a few constraints, though. Firstly, the remote file must exist at the assumed position. Second, not all file extensions may be checked. The functionality can be improved in the long run but for now, it is like that. (The above should work reliably well, though).
+Do note that since as of April 2019 we can also attempt to
+download different versions of a given program. As an example, let's
+say that we wish to download **glibc version 2.28**. You could
+use this commandline way in order to achieve this:
+
+    rbt --download glibc-2.28
+    rbt --download glibc-2.27
+    rbt --download glibc-2.26
+    # and so forth
+
+This has a few constraints, though. Firstly, the remote file
+must exist at the assumed position. Second, not all file
+extensions may be checked. The functionality can be improved
+in the long run but for now, it is like that. (The above
+should work reliably well, though).
 
 Certain github-based URLs may also not work.
 
-Note that different version may be supported as well, such as:
+Note that different version may be supported as well,
+such as:
 
-rbt kernel --version=2.6.30.1 download
-This would then attempt to download the linux kernel version 2.6.30.1. However had, this was last tested a long time ago, so it may be easier to stick to the other mentioned use cases.
+    rbt kernel --version=2.6.30.1 download
 
-This has an additional chance for failure, such as wehn the remote FTP/website changes - so it is no foolproof mechanism.
+This would then attempt to download the linux kernel version
+2.6.30.1. However had, this was last tested a long time ago,
+so it may be easier to stick to the other mentioned
+use cases.
 
-Also note that there is a configuration option which allows you to automatically attempt to download a missing file.
+This has an additional chance for failure, such as wehn
+the remote FTP/website changes - so it is no foolproof
+mechanism.
 
-The method try_to_find_an_alias_to_this_input_unless_the_program_exists()
-The method try_to_find_an_alias_to_this_input_unless_the_program_exists() can be used to find an alias name to a given input.
+Also note that there is a configuration option which allows
+you to automatically attempt to download a missing file.
 
-For example, the input xorgser will be converted to xorgserver. This will help us compile programs, since abbreviations are available for all the registered programs in the RBT project.
+## The method try_to_find_an_alias_to_this_input_unless_the_program_exists()
 
-If you need to determine whether something is a registered abbreviation, as far as the RBT project is concerned, you can use the following toplevel method:
+The method <b>try_to_find_an_alias_to_this_input_unless_the_program_exists()</b>
+can be used to find an alias name to a given input.
 
-RBT.is_this_a_registered_abbreviation?(i)
-The constant called FILE_ABBREVIATIONS and abbreviations for the RBT project
-FILE_ABBREVIATIONS is a constant pointing to a file that keeps the abbreviations to the registered programs. Abbreviations in this context are words such as "ph", which may stand for "php". So in short: an alias to a longer name.
+For example, the input **xorgser** will be converted to **xorgserver**. This
+will help us compile programs, since abbreviations are available for all
+the registered programs in the **RBT project**.
 
-The above example may be useful if you wish to compile PHP on the commandline: rather than typing "php", you can type "ph" and it should still work.
+If you need to determine whether something is a registered abbreviation,
+as far as the RBT project is concerned, you can use the following
+toplevel method:
 
-The net gain in this specific example is little, but consider a longer name, such as xorg-server.
+    RBT.is_this_a_registered_abbreviation?(i)
+
+## The constant called FILE_ABBREVIATIONS and abbreviations for the RBT project
+
+**FILE_ABBREVIATIONS** is a constant pointing to a file that
+keeps the abbreviations to the registered programs. Abbreviations
+in this context are words such as "**ph**", which may stand for
+"**php**". So in short: **an alias** to a longer name.
+
+The above example may be useful if you wish to compile PHP
+on the commandline: rather than typing "php", you can type
+"ph" and it should still work.
+
+The net gain in this specific example is little, but consider a
+longer name, such as **xorg-server**.
 
 You could compile it via:
 
-rbt xorgser
+    rbt xorgser
+
 That is more convenient, isn't it?
 
-Do note that tab-completion support for bash and zsh also exists to enable a functionality like this, but I wanted to be able to find shorter aliases within the ruby code itself too, so that a toplevel-method API such as the following one may also work:
+Do note that **tab-completion support** for bash and zsh also exists
+to enable a functionality like this, but I wanted to be able to find
+shorter aliases **within** the ruby code itself too, so that a
+toplevel-method API such as the following one may also work:
 
-RBT.compile 'php'     # For php.
-RBT.compile 'ph'      # For php, too.
-RBT.compile 'xorgser' # For xorg-server.
-All variants should work fine. The longer variant, while it is more typing work, is the recommended way, though. This is primarily because that way you can avoid ambiguity, since you fully specify the name as-is; the RBT project will not have to guess in these cases.
+    RBT.compile 'php'     # For php.
+    RBT.compile 'ph'      # For php, too.
+    RBT.compile 'xorgser' # For xorg-server.
 
-(Note that since as of 2020, the main abbreviation for 'ph' is 'physfs'. So do not rely too much on these abbreviations - they are determined automatically, so the shorter the input, the less likely it may be that you find a particular program, IF many other programs are already defined. The more choices you have, the more possibilities exist for these abbreviations too. Compare the number of abbreviations by 100 different words, as opposed to 10000 different words - the latter will have many more abbreviations.)
+All variants should work fine. The longer variant, while it is more
+typing work, is **the recommended way**, though. This is primarily
+because that way you can **avoid ambiguity**, since you fully
+specify the name as-is; the RBT project will not have to guess
+in these cases.
 
-The usual residency of the file pointed at via the constant FILE_ABBREVIATIONS resides at:
+(Note that since as of 2020, the main abbreviation for 'ph'
+is 'physfs'. So do not rely too much on these abbreviations -
+they are determined automatically, so the shorter the input,
+the less likely it may be that you find a particular 
+program, **IF** many other programs are already defined.
+The more choices you have, the more possibilities exist
+for these abbreviations too. Compare the number of
+abbreviations by 100 different words, as opposed to
+10000 different words - the latter will have many more
+abbreviations.)
 
-rbt/yaml/abbrevations_to_the_programs.yml
-In short: the reason why this file exists is so that we can use abbreviations, if we wish to compile programs from source.
+The usual residency of the file pointed at via the constant
+FILE_ABBREVIATIONS resides at:
 
-Do note that additionally the configuration flag use_abbreviations must be set to true; otherwise the RBT project will not make use of abbreviations.
+    rbt/yaml/abbrevations_to_the_programs.yml
 
-Repackaging archives and Packaging archives
-You can quickly repackage archives, such as foobar-1.0.tar.gz into foobar-1.0.tar.xz, by issuing this command:
+In short: the reason why this file exists is so that we can
+**use abbreviations**, if we wish to compile programs from
+source.
 
-rbt --repackage=foobar-1.0.tar.gz
-To quickly create an archive from a compiled and installed AppDir, try something like this:
+Do note that additionally the configuration flag **use_abbreviations**
+must be set to true; otherwise the RBT project will not make
+use of abbreviations.
 
-rbt --package-this-app-dir=htop
-rbt --package-this-appdir=htop
-rbt --package-appdir=htop
-Optimizations for compilation
+## Repackaging archives and Packaging archives
+
+You can quickly repackage archives, such as **foobar-1.0.tar.gz**
+into **foobar-1.0.tar.xz**, by issuing this command:
+
+    rbt --repackage=foobar-1.0.tar.gz
+
+To quickly create an archive from a compiled and installed
+AppDir, try something like this:
+
+    rbt --package-this-app-dir=htop
+    rbt --package-this-appdir=htop
+    rbt --package-appdir=htop
+
+## Optimizations for compilation
+
 This subsection will be expanded in the future.
 
-If you wish to compile via -O3 optimization, you can pass it in:
+If you wish to compile via -O3 optimization, you can
+pass it in:
 
-rbt gnomedesktop --O3
-rbt gnomedesktop --speedy
-This may lead to faster program execution, at the expense of slightly larger program size - say +20% or so increase in size, depending on the program at hand.
+    rbt gnomedesktop --O3
+    rbt gnomedesktop --speedy
 
-In principle this can be combined with --static (to enable static compilation), but not every program can be compiled statically.
+This may lead to faster program execution, at the expense of 
+slightly larger program size - say +20% or so increase in
+size, depending on the program at hand.
 
-Installing/Compiling the various xcb components
-If you, like me, get tired of installing the various xorg-related xcb components then the following command should be of help here:
+In principle this can be combined with --static (to enable
+static compilation), but not every program can be compiled
+statically.
 
-rbt --compile-xcb-components
-This will install the xcb-components in the correct order (actually it will compile the xcb-components).
+## Installing/Compiling the various xcb components
+
+If you, like me, get tired of installing the various xorg-related
+**xcb components** then the following command should be of help
+here:
+
+    rbt --compile-xcb-components
+
+This will install the xcb-components in the correct order
+(actually it will compile the xcb-components).
 
 Aliases exist for this:
 
-ry --compile-the-xcb-components ry --compile-all-the-xcb ry --compile-xcb
+   ry --compile-the-xcb-components
+   ry --compile-all-the-xcb
+   ry --compile-xcb
 
-Perl
-In order to compile perl, you could simply issue the following command:
+## Perl
 
-rbt perl
-If you wish to install the various registered perl-addons, you can try to use the following command:
+In order to **compile perl**, you could simply issue the following command:
 
-rbt --compile-perl-addons
-(Unfortunately there is some bug, where the installation stops after the first installed perl program. I will have to investigate this at a later time; this notice has been written in 20.04.2019).
+    rbt perl
 
-Keep in mind that if the above --flag does not work for you, you can always try to install these programs individually.
+If you wish to install the various registered perl-addons, you can
+try to use the following command:
 
-class RBT::QueryFileAssociation
-Sometimes you may wish to find out to which particular program any file belongs to - for example, the header called stdio.h.
+    rbt --compile-perl-addons
 
-class RBT::QueryFileAssociation does answer this.
+(Unfortunately there is some bug, where the installation stops after
+the first installed perl program. I will have to investigate this at
+a later time; this notice has been written in 20.04.2019).
+
+Keep in mind that if the above --flag does not work for you, you
+can always try to install these programs individually.
+
+## class RBT::QueryFileAssociation
+
+Sometimes you may wish to find out to which particular program
+any file belongs to - for example, the header called
+**stdio.h**.
+
+class **RBT::QueryFileAssociation** does answer this.
 
 Usage example:
 
-require 'rbt/utility_scripts/query_file_association.rb'
+    require 'rbt/utility_scripts/query_file_association.rb'
 
-RBT::QueryFileAssociation.new(of: 'libc.so')
-RBT::QueryFileAssociation.new(of_this_file: 'vlc')
-RBT::QueryFileAssociation.new(of_this_file: 'stdio.h')
-Any registered input will do fine, be it a binary, a library or a .h header file. The file must be registered as part of the RBT project, though. If that condition is met then this class will report, on the commandline, more information as to which program this input-file belongs to.
+    RBT::QueryFileAssociation.new(of: 'libc.so')
+    RBT::QueryFileAssociation.new(of_this_file: 'vlc')
+    RBT::QueryFileAssociation.new(of_this_file: 'stdio.h')
 
-Do note that before January 2020, multiple associations were not reported properly. Since as of January 2020, if for example a .h header file belongs to several programs then this information will be properly displayed on the commandline. That way if a header file, such as stdio.h, belongs to different programs, all of them will be reported as well.
+Any registered input will do fine, be it a binary, a library
+or a .h header file. The file must be registered as part of
+the RBT project, though. If that condition is met then this
+class will report, on the commandline, more information as
+to which program this input-file belongs to.
 
-Do note that since as of February 2020, querying .gir files is also possible.
+Do note that before January 2020, multiple associations were
+not reported properly. Since as of January 2020, if for
+example a .h header file belongs to several programs then
+this information will be properly displayed on the
+commandline. That way if a header file, such as stdio.h,
+belongs to different programs, all of them will be
+reported as well.
+
+Do note that since as of February 2020, querying .gir files
+is also possible.
 
 Example:
 
-query_file_association Gdk-3.0.gir
-Currently (23.02.2020) not all .gir files are registered, but expect more .gir files to be added to the RBT project in the near future.
+    query_file_association Gdk-3.0.gir
+
+Currently (**23.02.2020**) not all .gir files are registered,
+but expect more .gir files to be added to the RBT project
+in the near future.
 
 Support for .m4 files was added in June 2020.
 
 Usage example:
 
-what ltoptions.m4
-(what is my alias towards query_file_association.)
+    what ltoptions.m4
 
-Using /usr/lib64/ as the libdir target for configure
-If you wish to use /usr/lib64/ as the libdir target for the current invocation run, you can use --libdir64 as in:
+(**what** is my alias towards **query_file_association**.)
 
-rbt libgpgerror --libdir64
+## Using /usr/lib64/ as the libdir target for configure
+
+If you wish to use /usr/lib64/ as the libdir target for
+the current invocation run, you can use **--libdir64**
+as in:
+
+    rbt libgpgerror --libdir64
+
 This is essentially equal to:
 
-rbt libgpgerror --libdir=/usr/lib64
-So we just save a bit of typing work. Note that --dir64 also works, as slightly shorter variant.
+    rbt libgpgerror --libdir=/usr/lib64
+
+So we just save a bit of typing work. Note that --dir64
+also works, as slightly shorter variant.
 
 Example:
 
-ry libgpgerror --dir64
+  ry libgpgerror --dir64
 
-Disable adding the shell script error line
-By default, the configure scripts will try to make use of 2>&1. That is, this is normally appended.
+## Disable adding the shell script error line
 
-Not every user may want this by default, though, so it can be disabled for the current invocation run, via --do-not-append-no-error, like in this way:
+By default, the configure scripts will try to make use of
+**2>&1**. That is, this is normally appended.
 
-rbt coreutils --static --do-not-append-no-error
-Generating shell scripts / shell recipes
+Not every user may want this by default, though, so it
+can be disabled for the current invocation run, via
+**--do-not-append-no-error**, like in this way:
+
+    rbt coreutils --static --do-not-append-no-error
+
+## Generating shell scripts / shell recipes
+
 You can generate standalone .sh (shell scripts).
 
 Examples:
 
-rbt sed        --generate_shellscript
-rbt python     --standalone
-rbt gnunetgtk  --create_shellscript
-rbt wxwidget   --shellscript
-This will generate .sh files that are, in theory, usable to just compile a source archive via a shell script.
+    rbt sed        --generate_shellscript
+    rbt python     --standalone
+    rbt gnunetgtk  --create_shellscript
+    rbt wxwidget   --shellscript
 
-That way you don't even need ruby (in principle) on the target machine.
+This will generate .sh files that are, in theory,
+usable to just compile a source archive via a
+shell script.
 
-Unfortunately the code is not perfect; the extract function for the shell code currently (June 2020) does not work properly, so you may have to write your own function in shell/bash that works here. But eventually I may fix this, and then also add support for cmake, meson and so forth.
+That way you don't even need ruby (in principle)
+on the target machine.
 
-I rarely use shell scripts these days, though - ruby is so much more powerful, so this option is mostly a legacy option really.
+Unfortunately the code is not perfect; the extract
+function for the shell code currently (June 2020)
+does not work properly, so you may have to write
+your own function in shell/bash that works here.
+But eventually I may fix this, and then also
+add support for cmake, meson and so forth.
 
-Use a local file for configure-options
-Usually when I compile a program from source, I am using a graphical interface - typically the xorg-server.
+I rarely use shell scripts these days, though -
+ruby is so much more powerful, so this option
+is mostly a legacy option really.      
 
-This is convenient as I can then make use of the KDE Konsole in particular.
+## Use a local file for configure-options
 
-However had, sometimes I do not have a running xorg-server available - and this makes compiling more difficult than normal. In particular when I break xorg, then I may end up without a working xorg-server, and thus without a working graphical user interface. This is really annoying.
+Usually when I compile a program from source, I am
+using a graphical interface - typically the xorg-server.
 
-As a tiny "workaround", I made it possible to read instructions to GNU configure based scripts via a local file.
+This is convenient as I can then make use of the KDE
+Konsole in particular.
+
+However had, sometimes I do not have a running
+xorg-server available - and this makes compiling
+more difficult than normal. In particular when
+I break xorg, then I may end up without a
+working xorg-server, and thus without a working
+graphical user interface. This is really annoying.
+
+As a tiny "workaround", I made it possible to 
+read instructions to GNU configure based
+scripts via a local file.
 
 Consider these two invocation examples:
 
-rbt gcc --use-instructions-from-this-file=/Depot/foobar.md
-rbt php --trad --use-this-file=/Depot/j/foo.md
-These instructions would read in the dataset from these two files, and treat them as the main configure-options.
+    rbt gcc --use-instructions-from-this-file=/Depot/foobar.md
+    rbt php --trad --use-this-file=/Depot/j/foo.md
 
-That way you can quickly edit/modify local files if you wish to use different configure options, rather than have to rely on the hardcoded values that are part of the default yaml files for a given program. This was the primary use case, because sometimes you may wish to, for example, compile another GCC with different options, so this option can then be useful in such a case.
+These instructions would read in the dataset from these
+two files, and treat them as the main configure-options.
 
-Extract to and the Temp directory
-Archives such as foobar-1.0.tar.xz or barfoo-2.0.zip will first have to be extracted before they can be compiled. The RBT project thus needs to have this functionality; and you, as a prospective user, also need to have (some) control over this behaviour, in particular if you wish to extract to a specific directory.
+That way you can quickly edit/modify local files if you
+wish to use different configure options, rather than
+have to rely on the hardcoded values that are part of
+the default yaml files for a given program. This was
+the primary use case, because sometimes you may wish
+to, for example, compile another GCC with different
+options, so this option can then be useful in such
+a case. 
 
-The file temp_directory.yml, which is part of RBT's configuration, designates the main directory to which RBT will extract an archive.
+## Extract to and the Temp directory
 
-For example, if the content of this yaml-file is /tmp/ then RBT would extract archives into that directory. (Actually, RBT will extract into the rbt/ subdirectory, in order to not make a mess of the target temp-directory; so a value of /tmp/ would really mean /tmp/rbt/ instead.)
+Archives such as **foobar-1.0.tar.xz** or **barfoo-2.0.zip** will first have
+to be extracted before they can be compiled. The **RBT** project thus
+needs to have this functionality; and you, as a prospective user, also
+need to have (some) control over this behaviour, in particular if you
+wish to **extract to a specific directory**.
 
-It is permissible and possible to use $FOO variables inside of that yaml-file, to designate and make use of shell variables. For example, I may use the variable called $TEMP as the content of the file temp_directory.yml, which in turn points towards /Depot/Temp/ on my home system. This is the very same as if you would have used /Depot/Temp/ as the content of this yaml-file, so the only net-gain is that you may not have to hardcode the same path several times; instead, you can re-use shell variables that way.
+The file <b>temp_directory.yml</b>, which is part of RBT's configuration,
+designates the main directory to which RBT will extract an archive.
 
-If you want to extract into the home directory instead, then you can use any of the following commands to do so permanently:
+For example, if the content of this yaml-file is **/tmp/** then RBT
+would extract archives into that directory. (Actually, RBT will
+extract into the **rbt/** subdirectory, in order to not make a mess
+of the target temp-directory; so a value of **/tmp/** would really
+mean **/tmp/rbt/** instead.)
 
-rbt --permanently-extract-to-home
-rbt --permanently-extract-to-home-dir
-rbt --extract-to-home
-You can also specify a specific target directory that is used for the extraction step of a compilation that you are about to start.
+It is permissible and possible to use $FOO variables inside of that
+yaml-file, to designate and make use of shell variables. For example,
+I may use the variable called $TEMP as the content of the file
+<b>temp_directory.yml</b>, which in turn points towards
+<b>/Depot/Temp/</b> on my home system. This is the very same as if
+you would have used **/Depot/Temp/** as the content of this yaml-file,
+so the only net-gain is that you may not have to hardcode the same
+path several times; instead, you can re-use shell variables that
+way.
+
+If you want to extract into the **home directory** instead, then
+you can use any of the following commands to do so permanently:
+
+    rbt --permanently-extract-to-home
+    rbt --permanently-extract-to-home-dir
+    rbt --extract-to-home
+
+You can also specify a specific target directory that is used
+for the extraction step of a compilation that you are about
+to start.
 
 Consider the following example:
 
-rbt htop ntrad --use-this-temp-dir=/opt/foobar_create_it 
-This would use the directory /opt/foobar_create_it for extracting the source archive.
+    rbt htop ntrad --use-this-temp-dir=/opt/foobar_create_it 
 
-I needed this functionality in particular because I sometimes have to do two compilation runs at the same time, e. g. for different target prefixes - so it made sense to also use a different* **temp dir for extraction.
+This would use the directory **/opt/foobar_create_it** for
+extracting the source archive.
 
-If you want to, or have to, you can also designate another temp-directory, permanently, via the following toplevel API:
+I needed this functionality in particular because I sometimes
+have to do two compilation runs at the same time, e. g. for
+different target prefixes - so it made sense to also use a
+**different* **temp dir** for extraction.
 
-RBT.permanently_set_temp_dir
-RBT.permanently_set_temp_dir '/tmp/rbt/'
-You can also quickly extract any local archive via this toplevel method:
+If you want to, or have to, you can also designate another
+temp-directory, permanently, via the following **toplevel
+API**:
 
-RBT.extract()
-The latter method can also be used on the commandline, through bin/rbt via:
+    RBT.permanently_set_temp_dir
+    RBT.permanently_set_temp_dir '/tmp/rbt/'
 
-rbt --extract htop
-This will first download htop and then extract it, in the current working directory (cwd).
+You can also quickly extract any local archive via this
+**toplevel method**:
 
-You can also quickly extract a locally existing archive, such as bison-3.2.4.tar.xz.
+    RBT.extract()
 
-rbt --extract-this=bison-3.2.4.tar.xz
-rbt --extract=zenity-3.42.1.zip
-(This should also work on windows, since as of June 2022 if 7z has been installed.)
+The latter method can also be used on the commandline, through
+**bin/rbt** via:
 
-Another functionality is that you can change the directory as to where source archives will be extracted to, permanently, from the commandline. Normally a good directory for this may be /tmp/ but you can of course choose another directory, too. I tend to use /home/Temp/ as my temp-directory - to me it feels cleaner than /tmp/ but your mileage may vary.
+    rbt --extract htop
+
+This will first **download htop** and then extract it, in the
+**current working directory** (**cwd**).
+
+You can also quickly extract a locally existing archive,
+such as **bison-3.2.4.tar.xz**.
+
+    rbt --extract-this=bison-3.2.4.tar.xz
+    rbt --extract=zenity-3.42.1.zip
+
+(This should also work on windows, since as of <b>June 2022</b>
+if <b>7z</b> has been installed.)
+
+Another functionality is that you can change the directory as to
+where source archives will be extracted to, **permanently**, from
+the commandline. Normally a good directory for this may be
+**/tmp/** but you can of course choose another directory, too. I
+tend to use /home/Temp/ as my temp-directory - to me it feels
+cleaner than /tmp/ but your mileage may vary.
 
 Examples:
 
-rbt --permanently-set-temp-dir-to=/user/bioinf4/Temp/
-rbt --permanently-set-temp-dir=/user/bioinf4/Temp/
-rbt --permanently_extract_to=pwd
-rbt --permanently_extract_to=/Depot
-rbt --permanently_extract_to=/tmp
-rbt --permanently-set-temp-dir=/user/bioinf4/Temp/
-rbt --permanently-set-temp-dir-to=/user/bioinf4/Temp/
-rbt --use-this-temp-dir=/Depot/
-rbt --use-temp=/Depot
+    rbt --permanently-set-temp-dir-to=/user/bioinf4/Temp/
+    rbt --permanently-set-temp-dir=/user/bioinf4/Temp/
+    rbt --permanently_extract_to=pwd
+    rbt --permanently_extract_to=/Depot
+    rbt --permanently_extract_to=/tmp
+    rbt --permanently-set-temp-dir=/user/bioinf4/Temp/
+    rbt --permanently-set-temp-dir-to=/user/bioinf4/Temp/
+    rbt --use-this-temp-dir=/Depot/
+    rbt --use-temp=/Depot
+
 These are all equivalent.
 
-If you wish to extract to, for example, the target location /opt/test just for the current run, then the following command should suffice:
+If you wish to extract to, for example, the target location
+**/opt/test** just for the current run, then the following
+command should suffice:
 
-rbt htop --extract-to=/opt/test
-Sometimes you may not want to even think about a specific name and just wish to use any random name for a directory.
+    rbt htop --extract-to=/opt/test
 
-In order to do so, you can use any of the following ways to invoke rbt:
+Sometimes you may not want to even think about a specific
+name and just wish to use any random name for a directory.
 
-rbt php --random-temp-dir
-rbt php --random-dir
-rbt php --random-temp
-rbt php --rdir
-This will use a temp-directory such as /home/temp/rbt/foeghe/.
+In order to do so, you can use any of the following 
+ways to invoke rbt:
 
-Do note that you can also quickly extract the tarball of a registered program into the current working directory.
+    rbt php --random-temp-dir
+    rbt php --random-dir
+    rbt php --random-temp
+    rbt php --rdir
+
+This will use a temp-directory such as **/home/temp/rbt/foeghe/**.
+
+Do note that you can also quickly extract the tarball of a
+registered program into the current working directory.
 
 For example, say you cd to /tmp:
 
-cd /tmp
-Next, you want to extract htop:
+    cd /tmp
 
-rbt --extract htop
-This should work fine if you have htop downloaded (ry htop --download should work for this as well).
+Next, you want to extract **htop**:
 
-The reason as to why the ry --extract functionality was added is mostly due to convenience alone.
+    rbt --extract htop
 
-To quickly extract into the current working directory, use --extract-here such as in:
+This should work fine if you have htop downloaded (**ry htop --download**
+should work for this as well).
 
-rbt gimp --extract-here
-This would extract into the current working directory, if the archive has been downloaded into the default working directory before. I use this option to quickly work with the source archive as-is, without having to manually extract it.
+The reason as to why the ry --extract functionality was added
+is mostly due to convenience alone.
 
-Busybox
-Having the application called busybox installed, in a static manner, is quite useful.
+To quickly extract into the current working directory, use
+**--extract-here** such as in:
 
-I recommend to have a working version of busybox available on the local computer system, as that may help in recovering in the event that something has gone awry.
+    rbt gimp --extract-here
+
+This would extract into the current working directory, if the
+archive has been downloaded into the default working directory
+before. I use this option to quickly work with the source 
+archive as-is, without having to manually extract it.
+
+## Busybox
+
+Having the application called **busybox** installed, in a static manner,
+is quite useful.
+
+I recommend to have a **working version of busybox** available on the
+local computer system, as that may help in recovering in the event
+that something has gone awry.
 
 To compile busybox, try this:
 
-rbt busybox
-Make sure to compile busybox statically. That way you become less dependent on .so files being available, in the event that you somehow manage to break your system (which I typically used to do).
+    rbt busybox
 
-In November 2019, a default configuration was added for busybox, allowing static linking. The name of that file is static_busybox_config.md and it can be found under the profiles/ directory of the rbt gem:
+Make sure to compile busybox **statically**. That way you become less
+dependent on .so files being available, in the event that you somehow
+manage to break your system (which I typically used to do).
 
-rbt/misc/profiles/static_busybox_config.md
+In **November 2019**, a **default configuration** was added for
+busybox, **allowing static linking**. The name of that file is 
+**static_busybox_config.md** and it can be found under the
+**profiles/** directory of the rbt gem:
+
+    rbt/misc/profiles/static_busybox_config.md
+
 This should allow you to quickly install a static version of busybox.
 
-I needed this because I did not want to manually run "make menuconfig" or "make config", since I only needed the static version; and the rest is fine either way for me.
+I needed this because I did not want to manually run "make menuconfig"
+or "make config", since I only needed the static version; and the
+rest is fine either way for me.
 
-For a static compilation of busybox, this should work fine by default:
+For a static compilation of busybox, this should work fine by
+default:
 
-rbt busybox ntrad
-At a later time more flexibility may be added here, but for the time being (November 2019) this has to suffice.
+    rbt busybox ntrad
 
-Different package managers
-The RBT project is a toolset project. This means that:
+At a later time more flexibility may be added here, but for the
+time being (November 2019) this has to suffice.
 
-(a) it should be able to seamlessly integrate in a given system and making native use of the package manager in use by that system.
+## Different package managers
+
+The **RBT project** is a toolset project. This means that:
+
+(a) it should be able to seamlessly integrate in a given system
+and making native use of the package manager in use by that
+system.
 
 (b) it should also provide package-manager functionality.
 
-Both parts are quite a lot of work to implement, so don't expect this to happen soon. Some baby steps have been done.
+Both parts are quite a lot of work to implement, so don't
+expect this to happen soon. Some baby steps have been done.
 
-For example, for (b), the dataset for all the ~almost 4000 registered projects in RBT are distributed with the RBT gem as well, in the rbt/yaml/expanded_cookbooks/ directory. Furthermore, this information is also stored in some .yml files, which means that you can easily query the file association of a registered program.
+For example, for (b), the dataset for all the ~almost 4000
+registered projects in RBT are distributed with the RBT
+gem as well, in the **rbt/yaml/expanded_cookbooks/** 
+directory. Furthermore, this information is also stored
+in some .yml files, which means that you can easily
+query the file association of a registered program.
 
-At any rate - let's proceed to (a) now. The following subsection will continue as time passes by (that is, when I have more time to add new content).
+At any rate - let's proceed to (a) now. The following
+subsection will continue as time passes by (that is,
+when I have more time to add new content).
 
-Let's begin with the package manager for debia, dpkg.
+Let's begin with the package manager for debia, **dpkg**.
 
-dpkg requires header files such as md5.h.
+**dpkg** requires header files such as **md5.h**.
 
 I am not quite sure where this .h file typically resides.
 
-Archlinux uses pacman as package manager. Installing pacman is quite simple:
+Archlinux uses **pacman** as package manager. Installing pacman
+is quite simple:
 
-rbt pacman trad
-You may need libtar too:
+    rbt pacman trad
 
-rbt libtar trad
+You may need **libtar** too:
+
+    rbt libtar trad
+
 What to do next afterwards?
 
-Create a pacman.conf file or copy it from somewhere. Add repositories that you may want to have.
+Create a **pacman.conf file** or copy it from somewhere. Add
+repositories that you may want to have.
 
 Then do:
 
-pacman -Syyu
-Void uses another package manager, called xbps (the X Binary Package System).
+    pacman -Syyu
 
-It has not yet been added into rbt, but once it is, this part will be modified, to allow simple compilation/installation of xbps.
+**Void** uses another package manager, called **xbps** (the
+**X Binary Package System**).
 
-Dual Compile
-In the file rbt/toplevel_methods/dual_compile.rb there is code that will first compile a program into the /usr/ prefix, before it will then compile that program into its AppDir prefix as well, such as /Programs/Htop/2.2.0/.
+It has not yet been added into rbt, but once it is, this part
+will be modified, to allow simple compilation/installation of
+**xbps**.
 
-I needed this functionality because sometimes I use a hybrid layout, so it makes sense to keep a "backup" at the appdir place.
+## Dual Compile
 
-Colourizing output
-In general, --disable-colours or --disable-colours or --nocol will disable colour output. The rest of this subsection here explains some of the colour-settings used by RBT.
+In the file rbt/toplevel_methods/dual_compile.rb there is
+code that will first compile a program into the /usr/ prefix,
+before it will then compile that program into its AppDir
+prefix as well, such as **/Programs/Htop/2.2.0/**.
 
-By default, RBT will attempt to colourize output from some external programs, in particular "make" and "make install".
+I needed this functionality because sometimes I use a hybrid
+layout, so it makes sense to keep a "backup" at the
+appdir place.
 
-The class RBT::ColourizeParser will handle most of this. It can also be used in standalone scripts such as ColourMake or ColourMakeInstall, which will run a coloured variant of "make" and "make install", respectively.
+## Colourizing output
 
-The idea behind the colours is to mostly make it easier to detect what is going on; and in particular where errors may occur. I personally found the colours to be helpful, but it is indeed VERY colourful, which is why a commandline option exists to disable the colours.
+In general, **--disable-colours** or **--disable-colours** or
+**--nocol** will **disable colour output**. The rest of this
+subsection here explains some of the colour-settings used by
+RBT.
 
-The colours are presently hardcoded, but in the future we could use different profiles and then let the user decide which (other) profile to use. But I'll extend this part only when other people may want to have this - for now, the default colour "profile" has to suffice.
+By default, RBT will attempt to colourize output from some
+external programs, in particular "make" and "make install".
 
-If you wish to permanently disable the colours for the RBT project, then you may use the following command:
+The class **RBT::ColourizeParser** will handle most of this.
+It can also be used in standalone scripts such as ColourMake
+or ColourMakeInstall, which will run a coloured variant of
+"make" and "make install", respectively.
 
-rbt --permanently-disable-colours
+The idea behind the colours is to mostly make it easier to detect
+what is going on; and in particular where errors may occur. I
+personally found the colours to be helpful, but it is indeed VERY
+colourful, which is why a commandline option exists to disable
+the colours.
+
+The colours are presently hardcoded, but in the future we could use
+different profiles and then let the user decide which (other) profile
+to use. But I'll extend this part only when other people may want
+to have this - for now, the default colour "profile" has to suffice.
+
+If you wish to **permanently disable the colours** for the RBT
+project, then you may use the following command:
+
+    rbt --permanently-disable-colours
+
 And to permanently enable the colours again, issue:
 
-rbt --permanently-enable-colours
-Note that there are also a few classes that can handle colours or colourizing. In particular, class ColourizeParser will take any external output (e. g. output that has been taken via system()-like calls by ruby) and colourizes it.
+    rbt --permanently-enable-colours
 
-The general idea here is to make it visually easier to see which problem may have been encountered while compiling a program.
+Note that there are also a few classes that can handle colours
+or colourizing. In particular, class **ColourizeParser** will
+take any external output (e. g. output that has been taken
+via system()-like calls by ruby) and colourizes it.
 
-Users of RBT should be able to fully disable coloured output at any moment in time. See the section controlling the output of class RBT::Action::SoftwareManager.
+The general idea here is to make it visually easier to see
+which problem may have been encountered while compiling
+a program.
 
-Controlling the output of class RBT::Action::SoftwareManager
-By default, IO.popen() is used to parse the result of system-calls, and colourize some of them.
+Users of RBT should be able to fully disable coloured output
+at any moment in time. See the section <b>controlling the
+output of class RBT::Action::SoftwareManager</b>.
 
-But the user may not always want this, so a commandline flag exists to overrule this.
+## Controlling the output of class RBT::Action::SoftwareManager
+
+By default, IO.popen() is used to parse the result of
+system-calls, and colourize some of them.
+
+But the user may not always want this, so a commandline
+flag exists to overrule this.
 
 Invocation example:
 
-rbt glade --trad --use-simple-system
-This would just use system() instead, which is not as advanced, but simpler. (Won't use as many colours for example; and there will be fewer automatic error tracking as well. But if you prefer the simpler variant, or need to use it, this option exists for precisely that situation.)
+    rbt glade --trad --use-simple-system
 
-Minimal chroot environment
-On my home system I tend to have a working backup system at /Depot/Chroot/. In this directory I tend to have all important programs "duplicated", so that I can safely re-compile when necessary.
+This would just use system() instead, which is not as 
+advanced, but simpler. (Won't use as many colours
+for example; and there will be fewer automatic error
+tracking as well. But if you prefer the simpler
+variant, or need to use it, this option exists for
+precisely that situation.)
 
-Which compile-chain may be used to build up a minimal chroot?
+## Minimal chroot environment
 
-I will try to list the options here, as I use this on my system (or a new system):
+On my home system I tend to have a working backup system
+at **/Depot/Chroot/**. In this directory I tend to have
+all important programs "duplicated", so that I can
+safely re-compile when necessary.
 
-rbt make --static --chroot
-rbt bash --static --chroot # <- This may already suffice.
-rbt mpfr --chroot
-rbt gmp --chroot
-rbt mpc --chroot
-rbt sed --static --chroot
-rbt grep --static --chroot
-rbt coreutils --static --chroot
-rbt ruby --dontuseconfigureoptions --chroot
-rbt python --chroot
-rbt gawk --chroot --static
-rbt nano --static --chroot
-# Generate my custom rc-files next:
-rcfiles --populate-this-dir=/Depot/Chroot/AUTOGENERATED/
-rcfiles
-rcfiles --populate-this-dir=/AUTOGENERATED/
-rbt gcc --chroot --dont-symlink
-rbt ncurses --dontuseconfigureoptions --chroot
-rbt zlib --chroot
-rbt bison --static --chroot
-rbt m4 --chroot
-rbt curl --chroot
-rbt isl --chroot
-rbt flex --chroot
-rbt nasm --chroot
-rbt gc --chroot
-rbt tar --chroot
-rbt texinfo --chroot
-rbt openssl --chroot
-rbt libelf --chroot
-rbt elfutils --chroot
-rbt ccache --chroot
-rbt lzma  --chroot
-rbt cmake --chroot
-rbt file --chroot
-rbt pkgconfig --chroot
-rbt gperf --chroot
-rbt popt --chroot
-rbt git --chroot
-rbt pcre1 --chroot
-rbt pcre2 --chroot
-rbt libunistring --chroot
-rbt gettext --chroot
-rbt check --chroot
-rbt libxml2 --chroot
-rbt mtools --chroot
-rbt gzip --chroot
-rbt doxygen --chroot
-rbt strace --chroot
-rbt valgrind --chroot
-rbt graphite2 --chroot
-rbt tcl --chroot
-rbt expect --chroot
-rbt dejagnu --chroot
-rbt patch --chroot
-rbt libogg --chroot
-rbt sqlite --chroot
-rbt libpciaccess --chroot
-rbt libdrm --chroot
-rbt pixman --chroot
-rbt llvm --chroot
-rbt enchant --chroot
-# Compiling glibc should come last:
-rbt glibc --chroot --do-not-symlink --do-not-run-ldconfig
-Do not forget to also copy a statically compiled version of busybox.
+Which compile-chain may be used to build up a minimal
+chroot?
 
-Json support in the RBT project
-The package manager called homebrew has support for json files.
+I will try to list the options here, as I use this on
+my system (or a new system):
+
+    rbt make --static --chroot
+    rbt bash --static --chroot # <- This may already suffice.
+    rbt mpfr --chroot
+    rbt gmp --chroot
+    rbt mpc --chroot
+    rbt sed --static --chroot
+    rbt grep --static --chroot
+    rbt coreutils --static --chroot
+    rbt ruby --dontuseconfigureoptions --chroot
+    rbt python --chroot
+    rbt gawk --chroot --static
+    rbt nano --static --chroot
+    # Generate my custom rc-files next:
+    rcfiles --populate-this-dir=/Depot/Chroot/AUTOGENERATED/
+    rcfiles
+    rcfiles --populate-this-dir=/AUTOGENERATED/
+    rbt gcc --chroot --dont-symlink
+    rbt ncurses --dontuseconfigureoptions --chroot
+    rbt zlib --chroot
+    rbt bison --static --chroot
+    rbt m4 --chroot
+    rbt curl --chroot
+    rbt isl --chroot
+    rbt flex --chroot
+    rbt nasm --chroot
+    rbt gc --chroot
+    rbt tar --chroot
+    rbt texinfo --chroot
+    rbt openssl --chroot
+    rbt libelf --chroot
+    rbt elfutils --chroot
+    rbt ccache --chroot
+    rbt lzma  --chroot
+    rbt cmake --chroot
+    rbt file --chroot
+    rbt pkgconfig --chroot
+    rbt gperf --chroot
+    rbt popt --chroot
+    rbt git --chroot
+    rbt pcre1 --chroot
+    rbt pcre2 --chroot
+    rbt libunistring --chroot
+    rbt gettext --chroot
+    rbt check --chroot
+    rbt libxml2 --chroot
+    rbt mtools --chroot
+    rbt gzip --chroot
+    rbt doxygen --chroot
+    rbt strace --chroot
+    rbt valgrind --chroot
+    rbt graphite2 --chroot
+    rbt tcl --chroot
+    rbt expect --chroot
+    rbt dejagnu --chroot
+    rbt patch --chroot
+    rbt libogg --chroot
+    rbt sqlite --chroot
+    rbt libpciaccess --chroot
+    rbt libdrm --chroot
+    rbt pixman --chroot
+    rbt llvm --chroot
+    rbt enchant --chroot
+    # Compiling glibc should come last:
+    rbt glibc --chroot --do-not-symlink --do-not-run-ldconfig
+
+Do not forget to also copy a statically compiled
+version of busybox.
+
+## Json support in the RBT project
+
+The package manager called **homebrew** has support for json files.
 
 Example for using this:
 
-brew info --json
-In August 2020, the possibility to dump (display) the json dataset for a given program was added to the RBT project as well. Additionally, if this is used, a file is generated in the current working directory.
+    brew info --json
+
+In August 2020, the possibility to dump (display) the json
+dataset for a given program was added to the RBT project as well.
+Additionally, if this is used, a file is generated in the 
+**current working directory**.
 
 Usage example for this:
 
-rbt htop --json
-rbt gcc --json
-Give it a try! (For this to work, the expanded cookbook dataset has to exist locally.)
+    rbt htop --json
+    rbt gcc --json
 
-class RBT::Cookbooks::ExpandedCookbook
-class RBT::Cookbooks::ExpandedCookbook has been created in August 2020.
+Give it a try! (For this to work, the expanded cookbook
+dataset has to exist locally.)
 
-The main idea behind this class is that, in the long run, we will use different "backends" for the cookbook dataset (the individual cookbook recipes), including SQL datasets.
+## class RBT::Cookbooks::ExpandedCookbook
 
-That way we the user can decide which variant to use, with different advantages. For example, class RBT::Cookbooks::ExpandedCookbook is quite a bit faster than class RBT::Cookbooks::Cookbook, but not as versatile.
+<b>class RBT::Cookbooks::ExpandedCookbook</b> has been created in <b>August 2020</b>.
 
-Cmake
-cmake is a build system that is becoming increasingly popular these days. For example, the KDE project has transitioned into cmake completely, away from GNU autoconfigure. The GNOME project has transitioned into meson/ninja, though.
+The main idea behind this class is that, in the long run, we will use different
+"backends" for the cookbook dataset (the individual cookbook recipes),
+including SQL datasets.
 
-Anyway - cmake support is available within the RBT project too, to some extent.
+That way we the user can decide which variant to use, with different advantages.
+For example, class RBT::Cookbooks::ExpandedCookbook is quite a bit <b>faster</b>
+than class <b>RBT::Cookbooks::Cookbook</b>, but not as versatile.
 
-If you want to compile specifically via cmake, making use of class RBT::Action::SoftwareManager, then you can use the following instruction on the commandline:
+## Cmake
 
---use-cmake
+**cmake** is a build system that is becoming increasingly
+popular these days. For example, the KDE project has
+transitioned into cmake completely, away from **GNU autoconfigure**.
+The GNOME project has transitioned into meson/ninja, though.
+
+Anyway - **cmake support** is available within the RBT project too,
+to some extent.
+
+If you want to compile specifically via cmake, making use of
+**class RBT::Action::SoftwareManager**, then you can use the following instruction
+on the commandline:
+
+    --use-cmake
+
 Or more specifically have a look at these two examples:
 
-rbt harfbuzz --use-cmake
-rbt zlib --trad --use-cmake
-Note that the target build system has to support cmake, in order for this to work. You can often find out whether cmake-support exists by simply looking as to whether a file called CMakeLists.txt exists.
+    rbt harfbuzz --use-cmake
+    rbt zlib --trad --use-cmake
 
-Auto-generating cmake files does not yet work for the RBT gem alone, but it is on the todo-list, to easily transition between GNU configure and cmake one day.
+Note that the **target build system** has to support cmake, in order
+for this to work. You can often find out whether cmake-support
+exists by simply looking as to whether a file called
+**CMakeLists.txt** exists.
 
-cmake can be a bit annoying to use from the commandline, since the user has to use ALL_CAPS. For instance, to create a release build with optimizations, one has to use the flag -DCMAKE_BUILD_TYPE=Release.
+Auto-generating cmake files does not yet work for the **RBT gem**
+alone, but it is on the todo-list, to easily transition between
+GNU configure and cmake one day.
 
-As that is not very convenient to type, --release has been added to the RBT project.
+cmake can be a bit annoying to use from the commandline, since
+the user has to use ALL_CAPS. For instance, to create a release
+build with optimizations, one has to use the flag
+**-DCMAKE_BUILD_TYPE=Release**.
+
+As that is not very convenient to type, --release has been
+added to the **RBT project**.
 
 Use it like so:
 
-rbt initng --release
-More options may be added in the future like this. For now, only this shortcut to -DCMAKE_BUILD_TYPE=Release exists.
+    rbt initng --release
 
-Copying archives to the current working directory
-If you ever need to copy some archives into the current working directory (pwd), such as if you wish to copy them onto a USB stick, or for any other similar use case, then the following API may be of help to you, accessible via this commandline variant:
+More options may be added in the future like this. For now, only
+this shortcut to **-DCMAKE_BUILD_TYPE=Release** exists.
 
-rbt --copy-these-archives=ruby,php,python
-rbt --copy-archives=kde5_plasma
-The latter in particular will copy all the different KDE5-plasma components onto a USB stick. This was the original use case as to why I have added this functionality - I needed to copy the plasma components to another computer located elsewhere (but accessible via USB stick only), in order to compile these programs on that machine.
+## Copying archives to the current working directory
 
-Note that you could also, in principle, use abbreviations here:
+If you ever need to copy some archives into the **current working
+directory** (pwd), such as if you wish to **copy them onto a
+USB stick**, or for any other similar use case, then the following
+API may be of help to you, accessible via this commandline
+variant:
 
-rbt --copy-these-archives=xorgser
-This would copy the local directory containing the xorg-server tarball, rather than the user being required to input "xorg-server".
+    rbt --copy-these-archives=ruby,php,python
+    rbt --copy-archives=kde5_plasma
 
-In order for this functionality to work, the directory has to exist prior to invoking the above command(s).
+The latter in particular will copy all the different KDE5-plasma
+components onto a USB stick. This was the original use case as
+to why I have added this functionality - I needed to copy the
+plasma components to another computer located elsewhere (but
+accessible via USB stick only), in order to compile these
+programs on that machine.
 
-Take note that in order for this functionality to work, you must have already downloaded these programs into local directories. Currently the RBT project does not automate these downloads for you (although it would be simple to add
+Note that you could also, in principle, **use abbreviations**
+here:
 
-we will see when this functionality is actually required).
-If you only wish to copy a single source archive to the current working directory then you can use an API such as the following:
+    rbt --copy-these-archives=xorgser
 
-rbt --copy-source=php
+This would copy the local directory containing the xorg-server
+tarball, rather than the user being required to input "xorg-server".
+
+In order for this functionality to work, the directory has to
+exist prior to invoking the above command(s).
+
+Take note that in order for this functionality to work, you
+must have already downloaded these programs into local 
+directories. Currently the **RBT** project does not automate
+these downloads for you (although it would be simple to add
+- we will see when this functionality is actually required).
+
+If you only wish to copy a single source archive to the
+current working directory then you can use an API such
+as the following:
+
+    rbt --copy-source=php
+
 A few aliases exist to the above, such as:
 
-rbt --copy-this-archive=bison
-I am not yet sure whether I should unify this distinction (archive versus archives) or not, but for the time being, do not be too confused that the code makes an internal distinction between a single archive, and multiple archives (August 2020).
+    rbt --copy-this-archive=bison
 
-class RBT::Action::Cookbooks::MultiUrlDisplayer
-class RBT::Action::Cookbooks::MultiUrlDisplayer can be used to quickly show several programs and their associated remote URLs to their respective source archive on the commandline. In order for this to work, naturally, these have to be part of a component, and registered in the cookbooks.
+I am not yet sure whether I should unify this distinction
+(**archive** versus **archives**) or not, but for the time 
+being, do not be too confused that the code makes an internal 
+distinction between a single archive, and multiple archives 
+(**August 2020**).
 
-Since as of April 2024 this class is now part of the Action submodule, and thus an actionable component of the RBT suite.
+## class RBT::Action::Cookbooks::MultiUrlDisplayer
 
-Let's look at a specific usage example to demonstrate this functionality:
+<b>class RBT::Action::Cookbooks::MultiUrlDisplayer</b> can be used to quickly 
+show several programs and their associated remote URLs to their
+respective source archive on the commandline. In order for
+this to work, naturally, these have to be part of a component,
+and registered in the cookbooks.
 
-require 'rbt/actions/individual_actions/cookbooks/multi_url_displayer/multi_url_displayer.rb'
+Since as of April 2024 this class is now part of the Action
+submodule, and thus <b>an actionable component of the RBT suite</b>.
 
-RBT::Action::Cookbooks::MultiUrlDisplayer.new(ARGV)
-RBT::Action::Cookbooks::MultiUrlDisplayer.new('kde-plasma5')
-RBT::Action::Cookbooks::MultiUrlDisplayer.new('plasma5')
-RBT::Action::Cookbooks::MultiUrlDisplayer.new('audio_suite')
-Or, simpler, since as of April 2024:
+Let's look at a specific usage example to demonstrate this
+functionality:
 
-RBT.action(:MultiUrlDisplayer, :audio_suite)
-Or from the commandline, via multi_url_displayer:
+   require 'rbt/actions/individual_actions/cookbooks/multi_url_displayer/multi_url_displayer.rb'
 
-multi_url_displayer plasma5
-The output will show all remote URLs of, for example, the KDE5 plasma components.
+    RBT::Action::Cookbooks::MultiUrlDisplayer.new(ARGV)
+    RBT::Action::Cookbooks::MultiUrlDisplayer.new('kde-plasma5')
+    RBT::Action::Cookbooks::MultiUrlDisplayer.new('plasma5')
+    RBT::Action::Cookbooks::MultiUrlDisplayer.new('audio_suite')
+
+Or, simpler, since as of <b>April 2024</b>:
+
+    RBT.action(:MultiUrlDisplayer, :audio_suite)
+
+Or from the commandline, via <b>multi_url_displayer</b>:
+
+    multi_url_displayer plasma5
+
+The output will show all remote URLs of, for example,
+the KDE5 plasma components.
 
 Example listing:
 
-plasmabrowserintegration:    https://download.kde.org/stable/plasma/5.19.4/plasma-browser-integration-5.19.4.tar.xz
-plasmanano:                  https://download.kde.org/stable/plasma/5.19.4/plasma-nano-5.19.4.tar.xz
-plasmaphonecomponents:       https://download.kde.org/stable/plasma/5.19.4/plasma-phone-components-5.19.4.tar.xz
-kwaylandserver:              https://download.kde.org/stable/plasma/5.19.4/kwayland-server-5.19.4.tar.xz
+    plasmabrowserintegration:    https://download.kde.org/stable/plasma/5.19.4/plasma-browser-integration-5.19.4.tar.xz
+    plasmanano:                  https://download.kde.org/stable/plasma/5.19.4/plasma-nano-5.19.4.tar.xz
+    plasmaphonecomponents:       https://download.kde.org/stable/plasma/5.19.4/plasma-phone-components-5.19.4.tar.xz
+    kwaylandserver:              https://download.kde.org/stable/plasma/5.19.4/kwayland-server-5.19.4.tar.xz
+
 On my computer system the output this will generate is as follows (as an image):
 
+<img src="https://i.imgur.com/vC3Zfyt.png" style="margin: 1em">
 
+If you are only interested in the raw URL entries, on the
+right side, without the leading name, such as when you wish
+to use wget to batch-download this easily, try any of the
+following variants from the commandline:
 
-If you are only interested in the raw URL entries, on the right side, without the leading name, such as when you wish to use wget to batch-download this easily, try any of the following variants from the commandline:
+    multi_url_displayer plasma5 --show-only-URLs
+    multi_url_displayer plasma5 --only-URLs
+    multi_url_displayer plasma5 --show-only-urls
+    multi_url_displayer plasma5 --raw
 
-multi_url_displayer plasma5 --show-only-URLs
-multi_url_displayer plasma5 --only-URLs
-multi_url_displayer plasma5 --show-only-urls
-multi_url_displayer plasma5 --raw
-Support for Windows
-One goal for the RBT project is to work on Windows, even in a restricted environment such as cmd.exe.
+## Support for Windows
 
-However had, for now this is ... not working. But you can try RBT in WSL1 or WSL2 (Windows Subsystem for Linux). There, RBT works just fine. I am currently (September 2020) testing how well it works and making adjustments to the RBT code base as a consequence. Stay tuned for more updates here - eventually I think I may get RBT to work even with msys2, thus adding another option (more flexibility) for the RBT suite of programs.
+One goal for the RBT project is to work on Windows, even in a restricted
+environment such as **cmd.exe**.
 
-Changelog for the RBT scripts
-Years ago I decided to no longer maintain a changelog for the RBT scripts, since there is some maintenance time associated with it.
+However had, for now this is ... not working. But you can try RBT in
+WSL1 or WSL2 (Windows Subsystem for Linux). There, RBT works just
+fine. I am currently (September 2020) testing how well it works and
+making adjustments to the RBT code base as a consequence. Stay tuned
+for more updates here - eventually I think I may get RBT to work 
+even with msys2, thus adding another option (more flexibility) for
+the RBT suite of programs. 
 
-However had, in September 2020 I changed this opinion a bit - the RBT project may sometimes include some changes, in particular some bug fixes here and there. This way users may occasionally check here and see whether they may want to upgrade.
+## Changelog for the RBT scripts
 
-On 02.09.2020 (2nd of september 2020) an annoying bug was fixed where symlinks in the post-install section were linked to the name "m", rather than there real name. So for example, the vte-2.91 binary was linked to "m", rather than "vte". I kept on having symlinks to "m" all the time, which made no sense, until I finally tracked this annoying bug down and squished it.
+Years ago I decided to no longer maintain a changelog for the RBT scripts,
+since there is some maintenance time associated with it.
 
-Compiling several programs in one go (Chain-Compiling)
-Compiling several programs one-after-the-other is what the RBT tools will refer to as chain-compiling.
+However had, in September 2020 I changed this opinion a bit - the RBT 
+project may sometimes include some changes, in particular some bug
+fixes here and there. This way users may occasionally check here and
+see whether they may want to upgrade.
 
-It is handled by the ruby script called chain_compile.rb, class RBT::ChainCompile. The code can be found within the file called $RBT/utility_scripts/chain_compile.rb
+On 02.09.2020 (2nd of september 2020) an annoying bug was fixed where 
+symlinks in the post-install section were linked to the name "m", 
+rather than there real name. So for example, the vte-2.91 binary 
+was linked to "m", rather than "vte". I kept on having symlinks to
+"m" all the time, which made no sense, until I finally tracked this
+annoying bug down and squished it.
 
-This script allows you to compile several programs in one go, thus making your life easier if you need to compile several programs quickly.
+## Compiling several programs in one go (Chain-Compiling)
 
-There are basically two ways to trigger this.
+Compiling several programs one-after-the-other is what the RBT
+tools will refer to as <i>chain-compiling</i>.
 
-lem 'The first one uses Installer.rb, i.e. the file we aliased to compile earlier on.
+It is handled by the ruby script called chain_compile.rb,
+<b class="crimson">class RBT::ChainCompile</b>. The code
+can be found within the file called
+$RBT/utility_scripts/chain_compile.rb
+
+This script allows you to compile several programs in one go, thus
+making your life easier if you need to compile several programs
+quickly.
+
+There are basically <b>two ways</b> to trigger this.
+
+lem 'The first one uses Installer.rb, i.e. the file we aliased to
+`compile` earlier on.
 
 The syntax for this is:
 
-rbt sdl wrap # This is no longer working. I removed this feature 
-             # for now. If you need this feature, use "chained sdl"
-             # instead.
+    rbt sdl wrap # This is no longer working. I removed this feature 
+                 # for now. If you need this feature, use "chained sdl"
+                 # instead.
 
-rbt sdl chained
-Because the above idiom may be commonly used, you may omit the last argument if you prepend a @ to the name.'
+    rbt sdl chained
+
+Because the above idiom may be commonly used, you may omit the 
+last argument if you prepend a <b class="yel">@</b> to the name.'
 
 For example:
 
-rbt @sdl
+    rbt @sdl
+
 In this regard, @ acts as a shortcut for wrap/chained mode.
 
-However, there were a few design problems, and for now this is disabled - use "chained sdl" instead. One day I may reenable this feature.
+However, there were a few design problems, and for now this is
+disabled - use "chained sdl" instead. One day I may reenable
+this feature.
 
 The other way uses chained directly. Example:
 
-chained sdl
-Personally I prefer the latter version "chained sdl", mostly because I feel it is cleaner to use another command for compiling multiple programs in one go.
+    chained sdl
 
-In this example chained is aliased to ChainedCompiling.rb.
+Personally I prefer the latter version <b>"chained sdl"</b>, 
+mostly because I feel it is cleaner to use another command 
+for compiling multiple programs in one go.
 
-In later versions I switched to "chained" command instead of chained.
+In this example <b>chained</b> is aliased to 
+<b>ChainedCompiling.rb</b>.
+
+In later versions I switched to "chained" command instead
+of chained.
 
 Examples with some modular xorg chains follow:
 
-chained xorg_protos
-chained xorg_apps
-The above commands would compile several xorg related programs.
+    chained xorg_protos
+    chained xorg_apps
 
-This is also doable from within rbt itself, as of June 2017. Issue this command:
+The above commands would compile several xorg related
+ programs.
 
-rbt protos
-To find out which chain is used, simply look at the cookbook_chained_programs.yml file.
+This is also doable from within rbt itself, as of
+June 2017. Issue this command:
 
-If you only want to compile a single program from within that chain for some reason, you can use specific positions.'
+    rbt protos
+
+To find out which chain is used, simply look 
+at the <b>cookbook_chained_programs.yml</b> file.
+
+If you only want to compile a single program from within
+that chain for some reason, you can use specific positions.'
 
 For example:
 
-chained xorg_apps 3
-would compile the third program of xorg_apps. (At the time of this writing, this program would be beforelight)
+    chained xorg_apps 3
 
-The default is also to report the size of the tarballs used in this chained compilation process - this can be altered via the config file. (At March 2009 this was not a very sophisticated solution - it needs to be heavily improved.)
+would compile the third program of xorg_apps. 
+(At the time of this writing, this program would be 
+<b>beforelight</b>)
 
-The info for compiling several programs at once is written (and can thus be changed) inside chained_programs.yml'
+The default is also to report the size of the tarballs used in
+this chained compilation process - this can be altered via the
+config file. (At March 2009 this was not a very sophisticated
+solution - it needs to be heavily improved.)
 
-cat $RBT_COOKBOOK_DIRECTORY/cookbook_chained_programs.yml
-Showing the components of a chained compile setup via the commandline
-If you wish to quickly see all components that belong to, e. g. the compile chain forming xfce, then you can use this variant:
+The info for compiling several programs at once is written 
+(and can thus be changed) inside 
+<span class="lightblue marl2em">chained_programs.yml</span>'
 
-rbt --show-components=xfce
+    cat $RBT_COOKBOOK_DIRECTORY/cookbook_chained_programs.yml
+
+## Showing the components of a chained compile setup via the commandline
+
+If you wish to quickly see all components that belong to, e. g. the
+compile chain forming xfce, then you can use this variant:
+
+    rbt --show-components=xfce
+
 Similarly to do so for ruby, try:
 
-rbt --show-components=ruby_addons
-Chained compilation
-The term chained compilation simply refers to programs that are compiled one-after-the-other, in a compile chain.
+    rbt --show-components=ruby_addons
 
-For example, if you wish to install (compile, that is) the mate-desktop then you need the necessary libraries.
+## Chained compilation
 
-The yaml file chained_programs.yml keeps track of such compile chains. That file is edited manually; in the future it may be useful to automatically analyse all dependencies of a given program, but code support for this has not (yet) been added to RBT.
+The term **chained compilation** simply refers to programs
+that are compiled one-after-the-other, in a compile chain.
+
+For example, if you wish to install (compile, that is) the
+mate-desktop then you need the necessary libraries.
+
+The yaml file chained_programs.yml keeps track of such compile
+chains. That file is edited manually; in the future it may
+be useful to automatically analyse all dependencies of a
+given program, but code support for this has not (yet) been
+added to RBT.
 
 To compile the mate-desktop, for example, try:
 
-rbt --chained=mate
+    rbt --chained=mate
+
 To compile xfce, try:
 
-rbt --chained=xfce
-Take note that this is not very sophisticated right now. A proper dependency manager requires more error checking and error handling, whereas the current variant in RBT is simple - and stupid.
+    rbt --chained=xfce
+
+Take note that this is not very sophisticated right now. A
+proper dependency manager requires more error checking
+and error handling, whereas the current variant in RBT
+is simple - and stupid.
 
 Some aliases to the above exist, such as the following:
 
-rbt --chained=kde5_porting_aids # if you wish to compile the KDE5 porting aids
-Compile chain
-Several programs require the compilation of prior, other programs. For example, KDE or KDE Plasma or mate-desktop.
+    rbt --chained=kde5_porting_aids # if you wish to compile the KDE5 porting aids
 
-If you want to find out which programs are part of a particular chain, you can try any of the following:
+## Compile chain
 
-rbt --show-chain=plasma
-rbt --show-compile-chain-of=mate
-The first variant would show the proper compile chain that ought to be usable for KDE plasma; the second variant would show the proper compile-chain for the *mate-desktop.
+Several programs require the <b>compilation of prior, other programs</b>.
+For example, KDE or KDE Plasma or mate-desktop.
 
-Simply pass in the argument of the compile-chain that you seek. Note that the main class that handles this on the commandline, class RBT::ShowCompileChain, will do a little bit sanitizing in order to find proper and plausible compile-chains.
+If you want to find out which programs are part of a particular
+chain, you can try any of the following:
 
-Note that you can also batch-compile various components that are listed that way, as they are registered in the file chained_programs.yml.
+    rbt --show-chain=plasma
+    rbt --show-compile-chain-of=mate
 
-For example, to try to batch-compile the KDE5 applications framework, you can try the following command:
+The first variant would show the proper compile chain that ought to be
+usable for KDE plasma; the second variant would show the proper 
+compile-chain for the **mate-desktop*.
 
-rbt --batch-compile=kde_apps
-rbt --batch-compile=kde-plasma
+Simply pass in the argument of the compile-chain that you seek. Note that
+the main class that handles this on the commandline, class
+**RBT::ShowCompileChain**, will do a little bit sanitizing in order to
+find proper and plausible compile-chains.
+
+Note that you can also batch-compile various components that are listed
+that way, as they are registered in the file **chained_programs.yml**.
+
+For example, to try to batch-compile the KDE5 applications framework,
+you can try the following command:
+
+    rbt --batch-compile=kde_apps
+    rbt --batch-compile=kde-plasma
+
 Or, simpler:
 
-rbt --kde-framework
-rbt --compile-kde-framework
-Keep in mind that the prior dependencies ought to have been installed already for this to work (that is, to have compiled successfully before).
+    rbt --kde-framework
+    rbt --compile-kde-framework
 
-Since as of July 2018, a few simpler shortcuts exist as well.
+Keep in mind that the **prior dependencies** ought to have been installed
+already for this to work (that is, <b>to have compiled successfully</b>
+before).
 
-For example, to compile all programs of the KDE5 foundation, you can simply use the following command:
+Since **as of July 2018**, a few simpler shortcuts exist as well.
 
-rbt --compile-kde-foundation
-You can also manually specify which programs you may wish to batch-compile (that is, to compile them one after the other). The following example shows how this can be done:
+For example, to compile all programs of the **KDE5 foundation**,
+you can simply use the following command:
 
-rbt --compile-these-programs=make,sed,awk,coreutils,utillinux,gawk
-This would specifically compile these programs in the given order, e. g. starting with make, over to sed, awk, coreutils, utillinux and finally gawk.
+    rbt --compile-kde-foundation
 
-Since as of 25.12.2019 it is also possible to compile the first n programs of, for example, KDE.
+You can also manually specify which programs you may wish to
+**batch-compile** (that is, to compile them one after the
+other). The following **example** shows how this can be done:
+
+    rbt --compile-these-programs=make,sed,awk,coreutils,utillinux,gawk
+
+This would specifically compile these programs in the given order,
+e. g. starting with **make**, over to **sed**, **awk**,
+**coreutils**, **utillinux** and finally **gawk**.
+
+Since as of **25.12.2019** it is also possible to compile the first
+n programs of, for example, KDE.
 
 For example:
 
-rbt --kde1-first=10
-rbt --kde1-first=20
-This would compile the first 10 or first 20 programs of the KDE5 foundation stack. Why has this functionality been added?
+    rbt --kde1-first=10
+    rbt --kde1-first=20
 
-I did not want to have to remember the names; instead, I just wanted to tell to RBT that I want to compile the first 10 or 20 etc.. programs of said stack.
+This would compile the first 10 or first 20 programs of the 
+**KDE5 foundation** stack. Why has this functionality been
+added?
+
+I did not want to have to remember the names; instead, I just wanted
+to tell to RBT that I want to compile the first 10 or 20 etc.. 
+programs of said stack.
 
 The first part here, "kde1", is an alias to "KDE5 foundation".
 
-More such aliases may be added in the future, but for now this has to suffice.
+More such aliases may be added in the future, but for now this
+has to suffice.
 
-class RBT::Chainer - the chainer
-This is the chainer!
+## class RBT::Chainer - the chainer
 
-The class was added some day in October 2020. The idea for RBT::Chainer is simple:
+This is the **chainer**!
 
-Pass a name of a program to it, and if said program is part of a "compile chain", the whole compile chain is compiled. That way, you can use any member of the compile chain in order to compile it. I needed this because I do not want to have to remember to which compile chain a particular member belongs to, when working on the commandline.
+The class was added some day in October 2020. The idea for
+RBT::Chainer is simple:
+
+Pass a name of a program to it, and if said program is part
+of a "compile chain", the whole compile chain is compiled.
+That way, you can use any member of the compile chain
+in order to compile it. I needed this because I do not want
+to have to remember to which compile chain a particular
+member belongs to, when working on the commandline.
 
 So, for example:
 
-chainer libxmu
-This would compile the compile chain where libxmu is a member of; in this context, this would be xorg_libraries.
+    chainer libxmu
+
+This would compile the compile chain where libxmu is a member 
+of; in this context, this would be **xorg_libraries**.
 
 Or another example:
 
-chainer khotkeys
-This would compile kde5_plasma.
+    chainer khotkeys
 
-I believe this class may be somewhat useful in some cases, so a bin/chainer file was also added.
+This would compile **kde5_plasma**.
 
-Specifically run autoconf before compilation begins
-Sometimes you may have to trigger "autoconf", as some programs do not come with a configure script. The --use-autoconf commandline flag can be used for this.
+I believe this class may be somewhat useful in some cases,
+so a **bin/chainer** file was also added.
+
+## Specifically run autoconf before compilation begins
+
+Sometimes you may have to trigger "autoconf", as some programs
+do not come with a **configure** script. The **--use-autoconf**
+commandline flag can be used for this.
 
 Example:
 
-rbt tiff --ntrad --use-autoconf
-Bootstrapping on a new system
-Since as of November 2020, the following option attempts to compile the missing and outdated programs, if the gem called environment_information is available.
+    rbt tiff --ntrad --use-autoconf
+
+## Bootstrapping on a new system
+
+Since as of November 2020, the following option attempts to
+compile the missing and outdated programs, if the gem called
+environment_information is available.
 
 So:
 
-gem install environment_information
+    gem install environment_information
+
 And then:
 
-rbt --intelligent-bootstrap
-The name "intelligent" is a misnomer. Right now it is not intelligent; it simply grabs all missing entries, then will attempt to compile them one after the other, starting with the smallest program first (otherwise these will be appended to the array, and be handled last).
+    rbt --intelligent-bootstrap
 
-Checking a remote git repository
-If you wish to quickly download the git-source of a program, say binutils, you could use any of the following options:
+The name "intelligent" is a misnomer. Right now it is not
+intelligent; it simply grabs all missing entries, then
+will attempt to compile them one after the other, starting
+with the smallest program first (otherwise these will be
+appended to the array, and be handled last).
 
-rbt binutils --check-source
-rbt binutils --git
-rbt mpv --git-download
-This would, in principle, work for all programs that are hosted via git. A requirement is that the .yml file at hand has the corresponding git_url: setting set to a valid value - a remote URL. See the file binutils.yml for an example of this. Without such an entry, the git checkout can, quite logically, never work.
+## Checking a remote git repository
 
-Do note that the method in use here will also automatically rename the downloaded directory and create a .tar.xz file from that as well. This is mostly a convenience feature, since I tend to store those .tar.xz files anyway. If you don't need it, just disregard that feature and delete the file, or re-package as you want it to.
+If you wish to quickly download the git-source of a program,
+say **binutils**, you could use any of the following options:
 
-Since as of November 2020 another way exist as well, a bit shorter than the above:
+    rbt binutils --check-source
+    rbt binutils --git
+    rbt mpv --git-download
 
-rbt --git-clone=htop
-The difference there is that you simply specify the program last, e. g. via the --git-clone= commandline switch.
+This would, in principle, work for all programs that are
+hosted via git. A requirement is that the .yml file at hand
+has the corresponding **git_url**: setting set to a valid
+value - a remote URL. See the file **binutils.yml** for
+an example of this. Without such an entry, the git checkout
+can, quite logically, never work.
 
-Copying all headers to the current working directory
-If you want to copy all .h files from, say, glibc, to the current working directory, then you could do it via this commandline flag:
+Do note that the method in use here will also automatically
+rename the downloaded directory and create a .tar.xz file
+from that as well. This is mostly a convenience feature,
+since I tend to store those .tar.xz files anyway. If you
+don't need it, just disregard that feature and delete
+the file, or re-package as you want it to.
 
-rbt glibc --copy-headers-from=/usr/include
-I needed this functionality so that I could copy a glibc version installed into the /usr or / prefix, into /Programs/Glibc/VERSION_NUMBER/include/.
+Since as of <b>November 2020</b> another way exist as well,
+a bit shorter than the above:
+
+    rbt --git-clone=htop
+
+The difference there is that you simply specify the program
+last, e. g. via the **--git-clone=** commandline switch.
+
+## Copying all headers to the current working directory
+
+If you want to copy all .h files from, say, glibc, to the current
+working directory, then you could do it via this commandline 
+flag:
+
+    rbt glibc --copy-headers-from=/usr/include
+
+I needed this functionality so that I could copy a glibc version
+installed into the **/usr** or **/** prefix, into
+**/Programs/Glibc/VERSION_NUMBER/include/**.
 
 There also exists a slightly simply API:
 
-rbt glibc --copy-headers
-rbt glibc --copy-headers-into-pwd
-rbt glibc --copy-headers-to-pwd
-The two variants are not completely the same, though. The second variant will only copy .h files that reside in an AppDir-like prefix, so it is more likely to fail. It will, however had, never pick up any possibly incorrect .h files from /usr/include/.
+    rbt glibc --copy-headers
+    rbt glibc --copy-headers-into-pwd
+    rbt glibc --copy-headers-to-pwd
 
-Glib-schemata
-Some programs, such as evince, require a .xml file that is installed into a certain directory.
+The two variants are not completely the same, though. The second
+variant will only copy .h files that reside in an AppDir-like
+prefix, so it is more likely to fail. It will, however had,
+never pick up any possibly incorrect .h files from **/usr/include/**.
 
-You can enable symlink-action of that .xml file by issuing the following command:
+## Glib-schemata
 
-rbt ntrad --use-glib-scheme
+Some programs, such as <b>evince</b>, require a .xml file that is
+installed into a certain directory.
+
+You can enable symlink-action of that .xml file by issuing the
+following command:
+
+    rbt ntrad --use-glib-scheme
+
 Note that this has not been tested extensively though.
 
-Determine to which program a particular .h file in /usr/include/ or an executable in /usr/bin/ may belong to
-If you ever do want to find out to which program a particular .h file (header file) belongs to, you can make use of the class RBT::QueryHeaderToPackage for this task.
+## Determine to which program a particular .h file in /usr/include/ or an executable in /usr/bin/ may belong to
+
+If you ever do want to find out to which program a particular .h
+file (header file) belongs to, you can make use of the class
+**RBT::QueryHeaderToPackage** for this task.
 
 A specific usage example in ruby follows:
 
-RBT::QueryHeaderToPackage.new('/usr/include/')
-You can also do so from the commandline, if your target is the /usr/include/ hierarchy.
+    RBT::QueryHeaderToPackage.new('/usr/include/')
+
+You can also do so from the commandline, if your target is the
+**/usr/include/** hierarchy.
 
 Example:
 
-rbt --query-headers
-You can designate another target directory to be checked for .h files, via a commandline flag such as:
+    rbt --query-headers
 
-rbt --query-headers=/usr/local/include/
-This functionality also works for binaries found under /usr/bin/, by issuing something like:
+You can designate another target directory to be checked for
+.h files, via a commandline flag such as:
 
-rbt --query-programs
-rbt --query-programs?
-rbt --attribute?
+    rbt --query-headers=/usr/local/include/
+
+This functionality also works for binaries found under **/usr/bin/**,
+by issuing something like:
+
+    rbt --query-programs
+    rbt --query-programs?
+    rbt --attribute?
+
 This is equivalent to the following ruby code:
 
-RBT::QueryBinaryToPackage.new('/usr/bin/')
-If you want to determine all headers of, say, the program called ruby then you can issue the following command:
+    RBT::QueryBinaryToPackage.new('/usr/bin/')
 
-rbt --headers-of=ruby
-Using header files such as ao.h or udev.h as input for compilation
-class RBT::Headers is a helper class that can map the given input at hand, if it is a header file such as ao.h, to the corresponding program at hand - which is libao in this case.
+If you want to determine all headers of, say, the program called
+**ruby** then you can issue the following command:
 
-This also works if you wish to use a .h header file as compile input and don't care about the program name; or do not remember the name of the program.
+    rbt --headers-of=ruby
+
+## Using header files such as ao.h or udev.h as input for compilation
+
+**class RBT::Headers** is a helper class that can map the
+given input at hand, if it is a header file such as **ao.h**,
+to the corresponding program at hand - which is **libao**
+in this case.
+
+This also works if you wish to use a .h header file as compile
+input and don't care about the program name; or do not remember
+the name of the program.
 
 Consider the following:
 
-rbt udev.h ntrad
-This would replace udev.h with eudev, and compile it in a non-traditional (== AppDir) way.
+    rbt udev.h ntrad
 
-This functionality has been added in November 2019, but it is quite experimental at this time. My personal recommendation is to use the real name of the program, because using the .h as name can lead to errors (such as when different programs use the same .h file, for example).
+This would replace **udev.h** with **eudev**, and compile it in
+a non-traditional (== **AppDir**) way.
 
-On the other hand, the functionality was specifically added because sometimes you just don't care about to which program a particular .h file belongs, yet still wish to compile/install it, so that is the rationale as to why that functionality has been added.
+This functionality has been added in **November 2019**, but it is
+quite experimental at this time. My personal recommendation is
+to use the real name of the program, because using the .h as name
+can lead to errors (such as when different programs use the
+same .h file, for example).
 
-The clang compiler and LLVM support
-LLVM offers the clang compiler. Compiling most programs should be possible via clang. The content of the configuration file use_this_compiler.yml tells RBT::Action::SoftwareManager which compiler to favour. If clang is available, and the content of the file use_this_compiler.yml is clang, then clang will be used - otherwise RBT::Action::SoftwareManager will default to gcc, as the latter is more commonly used than clang (in 2020 at the least).
+On the other hand, the functionality was specifically added because
+sometimes you just don't care about to which program a particular
+.h file belongs, yet still wish to compile/install it, so that
+is the rationale as to why that functionality has been added.
 
-The environment variable RBT_USE_THIS_COMPILER can overrule the content of this yaml file if it is set, so you will always have a way to toggle the behaviour when you desire to do so, even without tampering with yaml files. (From within ruby code, you can modify it via ENV['RBT_USE_THIS_COMPILER'] = compiler_to_use_goes_in_here.)
+## The clang compiler and LLVM support
 
-To find out which compiler will be used you can use the following from the commandline:
+**LLVM** offers the **clang compiler**. Compiling most programs should
+be possible via **clang**. The content of the configuration file
+**use_this_compiler.yml** tells RBT::Action::SoftwareManager which compiler to
+favour. If clang is available, and the content of the file
+use_this_compiler.yml is clang, then clang will be used - 
+otherwise RBT::Action::SoftwareManager will default to **gcc**, as the latter is
+more commonly used than clang (in 2020 at the least).
 
-rbt --compiler?
-If you wish to compile not only LLVM from source, but also the clang-compiler and the compiler-rt add-ons, then you can use the following commandline to do so:
+The environment variable **RBT_USE_THIS_COMPILER** can overrule 
+the content of this yaml file **if it is set**, so you will
+always have a way to toggle the behaviour when you desire to
+do so, even without tampering with yaml files. (From within
+ruby code, you can modify it via
+**ENV['RBT_USE_THIS_COMPILER'] = compiler_to_use_goes_in_here**.)
 
-rbt llvm --include-clang-for-compilation
-rbt llvm --compile-clang
-Make sure that you have the necessary archive tarballs in the corresponding directories for this to work, though. (This last step is a bit hackish so don't expect this to work flawlessly.)
+To find out which compiler will be used you can use the following
+from the commandline:
 
-Take note that you do not necessarily have to compile llvm first with clang support; you can first compile llvm, and then at a later time also compile clang.
+    rbt --compiler?
 
-You can also permanently enable clang on the commandline.
+If you wish to compile not only LLVM from source, but also the
+**clang-compiler** and the **compiler-rt add-ons**, then you
+can use the following commandline to do so:
+
+    rbt llvm --include-clang-for-compilation
+    rbt llvm --compile-clang
+
+Make sure that you have the necessary archive tarballs in the
+corresponding directories for this to work, though. (This
+last step is a bit hackish so don't expect this to work
+flawlessly.)
+
+Take note that you do not necessarily have to compile llvm
+first **with** clang support; you can first compile llvm, and
+then at a later time also compile clang.
+
+You can also permanently enable **clang** on the commandline.
 
 Example for this:
 
-rbt --permanently-use-clang
-(This will modify the .yml file, so you can do the very same on your own; the feature exists merely as a convenience tool, to avoid users having to modify a .yml file's content as such.)
+    rbt --permanently-use-clang
 
-You can use clang rather than gcc to compile something.
+(This will modify the .yml file, so you can do the very same on your 
+own; the feature exists merely as a convenience tool, to avoid users 
+having to modify a .yml file's content as such.)
 
-To enable this functionality for the current compilation run, do use any of the following variants:
+You can use <b>clang</b> rather than <b>gcc</b> to compile something.
 
-rbt htop --use-clang
-rbt htop --clang
-rbt htop --do-use-clang
-ry php --ntrad --do-use-clang
-Traditional compiling
-Traditional compiling, in the context of the RBT project, means compilation with the implied prefix being /usr/. This is typically done via --prefix=/usr/, for projects that make use of GNU configure.
+To enable this functionality for the current compilation run, do use
+any of the following variants:
 
-As I use this variant quite frequently, and have a use case to download newer packages from source, code was added to the RBT project that allows me to automatically update a program if a remote URL was given. This has been combined via the alias I use called trad (for "traditional").
+    rbt htop --use-clang
+    rbt htop --clang
+    rbt htop --do-use-clang
+    ry php --ntrad --do-use-clang
+
+## Traditional compiling
+
+Traditional compiling, in the context of the RBT project, means
+**compilation** with the implied prefix being **/usr/**. This is
+typically done via **--prefix=/usr/**, for projects that make
+use of **GNU configure**.
+
+As I use this variant quite frequently, and have a use case to
+download newer packages from source, code was added to the
+RBT project that allows me to automatically update a program
+if a remote URL was given. This has been combined via the
+alias I use called **trad** (for "traditional").
 
 A specific usage example for this follows:
 
-trad https://mesa.freedesktop.org/archive/mesa-20.2.3.tar.xz
-This will download this remote tarball (if it exists there), register it as the new up-to-date version locally, and then proceed to compile it into the /usr/ hierarchy. Quite nifty and convenient! \o/
+    trad https://mesa.freedesktop.org/archive/mesa-20.2.3.tar.xz
 
-Of course this is no guarantee that it will compile, but many programs are well-written and compile fairly decently and easily.
+This will download this remote tarball (if it exists there),
+register it as the new up-to-date version locally, and then
+proceed to compile it into the **/usr/** hierarchy. Quite
+nifty and convenient! **\o/**
 
-The shortcut option called --backup
-Sometimes you want to combine --ntrad and --dontsymlink. For that particular use case, the following aggregate entry point exists as a commandline option to rbt.
+Of course this is no guarantee that it will compile, but many
+programs are well-written and compile fairly decently and
+easily.
+
+## The shortcut option called --backup
+
+Sometimes you want to combine --ntrad and --dontsymlink. For
+that particular use case, the following **aggregate entry point**
+exists as a commandline option to **rbt**.
 
 Example for this:
 
-rbt libx11 --backup
-This will compile the program called libx11 into a prefix such as /home/Programs/Libx11/1.7.0/ or wherever else your programs-directory is set to, and it will NOT symlink by default. This option was added merely due to convenience, as I had to use the above quite a lot over the years.
+    rbt libx11 --backup
 
-The functionality was added in November 2020.
+This will compile the program called **libx11** into
+a prefix such as **/home/Programs/Libx11/1.7.0/** or wherever else
+your programs-directory is set to, and it will **NOT** symlink
+by default. This option was added merely due to convenience,
+as I had to use the above quite a lot over the years.
 
-Note that the name --backup is not a great name, so this may be subject to change one day. However had, when and if this happens, the section here will also be updated; I just wanted the functionality, to avoid having to pass both --ntrad --dontsymlink.
+The functionality was added in **November 2020**.
 
-The XFCE desktop environment
-If you wish to compile all of XFCE into a single directory, such as /Programs/Xfce/4.12.0/, then you can issue the following command:
+Note that the name --backup is not a great name, so this **may**
+be subject to change one day. However had, when and if this
+happens, the section here will also be updated; I just wanted
+the functionality, to avoid having to pass both
+**--ntrad --dontsymlink**.
 
-rbt --xfce-into-standalone-dir
+## The XFCE desktop environment
+
+If you wish to compile all of **XFCE** into a single directory, such
+as <b>/Programs/Xfce/4.12.0/</b>, then you can issue the following
+command:
+
+    rbt --xfce-into-standalone-dir
+
 Some aliases exist to the above commandline flag, such as:
 
-rbt --compile-xfce-components-into-one-standalone-directory
-rbt --compile-xfce-components-into-a-standalone-directory
-rbt --compile-xfce-components-into-standalone-directory
-rbt --use-xfce-prefix
-This functionality is experimental as of October 2018, and relies on a hardcoded path; but in the future, this functionality may be extended to more components than just XFCE, and not depend on a hardcoded path. When it is changed, this section will also be changed (hopefully :) ).
+    rbt --compile-xfce-components-into-one-standalone-directory
+    rbt --compile-xfce-components-into-a-standalone-directory
+    rbt --compile-xfce-components-into-standalone-directory
+    rbt --use-xfce-prefix
 
-If you wish to compile all of XFCE into a standalone directory, but wish to do so in a step-like fashion e. g. in order to reduce errors, have a look at the subsection here in this page called Environment settings.
+This functionality is experimental as of **October 2018**, and
+relies on a hardcoded path; but in the future, this functionality
+may be extended to more components than just XFCE, and not depend
+on a hardcoded path. When it is changed, this section will also
+be changed (hopefully :) ).
+
+If you wish to compile all of XFCE into a **standalone directory**,
+but wish to do so in a step-like fashion e. g. in order to
+reduce errors, have a look at the subsection here in this
+page called **Environment settings**.
 
 You can also batch-compile the XFCE components via:
 
-rbt --compile-xfce
-If you already have XFCE installed/compiled, then you can use the following code to report the versions of the XFCE components:
+    rbt --compile-xfce
 
-require 'rbt/utility_scripts/report_xfce_version.rb'
+If you already have XFCE installed/compiled, then you can use
+the following code to report the versions of the XFCE
+components:
 
-RBT::ReportXfceVersion.new
+    require 'rbt/utility_scripts/report_xfce_version.rb'
+
+    RBT::ReportXfceVersion.new
+
 Commandline invocation:
 
-rbt --report-xfce-version
-Note that this will depend on a few .pc files, and a few binaries, so it may not work for all systems as-is.
+    rbt --report-xfce-version
 
-class RBT::ReportXfceVersion has been added on 23.02.2020, so it is fairly new and not yet complete. Keep this in mind. In the long run, this notice will be removed or changed, once everything works very well in this regard (that is reporting the XFCE version).
+Note that this will depend on a few .pc files, and a few
+binaries, so it may not work for all systems as-is.
 
-Using meson
-You can use the build-system meson but keep in mind that this requires python version 3.x and the build tool called "ninja".
+**class RBT::ReportXfceVersion** has been added on **23.02.2020**,
+so it is fairly new and not yet complete. Keep this in mind.
+In the long run, this notice will be removed or changed, once
+everything works very well in this regard (that is reporting
+the XFCE version).
 
-You can then add a dependency on meson in the individual cookbook file, at required_deps_on:, or you can use meson via the commandline switch --use-meson.
+## Using meson
+
+You can use the build-system meson but keep in mind that this
+requires python version 3.x and the build tool called "ninja".
+
+You can then add a dependency on meson in the individual cookbook
+file, at **required_deps_on:**, or you can use meson via the
+commandline switch **--use-meson**.
 
 Usage example:
 
-rbt glib --use-meson
-Note that presently (2018) this does not work perfectly well, which may be understandable since meson/ninja is fairly new, compared to GNU autoconfigure-based systems.
+    rbt glib --use-meson
 
-If you want to prevent automatic download of source code, such as via git, through meson, then this option could be given to meson:
+Note that presently (2018) this does not work perfectly well,
+which may be understandable since meson/ninja is fairly new,
+compared to GNU autoconfigure-based systems.
 
---wrap-mode=nodownload
-highest.rb - showing the highest n programs
-You can use the file highest.rb to show the largest local programs, a Top 50 for instance, by doing:
+If you want to prevent automatic download of source code,
+such as via git, through meson, then this option could
+be given to meson:
 
-rbt --highest
-You can specify an argument to it to denote how many programs to find. It defaults to 20 programs right now if no such argument is supplied.
+    --wrap-mode=nodownload
 
-rbt --highest=50
-find_alternative_archive.rb
-^^^ Use this when you could not find an existing archive first. After this has failed, we can try to check if we have to download a new archive.
 
-new_cookbook.rb
-^^^ Use this when you wish to create a new yaml file.
+## highest.rb - showing the highest n programs
 
-scan_source_archive.rb
-^^^ Use this when you wish to scan through the local Source archive. This class will report which entries are missing.
+You can use the file highest.rb to show the largest local
+programs, a Top 50 for instance, by doing:
 
-merge_cookbooks.rb
-^^^ Use this when you wish to create one big new cookbookfile containing all other entries.
+    rbt --highest
 
-generate_machomebrew_formula.rb
+You can specify an argument to it to denote how many
+programs to find. It defaults to 20 programs right now
+if no such argument is supplied.
+
+    rbt --highest=50
+
+## find_alternative_archive.rb
+
+^^^ Use this when you could not find an existing
+    archive first. After this has failed, we can try
+    to check if we have to download a new archive.
+
+## new_cookbook.rb
+
+^^^ Use this when you wish to create a new yaml
+    file.
+
+## scan_source_archive.rb
+
+^^^ Use this when you wish to scan through the
+    local Source archive. This class will report which
+    entries are missing.
+
+## merge_cookbooks.rb
+
+^^^ Use this when you wish to create one big
+    new cookbookfile containing all other entries.
+
+## generate_machomebrew_formula.rb
+
 ^^^ Use this to generate a machomebrew formula.
 
-GNOME
-The gnome-project tarball archives can be found here, as I last verified this in April 2021:
+## GNOME
 
-https://download.gnome.org/sources/?C=M&O=D
-The releases usually have even numbers for stable releases; and odd numbers for unstable releases.
+The gnome-project tarball archives can be found here,
+as I last verified this in **April 2021**:
 
-I myself used to stay on the "bleeding edge", thus using unstable releases, to try to see what is new - but after some time, running into problems here and there, I am now convinced that the stable releases are MUCH much better, since you will have less problems or errors in the long run. Every time I encountered a problem related to an unstable release, I ended up investing via my time trying to fix the problem at hand, which often was not possible, and quite frustrating anyway. In the end I did waste way too much time for too little gain, so I decided to stop making use of unstable gnome releases. Past that point I am using only the stable tarball releases, unless there is some specific reason why not - but, 99% of the time I settle for stable releases.
+    https://download.gnome.org/sources/?C=M&O=D
 
-I added some code to the class that automatically download gnome-packages, to only consider even numbers when doing such a download. But this behaviour can be toggled via a commandline switch on the commandline, anyway - so the subsection here just explains as to why I personally favour stable gnome releases really.
+The releases usually have even numbers for **stable releases**; and
+odd numbers for **unstable releases**.
 
-You can also compile the gnome components in an ordered fashion if you wish to compile them, by making use of numbers. (This also works for kde, xfce, xorg, mate-desktop, games and the like.)
+I myself used to stay on the "bleeding edge", thus using unstable
+releases, to try to see what is new - but after some time, running
+into problems here and there, I am now convinced that the stable
+releases are MUCH much better, since you will have less problems
+or errors in the long run. Every time I encountered a problem related
+to an unstable release, I ended up investing via my time trying to
+fix the problem at hand, which often was not possible, and quite
+frustrating anyway. In the end I did waste way too much time for
+too little gain, so I decided to stop making use of unstable
+gnome releases. Past that point I am using only the stable 
+tarball releases, unless there is some specific reason why
+not - but, 99% of the time I settle for stable releases.
+
+I added some code to the class that automatically download 
+gnome-packages, to only consider **even numbers** when doing
+such a download. But this behaviour can be toggled via a
+**commandline switch** on the commandline, anyway - so 
+the subsection here just explains as to why I personally 
+**favour stable gnome releases** really.
+
+You can also compile the gnome components in an ordered fashion
+if you wish to compile them, by making use of **numbers**.
+(This also works for kde, xfce, xorg, mate-desktop, games
+and the like.)
 
 Specific examples:
 
-rbt gnome1
-rbt gnome2
-rbt gnome3
-rbt gnome4
+    rbt gnome1
+    rbt gnome2
+    rbt gnome3
+    rbt gnome4
+
 And so forth.
 
-To batch compile most of these components, try:
+To **batch compile** most of these components, try:
 
-rbt gnome1..200
-If you want to see what entries are available on the gnome FTP site, try this API:
+    rbt gnome1..200
 
-RBT.show_the_gnome_ftp_listing
-class RBT::ShowVersionsOfThesePrograms
-class RBT::ShowVersionsOfThesePrograms can be used to quickly compare the versions of different programs.
+If you want to see what entries are available on the
+gnome FTP site, try this API:
+
+    RBT.show_the_gnome_ftp_listing
+
+## class RBT::ShowVersionsOfThesePrograms
+
+class **RBT::ShowVersionsOfThesePrograms** can be used to
+quickly compare the versions of different programs.
 
 You can use it from the commandline via bin/show_versions_of_these_programs:
 
-show_versions_of_these_programs ruby python php
+    show_versions_of_these_programs ruby python php
+
 Or from within ruby itself via:
 
-require 'rbt/utility_scripts/show_versions_of_these_programs.rb'
-RBT::ShowVersionsOfThesePrograms.new(%w( ruby python php ))
+    require 'rbt/utility_scripts/show_versions_of_these_programs.rb'
+    RBT::ShowVersionsOfThesePrograms.new(%w( ruby python php ))
+
 The output would then be something like:
 
-ruby:                          3.0.0
-python:                        3.9.3
-php:                           8.0.3
-This is really just a quick way to show the versions of programs you may be interested in. If typing show_versions_of_these_programs is too cumbersome simply alias it to a shorter name.
+    ruby:                          3.0.0
+    python:                        3.9.3
+    php:                           8.0.3
 
-Removing outdated (local) archives
-I tend to batch-update the RBT project quite frequently. As a result of this, I end up having lots of local archives, usually in the .tar.xz format. Since removing these manually is annoying and time-consuming, a class has been added on 07.01.2020, called RBT::RemoveOutdatedArchives.
+This is really just a quick way to show the versions of programs
+you may be interested in. If typing **show_versions_of_these_programs**
+is too cumbersome simply alias it to a shorter name.
 
-This class is presently not very flexible, since I only used it to remove a specific set of programs - mostly KDE-related packages.
+## Removing outdated (local) archives
+
+I tend to batch-update the RBT project quite frequently. As a result
+of this, I end up having lots of local archives, usually in the
+**.tar.xz** format. Since removing these manually is annoying
+and time-consuming, a class has been added on **07.01.2020**,
+called **RBT::RemoveOutdatedArchives**.
+
+This class is presently not very flexible, since I only used it
+to remove a specific set of programs - mostly KDE-related
+packages.
 
 For example, one specific invocation may go like so:
 
-require 'rbt/utility_scripts/remove_outdated_archives.rb'
+    require 'rbt/utility_scripts/remove_outdated_archives.rb'
 
-RBT::RemoveOutdatedArchives.new(:kde_plasma)
-This would remove all outdated archives belonging to the KDE Plasma stack.
+    RBT::RemoveOutdatedArchives.new(:kde_plasma)
+
+This would **remove all outdated archives** belonging to the
+**KDE Plasma stack**.
 
 More examples:
 
-RBT::RemoveOutdatedArchives.new(:kde_applications)
-RBT::RemoveOutdatedArchives.new(:kde_foundation)
-The above would remove all outdated KDE5 applications (if all goes well), respectively all of KDE5 foundation.
+    RBT::RemoveOutdatedArchives.new(:kde_applications)
+    RBT::RemoveOutdatedArchives.new(:kde_foundation)
+
+The above would remove all outdated KDE5 applications (if all
+goes well), respectively all of KDE5 foundation.
 
 I run this from the commandline actually, so I tend to use:
 
-remove_outdated_archives :kde_applications
-In the future this class may be extended, to allow more groups of programs to be batch-removed, but for now this has to suffice.
+    remove_outdated_archives :kde_applications
 
-Also note that whenever this paragraph refers to KDE, it refers to KDE5. This may change in the future (e. g. KDE6 release and similar), but for now (January 2020) it is up-to-date and thus correct.
+In the future this class may be extended, to allow more groups
+of programs to be batch-removed, but for now this has to suffice.
 
-Recommendation: do not invoke this class unless you are absolutely certain that you want to get rid of local, outdated archives. I recommend to do a backup onto an external storage device first in general. As said, this class was not very thoroughly tested, so be cautious.
+Also note that whenever this paragraph refers to KDE, it refers
+to **KDE5**. This may change in the future (e. g. KDE6 release
+and similar), but for now (January 2020) it is up-to-date and
+thus correct.
 
-In May 2022 a toplevel action was added for this functionality. It is available via:
+**Recommendation**: do not invoke this class unless you are
+<b>absolutely certain</b> that you want to get rid of local, outdated
+archives. I recommend to do a backup onto an external storage
+device first in general. As said, this class was not very
+thoroughly tested, so be cautious.
 
-RBT.actions(:remove_outdated_archives, :kde_apps)
-ccache
-There is a configuration setting available as part of the RBT project, called use_ccache. If this is set to yes, aka enabled*, then the RBT project, in particular **RBT::Action::SoftwareManager, will attempt to make use of ccache for compilation.
+In <b>May 2022</b> a toplevel action was added for this
+functionality. It is available via:
 
-This may speed up repeated compilation cycles of the same program quite efficiently, so if you compile many different programs again and again, it is recommended to use ccache.
+    RBT.actions(:remove_outdated_archives, :kde_apps)
 
-If you do not need ccache or do not have it on the given computer system, you can disable the use of ccache permanently, as far as RBT is concerned, via the following commandline invocation:
+## ccache
 
-rbt --permanently-disable-ccache
-Alternatively you can also modify the file at rbt/yaml/configuration/use_ccache.yml, which is where the configuration setting as to whether to use ccache or not, resides. The allowed values are true or false, yes and no (for all configuration values, by the way. I tend to use yes and no in yaml files quite a lot; these get sanitized to true or false internally, anyway).
+There is a configuration setting available as part of the **RBT
+project**, called <b>use_ccache</b>. If this is set to yes, aka 
+**enabled*, then the RBT project, in particular **RBT::Action::SoftwareManager**,
+will attempt to **make use of ccache for compilation**.
 
-If you only want to disable ccache for the current run, then you can use any of the following variants (here we assume that the target program you wish to compile is fluxbox):
+This **may speed up repeated compilation cycles** of the same
+program quite efficiently, so if you compile many different
+programs again and again, it is recommended to use ccache.
 
-rbt fluxbox --disable-ccache 
-rbt fluxbox --do-not-use-ccache
-rbt fluxbox --no-ccache
-rbt fluxbox --ccache-
+If you do not need ccache or do not have it on the given computer
+system, you can disable the use of ccache **permanently**, as far
+as RBT is concerned, via the following commandline invocation:
+
+    rbt --permanently-disable-ccache
+
+Alternatively you can also modify the file at
+<b>rbt/yaml/configuration/use_ccache.yml</b>, which is
+where the configuration setting as to whether to use
+ccache or not, resides. The allowed values are
+<b>true</b> or <b>false</b>, <b>yes</b> and <b>no</b> (for
+all configuration values, by the way. I tend to use yes and
+no in yaml files quite a lot; these get sanitized to true
+or false internally, anyway).
+
+If you only want to **disable ccache for the current run**, then you
+can use any of the following variants (here we assume that the
+target program you wish to compile is <b>fluxbox</b>):
+
+    rbt fluxbox --disable-ccache 
+    rbt fluxbox --do-not-use-ccache
+    rbt fluxbox --no-ccache
+    rbt fluxbox --ccache-
+
 A manual use of ccache would go like this:
 
-ccache gcc # files to be compiled go in here
-In November 2021 I noticed a few compile-related issues with ccache. Although it may be possible to solve these issues, having spent a few hours on these indirect problems led me to change the default for RBT. So ccache is now disabled by default. You can easily enable it as-is with the information displayed above; if you build a LFS/BLFS, or want a clean system from scratch then you should perhaps consider avoiding ccache, until that system is sane. I had no issues on slackware, for instance, but on devuan and debian I had issues, most likely because the base system is somewhat set up incorrectly - says a lot about the debian maintainers too ...
+    ccache gcc # files to be compiled go in here
 
-Learn from the oldschool folks, people - learn from slackware.
+In **November 2021** I noticed a few compile-related issues
+with ccache. Although it may be possible to solve these
+issues, having spent a few hours on these indirect problems
+led me to change the default for **RBT**. So ccache is
+now **disabled** by default. You can easily enable it 
+as-is with the information displayed above; if you build
+a LFS/BLFS, or want a clean system from scratch then 
+you should perhaps consider avoiding ccache, until that
+system is **sane**. I had no issues on slackware, for
+instance, but on **devuan** and **debian** I had issues,
+most likely because the base system is somewhat set up
+incorrectly - says a lot about the debian maintainers
+too ...
 
-Installing the registered python addons
-The RBT project has some python add-ons registered. These can be installed via either of the following:
+Learn from the oldschool folks, people - learn from
+**slackware**.
 
-rbt --enable-python-addons
-rbt --compile-python-addons
-rbt --python-addons
-You will most likely not need this, since this is catered to my own use case (since I have to batch-install things on a new computer, for example). But the option exists nonetheless since as of March 2019. I use it typically after I have compiled a new python version. Once that python version has been installed, I compile (or just install) the python addons.
+## Installing the registered python addons
 
-Show which files will be installed by a given program
-To show which files are installed by, say, the program called htop, try this:
+The RBT project has some python add-ons registered. These can
+be installed via either of the following:
 
-rbt htop --show_which_files_will_be_installed
-Forgetful API design
-Over the years, tons of code has been added or removed; some of the existing code is not called.
+    rbt --enable-python-addons
+    rbt --compile-python-addons
+    rbt --python-addons
 
-Since I tend to forget what exists and what does not, I added this subsection in 2021 as a brief memo for (future) me.
+You will most likely not need this, since this is catered to my
+own use case (since I have to batch-install things on a new
+computer, for example). But the option exists nonetheless
+since as of **March 2019**. I use it typically after I have
+compiled a new python version. Once that python version has
+been installed, I compile (or just install) the python
+addons.
 
-return_possible_abbreviation_to_this_input(i)
-# ^^^ This can be used to return all possible
-# abbreviations to the given input at hand.
-Changing the prefix in any given Makefile
-Since as of 03.05.2019 (3rd May of 2019) it is now possible to change the prefix in a given Makefile, via class RBT::ChangePrefix.
+## Show which files will be installed by a given program
 
-This class can modify the PREFIX variable in that Makefile. It was added so that we can change the PREFIX target of any Makefile on the fly.
+To show which files are installed by, say, the program
+called **htop**, try this:
 
-Currently it does not have a lot of configurable options but this may change in the future. For the time being, the first argument should be the path to the Makefile that should be modified.
+    rbt htop --show_which_files_will_be_installed
 
-Configure options saved
-The configure options that were used in order to compile a particular program at hand, will be stored in the file called configure_command_database.yml, which can typically be found at a location such as:
+## Forgetful API design
 
-/Depot/Temp/rbt/configure_command_database.yml
+Over the years, tons of code has been added or removed; some
+of the existing code is not called.
+
+Since I tend to forget what exists and what does not, I
+added this subsection in 2021 as a brief memo for (future)
+me.
+
+    return_possible_abbreviation_to_this_input(i)
+    # ^^^ This can be used to return all possible
+    # abbreviations to the given input at hand.
+
+## Changing the prefix in any given Makefile
+
+Since as of **03.05.2019** (3rd May of 2019) it is now possible to change
+the prefix in a given **Makefile**, via class **RBT::ChangePrefix**.
+
+This class can modify the PREFIX variable in that Makefile. It was added
+so that we can change the PREFIX target of any Makefile on the fly.
+
+Currently it does not have a lot of configurable options but this may
+change in the future. For the time being, the first argument should
+be **the path to the Makefile** that should be modified.
+
+## Configure options saved
+
+The **configure options** that were used in order to compile a particular
+program at hand, will be stored in the file called
+<b>configure_command_database.yml</b>, which can typically be found
+at a location such as:
+
+    /Depot/Temp/rbt/configure_command_database.yml
+
 The entries in this yaml file may look like this:
 
-minuet: cmake -DCMAKE_INSTALL_PREFIX=/usr/ /Depot/Temp/rbt/minuet-18.12.3/ 2>&1
+  minuet: cmake -DCMAKE_INSTALL_PREFIX=/usr/ /Depot/Temp/rbt/minuet-18.12.3/ 2>&1
 
-So the format is - first comes the name of the program; followed by the particular command that was invoked.
+So the format is - first comes **the name of the program**; followed by the
+particular command that was invoked.
 
-Note that this will only be stored in that .yml file if no problem was encountered during compilation - thus, assumingly, would mean that the compilation was successful or at the least continued without major problems/errors encountered.
+Note that this will **only** be stored in that .yml file if no problem was
+encountered during compilation - thus, assumingly, would mean that the
+compilation was successful or at the least continued without major
+problems/errors encountered.
 
-The primary reason as to why this functionality was added was so that the user can quickly look at that .yml file and see which configure option was used to compile a program. This may be useful at some later time when you wish to find out what went wrong (if something went wrong) or perhaps if you can not access the xorg-server but need to re-compile something.
+The primary reason as to why this functionality was added was so that the
+user can quickly look at that .yml file and see which configure option was
+used to compile a program. This may be useful at some later time when you
+wish to find out what went wrong (if something went wrong) or perhaps
+if you can not access the xorg-server but need to re-compile something.
 
-Configure options and passing additional configure options
-The content of the various .yml files distributed as part of the rbt gem may have an entry called configure_options. For example, the htop.yml entry may look like this:
+## Configure options and passing additional configure options
 
-disable-unicode
-Which will be expanded into --disable-unicode if that .yml file is expanded.
+The content of the various .yml files distributed as part of the **rbt**
+gem may have an entry called **configure_options**. For example,
+the **htop.yml** entry may look like this:
 
-The entries that are listed under configure_options are usually those that will keep track of the arguments that a user may normally pass as arguments towards GNU ./configure, such as --enable-static or --disable-shared.
+    disable-unicode
+
+Which will be expanded into **--disable-unicode** if that .yml file
+is **expanded**.
+
+The entries that are listed under **configure_options** are usually
+those that will keep track of the arguments that a user may normally
+pass as arguments towards GNU **./configure**, such as
+**--enable-static** or **--disable-shared**.
 
 For example:
 
-./configure --prefix=/usr --enable-static
-Over the years, new and different build systems, such as meson/cmake or cmake, emerged. They often would use different syntax as well, such as -Dlibpsl=false for meson or -DDONT_USE_INTERNAL_LUA=Off for cmake.
+    ./configure --prefix=/usr --enable-static
 
-Largely because of these reasons, the rbt project had to allow for configure options sent to meson or cmake specifically, due to the difference in syntax.
+Over the years, new and different build systems, such as meson/cmake or
+cmake, emerged. They often would use different syntax as well, 
+such as **-Dlibpsl=false** for meson or **-DDONT_USE_INTERNAL_LUA=Off**
+for cmake.
 
-In December 2018, a new syntax was added for the .yml files, for meson specifically, called meson_configure_options. A similar option exists for cmake, called cmake_configure_options.
+Largely because of these reasons, the rbt project had to allow for
+configure options sent to meson or cmake specifically, due to the
+difference in syntax.
 
-An example for this in regards to meson can be found in the file networkmanager.yml.
+In **December 2018**, a new syntax was added for the .yml files,
+for meson specifically, called **meson_configure_options**. A
+similar option exists for cmake, called **cmake_configure_options**.
 
-Some of these configure options can be directly passed to an instance of class RBT::Action::SoftwareManager as well.
+An example for this in regards to meson can be found in the 
+file **networkmanager.yml**.
 
-For example, if you wish to use --enable-shared then you can simply pass it, like so:
+Some of these configure options can be directly passed to an
+instance of class **RBT::Action::SoftwareManager** as well.
 
-rbt htop --enable-shared
-This will simply pass in the configure option --enable-shared.
+For example, if you wish to use **--enable-shared** then you can
+simply pass it, like so:
+
+    rbt htop --enable-shared
+
+This will simply pass in the configure option **--enable-shared**.
 
 In the future, more options will probably be added and allowed.
 
-Some options may be translated into the equivalent cmake-option, if cmake is used, but for the time being, this is presently (November 2018) not well supported. Stay tuned for later changes in this regard.
+Some options may be translated into the equivalent cmake-option, if
+cmake is used, but for the time being, this is presently (November
+2018) not well supported. Stay tuned for later changes in this regard.
 
-Since as of November 2019, the configure options that were used to compile a program, will also be stored into the target file at Resources/configure_options.md if it was installed via an AppDir prefix (e. g. /Programs/Ruby/2.6.5/ and similar), if the compilation was a success and if there was at the least one configure options - thus, empty Strings will not be stored.
+Since as of **November 2019**, the configure options that were used
+to compile a program, will also be stored into the target
+file at **Resources/configure_options.md** if it was installed
+via an AppDir prefix (e. g. **/Programs/Ruby/2.6.5/** and
+similar), if the compilation was a success **and** if there
+was **at the least one** configure options - thus, empty Strings
+will not be stored.
 
-Note that this file will only store the actual configure_options that were used; for the full configure-like command, see the corresponding file in the same directory, whose name is full_configure_command.md.
+Note that this file will **only** store the actual configure_options
+that were used; for the **full** configure-like command, see the
+corresponding file in the same directory, whose name is
+**full_configure_command.md**.
 
-In the older rbt releases, it was possible to re-purpose the entry called configure_options for cmake and meson. In April 2021 this was deprecated. It is cleaner, simpler and more logical to use separate entries for GNU configure, meson/ninja and cmake instead.
+In the older rbt releases, it was possible to re-purpose the
+entry called **configure_options** for cmake and meson. In
+**April 2021** this was deprecated. It is cleaner, simpler
+and more logical to use separate entries for GNU configure,
+meson/ninja and cmake instead.
 
-md5sum
-The expanded cookbook dataset includes the md5sum entry for a given archive, such as foobar-1.0.tar.xz.
+## md5sum
 
-This md5sum entry is calculated locally on my home system, where the "md5sum" binary is run on a .tar.xz archive. So if you get another value, have a look whether you get the same value when the package is also in the .tar.xz format.
+The expanded cookbook dataset includes the **md5sum** entry
+for a given archive, such as **foobar-1.0.tar.xz**.
 
-Sinatra-interface
-The RBT project comes with a small sinatra-wrapper, for use on the www.
+This md5sum entry is calculated locally on my home system, where
+the "md5sum" binary is run on a .tar.xz archive. So if you get
+another value, have a look whether you get the same value
+when the package is also in the **.tar.xz format**.
 
-Not a lot of functionality is available as of yet (November 2020), but more functionality will be added over the coming months and years. Stay tuned. Some more functionality was added in April 2021. In July 2021 the sinatra part now depends on the cyberweb gem - it is easier for me to maintain the www-related code via another project in general,
+## Sinatra-interface
 
-Right now you can view the content of a registered program. In the future you may also be able to install/ or remove/ an installed program. Be careful when doing so, as things may not work properly - if possible use the commandline variant instead, as that one has been tested more thoroughly.
+The RBT project comes with a small **sinatra-wrapper**, for use
+on the **www**.
 
-Note that you can start the sinatra-interface from the commandline via:
+Not a lot of functionality is available as of yet (**November 2020**),
+but more functionality will be added over the coming months and
+years. Stay tuned. Some more functionality was added in
+**April 2021**. In **July 2021** the sinatra part now depends
+on the **cyberweb gem** - it is easier for me to maintain
+the www-related code via another project in general,
 
-rbt --sinatra
-rbt --sinatra & # if you want to start it as a background service
-To view a program, either use the input-field, or simply use an URL such as this:
+Right now you can **view** the content of a registered 
+program. In the future you may also be able to install/
+or remove/ an installed program. Be careful when doing
+so, as things may not work properly - if possible use 
+the commandline variant instead, as that one has been
+tested more thoroughly.
 
-http://localhost:5580/view/php
-Replace the URL port with whatever port you want to use; this is currently hardcoded and defined in the constant USE_THIS_PORT.
+Note that you can start the sinatra-interface from
+the commandline via:
 
-In order for this to work, the program must have been registered as part of the RBT project.
+    rbt --sinatra
+    rbt --sinatra & # if you want to start it as a background service
 
-You can also display the available programs, via the sinatra interface, by using:
+To view a program, either use the input-field, or
+simply use an URL such as this:
 
-http://localhost:5580/available_programs
-Note that since as of June 2021, this now depends on the cyberweb project. The reason is that I want to simplify maintaining sinatra-related code, and the cyberweb project handles this for me as-is.
+    http://localhost:5580/view/php
 
-For more documentation, have a look at doc/sinatra/README.md.
+Replace the URL port with whatever port you want to use; this
+is currently hardcoded and defined in the constant
+**USE_THIS_PORT**.
 
-Tab-Completion support for various shells
-Tab completion support exists for some of the commands, for bash, zsh and fish. These are completions that can be invoked when the user hits the tab-key on the keyboard.
+In order for this to work, the program must have been
+registered as part of the RBT project.
 
-In order for this to work, the corresponding file has to be sourced (loaded).
+You can also display the **available programs**, via
+the sinatra interface, by using:
 
-For RBT, making use of tab-completion can simplify compilation. Simply type "rbt", followed by a space, and then the first character of the program that you wish to install, followed by hitting the TAB key. (Do not forget to source the generated file in your shell.)
+    http://localhost:5580/available_programs
 
-Let us contemplate which syntax is to be used to generate these (tab) completions for the RBT project:
+Note that since as of June 2021, this now depends on the cyberweb
+project. The reason is that I want to simplify maintaining
+sinatra-related code, and the cyberweb project handles this
+for me as-is.
 
-rbt --generate-completions
-rbt --generatecompletions
-rbt --completion
-rbt --complete
+For more documentation, have a look at
+**doc/sinatra/README.md**.
+
+## Tab-Completion support for various shells
+
+<b>Tab completion</b> support exists for some of the commands, for **bash**,
+**zsh** and **fish**. These are completions that can be invoked when
+the user hits the <b>tab-key</b> on the keyboard.
+
+In order for this to work, the corresponding file has to be sourced
+(loaded).
+
+For <b>RBT</b>, making use of tab-completion can simplify compilation.
+Simply type "rbt", followed by a space, and then the first character
+of the program that you wish to install, followed by hitting the
+**TAB** key. (Do not forget to source the generated file in your
+shell.)
+
+Let us contemplate which syntax is to be used to
+**generate** these (**tab**) **completions** for
+the RBT project:
+
+    rbt --generate-completions
+    rbt --generatecompletions
+    rbt --completion
+    rbt --complete
+
 The code for this functionality resides in these two files primarily:
 
-rbt/compile/shell.rb
-rbt/utility_scripts/generate_shell_completion.rb
-Now - after you have sourced in this file into your shell, e. g. via source /path/to/the/file.sh, you should be able to use the tab-completions, like so:
+    rbt/compile/shell.rb
+    rbt/utility_scripts/generate_shell_completion.rb
 
-rbt gnomede**TAB**
-rbt k**PRESS TAB KEY HERE**
-TAB in the context above means to press the tab key on the keyboard.
+Now - after you have sourced in this file into your shell, e. g.
+via **source /path/to/the/file.sh**, you should be able to
+use the tab-completions, like so:
 
-The tab-completion shell script can be generated anew via the above .rb file, but since as of 27th March 2019 the shell code for bash and zsh is also distributed with rbt itself directly. This may simplify making use of it, in the event that ruby may not be installed on the host system or some other constraints exist. I source that .sh file in my .bashrc file since that same day.
+    rbt gnomede**TAB**
+    rbt k**PRESS TAB KEY HERE**
 
-If you want to find out where that .sh file exists on your system, try this commandline invocation:
+**TAB** in the context above means **to press the tab key** on
+the keyboard.
 
-rbt --shell-completion?
-In September 2021 the dependency on the gem called generate_shell_completion was removed, though. The functionality is retained, but users are no longer required to install that gem in order to make use of rbt. If you need shell completion support then you are encouraged to install that gem via:
+The **tab-completion shell script** can be **generated anew** via
+the above .rb file, but since as of 27th March 2019 the shell code
+for bash and zsh is also distributed with rbt itself directly.
+This may simplify making use of it, in the event that ruby may
+not be installed on the host system or some other constraints
+exist. I source that **.sh** file in my .bashrc file since that
+same day.
 
-gem install generate_shell_completion
-Showing the last updated programs:
+If you want to find out where that .sh file exists on your system,
+try this commandline invocation:
+
+    rbt --shell-completion?
+
+In **September 2021** the dependency on the gem called
+**generate_shell_completion** was removed, though. The functionality
+is retained, but users are no longer required to install that gem
+in order to make use of **rbt**. If you need shell completion 
+support then you are encouraged to install that gem via:
+
+    gem install generate_shell_completion
+
+## Showing the last updated programs:
+
 Use:
 
-rbt --oldest-programs
-This will show a "table" overview on the commandline starting with the oldest program first (based on the last_update: entry).
+    rbt --oldest-programs
 
-Use random directory names for the extracted archive
-The default compilation cycle may begin with a local archive, such as /home/x/src/htop/htop-3.0.5.tar.xz.
+This will show a "table" overview on the commandline
+starting with the oldest program first (based on the
+**last_update:** entry).
 
-This file may then be extracted into, for instance on my home system, /home/Temp/rbt/htop-3.0.5/. Then htop will be compiled from source, if all goes well.
+## Use random directory names for the extracted archive
 
-Sometimes you may want to compile different variants at the same time. If we then use a hardcoded path, such as for the target directory at /home/Temp/rbt/htop-3.0.5/, then only one program can be compiled.
+The default compilation cycle may begin with a local archive,
+such as /home/x/src/htop/htop-3.0.5.tar.xz.
 
-This is why the commandline option --gibberish has been added in October 2021. You can use other names, which may make more sense for you, so for example:
+This file may then be extracted into, for instance on my
+home system, /home/Temp/rbt/htop-3.0.5/. Then htop will
+be compiled from source, if all goes well.
 
-rbt htop --random-extracted-dir
+Sometimes you may want to compile different variants at
+the same time. If we then use a hardcoded path, such as
+for the target directory at **/home/Temp/rbt/htop-3.0.5/**,
+then only one program can be compiled.
+
+This is why the commandline option **--gibberish** has been
+added in **October 2021**. You can use other names, which
+may make more sense for you, so for example: 
+
+    rbt htop --random-extracted-dir
+
 This would use a randomly named, extracted directory.
 
 For instance:
 
-/home/Temp/rbt/HAoW4jJas1_htop-3.0.5/BUILD_DIRECTORY
+    /home/Temp/rbt/HAoW4jJas1_htop-3.0.5/BUILD_DIRECTORY
+
 This is used mostly to avoid using the same directory name.
 
-That way you can now compile "concurrently" with different options. I use this option sometimes when I want to compile into the /usr/ prefix as well as an AppDir prefix.
+That way you can now compile "concurrently" with different
+options. I use this option sometimes when I want to compile
+into the /usr/ prefix as well as an AppDir prefix.
 
-Note that this does not yet work 100% perfectly, because RBT uses a different variant to compile such programs, based on "logic snapshots" - these are individual steps that are taken. Right now class RBT::Action::SoftwareManager can not handle them perfectly well. In the future this may all be re-organized and work better at one point in time, but for now this has to suffice. The whole compile-logic behind RBT::Action::SoftwareManager became too complex. I will split this up eventually into smaller, logical chunks - perhaps even store them into a yaml file.
+Note that this does not yet work 100% perfectly, because
+RBT uses a different variant to compile such programs,
+based on "logic snapshots" - these are individual steps
+that are taken. Right now class RBT::Action::SoftwareManager can not
+handle them perfectly well. In the future this may all
+be re-organized and work better at one point in time,
+but for now this has to suffice. The whole compile-logic
+behind RBT::Action::SoftwareManager became too complex. I will split
+this up eventually into smaller, logical chunks - perhaps
+even store them into a yaml file.
 
-The manual_steps entry in an individual cookbook .yml file
-Since as of November 2021 a new entry exists that is optional, called manual_steps.
+## The **manual_steps** entry in an individual cookbook .yml file
 
-In order to understand it, let's look at a specific program first. We look at the program called bzip2.
+Since as of November 2021 a new entry exists that is optional,
+called **manual_steps**.
 
-First, have a look at the LFS/BLFS description for bzip2.
+In order to understand it, let's look at a specific program first.
+We look at the program called **bzip2**.
+
+First, have a look at the LFS/BLFS description for **bzip2**.
 
 https://www.linuxfromscratch.org/lfs/view/9.1-systemd/chapter06/bzip2.html
 
-If you look at the raw instructions, these go like something like this:
+If you look at the raw instructions, these go like something like
+this:
 
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
-sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-make -f Makefile-libbz2_so
-make clean
-make
-make PREFIX=/usr install
-cp -v bzip2-shared /bin/bzip2
-cp -av libbz2.so* /lib
-ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
-rm -v /usr/bin/{bunzip2,bzcat,bzip2}
-ln -sv bzip2 /bin/bunzip2
-ln -sv bzip2 /bin/bzcat
-So, one use case for this entry is that we can quickly copy/paste this from the .yml file onto the commandline. But aside from this convenience feature, we can also store additional (or different) compile instructions there, which are available if you invoke rbt.
+    sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+    sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+    make -f Makefile-libbz2_so
+    make clean
+    make
+    make PREFIX=/usr install
+    cp -v bzip2-shared /bin/bzip2
+    cp -av libbz2.so* /lib
+    ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
+    rm -v /usr/bin/{bunzip2,bzcat,bzip2}
+    ln -sv bzip2 /bin/bunzip2
+    ln -sv bzip2 /bin/bzcat
+
+So, one use case for this entry is that we can quickly copy/paste 
+this from the .yml file onto the commandline. But aside from
+this convenience feature, we can also store additional (or
+different) compile instructions there, which are available
+if you invoke **rbt**.
 
 The syntax for this is as follows:
 
-rbt bzip2 --manual-steps # easy to remember!
+    rbt bzip2 --manual-steps # easy to remember!
+
 An alias exists:
 
-rbt bzip2 --ad-hoc # I liked the name --ad-hoc; easy to remember too
-As to how useful that option is remains to be seen. In my experience not many programs need such an entry, but bzip2 in particular is quite annoying to handle, so that feature was added precisely due to bzip2. bzip2 is not the only misbehaving program in this regard, though - there are a few more troublemakers.
+    rbt bzip2 --ad-hoc # I liked the name --ad-hoc; easy to remember too
 
-Note that this will extract into the current working directory, so the behaviour is a bit different to how rbt normally handles programs. The rationale for extracting into the current working directory is that if the user is going to want to use the manual_steps instructions, then this is usually done in a manual manner anyway; thus, it makes sense to continue to work in the same directory. Make sure to be in a directory that could constitute your own working directory.
+As to how useful that option is remains to be seen. In my experience
+not many programs need such an entry, but bzip2 in particular is
+quite annoying to handle, so that feature was added precisely due to
+**bzip2**. **bzip2** is not the only misbehaving program in this
+regard, though - there are a few more troublemakers.
 
-Note that in May 2023 I also got tired of bzip2's horrible Makefile-based installation method. The rbt gem is not yet able to dynamically rewrite Makefiles (stay tuned for the future), but since I need bzip2, I simply added the following ad-hoc method to install it easily:
+Note that this will extract into the current working directory, so
+the behaviour is a bit different to how rbt normally handles
+programs. The rationale for extracting into the current working
+directory is that if the user is going to want to use the
+manual_steps instructions, then this is usually done in a manual
+manner anyway; thus, it makes sense to continue to work in the
+same directory. Make sure to be in a directory that could
+constitute your own working directory.
 
-ry --simple-bzip-installation
-Compiling via the --rootprefix option
+Note that in May <b>2023</b> I also got tired of bzip2's horrible
+Makefile-based installation method. The rbt gem is not yet
+able to dynamically rewrite Makefiles (stay tuned for the
+future), but since I need bzip2, I simply added the following
+ad-hoc method to install it easily:
+
+    ry --simple-bzip-installation
+
+## Compiling via the --rootprefix option
+
 Using the --rootprefix is exactly identical to passing this flag:
 
---prefix=/
+    --prefix=/
+
 Nothing more than that.
 
-The option was added in November 2021 because I needed to compile all coreutils binaries into the /bin/ subdirectory on my home setup, and I needed these to be compiled statically, to avoid any problems during reboot when some shared libraries can not be found.
+The option was added in **November 2021** because I needed to
+compile all coreutils binaries into the /bin/ subdirectory
+on my home setup, and I needed these to be compiled statically,
+to avoid any problems during reboot when some shared libraries
+can not be found.
 
 The exact command I used was:
 
-rbt coreutils --static --rootprefix
-Download the remote documentation from the commandline
-If you want to quickly download the RBT documentation for local display, do this:
+    rbt coreutils --static --rootprefix
 
-rbt --download-documentation
-This was added in November 2021. The reason this commandline flag has been added was because the xorg-server may sometimes not work but you may want to look at the documentation locally, such as via the browser called lynx.
+## Download the remote documentation from the commandline
 
-Future Goals for the RBT suite
-The RBT project may not necessarily have truly grand goals, such as "changing the world of package managers" - the scope of the project is way too limited for that.
+If you want to quickly download the RBT documentation for local
+display, do this:
+
+    rbt --download-documentation
+
+This was added in **November 2021**. The reason this commandline
+flag has been added was because the xorg-server may sometimes
+not work but you may want to look at the documentation locally,
+such as via the browser called **lynx**.
+
+## Future Goals for the RBT suite
+
+The **RBT project** may not necessarily have truly grand goals,
+such as "changing the world of package managers" - the scope of
+the project is way too limited for that.
 
 The primary project's goal is to:
 
-(1) gather information about source code in general (2) be able to present that information to the user, in a transparent manner (3) make use of that data to other programs or software suites, be it on the commandline or via a GUI or via the WWW (4) allow the user to compile/install these programs
+(1) gather information about source code in general
+(2) be able to present that information to the user, in a transparent
+manner
+(3) make use of that data to other programs or software suites,
+be it on the commandline or via a GUI or via the WWW
+(4) allow the user to compile/install these programs
 
-Thus, the project has to be a practical project rather than a visionnairy one.
+Thus, the project has to be a practical project rather than a
+visionnairy one.
 
-But there are some future goals for the RBT project nonetheless.
+But there are some **future goals** for the RBT project nonetheless.
 
-One distinct goal is to translate the instructions stored in the various yaml files, into specific SQL instructions which can be used to populate a SQL table - this is currently (July 2020) not working, but stay tuned; it will eventually work and be properly detailed and documented. The idea behind this is to be able to store all the data stored in the various .yml files, into a single database instead.
+- One distinct goal is to translate the instructions stored in the
+various yaml files, into **specific SQL instructions** which can be
+used to populate a SQL table - this is currently (July 2020) not
+working, but stay tuned; it will eventually work and be properly
+detailed and documented. The idea behind this is to be able to
+store all the data stored in the various .yml files, into a
+single database instead.
 
-Another goal is to use the project in order to create a full, reproducible LFS/BLFS build, in combination with the RBT project.
+- Another goal is to use the project in order to create a full,
+reproducible LFS/BLFS build, in combination with the RBT
+project.
 
-And yet another goal is, similar to the point above, to turn an existing Linux-system into a Linux-system based on an AppDir approach. Note that this is also covered by the RBT project primarily, and ... it does not work yet (July 2020). That means that rather than having files spread all over the place on a system, they will be contained in the respective directory of the given program at hand.
+- And yet another goal is, similar to the point above, to turn
+an existing Linux-system into a Linux-system based on an **AppDir
+approach**. Note that this is also covered by the RBT project
+primarily, and ... it does not work yet (**July 2020**). That means
+that rather than having files spread all over the place on a system,
+they will be contained in the respective directory of the given
+program at hand.
 
 So these are future goals.
 
 Will these be achieved?
 
-This is hard to say - and it has to be explained why this is hard to say.
+This is hard to say - and it has to be explained **why** this is
+hard to say.
 
-The RBT project was always a hobby project. On top of that, I wanted to understand package managers, and how to compile/install different programs from source. I have learned a lot over the years in this regard, but I am not sure how much time I really want to invest into the project in the future. Don't worry: this is not a "I will abandon this project.". It is simply a question to see how much time spent is worth it.
+The RBT project was always a hobby project. On top of that, I wanted
+to understand package managers, and how to compile/install
+different programs from source. I have learned a lot over the years
+in this regard, but I am not sure how much time I really want to
+invest into the project in the future. Don't worry: this is not
+a "I will abandon this project.". It is simply a question to
+see how much time spent is worth it.
 
-I never wanted to have to work professionally on this particular project, that is to work on it, and get paid for it. That would remove the old hobby-aspect. It may be feasible, but even with adequate pay, my vision for life was never about a compile-related software tool to be too overly important. I just wanted to get things to work.
+I never wanted to have to work professionally on this particular
+project, that is to work on it, and get paid for it. That would
+remove the old hobby-aspect. It may be feasible, but even with
+adequate pay, my vision for life was never about a compile-related
+software tool to be too overly important. I just wanted to get
+things to work.
 
-My personal interests are really much closer to synthetic biology, so after considering this for a few years, I have decided to limit the time I spend on other projects. Again - this does not mean that I will abandon this project at all, but in regards to the future goals, the only honest statement to make is that the above would be nice ideas, but they may never be implemented, simply due to lack of time and lack of focused effort. Users of the RBT project should be aware of that.
+My personal interests are really much closer to
+**synthetic biology**, so after considering this for a few
+years, I have decided to **limit** the time I spend on other
+projects. Again - this does not mean that I will abandon
+this project at all, but in regards to the future goals, the
+only honest statement to make is that the above would be
+nice ideas, but they may never be implemented, simply due
+to lack of time and lack of focused effort. Users of the RBT
+project should be aware of that.
 
-I will continue to improve the rbt project of course, including the documentation, and may add some features here and there. But the grand goals may never be achieved, simply due to lack of time and dedicated effort.
+I will continue to improve the rbt project of course, including
+the documentation, and may add some features here and there.
+But the grand goals may never be achieved, simply due to lack
+of time and dedicated effort.
 
-In December 2021 I thought about adding "actions" and "actionable events" to the RBT project. Please look at the subsection Defined actions in the RBT project for more information about this.
+In <b>December 2021</b> I thought about adding "actions" and
+"actionable events" to the RBT project. Please look at the
+subsection **Defined actions in the RBT project** for more
+information about this.
 
-The future is hard to predict, but I do have some ideas on my mind. Not everything seems to be possible in pure Ruby, but who knows - maybe we will include some C. Perhaps integrate crystal.
+The future is hard to predict, but I do have some ideas 
+on my mind. Not everything seems to be possible in pure 
+Ruby, but who knows - maybe we will include some C.
+Perhaps integrate crystal.
 
 I will also include other fancy ideas. Here goes:
 
-Ability to compile a project without being dependent on hardcoded Makefiles, cmake, or whatever.
+- Ability to compile a project without being 
+dependent on hardcoded Makefiles, cmake, or whatever.
 
-Ability to snapshot these compilations at any time, and being able to resume the compile process lateron.
+- Ability to snapshot these compilations at any time,
+and being able to resume the compile process lateron.
 
-Ability to generate Makefiles etc... for projects.
+- Ability to generate Makefiles etc... for projects.
 
-We should realize a generic plugin architecture, so that build types like cmake or scons work easily.
+- We should realize a generic plugin architecture,
+so that build types like cmake or scons work easily.
 
-Installing the Linux Kernel Header files and/or extracting the Linux Kernel archive
-The LFS project has a step where the kernel headers are copied to the /usr/include/ target. I wanted this on a versioned AppDir layout as well, so the following commands were added:
+## Installing the Linux Kernel Header files and/or extracting the Linux Kernel archive
 
-rbt --install-kernel-headers
-rbt --install-linux-headers
-This will essentially copy the important .h files from the linux kernel to the correct target AppDir location, under the corresponding PROGRAMS_DIR (wherever the user has set this; on my system this is /home/Programs/ usually).
+The **LFS project** has a step where the kernel headers are
+copied to the **/usr/include/** target. I wanted this on a
+versioned AppDir layout as well, so the following commands
+were added: 
 
-If you merely wish to extract the Linux Kernel archive into the corresponding target directory specified in the file linux.yml then you can do the following:
+    rbt --install-kernel-headers
+    rbt --install-linux-headers
 
-rbt --extract-linux
-This is simply a convenience feature, not an important one; I wanted to alias extract_linux in bash to simply extract the current linux kernel, and then continue from there.
+This will essentially copy the important .h files from the linux
+kernel to the correct target AppDir location, under the corresponding
+PROGRAMS_DIR (wherever the user has set this; on my system this is
+**/home/Programs/** usually).
 
-You can also install the kernel headers into your home directory, e. g. at /home/name/.
+If you merely wish to extract the Linux Kernel archive into the
+corresponding target directory specified in the file **linux.yml**
+then you can do the following:
+
+    rbt --extract-linux
+
+This is simply a convenience feature, not an important one; I wanted
+to alias **extract_linux** in bash to simply extract the current
+linux kernel, and then continue from there.
+
+You can also install the kernel headers into your home directory,
+e. g. at **/home/name/**.
 
 To do this, use:
 
-rbt --install-kernel-headers-into-the-home-dir
-Determining the log directory for the RBT project
-The RBT project needs a base directory for log files, that is when it attempts to create log files and store these in a directory.
+    rbt --install-kernel-headers-into-the-home-dir
 
-If you want to know where the log directory is on your given system, then you can ask rbt, using this commandline flag:
+## Determining the log directory for the RBT project
 
-rbt rbt_log_dir?
-rbt --log_dir?
-Statistics used by the RBT project in general (and class RBT::CompileStrategies in particular)
-The RBT project includes code that is related to statistics. Furthermore, raw data points are also added, typically into .md files (markdown files).
+The RBT project needs a base directory for log files, that
+is when it attempts to create log files and store these
+in a directory.
 
-To look at a specific example for code pertaining to statistics, have a look at class RBT::CompileStrategies. This class can be used to query how many programs use meson, python, ruby or cmake, in order to be compiled or installed. class RBT::ShowHowManyFilesAreTracked on the other hand can show how many .h header files, binaries, and library files (.so and .a) files are tracked by the RBT project.
+If you want to know where the log directory is on your
+given system, then you can ask rbt, using this
+commandline flag:
 
-Since the latter may be interesting from a historic perspective, this is the result I got after running the latter class on the 15.09.2019 (15th september 2019):
+    rbt rbt_log_dir?
+    rbt --log_dir?
+    
+## Statistics used by the RBT project in general (and class RBT::CompileStrategies in particular)
 
-There are 4512 programs registered in total in the RBT project.
-There are 3616 binaries registered in the RBT project.
-There are 17221 .so / .a library files registered in the RBT project.
-There are 7278 .h header files registered in the RBT project.
-I repeated this on the 12.05.2022 (12th may 2022) and got even more results in this regard:
+The RBT project includes code that is related to **statistics**.
+Furthermore, raw data points are also added, typically into 
+.md files (markdown files).
 
-There are  3756 programs registered in total in the RBT project.
-There are  5531 binaries registered in the RBT project.
-There are 24165 .h header files registered in the RBT project.
-There are 11995 .so / .a library files registered in the RBT project.
-There are   124 .gir files registered in the RBT project.
-There are    11 .m4 files registered in the RBT project.
-(The first result from 2019 appears to be wrong, not sure why. The second result in 2022, though, appears to be correct. So consider the first result to be incorrect and just look at the result from 2022 and past that point.)
+To look at a specific example for **code** pertaining to statistics, have a 
+look at class <b>RBT::CompileStrategies</b>. This class can be used
+to query how many programs use meson, python, ruby or cmake, in
+order to be compiled or installed. class <b>RBT::ShowHowManyFilesAreTracked</b>
+on the other hand can show how many .h header files, binaries, and library
+files (.so and .a) files are tracked by the RBT project.
 
-A module-method allows you to query for the compile strategies used in the registered cookbook files of the RBT project, via:
+Since the latter may be interesting from a <b>historic perspective</b>,
+this is the result I got after running the latter class on the
+15.09.2019 (<b>15th september 2019</b>):
 
-RBT.compile_strategies?
-And from the commandline, you can invoke it via the following invocation:
+    There are 4512 programs registered in total in the RBT project.
+    There are 3616 binaries registered in the RBT project.
+    There are 17221 .so / .a library files registered in the RBT project.
+    There are 7278 .h header files registered in the RBT project.
 
-rbt --compile_strategies?
-If you would like to see a more comprehensive overview over the whole RBT project, and associated statistics, you can do so via either of the following variants:
+I repeated this on the 12.05.2022 (<b>12th may 2022</b>) and got even
+more results in this regard:
 
-rbt --stats?
-rbt --stats?
-This will essentially invoke class RBT::ShowStatistics, which in turn calls the other classes. (Take note that this may take a while, since lots of .yml files may be processed.)
+    There are  3756 programs registered in total in the RBT project.
+    There are  5531 binaries registered in the RBT project.
+    There are 24165 .h header files registered in the RBT project.
+    There are 11995 .so / .a library files registered in the RBT project.
+    There are   124 .gir files registered in the RBT project.
+    There are    11 .m4 files registered in the RBT project.
 
-The cookbook-submodule of the RBT project also includes some statistics, which can be next seen here, displayed (and stored) in the file called rbt/doc/statistics/cookbook_statistics.md:
+(The first result from 2019 appears to be wrong, not sure why. The
+second result in 2022, though, appears to be correct. So consider
+the first result to be incorrect and just look at the result from
+2022 and past that point.)
 
-In April 2021, the output of class RBT::ShowHowManyFilesAreTracked was as follows:
+A module-method allows you to query for the **compile strategies**
+used in the registered cookbook files of the RBT project,
+via:
 
-There are  3725 programs registered in total in the RBT project.
-There are  5500 binaries registered in the RBT project.
-There are 24031 .h header files registered in the RBT project.
-There are 11620 .so / .a library files registered in the RBT project.
-There are   120 .gir files registered in the RBT project.
-There are    11 .m4 files registered in the RBT project.
-This should give you some overview as to how many files are tracked so far, within the RBT project as-is.
+    RBT.compile_strategies?
+
+And from the commandline, you can invoke it via the following
+invocation:
+
+    rbt --compile_strategies?
+
+If you would like to see a more comprehensive overview over
+the whole RBT project, and associated statistics, you can
+do so via either of the following variants:
+
+    rbt --stats?
+    rbt --stats?
+
+This will essentially invoke class **RBT::ShowStatistics**,
+which in turn calls the other classes. (Take note that this
+may take a while, since lots of .yml files may be
+processed.)
+
+The cookbook-submodule of the RBT project also includes some
+statistics, which can be next seen **here**, displayed (and
+stored) in the file called **rbt/doc/statistics/cookbook_statistics.md**:
+
+In **April 2021**, the output of class RBT::ShowHowManyFilesAreTracked was
+as follows:
+
+    There are  3725 programs registered in total in the RBT project.
+    There are  5500 binaries registered in the RBT project.
+    There are 24031 .h header files registered in the RBT project.
+    There are 11620 .so / .a library files registered in the RBT project.
+    There are   120 .gir files registered in the RBT project.
+    There are    11 .m4 files registered in the RBT project.
+
+This should give you some overview as to how many files are 
+tracked so far, within the RBT project as-is.
 
 
+<pre>
 # =========================================================================== #
 # === Statistics for the Cookbooks found in the RBT project
 #
@@ -4887,1003 +9069,1820 @@ This should give you some overview as to how many files are tracked so far, with
 #   → 3781 programs registered as of 02.04.2023.
 #
 # =========================================================================== #
-The number of registered binaries are also kept in a file - specifically look at the file at doc/statistics/n_binaries.md. To show only three entries:
+</pre>
 
-On the 30.04.2021 there were 5497 registered binaries.
-On the 12.05.2022 there were 5531 registered binaries.
-On the 05.02.2023 there were 5651 registered binaries.
-These are executables that reside under the bin/ hierarchy of a given program. As you can see, the number of registered (and thus tracked) programs increases steadily, as more and more programs are added.
 
-Different datasets
-The first, raw material for the dataset is a fairly short .yml file that may contain information specific to the program at hand. For example, files such as ruby.yml or php.yml.
+The number of registered binaries are also kept in a file - 
+specifically look at the file at <b>doc/statistics/n_binaries.md</b>.
+To show only three entries:
+
+    On the 30.04.2021 there were 5497 registered binaries.
+    On the 12.05.2022 there were 5531 registered binaries.
+    On the 05.02.2023 there were 5651 registered binaries.
+
+These are executables that reside under the **bin/** hierarchy
+of a given program. As you can see, the number of registered
+(and thus tracked) programs increases steadily, as more and
+more programs are added.
+
+## Different datasets
+
+The first, raw material for the dataset is a fairly short .yml
+file that may contain information specific to the program at
+hand. For example, files such as <b>ruby.yml</b> or <b>php.yml</b>.
 
 This variant has to be expanded and sanitized, though.
 
-If the end user wishes to skip this step then this short .yml file can be converted into a so-called expanded .yml file (via the commandline rbt --expand-dataset, for instance; you can test this on your computer system. I recommend a Linux system though).
+If the end user wishes to skip this step then this short .yml
+file can be converted into a so-called <b>expanded</b> .yml file
+(via the commandline **rbt --expand-dataset**, for instance;
+you can test this on your computer system. I recommend a Linux
+system though).
 
-Since as of September 2019 an additional, SQL-based way exists. This variant is currently (re)written and requires more testing before it can be added completely. Consider this as work-in-progress for now. In the long run, RBT will optionally allow for the use of a SQLite database in order to allow for faster queries. A positive side aspect of this will be that RBT will work better on windows, since all queries can then be done from a single sqlite database.
+Since as of <b>September 2019</b> an additional, SQL-based way
+exists. This variant is currently (re)written and requires
+more testing before it can be added completely. Consider this
+as work-in-progress for now. In the long run, RBT will
+optionally allow for the use of a SQLite database in 
+order to allow for faster queries. A positive side aspect
+of this will be that RBT will work better on windows, since
+all queries can then be done from a single sqlite database.
 
-In July 2022 a new SQL-specific class was added and the SQL database definition improved.
+In <b>July 2022</b> a new SQL-specific class was added and the
+SQL database definition improved.
 
 The code for this new class can be found here:
 
-require 'rbt/sql/compile_via_sql.rb'
-RBT::CompileViaSQL.new(ARGV)
+    require 'rbt/sql/compile_via_sql.rb'
+    RBT::CompileViaSQL.new(ARGV)
+
 You first have to generate a new SQL database.
 
 You can use the following API for this:
 
-RBT.generate_sql_table
+    RBT.generate_sql_table
+
 Or from the commandline via:
 
-rbt --sql
-This will create a new SQL database which is then used by class RBT::CompileViaSQL for compiling a program from source.
+    rbt --sql
 
-This currently does not work that well, tons of things are missing - but the overall idea is to be able to use a single SQL database, in particular on windows, and compile or install things from source on windows. At a later time we may also turn the windows-specific cookbook, a .yml file, into a SQL database. This may speed up compiling from source on windows, and we could also skip having to install all .yml files - simply use a single SQL database instead. But right now this is limited, so stay tuned for more updates in this regard at a later time.
+This will create a new SQL database which is then
+used by class RBT::CompileViaSQL for compiling 
+a program from source.
 
-You can also query the raw dataset from that sqlite database quickly. I made sure that we can use simple select statemets, such as WHERE PROGRAM_VERSION = to quickly query sub-components as-is.
+This currently does not work that well, tons of
+things are missing - but the overall idea is to
+be able to use a single SQL database, in 
+particular on windows, and compile or install
+things from source on windows. At a later time
+we may also turn the windows-specific cookbook,
+a .yml file, into a SQL database. This may
+speed up compiling from source on windows, 
+and we could also skip having to install all
+.yml files - simply use a single SQL database
+instead. But right now this is limited, so
+stay tuned for more updates in this regard
+at a later time.
 
-The sqlite dataset is currently (August 2022) distributed within the rbt gem, to help you bootstrap the project. However had, it is quite large (almost 1MB already) and since it is generated from the expanded cookbook dataset it is not necessary to distribute it. So this may change in the future. For now it is the way it is, though. If it is changed then the section here will be updated as well.
+You can also query the raw dataset from that sqlite
+database quickly. I made sure that we can use
+simple select statemets, such as <b>WHERE
+PROGRAM_VERSION =</b> to quickly query sub-components
+as-is.
 
-Databases and the RBT project
-This subsection was created in August 2022. In the long run it will contain information about how RBT works with different databases. For now, though, the existing information is spread out among different subsections here; this may be remedied at a later point in time.
+The sqlite dataset is currently (August 2022) distributed
+within the rbt gem, to help you bootstrap the project.
+However had, it is quite large (almost 1MB already)
+and since it is generated from the expanded cookbook
+dataset it is not necessary to distribute it. So this
+may change in the future. For now it is the way it
+is, though. If it is changed then the section here
+will be updated as well.
 
-The primary database used by RBT project, if possible, is sqlite3.
+## Databases and the RBT project
 
-On windows you should download both the .dll file as well as the .exe files - in particular sqlite3.exe will be used to create the initial database for sqlite. This may eventually become the new default one day, so if you use ruby, RBT and windows then you may have to setup your windows machine properly. On Linux this is a little bit easier usually.
+This subsection was created in <b>August 2022</b>. In the
+long run it will contain information about how RBT works
+with different databases. For now, though, the existing
+information is spread out among different subsections here;
+this may be remedied at a later point in time.
 
-On August 2022 I could confirm that the generated SQL-file works. This means that in the future we may be able to read in the dataset solely from a single sqlite database. Stay tuned for more updates in this regard in the coming weeks and months.
+The primary database used by RBT project, if possible,
+is sqlite3.
 
-RBT.make_app_prefix
-This method can be used to create a make command such as the following:
+On windows you should download both the .dll file as
+well as the .exe files - in particular sqlite3.exe
+will be used to create the initial database for
+sqlite. This may eventually become the new default
+one day, so if you use ruby, RBT and windows then
+you may have to setup your windows machine properly.
+On Linux this is a little bit easier usually.
 
-make PREFIX=/home/Programs/Xfce4-panel/4.14.3/ install
-In other words: we will automatically use the specified PROGRAMS_DIRECTORY entry, and then run the actual Makefile, via that "make" command. I was too lazy to remember the specific syntax, so this method was added to the rbt suite.
+On <b>August 2022</b> I could confirm that the generated
+SQL-file works. This means that in the future we may
+be able to read in the dataset solely from a single
+sqlite database. Stay tuned for more updates in this
+regard in the coming weeks and months.
 
-Registering errors during compilation/installation
-Some problems and errors may happen during compilation or installation of programs.
+## RBT.make_app_prefix
 
-These are currently handled internally by RBT::Action::SoftwareManager, but they will also be registered in a toplevel-method onto the RBT Namespace.
+This method can be used to create a make command such
+as the following:
+
+    make PREFIX=/home/Programs/Xfce4-panel/4.14.3/ install
+
+In other words: we will automatically use the specified
+PROGRAMS_DIRECTORY entry, and then run the actual
+Makefile, via that "make" command. I was too lazy to
+remember the specific syntax, so this method was added
+to the rbt suite.
+
+## Registering errors during compilation/installation
+
+Some problems and errors may happen during compilation or
+installation of programs.
+
+These are currently handled internally by <b>RBT::Action::SoftwareManager</b>,
+but they will also be registered in a toplevel-method
+onto the RBT Namespace.
 
 It is available via the following code:
 
-RBT.error_message?
-Note that this will be reset to nil, its default value, whenever a new program is compiled.
+    RBT.error_message?
 
-The whole error-handling part doesn't work that well in RBT. At some point in the future it will be rewritten - but first we will collect more errors that can occur during compilation.
+Note that this will be reset to nil, its default value,
+whenever a new program is compiled.
 
-Last updated programs
-The following programs were updated with this release, compared to the previous release:
+The whole error-handling part doesn't work that well
+in RBT. At some point in the future it will be
+rewritten - but first we will collect more errors
+that can occur during compilation.
 
-gnometerminal was updated to program version 3.52.0 (on: 16.04.2024-16:34:26)
-eog was updated to program version 45.3 (on: 16.04.2024-16:36:07)
-simplescan was updated to program version 46.0 (on: 16.04.2024-16:37:23)
-linux was updated to program version 6.8.7 (on: 17.04.2024-13:34:59)
-xfsprogs was updated to program version 6.7.0 (on: 17.04.2024-16:49:02)
-cifsutils was updated to program version 7.0 (on: 17.04.2024-17:40:09)
-clamav was updated to program version 1.3.1 (on: 18.04.2024-13:57:00)
-nasm was updated to program version 2.16.03 (on: 18.04.2024-13:57:09)
-utilmacros was updated to program version 1.20.1 (on: 18.04.2024-14:01:01)
-libxmu was updated to program version 1.2.1 (on: 18.04.2024-14:01:22)
-bluez was updated to program version 5.0 (on: 18.04.2024-14:05:18)
-bluez was updated to program version 5.75 (on: 18.04.2024-14:05:36)
-waylandprotocols was updated to program version 1.35 (on: 18.04.2024-14:06:14)
-flatpak was updated to program version 1.14.6 (on: 18.04.2024-22:47:02)
-calibre was updated to program version 7.9.0 (on: 19.04.2024-08:03:45)
-gtk was updated to program version 4.14.3 (on: 19.04.2024-08:03:59)
-bind was updated to program version 9.18.26 (on: 19.04.2024-08:22:37)
-bind was updated to program version 9.18.26 (on: 19.04.2024-08:22:59)
-bind was updated to program version 9.18.26 (on: 19.04.2024-08:25:08)
-bind was updated to program version 9.16.50 (on: 19.04.2024-08:25:31)
-bind was updated to program version 9.16.50 (on: 19.04.2024-08:29:46)
-evolution was updated to program version 3.52.1 (on: 19.04.2024-12:59:24)
-evolution was updated to program version 3.52.1 (on: 19.04.2024-13:00:21)
-hatchling was updated to program version 1.24.1 (on: 19.04.2024-16:25:04)
-glibmm was updated to program version 2.80.0 (on: 19.04.2024-16:34:52)
+## Last updated programs
 
-Available program versions
-The following list, as html-pre tag, shows which versions are currently tracked, including the URL to these programs.
+The following programs were updated with this release,
+compared to the previous release:
 
-The four entries are:
+gnometerminal was updated to program version 3.52.0 (on: 16.04.2024-16:34:26)<br>
+eog was updated to program version 45.3 (on: 16.04.2024-16:36:07)<br>
+simplescan was updated to program version 46.0 (on: 16.04.2024-16:37:23)<br>
+linux was updated to program version 6.8.7 (on: 17.04.2024-13:34:59)<br>
+xfsprogs was updated to program version 6.7.0 (on: 17.04.2024-16:49:02)<br>
+cifsutils was updated to program version 7.0 (on: 17.04.2024-17:40:09)<br>
+clamav was updated to program version 1.3.1 (on: 18.04.2024-13:57:00)<br>
+nasm was updated to program version 2.16.03 (on: 18.04.2024-13:57:09)<br>
+utilmacros was updated to program version 1.20.1 (on: 18.04.2024-14:01:01)<br>
+libxmu was updated to program version 1.2.1 (on: 18.04.2024-14:01:22)<br>
+bluez was updated to program version 5.0 (on: 18.04.2024-14:05:18)<br>
+bluez was updated to program version 5.75 (on: 18.04.2024-14:05:36)<br>
+waylandprotocols was updated to program version 1.35 (on: 18.04.2024-14:06:14)<br>
+flatpak was updated to program version 1.14.6 (on: 18.04.2024-22:47:02)<br>
+calibre was updated to program version 7.9.0 (on: 19.04.2024-08:03:45)<br>
+gtk was updated to program version 4.14.3 (on: 19.04.2024-08:03:59)<br>
+bind was updated to program version 9.18.26 (on: 19.04.2024-08:22:37)<br>
+bind was updated to program version 9.18.26 (on: 19.04.2024-08:22:59)<br>
+bind was updated to program version 9.18.26 (on: 19.04.2024-08:25:08)<br>
+bind was updated to program version 9.16.50 (on: 19.04.2024-08:25:31)<br>
+bind was updated to program version 9.16.50 (on: 19.04.2024-08:29:46)<br>
+evolution was updated to program version 3.52.1 (on: 19.04.2024-12:59:24)<br>
+evolution was updated to program version 3.52.1 (on: 19.04.2024-13:00:21)<br>
+hatchling was updated to program version 1.24.1 (on: 19.04.2024-16:25:04)<br>
+glibmm was updated to program version 2.80.0 (on: 19.04.2024-16:34:52)<br>
 
-(1) program name
 
-(2) program version
+## Available program versions
 
-(3) last update of this program (in regards to the cookbooks project)
+The following list, as html-pre tag, shows which versions are currently
+tracked, including the URL to these programs.
 
-(4) remote URL
+The **four entries** are:
 
-The most useful entry of this list for users of the RBT project is probably the remote URL entry there - the most right entry.
+(**1**) **program name**
 
-Note that some old programs are no longer available, which explains why they have not been updated in many years. Can't update what is no longer there now, can you. :)
+(**2**) **program version**
 
-(Very outdated program entries will eventually be removed from the Cookbooks listing, in particular if the program is no longer available.)
+(**3**) **last update of this program** (in regards to the cookbooks project)
+
+(**4**) **remote URL**
+
+The most useful entry of this list for users of the RBT project is probably
+the **remote URL** entry there - the **most right** entry.
+
+Note that some old programs are no longer available, which explains
+why they have not been updated in many years. Can't update what is
+no longer there now, can you. :)
+
+(Very outdated program entries will eventually be removed from the
+Cookbooks listing, in particular if the program is no longer
+available.)
 
 The file is also distributed with the RBT project at:
 
-rbt/yaml/programs_version/available_programs_versions.md
+**rbt/yaml/programs_version/available_programs_versions.md**
 
-That way you can use it on your local system easily, if you would like to, e. g. to quickly scan for any entry there and determine the URL or something like that.
+That way you can use it on your local system easily, if you would
+like to, e. g. to quickly scan for any entry there and
+determine the URL or something like that.
 
-Makefiles and support for Makefiles in the RBT suite
-Most open source projects on Linux that require you to compile C or C++ code, come with a file called a Makefile.
+## Makefiles and support for Makefiles in the RBT suite
 
-The command "make" can then be used to interpret the rules stored in said file.
+Most open source projects on Linux that require you to compile
+C or C++ code, come with a file called a <b>Makefile</b>.
 
-Sometimes no such file is provided, though, and instead, some other variant is used, that typically generates such a Makefile. For instance, a generic file called Makefile.linux can be found, or some other generator.
+The command "make" can then be used to interpret the rules
+stored in said file.
 
-This file is a template file that can be used to generate such a Makefile file.
+Sometimes no such file is provided, though, and instead,
+some other variant is used, that typically generates such
+a <b>Makefile</b>. For instance, a generic file called
+<b>Makefile.linux</b> can be found, or some other 
+generator.
 
-The common syntax for how to invoke this this would be like this:
+This file is a <b>template</b> file that can be used to
+generate such a <b>Makefile</b> file.
 
-make -f Makefile.linux
-So you pass the -f flag to make.
+The common syntax for how to invoke this this would
+be like this:
 
-However had, the RBT scripts will automatically check whether such a file exists, in the event that no Makefile exists. If this is indeed the case, then the make command will be modified to first create this Makefile. Note that this behaviour may be subject to change at some point in the future, but for the time being I wanted to document this, in case a modification may be necessary.
+    make -f Makefile.linux
 
-How to find out how many programs are registered in the RBT suite
-To find out how many programs are registered in the RBT suite, do one of the following:
+So you pass the <b>-f</b> flag to <b>make</b>.
 
-rbt --n_programs?
-rbt n_registered?
-rbt registered?
+However had, the RBT scripts will automatically check
+whether such a file exists, in the event that no Makefile
+exists. If this is indeed the case, then the make command
+will be modified to first create this Makefile. Note
+that this behaviour may be subject to change at some
+point in the future, but for the time being I wanted
+to document this, in case a modification may be 
+necessary.
+
+## How to find out how many programs are registered in the RBT suite
+
+To find out how many programs are registered in the RBT suite,
+do one of the following:
+
+    rbt --n_programs?
+    rbt n_registered?
+    rbt registered?
+    
 It will then feedback something such as:
 
-RBT::ReportTheRegisteredPrograms: 2619 programs are registered in our cookbooks as of 30.03.2014.
+RBT::ReportTheRegisteredPrograms: 2619 programs are registered
+in our cookbooks as of 30.03.2014.
 
-RBT::ReportTheRegisteredPrograms: 2832 programs are registered in our cookbooks as of 18.02.2016.
+RBT::ReportTheRegisteredPrograms: 2832 programs are registered
+in our cookbooks as of 18.02.2016.
 
-RBT::ReportTheRegisteredPrograms: 2862 programs are registered in our cookbooks as of 18.08.2016.
+RBT::ReportTheRegisteredPrograms: 2862 programs are registered
+in our cookbooks as of 18.08.2016.
 
-RBT::ReportTheRegisteredPrograms: 3185 programs are registered in the cookbooks as of 06.10.2017.
+RBT::ReportTheRegisteredPrograms: 3185 programs are registered
+in the cookbooks as of 06.10.2017.
 
-As can be seen, more and more programs are (slowly) added and registered over time. We are now (2022) past over 3500 programs already. \o/
+As can be seen, more and more programs are (slowly) added
+and registered over time. We are now (2022) past over
+3500 programs already. \o/
 
-View the remote URLs of certain programs
+## View the remote URLs of certain programs
+
 To view the URLs of certain programs, you can do this:
 
-rinfo
-rinfo video
-rbt libxrandr url
-url libxrandr
-Also note that you can set the program name by using USE_URL - we will then use the URL from url1.
+    rinfo
+    rinfo video
+    rbt libxrandr url
+    url libxrandr
 
-The USE_URL is automatically assumed if you only provide a remote URL.
+Also note that you can set the program name by using 
+USE_URL - we will then use the URL from <b>url1</b>.
 
-class RBT::Cookbooks::SearchForTags
-This class can be used to search for specific tags.
+The USE_URL is automatically assumed if you only provide
+a remote URL.
 
-Graphical User Interface (GUI) for the RBT suite
-A GUI simplifies interacting with the computer for most (regular) users. The RBT suite makes use of some GUIs as well.
+## class RBT::Cookbooks::SearchForTags
 
-For the purpose of this subsection we will count the www (world wide web) as part of a GUI too, as it is quite similar to traditional desktop applications.
+This class can be used to <b>search for specific
+tags.</b>
 
-In August 2022 support for ruby-gtk2 was removed from the rbt gem. Only ruby-gtk3 is supported now.
+## Graphical User Interface (GUI) for the RBT suite
 
-While in theory it would have been possible to maintain the ruby-gtk2 bindings, in practice I found that it was not worth the extra time spent to do so. ruby-gtk3 is simply significantly better than ruby-gtk2 at this point, for the most part, in particular the CSS support it brings made the GUIs look so much more pleasant. Some of the functionality in gtk2 no longer works, which is unfortunate, but it is simply a trade-off. We have to "go with the flow" and move onto ruby-gtk3.
+A GUI simplifies interacting with the computer for most
+(regular) users. The RBT suite makes use of some GUIs
+as well.
 
-A few libui widgets exist as well. To start the main one you can simply pass --libui such as via:
+For the purpose of this subsection we will count the
+www (world wide web) as part of a GUI too, as it is
+quite similar to traditional desktop applications.
 
-rbt --libui
+In <b>August 2022</b> support for ruby-gtk2 was removed
+from the rbt gem. Only ruby-gtk3 is supported now.
+
+While in theory it would have been possible to maintain
+the ruby-gtk2 bindings, in practice I found that it was
+not worth the extra time spent to do so. ruby-gtk3 is
+simply significantly better than ruby-gtk2 at this point,
+for the most part, in particular the CSS support it brings
+made the GUIs look so much more pleasant. Some of the
+functionality in gtk2 no longer works, which is unfortunate,
+but it is simply a trade-off. We have to "go with the flow"
+and move onto ruby-gtk3.
+
+A few libui widgets exist as well. To start the main one
+you can simply pass --libui such as via:
+
+    rbt --libui
+
 Keep in mind that this could, in theory, change one day.
 
-How many classes are available in the RBT suite?
-This is kept track via the .md file called n_classes_in_total_in_this_project.md.
+## How many classes are available in the RBT suite?
 
-Displaying the AppDir prefix of a given program via the commandline
-Use the following code if you want to know the AppDir prefix of a given program:
+This is kept track via the .md file
+called <b>n_classes_in_total_in_this_project.md</b>.
 
-require 'rbt/toplevel_methods/configure_appdir_prefix.rb'
+## Displaying the AppDir prefix of a given program via the commandline
 
-puts RBT.return_appdir_prefix(ARGV)
-puts RBT.return_appdir_prefix('libssh-0.9.6')
+Use the following code if you want to know the AppDir
+prefix of a given program:
+
+    require 'rbt/toplevel_methods/configure_appdir_prefix.rb'
+
+    puts RBT.return_appdir_prefix(ARGV)
+    puts RBT.return_appdir_prefix('libssh-0.9.6')
+
 The latter would yield this as a result:
 
-/home/Programs/Libssh/0.9.6/
-General information about the RBT project via a generated HTML file
-The RBT project allows you to also generate some HTML pages, similar to how the LFS (Linux from scratch) project.
+    /home/Programs/Libssh/0.9.6/
 
-The central ruby script that does that is called central_information_agency.rb.
+## General information about the RBT project via a generated HTML file
+
+The RBT project allows you to also generate some HTML pages,
+similar to how the LFS (<b>Linux from scratch</b>) project.
+
+The central ruby script that does that is called
+<b>central_information_agency.rb</b>.
 
 In order to generate a bunch of HTML pages, do this:
 
-cia lfs
+    cia lfs
+
 or
 
-cia html_pages
-Using / Reusing old configure options
-If you wish to re-use very long configure options, such as from gcc, then you can use this command:
+    cia html_pages
 
-rbt gcc --use-this-version=7.1.0 --use-old-configure-options
-This will use the configure options from the currently installed gcc compile.
+## Using / Reusing old configure options
 
-class RBT::ScanSourceArchive
-class RBT::ScanSourceArchive will scan through the (local) main archive repository and check if a tarball archive was encountered that is not registered within the RBT suite.
+If you wish to re-use very long configure options, such
+as from gcc, then you can use this command:
 
-I use it to make sure that the local copy I keep is "sane" and correct. The class could need a rewrite, though - it is a fairly old class at this point in time.
+    rbt gcc --use-this-version=7.1.0 --use-old-configure-options
 
-Environment settings and the external gem called environment_information
-Sometimes environment settings, stored in ENV as far as ruby itself is concerned, may interfere with compilation. For example, assigning to the env variable called TZ may cause a build to fail (TZ stands for TIMEZONE).
+This will use the configure options from the currently
+installed gcc compile.
 
-I consider this pretty awful for shells such as bash or zsh, but I did not design any of them.
+## class RBT::ScanSourceArchive
 
-What this means as far as the RBT project is concerned is that we may need a way to easily AVOID using any ENV variable that may be faulty.
+class <b>RBT::ScanSourceArchive</b> will scan through the
+(local) main archive repository and check if a tarball archive
+was encountered that is not registered within the RBT suite.
 
-The simplest way how to do this may be by not using any ENV variable, save for PATH (which has to work, as otherwise the compiler can not find anything).
+I use it to make sure that the local copy I keep is "sane"
+and correct. The class could need a rewrite, though - it
+is a fairly old class at this point in time.
+
+## Environment settings and the external gem called environment_information
+
+Sometimes environment settings, stored in ENV as far as ruby itself
+is concerned, may interfere with compilation. For example, assigning
+to the env variable called TZ may cause a build to fail (TZ stands
+for TIMEZONE).
+
+I consider this pretty awful for shells such as bash or zsh, but
+I did not design any of them.
+
+What this means as far as the RBT project is concerned is that we
+may need a way to easily **AVOID** using any ENV variable that may
+be faulty.
+
+The simplest way how to do this may be by not using any ENV variable,
+save for PATH (which has to work, as otherwise the compiler can not
+find anything).
 
 Usage examples:
 
-rbt nss  --clear-envs ntrad
-rbt nspr --clear-envs ntrad
-This would attempt to compile both nss and nspr without any environment variables (save for PATH).
+    rbt nss  --clear-envs ntrad
+    rbt nspr --clear-envs ntrad
 
-Since as of December 2018, a new class called RBT::CompileViaEnvironmentVariableAsPrefix can be used to specifically compile into a prefix that is specified via an environment variable.
+This would attempt to compile both nss and nspr without any environment
+variables (save for PATH).
+
+Since as of **December 2018**, a new class called 
+**RBT::CompileViaEnvironmentVariableAsPrefix** can be used to 
+specifically compile into a prefix that is specified via an
+**environment variable**.
 
 This allows me to then use something like this on the commandline:
 
-env_prefix xfconf
-And it will compile the XFCE xfconf component into the prefix specified by the environment variable called XFCE_PREFIX, which I happen to have set to a value such as /Programs/Xfce/4.12.0/.
+    env_prefix xfconf
 
-As we discussed the situation concerning environment-variables, at the least to some extent, it should be mentioned that there is an external gem called environment_information, written by the same (original) author of the RBT project. That project is not depending on the rbt gem, but if you have both gems installed then you can use the environment_information gem to indicate which programs you could install still. I use this actually to see whether I have to update some programs on the given computer system (on Linux typically). See the commandline option --really-everything to obtain that information.
+And it will compile the XFCE xfconf component into the prefix 
+specified by the environment variable called XFCE_PREFIX,
+which I happen to have set to a value such as
+**/Programs/Xfce/4.12.0/**.
 
-Batch Compiling and Chain compiling
+As we discussed the situation concerning environment-variables,
+at the least to some extent, it should be mentioned that there
+is an external gem called <b>environment_information</b>,
+written by the same (original) author of the RBT project.
+That project is not depending on the rbt gem, but if you have
+both gems installed then you can use the <b>environment_information</b>
+gem to indicate which programs you could install still. I use this
+actually to see whether I have to update some programs on the
+given computer system (on Linux typically). See the commandline
+option <b>--really-everything</b> to obtain that information.
+
+## Batch Compiling and Chain compiling
+
 You can batch-compile several programs in one go.
 
 The syntax is:
 
-rbt --batch-compile=mate
-rbt --batch-compile=ruby_addons
-rbt --batch-compile=xorg_protos
-The first example will compile all of mate; the last example will compile all xorg-protos.
+    rbt --batch-compile=mate
+    rbt --batch-compile=ruby_addons
+    rbt --batch-compile=xorg_protos
 
-Note that for this to work, you first must have defined a compile-chain in the file chained_programs.yml, which is part of the RBT project.
+The first example will compile all of mate; the last example will
+compile all xorg-protos.
 
-Alternatively, you can just specify the programs that you wish to compile, separated by a "," character, such as shown by the following commandline example:
+Note that for this to work, you first must have defined a compile-chain
+in the file chained_programs.yml, which is part of the RBT project.
 
-rbt --batch-compile=python,php,perl,ruby
-Batch-downloading all source archives
-You can download all registered source archives by calling class RBT Cookbooks::DownloadAllSourceArchives. Warning: before you do so, consider that this will really download a LOT of source archives - several GB. On my home setup, where I keep all archives in the directory /home/x/src/, in September 2022, this reached a size of 31GB. That's quite a LOT.
+Alternatively, you can just specify the programs that you wish to
+compile, separated by a "," character, such as shown by the
+following commandline example:
 
-I use an alias to call that .rb file, if I ever have a use case to invoke this functionality. Then I can do, for example, on the commandline:
+    rbt --batch-compile=python,php,perl,ruby
+    
+## Batch-downloading all source archives
 
-download_all_source_archives
-Alternatively, you can also invoke the file from the commandline directly, by issuing either one of the following to bin/rbt:
+You can download all registered **source archives** by calling
+**class RBT Cookbooks::DownloadAllSourceArchives**. Warning:
+before you do so, consider that this will really download
+a <b>LOT</b> of source archives - several GB. On my home 
+setup, where I keep all archives in the directory
+<b>/home/x/src/</b>, in <b>September 2022</b>, this reached
+a size of <b>31GB</b>. That's quite a LOT.
 
-rbt --download-all-source-archives
-rbt --downloadallsourcearchives
-rbt --grab-source-archives
-rbt --grabsourcearchives
-rbt --batch-download-all-source-archives
-From within Ruby code, you can use the following toplevel-API to download all source archives, if you have a use case to support this in any of your ruby files:
+I use an alias to call that **.rb** file, if I ever have a use
+case to invoke this functionality. Then I can do, for example,
+on the commandline:
 
-RBT.download_all_source_archives
-You can also download only those files that have a certain tag registered. For example, if you want to download all programs that have the tag "plasma" attached (for KDE5), you can issue the following command (and argument) for this functionality:
+    download_all_source_archives
 
-download_all_source_archives --tags=plasma
-In order for this to work, the tag (in this case plasma has had to be registered (and thus, logically, exist). This registration typically happens on the individual .yml file, which can then be expanded into a SQL database. However had, I primarily work with the yaml files, so this is where I make modifications first - see the corresponding entry called tags in these yaml files.
+Alternatively, you can also **invoke the file from the commandline 
+directly, by issuing either one of the following** to 
+<b>bin/rbt</b>:
 
-If you need an overview over the existing tags, issue this command:
+    rbt --download-all-source-archives
+    rbt --downloadallsourcearchives
+    rbt --grab-source-archives
+    rbt --grabsourcearchives
+    rbt --batch-download-all-source-archives
 
-rbt --available-tags
-Deprecations within the RBT project
-Over the years, quite a lot of old code was removed or rewritten. As I can not keep track of everything mentally, I will use this subsection to note down when something was removed.
+From within Ruby code, you can use the following **toplevel-API**
+to download all source archives, if you have a use case to 
+support this in any of your ruby files:
 
-In the past, cmake configure options were stored as configure_options: in the corresponding .yml file. However had, since some time the new option cmake_configure_options: exists. For about two years, if no such cmake_configure_options was existing, yet cmake was used as the build system, then the RBT scripts would assume that the user wanted to make use of configure_options anyway, so this was used.
-In April 2021, though, I decided that it is cleaner to only use cmake_configure_options and thus deprecate that old behaviour where configure_options could be substituted.
+    RBT.download_all_source_archives
 
-The constant FILE_SOURCE_DIRECTORY was finally removed in August 2022; it was deprecated in May 2020 and commented out. Use the method RBT.file_source_directory if you need to find out the file that specifies the source directory.
+You can also download only those files that have a certain **tag**
+registered. For example, if you want to download all programs that
+have the tag "plasma" attached (for KDE5), you can issue the
+following command (and argument) for this functionality:
 
-In September 2022 I decided to slowly deprecate class RBT::SymlinkFromToCurrent. There is currently a bug in this class where it does not symlink into the /usr/bin/ hierarchy. As that class is a huge mess, rather than spending time to fix it, I decided to slowly rewrite its logic step by step. First step is to no longer allow it to handle bin/ and sbin/ entries. At a later time it may be removed completely.
+    download_all_source_archives --tags=plasma
 
-class RBT::Action::SoftwareManager was taken as base to create RBT::Install in September 2022. Several old code parts were removed. For instance, @internal_hash[:original_input] was removed, as well as the two method names input? and original_input?. Both were not really in use. If I ever need these again I may look at this deprecation notice here. But I am fairly certain that the rewritten code won't need this.
+In order for this to work, the <b>tag</b> (in this case
+<b>plasma</b> has had to be **registered** (and thus,
+logically, exist). This registration typically happens on
+the individual .yml file, which can then be expanded into
+a SQL database. However had, I primarily work with the yaml
+files, so this is where I make modifications first - see
+the corresponding entry called <b>tags</b> in these
+yaml files.
 
-Querying the licence for a program
-The file feedback_licenses.rb can help you if you want to determine the licence for a program from the commandline. It will feedback the known (aka registered) licenses.
+If you need an <b>overview</b> over the existing tags, issue
+this command:
 
-Usage example where flic is an alias to the .rb file:
+    rbt --available-tags
 
-flic gpl
-flic bsd
-Mandating a specific licence on the commandline
-Gentoo has an interesting feature through Portage, since as of version 2.1.7.
+## Deprecations within the RBT project
 
-The user can designate a specific mandatory licence to be used, on the commandline. If the program at hand does NOT fulfil this licence then the program will not be installed/compiled.
+Over the years, quite a lot of old code was removed or rewritten. As I can
+not keep track of everything mentally, I will use this subsection to note
+down when something was removed.
 
-In other words, the user can accept or reject software installation based on its license. The RBT suite added support for this in September 2022.
+- In the past, cmake configure options were stored as <b>configure_options:</b>
+in the corresponding .yml file. However had, since some time the new
+option <b>cmake_configure_options:</b> exists. For about two years,
+if no such cmake_configure_options was existing, yet cmake was used as
+the build system, then the RBT scripts would assume that the user
+wanted to make use of **configure_options** anyway, so this was used.
 
-Note that presently many licences are missing in the rbt suite - this information has to be added over time. But in the long run it is expected that this feature will be supported fully, so stay tuned in this regard.
+In April 2021, though, I decided that it is cleaner to only use
+**cmake_configure_options** and thus deprecate that old behaviour where
+**configure_options** could be substituted.
 
-The goal here is to have a pure system in regards to licences - or at the least the possibility.
+The constant FILE_SOURCE_DIRECTORY was finally removed in August 2022;
+it was deprecated in May 2020 and commented out. Use the method
+RBT.file_source_directory if you need to find out the file that
+specifies the source directory.    
+
+In <b>September 2022</b> I decided to slowly deprecate class
+<b>RBT::SymlinkFromToCurrent</b>. There is currently a bug in
+this class where it does not symlink into the /usr/bin/
+hierarchy. As that class is a huge mess, rather than spending
+time to fix it, I decided to slowly rewrite its logic step
+by step. First step is to no longer allow it to handle
+<b>bin/</b> and <b>sbin/</b> entries. At a later time it
+may be removed completely.
+
+class RBT::Action::SoftwareManager was taken as base to create RBT::Install
+in <b>September 2022</b>. Several old code parts were
+removed. For instance, @internal_hash[:original_input] was
+removed, as well as the two method names input? 
+and original_input?. Both were not really in use. If I ever
+need these again I may look at this deprecation notice here.
+But I am fairly certain that the rewritten code won't need
+this.
+
+## Querying the licence for a program
+
+The file <b>feedback_licenses.rb</b> can help you if
+you want to determine the licence for a program from
+the commandline. It will feedback the known
+(aka registered) licenses.
+
+Usage example where <b>flic</b> is an alias to the
+.rb file:
+
+    flic gpl
+    flic bsd
+
+## Mandating a specific licence on the commandline
+
+<b>Gentoo</b> has an interesting feature through Portage, since
+as of version 2.1.7.
+
+The user can designate a specific mandatory licence to
+be used, on the commandline. If the program at hand does
+NOT fulfil this licence then the program will not be
+installed/compiled.
+
+In other words, <b>the user can accept or reject software installation
+based on its license</b>. The RBT suite added support for
+this in <b>September 2022</b>.
+
+Note that presently many licences are missing in the rbt
+suite - this information has to be added over time. But
+in the long run it is expected that this feature will be
+supported fully, so stay tuned in this regard.
+
+The goal here is to <b>have a pure system in regards to
+licences</b> - or at the least the possibility.
 
 How does this work syntax-wise?
 
-Use any of the alternatives shown below - simply pick the one that makes most sense to you:
+Use any of the alternatives shown below - simply pick
+the one that makes most sense to you:
 
-rbt php --honour-this-licence=GPLv3
-rbt php --check-for-licence=GPLv3
-rbt php --check-licence=GPLv3
-rbt php --only-this-licence=GPLv3
-rbt php --only-this-licence=gplv3
-rbt xfce4panelprofiles --licence=gplv2
-rbt exo --licence=gplv2
-rbt exo --licence=gplv3
-rbt plasmapa --licence=gplv2
-Internally this is sanitized and checked by the method RBT.sanitize_licence().
+    rbt php --honour-this-licence=GPLv3
+    rbt php --check-for-licence=GPLv3
+    rbt php --check-licence=GPLv3
+    rbt php --only-this-licence=GPLv3
+    rbt php --only-this-licence=gplv3
+    rbt xfce4panelprofiles --licence=gplv2
+    rbt exo --licence=gplv2
+    rbt exo --licence=gplv3
+    rbt plasmapa --licence=gplv2
+
+Internally this is sanitized and checked by the method
+<b>RBT.sanitize_licence()</b>.
 
 What will happen when you pass the "incorrect" licence?
 
 Consider the following two uses cases:
 
-rbt exo --licence=gplv2
-rbt exo --licence=gplv3
-Only one of these two would compile. The other one would show this error:
+    rbt exo --licence=gplv2
+    rbt exo --licence=gplv3
 
-RBT::Action::SoftwareManager: The licences do not match. Expected licence
-RBT::Action::SoftwareManager: was: GPLv3, specified licence was: unknown
-The method RBT.filter_for_valid_program_names()
-The method RBT.filter_for_valid_program_names() can be used to turn short input into a valid program name.
+Only one of these two would compile. The other one would
+show this error:
+
+    RBT::Action::SoftwareManager: The licences do not match. Expected licence
+    RBT::Action::SoftwareManager: was: GPLv3, specified licence was: unknown
+ 
+## The method RBT.filter_for_valid_program_names()
+
+The method <b>RBT.filter_for_valid_program_names()</b> can be
+used to turn short input into a valid program name.
 
 It is best to demonstrate this via an example.
 
 Consider the following code tapping into RBT:
 
-require 'rbt/toplevel_methods/filter_for_valid_program_names.rb'
-RBT.filter_for_valid_program_names('libarch')
-This would return the string libarchive, which is a registered program in RBT.
+    require 'rbt/toplevel_methods/filter_for_valid_program_names.rb'
+    RBT.filter_for_valid_program_names('libarch')
 
-The remote URL for this program is https://github.com/libarchive/libarchive/releases/download/v3.6.1/libarchive-3.6.1.tar.xz .
+This would return the string <b>libarchive</b>, which is
+a registered program in RBT.
 
-Thus, this method can be used by a user to find programs that he or she wants to download and subsequently compile.
+The remote URL for this program is
+<b>
+https://github.com/libarchive/libarchive/releases/download/v3.6.1/libarchive-3.6.1.tar.xz
+</b>.
+
+Thus, this method can be used by a user to find programs that
+he or she wants to download and subsequently compile.
 
 On the commandline I can then do this:
 
-rbt libarch
-And it will compile libarchive for me. Saves some keystrokes thus - mostly it is a convenience feature. (You can also use tab-completion, so you could then type rbt libarch and hit the TAB key, if you loaded the completions in your shell. But this happens before input is sent to RBT itself; I wanted to be able to support both the case of tab completion as well as the case where the user did not use tab completion, for whatever the reason.)
+    rbt libarch
 
-Note that RBT.sanitize_this_program_name is an alias to this method.
+And it will compile libarchive for me. Saves some keystrokes
+thus - mostly it is a convenience feature. (You can also use
+tab-completion, so you could then type <b>rbt libarch</b>
+and hit the TAB key, if you loaded the completions in your
+shell. But this happens before input is sent to RBT itself;
+I wanted to be able to support both the case of tab completion
+as well as the case where the user did not use tab completion,
+for whatever the reason.)
 
-The method was added because different .rb files in the RBT suite may require such abbreviations, so it was easier to just bundle all these use cases into a single methods.
+Note that <b>RBT.sanitize_this_program_name</b> is an alias
+to this method.
 
-I am making slow but steady progress with class RBT::Action::SoftwareManager. For instance, we can now install any different program version via the @ special syntax.
+The method was added because different .rb files in the
+RBT suite may require such abbreviations, so it was
+easier to just bundle all these use cases into a single
+methods.
+
+I am making slow but steady progress with class RBT::Action::SoftwareManager.
+For instance, we can now install any different program version
+via the <b>@ special syntax</b>.
 
 Let's explain this with a specific example.
 
-Say that you have two archives locally, glib-2.74.0.tar.xz and glib-2.72.3.tar.xz.
+Say that you have two archives locally,
+glib-2.74.0.tar.xz and glib-2.72.3.tar.xz.
 
-Normally the RBT suite will cater to the most recent program version by default, such as glib-2.74.0 in the above situation - but this is not always wanted. Sometimes a program does not compile, and you may want to look at another program instead.
+Normally the RBT suite will cater to the most recent
+program version by default, such as glib-2.74.0 in the 
+above situation - but this is not always wanted. Sometimes
+a program does not compile, and you may want to look at
+another program instead.
 
-So we need a way to specify another program version on the commandline.
+So we need a way to specify another program version
+on the commandline.
 
-In the past the following syntax was used, with the old class called RBT::Compile:
+In the past the following syntax was used, with 
+the old class called <b>RBT::Compile</b>:
 
-rbt glib --use-this-version=2.72.3
-But this was quite verbose and not very convention to type.
+    rbt glib --use-this-version=2.72.3
 
-For RBT::Action::SoftwareManager, the above syntax will work (eventually), but the user can also use the @ syntax (which already does work, and was one reason why RBT::Action::SoftwareManager has been written, to begin with) like this:
+But this was quite verbose and not very convention to
+type.
 
-installer glib@2.72.3
-installer glib@2.80.0
-So this will infer the version after the @ part, rather than requiring of you to pass it explicitely on the commandline.
+For <b>RBT::Action::SoftwareManager</b>, the above syntax will work
+(eventually), but the user can also use the <b>@ syntax</b> (which
+already does work, and was one reason why RBT::Action::SoftwareManager
+has been written, to begin with) like this:
 
-This is quite convenient and shorter to type than the old variant - just compare it. It is so much shorter and more succint. Laziness for the win! \o/
+    installer glib@2.72.3
+    installer glib@2.80.0
 
-Installing only the headers of a program
+So this will infer the version after the @ part, rather
+than requiring of you to pass it explicitely on the
+commandline.
+
+This is quite convenient and shorter to type than the
+old variant - just compare it. It is so much shorter
+and more succint. Laziness for the win! \o/
+
+## Installing only the headers of a program
+
 You can use this:
 
-ry gmp --only-headers
-This will just copy the .h files into /usr/include/.
+    ry gmp --only-headers
 
-Build directories
-Some progams insist on using a build directory that is separate from the directory where the source code is kept.
+This will just copy the .h files into <b>/usr/include/</b>.
+      
+## Build directories
 
-For example, the KDE program called kirigami2 requires an "out-of-source" build directory. I typically use the generic name BUILD_DIRECTORY/ for such a build directory.
+Some progams insist on using a <b>build directory</b> that
+is separate from the directory where the source code is
+kept.
 
-There is a relevant entry in the cookbooks .yml files that can be used, called use_build_directory. If this entry is set to true or to yes (both are equivalent to one another) then the RBT project will make use of a build directory for compiling a particular program. Conversely if set to false or to no - or omitted - then this will default to "no, we will not use a build directory for installing/compiling this program.".
+For example, the KDE program called **kirigami2** requires
+an "out-of-source" build directory. I typically use the
+generic name <b>BUILD_DIRECTORY/</b> for such a build directory.
 
-You can get an overview over the programs that make use of a build directory, by using any of the following APIs on the commandline:
+There is a relevant entry in the cookbooks .yml files that
+can be used, called **use_build_directory**. If this entry
+is set to **true** or to **yes** (both are equivalent to 
+one another) then the RBT project will make use of a
+build directory for compiling a particular program. Conversely
+if set to **false** or to **no** - or omitted - then this
+will default to "no, we will not use a build directory 
+for installing/compiling this program.".
 
-rbt --show-all-programs-that-make-use-of-a-build-directory
-rbt --all-build-directory
-rbt --all-build-directories
-rbt --build-directories?
-rbt --build-directories
-Installer --build-directories?
-In order for this to work on your system you may have to create the expanded cookbook directory (or copy the existing expanded directories via rbt --copy-expanded-directories). We could use the internally distributed directory since as of 2021, but for the time being the above approach will still be valid as-is. I recommend to simply copy the expanded directories after installing the gem, for now.
+You can get an overview over the programs that make
+use of a build directory, by using any of the following
+APIs on the commandline:
 
-That still leaves a question of design consideration: if some build systems mandate a separate build directory, such as meson, how to handle this situation?
+    rbt --show-all-programs-that-make-use-of-a-build-directory
+    rbt --all-build-directory
+    rbt --all-build-directories
+    rbt --build-directories?
+    rbt --build-directories
+    Installer --build-directories?
+
+In order for this to work on your system you may have to
+create the expanded cookbook directory (or copy the existing
+expanded directories via <b>rbt --copy-expanded-directories</b>).
+We could use the internally distributed directory since as of
+2021, but for the time being the above approach will still be
+valid as-is. I recommend to simply copy the expanded directories
+after installing the gem, for now.
+
+That still leaves a question of design consideration: if some
+build systems mandate a separate build directory, such as
+meson, how to handle this situation?
 
 Well - there are two basic ways how to go about it here:
 
-(1) One could cd into a separate build directory in general, and then require that build systems, such as meson, cd back into the original "configure base directory".
+(1) One could cd into a separate build directory in
+general, and then require that build systems, such as
+meson, cd back into the original "configure base directory".
 
-(2) Or one could not cd into a separate build directory in general, and instead require a separate cd-action to change into a build directory.
+(2) Or one could not cd into a separate build directory
+in general, and instead require a separate cd-action
+to change into a build directory.
 
-While (1) is probably the more elegant solution, as it leads to less duplication of code, in September 2022 I decided to pick option (2). Perhaps at a later time in the future this may be changed, and then this subsection will have to be updated, but for now I wanted to specify this behaviour and rationale here, when I was creating class RBT::Action::SoftwareManager.
+While (1) is probably the more elegant solution, as it
+leads to less duplication of code, in September 2022
+I decided to pick option (2). Perhaps at a later time
+in the future this may be changed, and then this subsection
+will have to be updated, but for now I wanted to specify
+this behaviour and rationale here, when I was creating
+class RBT::Action::SoftwareManager.
 
-class RBT::CreateLogFile
-class RBT::CreateLogFile is going to be used for all log-related functionality of the RBT suite eventually.
+## class RBT::CreateLogFile
 
-Right now in September 2022 it is only used by class RBT::Action::SoftwareManager, but in the long run it is expected to handle all log-related aspects. The idea is that this class can be so flexible as to create all log files, including via .yml, that a user may want to look at or inspect at some later point in time.
+<b>class RBT::CreateLogFile</b> is going to be used for all
+log-related functionality of the RBT suite eventually.
 
-Java-related code in the RBT project
-More Java-related code will be added to the RBT project in the coming months and years. These Java-related parts are currently not quite complete, not even an early beta. It is most likely that one has to handle these parts with more care, such as manually downloading source archives before invoking the java-related parts. Having said that, though, some parts work somewhat: for instance, I can do:
+Right now in <b>September 2022</b> it is only used by class
+<b>RBT::Action::SoftwareManager</b>, but in the long run it is expected to
+handle all log-related aspects. The idea is that this
+class can be so flexible as to create all log files,
+including via .yml, that a user may want to look at
+or inspect at some later point in time.
 
-java BuildTools expat
+## Java-related code in the RBT project
+
+More Java-related code will be added to the RBT project in
+the coming months and years. These Java-related parts are
+currently not quite complete, not even an early beta. It is
+most likely that one has to handle these parts with more
+care, such as manually downloading source archives before
+invoking the java-related parts. Having said that, though,
+some parts work somewhat: for instance, I can do:
+
+    java BuildTools expat
+
 And on my home system this would mean to work on:
 
-/home/x/src/expat/expat-2.4.9.tar.xz
-At some later point in time I may then turn this into an executable via GraalVM and just do:
+    /home/x/src/expat/expat-2.4.9.tar.xz
 
-buildtools expat
-In the long run, perhaps years from now on, I intend to have RBT also work via Java. There should be a noticable speed-up when one combines this with GraalVM.
+At some later point in time I may then turn this 
+into an executable via GraalVM and just do:
 
-Binary and Library Checking
-You can also compile a program if you only know the name of a binary. For example, to compile the package "xine-ui", you could supply the name of one of its binaries, like so:
+    buildtools expat
 
-rbt xine-check
-xine-check is a binary of xine-ui. The above will actually compile xine-ui.
+In the long run, perhaps years from now on, I intend
+to have RBT also work via Java. There should be a 
+noticable speed-up when one combines this with
+GraalVM.
+
+## Binary and Library Checking
+
+You can also compile a program if you only know the name of a
+binary. For example, to compile the package "xine-ui", you could
+supply the name of one of its <span class="yel">binaries</span>, 
+like so:
+
+    rbt xine-check
+
+xine-check is a binary of xine-ui. The above will actually 
+compile <b>xine-ui</b>.
 
 Another example:
 
-rbt basename
-basename belongs to the package coreutils, and thus we will attempt to compile coreutils.
+    rbt basename
 
-Note that you can change this in the config file, look for the option check_for_binary_names.
+<b class="yel">basename</b> belongs to the package 
+<b>coreutils</b>, and thus we will attempt to compile 
+coreutils.
 
-One last example - say, you know the binary name which is called startx. You attempt to compile it, and we will set it to the proper package name:
+Note that you can change this in the config file, look
+for the option `check_for_binary_names`.
 
-rbt startx
-startx belongs to xinit and the above is the same as:
+One last example - say, you know the binary name which is
+called `startx`. You attempt to compile it, and we will set
+it to the proper package name:
 
-rbt xinit
-And the same mechanism works for library names just as well (if they were registered in RegisteredLibaries.yml that is).'
+    rbt startx
+
+<b>startx</b> belongs to xinit and the above is the same as:
+
+    rbt xinit
+
+And the same mechanism works for library names just as well
+(if they were registered in RegisteredLibaries.yml that is).'
 
 So for instance:
 
-rbt libqui.so
-The above would actually try to compile QT4 and would thus be the same as if you would have entered:
+    rbt libqui.so
 
-rbt qt4
-In the end, this is just a slight convenience to make your life easier.
+The above would actually try to compile QT4 and would thus be 
+the same as if you would have entered:
 
-The default behaviour for the scripts is to treat the given input as alias to a real program name, and if this alias is not found we check for binary names, then for library names.
+    rbt qt4
+
+In the end, this is just a slight convenience to make your 
+life easier.
+
+The default behaviour for the scripts is to treat the given
+input as alias to a real program name, and if this alias is
+not found we check for binary names, then for library names.
 
 Sometimes, this is not desired.
+ 
+Consider that you input "ld". Now let us also assume that you 
+already have an entry called "ldmud" in your scripts. But "ld" 
+is also the name of the binary "ld" in the binutils package.
 
-Consider that you input "ld". Now let us also assume that you already have an entry called "ldmud" in your scripts. But "ld" is also the name of the binary "ld" in the binutils package.
+To force that we seek for the binary "ld" and not for 
+"ldmud" you could do this:
 
-To force that we seek for the binary "ld" and not for "ldmud" you could do this:
+    rbt ld treat_as_binary_name
 
-rbt ld treat_as_binary_name
 Same works for library names as well:
 
-rbt ld treat_as_library_name
-Gstreamer
+    rbt ld treat_as_library_name
+
+## Gstreamer
+
 If you want to compile all gstreamer components, use:
 
-rbt --all-of-gstreamer
-I added this functionality because I can not offhand remember the proper compile order, e. g. gst-plugins-bad, gst-plugins-ugly and so forth.
+    rbt --all-of-gstreamer
 
-Porg: the package organizer
-Porg is a small utility that allows a user to track which files are installed by a given program that is compiled from source. RBT supports the use of porg through a configuration file, called use_porg.yml. You can set its content to either true/false, or yes/no - these are synonymous to one another. I prefer the yes/no nomenclature.
+I added this functionality because I can not offhand
+remember the proper compile order, e. g. gst-plugins-bad,
+gst-plugins-ugly and so forth.
 
-To query from the commandline whether porg is available on the given computer system, try:
+## Porg: the package organizer
 
-rbt --is-porg-available?
-If it is not available then you can compile porg of course, via:
+<b>Porg</b> is a small utility that allows a user to track which files
+are installed by a given program that is compiled from source. RBT
+supports the use of porg through a configuration file, called
+<b>use_porg.yml</b>. You can set its content to either true/false,
+or yes/no - these are synonymous to one another. I prefer the
+yes/no nomenclature.
 
-rbt porg --trad
+To query from the commandline whether porg is available on the
+given computer system, try:
+
+    rbt --is-porg-available?
+
+If it is not available then you can compile porg of course,
+via:
+
+    rbt porg --trad
+
+
 To query from the commandline whether porg will be used, use:
 
-rbt --use_porg?
+    rbt --use_porg?
+
 The raw command for porg to run the make install step is like this:
 
-porg -lp htop-2.2.0 "make install"
-So, to give you a more specific example, say you compile zlib via the rbt gem, like this:
+    porg -lp htop-2.2.0 "make install"
 
-rbt zlib --ntrad
+So, to give you a more specific example, say you compile zlib
+via the rbt gem, like this:
+
+    rbt zlib --ntrad
+
 And you also have porg enabled.
 
-Then you can run the following on the commandline to let porg tell you which files were installed:
+Then you can run the following on the commandline to let porg tell you
+which files were installed:
 
-porg -f zlib
+    porg -f zlib
+
 The output will then be something like this:
 
-zlib-1.2.13:
-/home/Programs/Zlib/1.2.13/include/zconf.h
-/home/Programs/Zlib/1.2.13/include/zlib.h
-/home/Programs/Zlib/1.2.13/lib/libz.a
-/home/Programs/Zlib/1.2.13/lib/libz.so
-/home/Programs/Zlib/1.2.13/lib/libz.so.1
-/home/Programs/Zlib/1.2.13/lib/libz.so.1.2.13
-/home/Programs/Zlib/1.2.13/lib/pkgconfig/zlib.pc
-/home/Programs/Zlib/1.2.13/share/man/man3/zlib.3
+    zlib-1.2.13:
+    /home/Programs/Zlib/1.2.13/include/zconf.h
+    /home/Programs/Zlib/1.2.13/include/zlib.h
+    /home/Programs/Zlib/1.2.13/lib/libz.a
+    /home/Programs/Zlib/1.2.13/lib/libz.so
+    /home/Programs/Zlib/1.2.13/lib/libz.so.1
+    /home/Programs/Zlib/1.2.13/lib/libz.so.1.2.13
+    /home/Programs/Zlib/1.2.13/lib/pkgconfig/zlib.pc
+    /home/Programs/Zlib/1.2.13/share/man/man3/zlib.3
+
 Quite convenient to have! \o/
 
 You can read up more about porg here:
 
 https://porg.sourceforge.net/
 
-Handling errors and problems in regards to the RBT project
-Autocorrecting some errors
-The RBT scripts can attempt to auto-correct some errors. This is presently in testing. The few errors that RBT can try to auto-correct are mostly related to libtool.
+# Handling errors and problems in regards to the RBT project
 
-If the file use_autofixing.yml contains a String called t or true, meaning "enable autofixing", then auto-correcting will be used. There is another option that has to be set to true though, which is the "is_on_roebe?" settings, which indicates my home directory use. Presently (Sep 2017) this option does not work too reliably, so I am still testing it. You can test it too though if you enable "is_on_roebe".
+## Autocorrecting some errors
 
-Helpful hints when a .h header file is missing
-Since as of December 2022 the RBT suite will give information to the user as to when a .h header file is missing, and if that missing .h header file is (in turn) registered as part of the RBT project.
+The RBT scripts can attempt to auto-correct some errors. This
+is presently in testing. The few errors that RBT can try to
+auto-correct are mostly related to libtool.
+
+If the file use_autofixing.yml contains a String called t or
+true, meaning "enable autofixing", then auto-correcting will
+be used. There is another option that has to be set to true
+though, which is the "is_on_roebe?" settings, which indicates
+my home directory use. Presently (Sep 2017) this option does
+not work too reliably, so I am still testing it. You can 
+test it too though if you enable "is_on_roebe".
+
+## Helpful hints when a .h header file is missing
+
+Since as of December 2022 the RBT suite will give information
+to the user as to when a .h header file is missing, and if that
+missing .h header file is (in turn) registered as part of the
+RBT project.
 
 Let's explain this statement via a specific example.
 
-The software called usbutils depends on a header file called libusb.h.
+The software called <b>usbutils</b> depends on a header file called
+<b>libusb.h</b>.
 
-This header file (libusb.h) is part of libusb.
+This header file (libusb.h) is part of <b>libusb</b>.
 
-So, if the user tries to compile usbutils, but the error reported refers to a missing libusb.h file, then the RBT::Action::SoftwareManager class will inform the user about this situation.
+So, if the user tries to compile usbutils, but the error reported
+refers to a missing libusb.h file, then the RBT::Action::SoftwareManager class will
+inform the user about this situation.
 
 This message may look like this:
 
-RBT::Action::SoftwareManager: You could consider compiling it via:
+    RBT::Action::SoftwareManager: You could consider compiling it via:
 
-  rbt libusb
-That way the user can then consider compiling this program if he would like to.
+      rbt libusb
 
-Before that code was added, if the user got some error about a missing .h file, there was no indicator as to what was missing. Now, since as of December 2022, the user will get this notification if the program is registered in the RBT project.
+That way the user can then consider compiling this program if
+he would like to.
 
-class RBT::SimpleAppdirConfigure
-class RBT::SimpleAppdirConfigure can be used to quickly use the appdir-prefix at hand.
+Before that code was added, if the user got some error about
+a missing .h file, there was no indicator as to what
+was missing. Now, since as of December 2022, the user
+will get this notification <b>if</b> the program is 
+registered in the RBT project.
 
-Note that you can also use the following toplevel-method for this functionality:
+## class RBT::SimpleAppdirConfigure
 
-RBT.simple_appdir_configure # ← simply pass arguments to this method.
-class RBT::WhatCouldBecomeAnAppDir
-class RBT::WhatCouldBecomeAnAppDir was added in March 2023. The idea behind this class is that RBT should tell us which programs could be turned into an AppDir program, based on the binaries. This class will thus scan through all of /usr/bin/ and notify the user whether this is a registered binary or whethre it is not; and, if it is, whether it can be compiled into an AppDir.
+class <b>RBT::SimpleAppdirConfigure</b> can be used to quickly
+use the appdir-prefix at hand.
 
-This may be a bit confusing for newcomers, so this is clearly something for advanced users only.
+Note that you can also use the following toplevel-method for
+this functionality:
 
-Show the manual installation steps
-If you want to see the manual installation steps, use the file show_manual_steps.rb.
+    RBT.simple_appdir_configure # ← simply pass arguments to this method.
 
-This will not invoke these steps, contrary to another class which will invoke the manual steps.
+## class RBT::WhatCouldBecomeAnAppDir
 
-Static compilation
-Some programs can be compiled statically, but this may also lead to problems sometimes - such as when the program can NOT be compiled statically.
+class <b>RBT::WhatCouldBecomeAnAppDir</b> was added in March 2023. The idea
+behind this class is that RBT should tell us which programs could be
+turned into an AppDir program, based on the binaries. This class will
+thus scan through all of /usr/bin/ and notify the user whether this is
+a registered binary or whethre it is not; and, if it is, whether it
+can be compiled into an AppDir.
 
-The optional entry build_static in a cookbook file allows us to determine whether compilation should be statically or whether it should not be static.
+This may be a bit confusing for newcomers, so this is clearly something
+for advanced users only.
 
-If you wish to overrule this on the commandline and specifically disable static compilation, you can use a commandline instructions such as:
+## Show the manual installation steps
 
-rbt htop --do-not-build-statically
-Note that as of December 2018 you can also combine --enable-shared --disable-static in one variant via --shared-no-static:
+If you want to see the manual installation steps, use the file
+show_manual_steps.rb.
 
-rbt libxmu --shared-no-static ntrad
-To determine whether a program can be compiled statically, you can issue a command such as the following:
+This will not invoke these steps, contrary to another class which
+will invoke the manual steps.
 
-rbt tar --can-be-compiled-statically?
-Do note that this requires a manual registration in the corresponding yaml file; by default this will return false (aka no).
 
-Since as of July 2020 you can also determine which programs can be compiled statically in general, via:
+## Static compilation
 
-rbt --which-programs-can-be-compiled-statically?
-Next, a few words about statically compiled binaries on Linux. I added this subsection in 2023 because I sometimes need to remember how to do so without the rbt project.
+Some programs can be <b>compiled statically</b>, but this may also lead
+to problems sometimes - such as when the program can <b>NOT</b> be
+compiled statically.
+
+The optional entry **build_static** in a cookbook file allows us to
+determine whether compilation should be statically or
+whether it should not be static.
+
+If you wish to overrule this on the commandline and specifically
+**disable** static compilation, you can use a commandline 
+instructions such as:
+
+    rbt htop --do-not-build-statically
+
+Note that as of **December 2018** you can also combine
+--enable-shared --disable-static in one variant via
+<b>--shared-no-static</b>:
+
+    rbt libxmu --shared-no-static ntrad
+
+To determine whether a program can be compiled statically, you can
+issue a command such as the following:
+
+    rbt tar --can-be-compiled-statically?
+
+Do note that this requires a manual registration in the corresponding
+yaml file; by default this will return false (aka no).
+
+Since as of July 2020 you can also determine which programs can
+be compiled statically in general, via:
+
+    rbt --which-programs-can-be-compiled-statically?
+
+Next, a few words about statically compiled binaries on Linux. I added
+this subsection in 2023 because I sometimes need to remember how to
+do so without the rbt project.
 
 I found that often setting CFLAGS to include -static works.
 
 In ruby this would look like this:
 
-ENV['CFLAGS'] = ENV['CFLAGS']+' -static -g'
-I tested this on the program called sed in June 2023, and, indeed, the resulting binary was statically compiled. \o/
+    ENV['CFLAGS'] = ENV['CFLAGS']+' -static -g'
 
-The entry status_of_the_project in a cookbooks .yml file
-In June 2023 the entry status_of_the_project was added.
+I tested this on the program called <b>sed</b> in June 2023, and,
+indeed, the resulting binary was statically compiled. \o/
+
+## The entry status_of_the_project in a cookbooks .yml file
+
+In June 2023 the entry <b>status_of_the_project</b> was added.
 
 Possible values include:
 
-- outdated
-- possibly outdated
-- low maintenance
-- actively maintained
-This is somewhat experimental for now. The key idea is to indicate the maintenance health of a project. Most will default to the value actively maintained, so this entry is primarily useful when a project was abandoned.
+    - outdated
+    - possibly outdated
+    - low maintenance
+    - actively maintained
 
-Defined actions in the RBT project and actions (actions tag)
-So, rather than think in terms of classes and .rb files, we think of every important part of RBT to be "actionable". That is, we can call its "action", which will lead to its specified, designated effect, such as compiling a program from a remote URL.
+This is somewhat experimental for now. The key idea is to
+indicate the maintenance health of a project. Most will
+default to the value <b>actively maintained</b>, so this
+entry is primarily useful when a project was abandoned.
 
-Thus, we should also provide a unified topdown way how to call all these actions. Furthermore we can chain these actions, to achieve a combined, new effect. For instance, in order to compile a program from source, we have to do certain actions one after the other. Thus we can specify all of them via these actions.
+## Defined actions in the RBT project and actions (actions tag)
 
-The general syntax suggestion for such an action is as follows:
+So, rather than think in terms of classes and .rb files, we think
+of every important part of RBT to be "actionable". That is, we can
+call its "action", which will lead to its specified, designated
+effect, such as compiling a program from a remote URL.
 
-RBT.action(:create_program_skeleton, 'htop-1.2')
+Thus, we should also provide a <b>unified topdown way</b>
+how to call <b>all</b> these actions. Furthermore we
+can <b>chain</b> these actions, to achieve a combined,
+new effect. For instance, in order to compile a program
+from source, we have to do certain actions one after the
+other. Thus we can specify all of them via these
+actions. 
+
+The general syntax suggestion for such an <b>action</b>
+is as follows:
+
+    RBT.action(:create_program_skeleton, 'htop-1.2')
+
 This would be the very same as issuing:
 
-rcp htop-1.2
+    rcp htop-1.2
+
 From the commandline.
 
-The reason why I think adding support for this is useful is because once you have many individual tasks in the project, it gets messy to remember their names and remember where that action resides (in which particular .rb file and class). Whereas, if we use a Symbol such as the above, we can call this from any other .rb file as-is, and have that work, without having to think about which specific .rb file to call, and so forth. Extra actions can be passed via {} blocks in a generic way, so this should be quite flexible if the user requires fine-tuning of this.
+The reason why I think adding support for this is useful is because once
+you have many individual tasks in the project, it gets messy to remember
+their names and remember where that action resides (in which particular
+.rb file and class). Whereas, if we use a Symbol such as the above, we can
+call this from any other .rb file as-is, and have that work, without having
+to think about which specific .rb file to call, and so forth. Extra
+actions can be passed via {} blocks in a generic way, so this should
+be quite flexible if the user requires fine-tuning of this.
 
-I will keep on exploring this - in the long run, the goal would be to make all actions available via the above generic API call. Furthermore we can also alias this, to simplify calling it from within ruby code.
+I will keep on exploring this - in the long run, the goal would be to
+make all **actions** available via the above generic API call.
+Furthermore we can also alias this, to simplify calling it from
+within ruby code.
 
-The following actions are registered as of May 2022, sorted alphabetically:
+The following actions are registered as of **May 2022**, sorted
+alphabetically:
 
-:all_urls                                # Feedback/Show all remote URLs on the commandline.
-:appdir                                  # Compile the given program(s) at hand in a (versioned) appdir style.
-:autosymlink                             # This ad-hoc helper class can symlink from lib64/ to lib/. Rarely needed, though.
-:autoupdate_this_program                 # Autoupdate a specific program.
-:batch_validate_the_cookbook_recipes     # Validate all cookbook recipes. This is not so important for regular users, though.
-:beautify_configure_help_output          # Beautify the "./configure --help" output.
-:binary_of                               # Query to which program a specific binary belongs to.
-:blfs                                    # Show the BLFS entry of the given program. This only works if there is a registered BLFS entry for the given .yml file.
-:build_detector                          # The build detector can be used to determine whether a program uses "configure" or "cmake" or "meson" and so forth.
-:chainer                                 # Chain-compile a series of programs, such as the "KDE5 applications".
-:chroot_compile                          # Compile into a chrooted environment as prefix-target.
-:colour_make                             # Run "make" in a colourized manner, that is, with colour support.
-:colour_make_install                     # Run "make install" in a colourized manner, that is, with colour support.
-:compile_in_traditional_manner           # This will compile the passed programs via the /usr/ prefix.
-:compile_into_home_dir                   # This will compile the given program into the HOME directory of the user, e. g. /root/ for the superuser.
-:compile_program                         # Compile a specific program. Symbols exist for shortcuts such as :lfs1.
-:compile_strategies                      # Give an overview over the available compile-strategies in use.
-:compile_these_programs                  # Compile several programs one after the other, e. g. the batch-variant to the :compile_program action.
-:compile_the_python_addons               # Compile/Install all registered python add-ons (registered in the RBT suite that is)
-:cookbooks                               # Create a new instance of RBT::Cookbooks::SanitizeCookbook.
-:copy_these_archives                     # Copy different source archives to the current working directory.
-:create_appdir_skeleton                  # Create a new AppDir skeleton structure for the given program.
-:create_cookbook_yaml_file               # Create a new .yml file for the given program.
-:create_log_directory                    # Create a new base log directory for the RBT project.
-:create_pkgconfig_file                   # This action will attempt to create a (pkgconfig) .pc file.
-:create_program_skeleton                 # Create a new AppDir skeleton for the given program. This is the same as ^^^ above, thus just another aliased name for it.
-:create_programs_version_html_file       # Create a large programs-version .html file. Not that useful for most end users, though.
-:create_program_version_url_file         # This will create the default .md file containing all URLs, before the rbt gem
-                                         # is uploaded. Not that useful for most end users, though.
-:create_programs_url_file                # This action will create the programs-URL file e. g. programs_version_url.md.
-:create_registered_tags                  # Create the registered-tags file. Normal users don't really need this.
-:create_snapcraft_file                   # Create a .snapcraft file for the given program.
-:custom_toolchain                        # This action will compile as if the user passed the three options '--static --home-dir --do-not-symlink' to RBT::Action::SoftwareManager.
-:download                                # Download a specific source archive. Alias "aliased" to :rbt_download.
-:download_all_source_archives            # Download all source archives, e. g. more than 3800 programs. Use only when you need to bootstrap your own local copy of archives.
-:dual_compile                            # First compile the program at hand via /usr/ prefix, then again via an AppDir prefix.
-:extra_information                       # Show extra information about the given program at hand.
-:extract                                 # Extract a tarball/zip archive to some location.
-:expand_cookbooks                        # This will expand from the short .yml files to the sanitized, longer
-                                         # .yml files, for all cookbooks. class ExpandCookbooks will handle this.
-:expanded_cookbooks                      #
-:feedback_program_description            # This action will feedback the description of the given program at hand.
-:feedback_description_of                 # This action will feedback the description of the given program at hand - ^^^ similar to theabove.
-:filter_for_valid_program_names          # Try to turn the given input into a required program, such as the input "ph"
-                                         # becoming "php" or "libar" becoming "libarchive".
-:find_all_archive_types                  # Find all local archives of a specific type, such as ".tar.gz".
-:find_url_for                            # Find the URL for a specific program, such as "htop".
-:generate_all_slack_desc_files           # Generate all slackware-description files for every registered program.
-:generate_version_file                   # Generate the large programs_version.yml file.
-:highest                                 # Show the "largest" programs, that is, the biggest file archives stored locally.
-:home_dir_without_symlinking             # Compile into the home directory, such as /root/, but do not symlink afterwards.
-:homepage                                # Simply report the homepage of the given argument, e. g. RBT.action(:homepage, 'php').
-                                         # :report_the_homepage is an alias to :homepage, by the way.
-:install_this_rubygem                    # To quickly install a rubygem .gem file
-:libtool                                 # A wrapper over libtool, to try to make libtool suck less.
-:make                                    # A wrapper over "make", primarily done to add colour support when doing "make" on the commandline.
-:make_app_prefix                         # Run "make" but pass an explicit app-dir prefix towards it.
-:manual_steps                            # (Missing description right now.)
-:meson_appdir_prefix                     # Compile via a meson-based system, into the default appdir prefix (e. g. /Programs/Htop/3.1.2/ or a siilar prefix).
-:multi_url_displayer                     # This will show several URLs in one go, such as for "lxqt".
-:ntrad                                   # Compile in an AppDir manner.
-:parse_help                              # Parse the output that is yielded by issuing "./configure --help" normally, for configure-based programs.
-:paste_blfs                              # Simply show the BLFS entry of the given program. (It has to have such an entry, though, otherwise this will not work.)
-:query_file_association                  # This will query to which package a specific file belongs to (if it has been registered).
-:remove_libtool_files                    # This action allows the user to remove .la files, in the versioned AppDir prefix
-:remove_outdated_archives                # This will remove outdated (that is old) archives, if more than one such archive exists locally.
-:remove_symlinks                         # This action will remove all broken symlinks (at the least in the PROGRAMS_DIRECTORY hierarchy).
-:rename_konsole_tab                      # This action will (try to) rename a konsole tab (that is KDE konsole), which is the terminal I tend to use.
-:report_how_many_binaries_are_registered # Report how many binaries are registered in the RBT project.
-:report_host_cpu                         # Report the host CPU in use, such as "x86_64".
-:report_the_mate_desktop_version         # Report the mate-desktop version, on the commandline.
-:report_total_size_of_all_archives       # Report the total size of all local archives.
-:report_xfce_version                     # Report the XFCE version (if installed locally).
-:run_make_then_make_install              # This will first run "make" and then "make install". It is mostly a convenience method, with support for colours.
-:scookie                                 # Show a lot of information about a specific program.
-:search_for_tags                         # Search for all programs that have a specific tag.
-:show_all_about                          # Show all about a specific program, e. g. "htop".
-:show_compile_chain                      # Show the compile chain for the given program.
-:show_configuration_options              # Show the configuration options of a specific program, if it has any.
-:show_versions_of_these_programs         # Show versions of the given programs.
-:simple_appdir_configure                 # Compile a program via an app-dir prefix, e. g. /Programs/Htop/1.2.3/.
-:store_abbreviations                     # This will store all abbreviations to the registered program names.
-:suggest_cookbook_for                    # Suggest a cookbook for a specific program, such as "htop".
-:symlink_into_the_usr_bin_hierarchy      # Symlink the given Array into the /usr/bin/ hierarchy.
-:test_this_alias                         # Test whether the input is an alias to a program, such as "ht" towards "htop".
-:to_current                              # Create a "Current" symlink.
-:toolchain                               # This will attempt to build a standalone toolchain for compilation, similar to what LFS does.
-:trad                                    # Compile a program in the traditional manner, aka prefix /usr/. The symbol :traditional is an "alias" to this entry point.
-:uchroot_chompile                        # Compile via user-chroot prefix.
-:url_action                              # Support instructions such as /install/php/6.3.1, in particular for www-related use cases.
-:update_all_ruby_gems                    # This will update all ruby .gem files that are registered in the RBT project.
-:update_entry                            # Update a specific program-entry, into the corresponding .yml file.
-:update_kde_application                  # Update all KDE applications (kde apps).
-:update_tags                             # This will update all registered tags.
-So, when you want to invoke :update_kde_application then you can simply do this:
+    :all_urls                                # Feedback/Show all remote URLs on the commandline.
+    :appdir                                  # Compile the given program(s) at hand in a (versioned) appdir style.
+    :autosymlink                             # This ad-hoc helper class can symlink from lib64/ to lib/. Rarely needed, though.
+    :autoupdate_this_program                 # Autoupdate a specific program.
+    :batch_validate_the_cookbook_recipes     # Validate all cookbook recipes. This is not so important for regular users, though.
+    :beautify_configure_help_output          # Beautify the "./configure --help" output.
+    :binary_of                               # Query to which program a specific binary belongs to.
+    :blfs                                    # Show the BLFS entry of the given program. This only works if there is a registered BLFS entry for the given .yml file.
+    :build_detector                          # The build detector can be used to determine whether a program uses "configure" or "cmake" or "meson" and so forth.
+    :chainer                                 # Chain-compile a series of programs, such as the "KDE5 applications".
+    :chroot_compile                          # Compile into a chrooted environment as prefix-target.
+    :colour_make                             # Run "make" in a colourized manner, that is, with colour support.
+    :colour_make_install                     # Run "make install" in a colourized manner, that is, with colour support.
+    :compile_in_traditional_manner           # This will compile the passed programs via the /usr/ prefix.
+    :compile_into_home_dir                   # This will compile the given program into the HOME directory of the user, e. g. /root/ for the superuser.
+    :compile_program                         # Compile a specific program. Symbols exist for shortcuts such as :lfs1.
+    :compile_strategies                      # Give an overview over the available compile-strategies in use.
+    :compile_these_programs                  # Compile several programs one after the other, e. g. the batch-variant to the :compile_program action.
+    :compile_the_python_addons               # Compile/Install all registered python add-ons (registered in the RBT suite that is)
+    :cookbooks                               # Create a new instance of RBT::Cookbooks::SanitizeCookbook.
+    :copy_these_archives                     # Copy different source archives to the current working directory.
+    :create_appdir_skeleton                  # Create a new AppDir skeleton structure for the given program.
+    :create_cookbook_yaml_file               # Create a new .yml file for the given program.
+    :create_log_directory                    # Create a new base log directory for the RBT project.
+    :create_pkgconfig_file                   # This action will attempt to create a (pkgconfig) .pc file.
+    :create_program_skeleton                 # Create a new AppDir skeleton for the given program. This is the same as ^^^ above, thus just another aliased name for it.
+    :create_programs_version_html_file       # Create a large programs-version .html file. Not that useful for most end users, though.
+    :create_program_version_url_file         # This will create the default .md file containing all URLs, before the rbt gem
+                                             # is uploaded. Not that useful for most end users, though.
+    :create_programs_url_file                # This action will create the programs-URL file e. g. programs_version_url.md.
+    :create_registered_tags                  # Create the registered-tags file. Normal users don't really need this.
+    :create_snapcraft_file                   # Create a .snapcraft file for the given program.
+    :custom_toolchain                        # This action will compile as if the user passed the three options '--static --home-dir --do-not-symlink' to RBT::Action::SoftwareManager.
+    :download                                # Download a specific source archive. Alias "aliased" to :rbt_download.
+    :download_all_source_archives            # Download all source archives, e. g. more than 3800 programs. Use only when you need to bootstrap your own local copy of archives.
+    :dual_compile                            # First compile the program at hand via /usr/ prefix, then again via an AppDir prefix.
+    :extra_information                       # Show extra information about the given program at hand.
+    :extract                                 # Extract a tarball/zip archive to some location.
+    :expand_cookbooks                        # This will expand from the short .yml files to the sanitized, longer
+                                             # .yml files, for all cookbooks. class ExpandCookbooks will handle this.
+    :expanded_cookbooks                      #
+    :feedback_program_description            # This action will feedback the description of the given program at hand.
+    :feedback_description_of                 # This action will feedback the description of the given program at hand - ^^^ similar to theabove.
+    :filter_for_valid_program_names          # Try to turn the given input into a required program, such as the input "ph"
+                                             # becoming "php" or "libar" becoming "libarchive".
+    :find_all_archive_types                  # Find all local archives of a specific type, such as ".tar.gz".
+    :find_url_for                            # Find the URL for a specific program, such as "htop".
+    :generate_all_slack_desc_files           # Generate all slackware-description files for every registered program.
+    :generate_version_file                   # Generate the large programs_version.yml file.
+    :highest                                 # Show the "largest" programs, that is, the biggest file archives stored locally.
+    :home_dir_without_symlinking             # Compile into the home directory, such as /root/, but do not symlink afterwards.
+    :homepage                                # Simply report the homepage of the given argument, e. g. RBT.action(:homepage, 'php').
+                                             # :report_the_homepage is an alias to :homepage, by the way.
+    :install_this_rubygem                    # To quickly install a rubygem .gem file
+    :libtool                                 # A wrapper over libtool, to try to make libtool suck less.
+    :make                                    # A wrapper over "make", primarily done to add colour support when doing "make" on the commandline.
+    :make_app_prefix                         # Run "make" but pass an explicit app-dir prefix towards it.
+    :manual_steps                            # (Missing description right now.)
+    :meson_appdir_prefix                     # Compile via a meson-based system, into the default appdir prefix (e. g. /Programs/Htop/3.1.2/ or a siilar prefix).
+    :multi_url_displayer                     # This will show several URLs in one go, such as for "lxqt".
+    :ntrad                                   # Compile in an AppDir manner.
+    :parse_help                              # Parse the output that is yielded by issuing "./configure --help" normally, for configure-based programs.
+    :paste_blfs                              # Simply show the BLFS entry of the given program. (It has to have such an entry, though, otherwise this will not work.)
+    :query_file_association                  # This will query to which package a specific file belongs to (if it has been registered).
+    :remove_libtool_files                    # This action allows the user to remove .la files, in the versioned AppDir prefix
+    :remove_outdated_archives                # This will remove outdated (that is old) archives, if more than one such archive exists locally.
+    :remove_symlinks                         # This action will remove all broken symlinks (at the least in the PROGRAMS_DIRECTORY hierarchy).
+    :rename_konsole_tab                      # This action will (try to) rename a konsole tab (that is KDE konsole), which is the terminal I tend to use.
+    :report_how_many_binaries_are_registered # Report how many binaries are registered in the RBT project.
+    :report_host_cpu                         # Report the host CPU in use, such as "x86_64".
+    :report_the_mate_desktop_version         # Report the mate-desktop version, on the commandline.
+    :report_total_size_of_all_archives       # Report the total size of all local archives.
+    :report_xfce_version                     # Report the XFCE version (if installed locally).
+    :run_make_then_make_install              # This will first run "make" and then "make install". It is mostly a convenience method, with support for colours.
+    :scookie                                 # Show a lot of information about a specific program.
+    :search_for_tags                         # Search for all programs that have a specific tag.
+    :show_all_about                          # Show all about a specific program, e. g. "htop".
+    :show_compile_chain                      # Show the compile chain for the given program.
+    :show_configuration_options              # Show the configuration options of a specific program, if it has any.
+    :show_versions_of_these_programs         # Show versions of the given programs.
+    :simple_appdir_configure                 # Compile a program via an app-dir prefix, e. g. /Programs/Htop/1.2.3/.
+    :store_abbreviations                     # This will store all abbreviations to the registered program names.
+    :suggest_cookbook_for                    # Suggest a cookbook for a specific program, such as "htop".
+    :symlink_into_the_usr_bin_hierarchy      # Symlink the given Array into the /usr/bin/ hierarchy.
+    :test_this_alias                         # Test whether the input is an alias to a program, such as "ht" towards "htop".
+    :to_current                              # Create a "Current" symlink.
+    :toolchain                               # This will attempt to build a standalone toolchain for compilation, similar to what LFS does.
+    :trad                                    # Compile a program in the traditional manner, aka prefix /usr/. The symbol :traditional is an "alias" to this entry point.
+    :uchroot_chompile                        # Compile via user-chroot prefix.
+    :url_action                              # Support instructions such as /install/php/6.3.1, in particular for www-related use cases.
+    :update_all_ruby_gems                    # This will update all ruby .gem files that are registered in the RBT project.
+    :update_entry                            # Update a specific program-entry, into the corresponding .yml file.
+    :update_kde_application                  # Update all KDE applications (kde apps).
+    :update_tags                             # This will update all registered tags.
 
-RBT.action(:update_kde_application)
-(Note that RBT.actions() is an alias to RBT.action(). Internally the RBT project will default to RBT.action() only, though; RBT.actions() exists mostly as a convenience-alias for e. g. working with IRB, if you forget the API, e. g. plural or singular - both will work.)
+So, when you want to invoke :update_kde_application then you can simply
+do this:
 
-In February 2022 a new filter-method was added that can be applied to turn a given input argument into a "registered" program. What this is meant to imply is that, say, you pass in the argument htop.yml. The .yml part is superfluous, so that filter-method would turn htop.yml into htop. This is not the only modification that is done there; the more important take-home message is that the end user shall never have to wonder about any of this. The rbt project will try to make sense of the given input at hand, as much as that is possible.
+    RBT.action(:update_kde_application)
 
-More actions will be added as time permits. There is a secondary advantage when using actions, by the way. If an action is specified, such as via Symbols, then we can internally change which class and .rb file handles that action. So perhaps we have some bugs and fixing these takes too long, but we still want the specified action to work - in this event we could quickly write a small task that handles the specified action, without having to worry about side effects.
+(Note that <b>RBT.actions()</b> is an alias to RBT.action(). Internally the
+RBT project will default to <b>RBT.action()</b> only, though; <b>RBT.actions()</b>
+exists mostly as a convenience-alias for e. g. working with IRB, if you
+forget the API, e. g. plural or singular - both will work.)
 
-Note that the above overview does not include all available actions; some are mostly internal actions that have very little value for regular users.
+In **February 2022** a **new filter-method** was added that can be applied
+to turn a given input argument into a "registered" program. What this
+is meant to imply is that, say, you pass in the argument **htop.yml**.
+The .yml part is superfluous, so that filter-method would turn **htop.yml**
+into **htop**. This is not the only modification that is done there;
+the more important take-home message is that the end user shall never
+have to wonder about any of this. The rbt project will try to make
+sense of the given input at hand, as much as that is possible.
 
-The actions may be a bit verbose and not necessarily easy to read compared to a method.
+More actions will be added as time permits. There is a secondary advantage
+when using actions, by the way. **If** an action is specified, such as
+via Symbols, then we can internally change which class and .rb file
+handles that action. So perhaps we have some bugs and fixing these
+takes too long, but we still want the specified action to work - in
+this event we could quickly write a small task that handles the
+specified action, without having to worry about side effects.
+
+Note that the above overview does **not** include all available 
+actions; some are mostly internal actions that have very little
+value for regular users.
+
+The actions may be a bit verbose and not necessarily easy to
+read compared to a method.
 
 Consider the following:
 
-RBT.action(:install_this_rubygem, 'path_to_the.gem')
-RBT.action(:install_this_rubygem, '/tmp/thor-1.2.0.gem')
-This would install this rubygem, if it exists locally, e. g. the thor-gem.
+    RBT.action(:install_this_rubygem, 'path_to_the.gem')
+    RBT.action(:install_this_rubygem, '/tmp/thor-1.2.0.gem')
+
+This would install this rubygem, if it exists locally, e. g.
+the <b>thor</b>-gem.
 
 Now compare this to this toplevel method:
 
-RBT.install_this_rubygem('/tmp/thor-1.2.0.gem')
-The second variant is a bit shorter and easier to read, in my opinion. So it is the better variant, yes?
+    RBT.install_this_rubygem('/tmp/thor-1.2.0.gem')
 
-Well, it depends. Brevity is useful, but think about the benefit you get via RBT.action(): you can simply call one unified method (e. g. action()) to do the required action. And we can add lots of aliases to this, to make working with it easier. And you don't have to worry about where the code resides - you just use the action without a need to do any manual require call.
+The second variant is a bit shorter and easier to read, in
+my opinion. So it is the better variant, yes?
 
-I think if you think this through for a while then you may realise that RBT.action() is not such a bad idea - it provides actionable entry points to the whole RBT suite.
+Well, it depends. Brevity is useful, but think about the
+benefit you get via RBT.action(): you can simply call
+one unified method (e. g. action()) to do the required
+action. And we can add lots of aliases to this, to 
+make working with it easier. And you don't have to 
+worry about **where** the code resides - you just
+use the action without a need to do any manual require
+call.
 
-Since as of September 2022 all executables that are part of the RBT suite, under the bin/ subdirectory, are "actionable". That is they are implemented via RBT.action() calls. New executables will conform to this new default. The only two exceptions are bin/rbt and bin/rbt_config - these two will not use RBT.action(). But who knows - perhaps at some point in time in the future they may.
+I think if you think this through for a while then you may
+realise that RBT.action() is not such a bad idea - it
+provides <b>actionable</b> entry points to the whole
+RBT suite.
 
-Permanently disabling trying to rename the KDE konsole tab
-You can permanently disable the renaming of the KDE konsole tab via:
+Since as of <b>September 2022</b> all executables that
+are part of the RBT suite, under the bin/ subdirectory,
+are "actionable". That is they are implemented via
+<b>RBT.action()</b> calls. New executables will conform
+to this new default. The only two exceptions are bin/rbt
+and bin/rbt_config - these two will not use RBT.action().
+But who knows - perhaps at some point in time in the
+future they may.
 
-ry --permanently-do-not-rename-tab
-class RBT::KernelConfigSanitizer
-class RBT::KernelConfigSanitizer, written in February 2024, can help ensure a certain linux kernel config (for the .config file that is typically found at /usr/src/linux/).
+## Permanently disabling trying to rename the KDE konsole tab
 
-It reads a dataset from a .yml file, which is also distributed via the RBT project. That .yml file is adjusted to my use cases, so you may have to keep a separate .yml file adjusted to your use cases.
+You can permanently disable the renaming of the KDE konsole
+tab via:
 
-At any rate, class RBT::KernelConfigSanitizer will read in the content from that .yml file and ensure that the .config file has the specified entries. In other words: we can ensure that the linux kernel that is to be compiled by you, also has these values. Note that this will only work if class RBT::KernelConfigSanitizer can find the corresponding key in the given line (for the whole dataset stored in .config). In other words: if the configuration option is NOT part of any line, then it will not be modified at all. This is done so that we can avoid using potentially deprecating configuration values, even IF they were specified in the .yml file.
+    ry --permanently-do-not-rename-tab
 
-Pseudo Macros in use
-Some Pseudo-Macros are used in the RBT Project - at the least in the past.
+## class RBT::KernelConfigSanitizer
+
+class RBT::KernelConfigSanitizer, written in February 2024,
+can help ensure a certain linux kernel config (for the
+.config file that is typically found at /usr/src/linux/).
+
+It reads a dataset from a .yml file, which is also distributed
+via the RBT project. That .yml file is adjusted to my use
+cases, so you may have to keep a separate .yml file adjusted
+to your use cases.
+
+At any rate, class RBT::KernelConfigSanitizer will read
+in the content from that .yml file and ensure that the
+.config file has the specified entries. In other words:
+we can ensure that the linux kernel that is to be compiled
+by you, also has these values. Note that this will only work
+if class RBT::KernelConfigSanitizer can find the corresponding
+key in the given line (for the whole dataset stored in
+.config). In other words: if the configuration option is
+NOT part of any line, then it will not be modified at all.
+This is done so that we can avoid using potentially deprecating
+configuration values, even IF they were specified in the
+.yml file. 
+
+## Pseudo Macros in use
+
+Some Pseudo-Macros are used in the RBT Project - at the least in
+the past.
 
 This section here details them:
 
-PROGRAM_NAME    # Will be replaced with the name of
-                # the program, for instance: "htop"
-PROGRAM_VERSION # Will be replaced with the actual
-                # version of the program, example: "1.0.0"
+    PROGRAM_NAME    # Will be replaced with the name of
+                    # the program, for instance: "htop"
+    PROGRAM_VERSION # Will be replaced with the actual
+                    # version of the program, example: "1.0.0"
 
+
+<pre>
 26.08.2022: 255 classes
-Build and compiling inside of a subdirectory (build directory)
-Sometimes you dont want to build in the current directory, but may want to use a subdirectory instead. (For example, glibc requires you to build inside a subdirectory).'
+</pre>
 
-To do this from the commandline, simply do one of the following commands:
 
-rbt php --subdir=PHP_BUILD_DIRECTORY'
-The above would build in the directory called "PHP_BUILD_DIRECTORY". If this directory does not exist (which is the case usually), then the RBT scripts will create that directory.'
 
-The default name for the subdirectory is called BUILD/ and you can do default to this directory:
 
-rbt pango -b'
-This will create a BUILD/ directory and change the working directory into it, while compiling.'
 
-In practise, defaulting to the BUILD/ directory is the easiest solution if you want to compile in your own directory.'
+## Build and compiling inside of a subdirectory (build directory)
 
-Please also note that you can specify build directories in the respective cookbook file as well - look at the description of the variables called <span class="yel">use_build_directory</span>, and <span class="yel">use_this_build_directory</span>.'
+Sometimes you dont want to build in the current directory, but
+may want to use a subdirectory instead. (For example, glibc requires
+you to build inside a subdirectory).'
 
-Alternative syntax exists as well,of course. If you want to use the default build directory for a project you compile, you can pass the option usebuilddir like so.'
+To do this from the commandline, simply do one of the following
+commands:
 
-rbt automake --use-build-dir'
-rbt automake usebuilddir'
-rbt htop usebuilddir'
-rbt php use_build_dir'
+    rbt php --subdir=PHP_BUILD_DIRECTORY'
+
+The above would build in the directory called "PHP_BUILD_DIRECTORY".
+If this directory does not exist (which is the case usually), then 
+the RBT scripts will create that directory.'
+
+The default name for the subdirectory is called
+<b class="red">BUILD/</b> and you can do default to
+this directory:
+
+    rbt pango -b'
+
+This will create a <b class="red">BUILD/</b> directory and change 
+the working directory into it, while compiling.'
+
+In practise, defaulting to the BUILD/ directory is the easiest
+solution if you want to compile in your own directory.'
+
+Please also note that you can specify build directories
+in the respective cookbook file as well - look at the description
+of the variables called `<span class="yel">use_build_directory</span>`, 
+and `<span class="yel">use_this_build_directory</span>`.'
+
+Alternative syntax exists as well,of course. If you want to
+use the default build directory for a project you compile, you
+can pass the option <b>usebuilddir</b> like so.'
+
+    rbt automake --use-build-dir'
+    rbt automake usebuilddir'
+    rbt htop usebuilddir'
+    rbt php use_build_dir'
+
 You can also specify a specific build directory to use.'
 
 One way that this works is via this:
 
-rbt htop --use-this-build-dir=/Depot/j'
-The RBT scripts will append a trailing / if it is a directory and if it does not yet have a trailing / character presently, so the above command is the very same as passing in /Depot/j/.'
+    rbt htop --use-this-build-dir=/Depot/j'
 
-If you want to use a build directory, but do not care about the name, you can also use a random name, like so:
+The RBT scripts will append a trailing / if it is a
+directory and if it does not yet have a trailing / character
+presently, so the above command is the very same as passing
+in <b>/Depot/j/</b>.'
 
-rbt php --use-random-build-directory'
-class RBT::Action::SoftwareManager
-This extremely important class was added in September 2022 and has replaced the older class called RBT::Compile. In December 2022 class RBT::Compile has been deprecated, and in 2024 removed completely; class RBT::Action::SoftwareManager is now the way to go. RBT::Compile is no longer available.
+If you want to use a build directory, but do not care
+about the name, you can also use a random name, like 
+so:
 
-class RBT::Action::SoftwareManager has been started from scratch. Note that for the time being RBT::Compile will co-exist with RBT::Action::SoftwareManager; it may still receive bug fixes and other updates. But other than that, the code base in RBT::Action::SoftwareManager should be better, and it may offer a greater functionality than does RBT::Compile - so in the long term (future), class RBT::Action::SoftwareManager will become the new default. It will then be decided whether RBT::Compile will be retained or not after that.
+    rbt php --use-random-build-directory'
 
-Note that RBT::Compile will be maintained for a longer time, so two ways to install something will co-exist. In the long run RBT::Action::SoftwareManager will likely be better, but you may find it easier to use RBT::Compile instead for now.
+## class RBT::Action::SoftwareManager
 
-The rewritten class RBT::Action::SoftwareManager has integrated various improvements. For instance, it is now possible to simply ignore compilation errors and other errors - this is sometimes necessary, because RBT erroneously reports some mistakes that are not real mistakes. The display and handling of messages has been improved in general - you can now decide to NOT read the extract-archive information, which used to be very spammy in the past.
+This extremely important class was added in September 2022 and has
+replaced the older class called <b>RBT::Compile</b>. In December 2022
+class RBT::Compile has been deprecated, and in 2024 removed completely;
+class RBT::Action::SoftwareManager is now the way to go. RBT::Compile
+is no longer available.
 
-The flag --use-this-program-version is still available, but a new syntax has been added:
+class RBT::Action::SoftwareManager has been started from scratch. Note that for the time
+being RBT::Compile will co-exist with RBT::Action::SoftwareManager; it may still
+receive bug fixes and other updates. But other than that,
+the code base in RBT::Action::SoftwareManager should be better, and it may
+offer a greater functionality than does RBT::Compile - so in
+the long term (future), class RBT::Action::SoftwareManager will become
+the new default. It will then be decided whether RBT::Compile
+will be retained or not after that.
 
-installer htop@3.1.2
+Note that RBT::Compile will be maintained for a longer time,
+so two ways to install something will co-exist. In the long
+run RBT::Action::SoftwareManager will likely be better, but you may find
+it easier to use RBT::Compile instead for now.
+
+The rewritten class RBT::Action::SoftwareManager has integrated various
+improvements. For instance, it is now possible to simply
+ignore compilation errors and other errors - this is
+sometimes necessary, because RBT erroneously reports
+some mistakes that are not real mistakes. The display
+and handling of messages has been improved in general -
+you can now decide to NOT read the extract-archive
+information, which used to be very spammy in the past.
+
+The flag --use-this-program-version is still available,
+but a new syntax has been added:
+
+    installer htop@3.1.2
+
 This may even work with locally existing archives.
 
-The following subsections will explain the tasks handled by class RBT::Action::SoftwareManager in more detail, as this is by far the most important class of the rbt gem. This is ongoing - right now many details are not yet explained, so the following subsections will eventually be expanded.
+The following subsections will explain the tasks handled by
+class RBT::Action::SoftwareManager in more detail, as this is by
+far the most important class of the <b>rbt</b> gem. This is
+ongoing - right now many details are not yet explained, so
+the following subsections will eventually be expanded.
 
-Internals of class RBT::Action::SoftwareManager
-class RBT::Action::SoftwareManager is the main class of the RBT project, as it allows us to compile or install a program from source. It is, more or less, the central entry point to RBT - even though you can invoke the other .rb files directly, RBT::Action::SoftwareManager often provides a simpler convenience access to the disparate functions of the RBT project. It integrates other classes, sort of like a glue.
+### Internals of class RBT::Action::SoftwareManager
 
-This subsection here will explain a few key decisions made, in the long run; and will also explain a few internals.
+<b>class RBT::Action::SoftwareManager</b> is the main class of the RBT project, as it allows
+us to compile or install a program from source. It is, more or less, <b>the
+central entry point to RBT</b> - even though you can invoke the other .rb 
+files directly, RBT::Action::SoftwareManager often provides a simpler convenience access
+to the disparate functions of the RBT project. It integrates other 
+classes, sort of like a <b>glue</b>.
 
-Do not worry if this may be a bit confusing at first - it is meant primarily for me, and for others who may want to extend the RBT project one day.
+This subsection here will explain a few key decisions made, in the long
+run; and will also explain a few internals.
 
-The method set_configure_base_directory(), defined in the file misc.rb, is used to determine the directory where the configure script ought to reside. That way we can enter a separate build directory yet still be able to invoke configure (or cmake) at the right directory target.
+Do not worry if this may be a bit confusing at first - it is meant
+primarily for me, and for others who may want to extend the RBT
+project one day.
 
-Commandline options for class RBT::Action::SoftwareManager
-As was already written down somewhere else in this document, you can pass in several commandline options to class RBT::Action::SoftwareManager.
+The method set_configure_base_directory(), defined in the file **misc.rb**,
+is used to determine the directory where the configure script ought to
+reside. That way we can enter a separate build directory yet still be
+able to invoke configure (or cmake) at the right directory target.
 
-You can also use commandline options that include -- and these options can overrule other configure options, on an ad-hoc basis.
+### Commandline options for class RBT::Action::SoftwareManager
 
-For instance, let's assume that the configure options in a given yaml file, such as weechat.yml, include an option such as --enable-gtk. But you don't want any GTK GUI for Weechat. So either you modify the .yml file, or you decide to override this flag, on the commandline, by doing:
+As was already written down somewhere else in this document, you
+can pass in several commandline options to class RBT::Action::SoftwareManager.
 
-rbt weechat --disable-gtk
-This will now overrule the setting in the weechat.yml file for the given compilation run, and compile weechat with gtk disabled. That way you can leave weechat.yml unmodified, yet you are still able to get the desired change. (For a permanent change you would have to modify the .yml file of course.)
+You can also use commandline options that include 
+<b>--</b> and these options can overrule other
+configure options, on an ad-hoc basis.
+
+For instance, let's assume that the configure options in a
+given yaml file, such as <b>weechat.yml</b>, include an
+option such as <b>--enable-gtk</b>. But you don't want
+any GTK GUI for Weechat. So either you modify the .yml
+file, or you decide to override this flag, on the
+commandline, by doing:
+
+    rbt weechat --disable-gtk
+
+This will now overrule the setting in the weechat.yml
+file for the given compilation run, and compile
+weechat with gtk <b>disabled</b>. That way you can
+leave weechat.yml unmodified, yet you are still
+able to get the desired change. (For a permanent
+change you would have to modify the .yml file of
+course.)
 
 If you want to get a quick overview, issue:
 
-rbt --overview
-This should give a brief overview over the available utility scripts.
+    rbt --overview
 
-class RBT::Action::SoftwareManager - the commandline option --compile-the-first-entry-in-the-current-working-directory
+This should give a brief overview over
+the available utility scripts.
+
+### class RBT::Action::SoftwareManager - the commandline option --compile-the-first-entry-in-the-current-working-directory
+
 On my computer system I have done the following alias:
 
-this → rbt --compile-the-first-entry-in-the-current-working-directory
-So, I can then navigate to a directory containing a source archive that can be compiled. Then I type "this" and hit enter. RBT::Action::SoftwareManager will proceed to compile the first entry of this directory.
+    this → rbt --compile-the-first-entry-in-the-current-working-directory
 
-This allows me to be lazy and efficient. I will simply compile the first entry in any given directory, without having to type the name or even write the beginning of the name and use '*' as substitution character, such as via:
+So, I can then navigate to a directory containing a source archive
+that can be compiled. Then I type "this" and hit enter. RBT::Action::SoftwareManager
+will proceed to compile the first entry of this directory.
 
-rbt php*.xz
-rbt php*.xz
-I recommend that users of the rbt gem also use an alias such as "this", but of course this is up to them, not me. For me, personally, just typing "this" is very convenient should I need it.
+This allows me to be lazy and efficient. I will simply compile the first
+entry in any given directory, without having to type the name or even
+write the beginning of the name and use '*' as substitution character,
+such as via:
 
-class RBT::Action::SoftwareManager: feedback the URL of various programs at the same time
-Say that you wish to find out the URL to various programs at the same time.
+    rbt php*.xz
+    rbt php*.xz
+
+I recommend that users of the rbt gem also use an alias such as "this",
+but of course this is up to them, not me. For me, personally, just
+typing "this" is very convenient should I need it.
+
+## class RBT::Action::SoftwareManager: feedback the URL of various programs at the same time
+
+Say that you <b>wish to find out the URL to various programs at the same
+time</b>.
 
 You can use this the following commandline invocation for this:
 
-rbt --url-for-these-programs=php,ruby,python,m4,php
+    rbt --url-for-these-programs=php,ruby,python,m4,php
+
 This will show a result such as:
 
+<img src="https://i.imgur.com/F9yA9vr.png" style="margin: 1em">
 
+Entries that are included more than once - such as php in the above
+made-up example - will only be shown once.
 
-Entries that are included more than once - such as php in the above made-up example - will only be shown once.
+## BLFS - Beyond Linux From Scratch (and also LFS)
 
-BLFS - Beyond Linux From Scratch (and also LFS)
-class RBT::Blfs has "support" for BLFS in that it will ... simply show a URL to the remote BLFS page of a given package, if it exists, on the commandline.
+<b>class RBT::Blfs</b> has "support" for BLFS in that it will ... simply
+show a URL to the remote BLFS page of a given package, if it exists,
+on the commandline.
 
-If you only need to know the URL to the BLFS homepage, to embed it for display into a webpage perhaps or to merely display it onto the commandline, you can use the following simple toplevel-API for this:
+If you only need to know the URL to the <b>BLFS homepage</b>, to embed
+it for display into a webpage perhaps or to merely display it onto the
+commandline, you can use the following simple <b>toplevel-API</b> for
+this:
 
-RBT.blfs(:name_of_the_program_goes_in_here)
-RBT.blfs(:openssl) # => "https://www.linuxfromscratch.org/blfs/view/8.1/postlfs/openssl.html"
+    RBT.blfs(:name_of_the_program_goes_in_here)
+    RBT.blfs(:openssl) # => "https://www.linuxfromscratch.org/blfs/view/8.1/postlfs/openssl.html"
 
-# You can also use a String as input to the method rather than a Symbol:
-RBT.blfs('ruby') # => "https://www.linuxfromscratch.org/blfs/view/svn/general/ruby.html"
-This will return the remote BLFS page, as URL (a String, actually), if it exists, and if it has been registered in the corresponding .yml file (cookbook file for the program at hand; in this example the file openssl.yml). If no BLFS entry has been registered then nil will be returned by this method.
+    # You can also use a String as input to the method rather than a Symbol:
+    RBT.blfs('ruby') # => "https://www.linuxfromscratch.org/blfs/view/svn/general/ruby.html"
 
-You can also use class RBT::LFS to build/create a LFS from scratch. This is presently (as of the year 2019) quite incomplete, though, and will not work. Lots of different things have to be done in the correct sequence before a LFS can be built from scratch successfully, and possible errors have to be checked before the build can continue. In the long run, for the future, this will eventually work, one day - but for now it is an incomplete stub and not recommended for testing much at all. It is simpler to use the slow, semi-manual approach for now.
+This will return the remote BLFS page, as URL (a **String**, actually),
+if it exists, and if it has been registered in the corresponding 
+.yml file (cookbook file for the program at hand; in this example
+the file <b>openssl.yml</b>). If no BLFS entry has been registered
+then **nil** will be returned by this method.
 
-If you wish to quickly paste the BLFS page of a given program onto the commandline, for display purpose, then you can do something like this:
+You can also use class <b>RBT::LFS</b> to build/create a LFS from scratch.
+This is presently (as of the year <b>2019</b>) quite incomplete, though,
+and will not work. Lots of different things have to be done in the correct
+sequence before a LFS can be built from scratch successfully, and possible
+errors have to be checked before the build can continue. In the long run,
+for the future, this will eventually work, one day - but for now it is an
+incomplete stub and not recommended for testing much at all. It is simpler
+to use the slow, semi-manual approach for now.
 
-rbt php --parseblfs
-Since as of September 2021 a bin/ script exists for this functionality. This was already planned back in August 2019, but I finally had a good use case (support for my older laptop) to add it. The executable is called paste_blfs and it can be used in the following way via the commandline:
+If you wish to quickly <b>paste</b> the BLFS page of a given program onto
+the commandline, for display purpose, then you can do something like this:
 
-paste_blfs ruby
-paste_blfs htop
-Since as of December 2019, it is now also possible to display, on the commandline, any registered BLFS entry. This will help in the event that you can not access the xorg-server at the moment, yet still require information for different packages (I faced exactly this problem, so I then added that functionality to RBT).
+    rbt php --parseblfs
 
-In order for this to work, you evidently need to have a working internet connection available - but in principle, the information stored in the BLFS project could be zipped up and distributed too, within the RBT project.
+Since as of <b>September 2021</b> a bin/ script exists for this functionality.
+This was already planned back in <b>August 2019</b>, but I finally had a 
+good use case (support for my older laptop) to add it. The executable
+is called <b>paste_blfs</b> and it can be used in the following way
+via the <b>commandline</b>:
 
-For the time being, though, only pasting is supported - there is no plan to bundle the information into the RBT project at this stage in time.
+    paste_blfs ruby
+    paste_blfs htop
+
+Since as of <b>December 2019</b>, it is now also possible to display,
+on the commandline, <b>any</b> registered BLFS entry. This will help
+in the event that you can not access the xorg-server at the moment,
+yet still require information for different packages (I faced
+exactly this problem, so I then added that functionality to RBT).
+
+In order for this to work, you evidently need to have a working
+**internet connection** available - but in principle, the information
+stored in the BLFS project could be zipped up and distributed
+too, within the RBT project.
+
+For the time being, though, only pasting is supported - there is
+no plan to bundle the information into the RBT project at this
+stage in time.
 
 Usage example for this functionality:
 
-rbt --parse-blfs-page-for=llvm
-In December 2019 another feature was added - the ability to make use of the BLFS instructions directly, and run them.
+    rbt --parse-blfs-page-for=llvm
 
-The idea here is that you may wish to compile some program from source, but may not access a working xorg-server, as you are working on the commandline only.
+In <b>December 2019</b> another feature was added - the ability to
+make use of the BLFS instructions directly, and run them.
+
+The idea here is that you may wish to compile some program
+from source, but may not access a working xorg-server, as
+you are working on the commandline only.
 
 Invocation example:
 
-rbt kerberos --use-blfs-instructions # Compile kerberos in the BLFS way.
-Since LFS/BLFS is such a useful project, the RBT suite has some more support in this regard. This is unsurprising, as the Linux From Scratch (LFS) Project has instructions on how to compile programs from source. So it has a somehwat similar meta-goal, like RBT.
+    rbt kerberos --use-blfs-instructions # Compile kerberos in the BLFS way.
 
-These instructions are immensely useful. A lot of the information from LFS/BLFS was integrated into the RBT project.
+Since LFS/BLFS is such a useful project, the RBT suite has some
+more support in this regard. This is unsurprising, as the
+<b>Linux From Scratch</b> (LFS) Project has instructions
+on how to compile programs from source. So it has a somehwat
+similar meta-goal, like RBT.
 
-Many individual cookbook yaml files can point towards the LFS/BLFS page, which will often contain additional useful information in case you get stuck with something.
+These instructions are immensely useful. A lot of the information
+from LFS/BLFS was integrated into the RBT project.
+
+Many individual cookbook yaml files can point towards the
+LFS/BLFS page, which will often contain additional useful
+information in case you get stuck with something.
 
 You can try to show this URL by doing this:
 
-blfs curl
-This would show the BLFS remote URL of the program called curl.
+    blfs curl
 
-Since as of July 2017, you can also directly paste the content of the remote BLFS webpage onto the terminal, if there is a remote BLFS page associated with a given program.
+This would show the BLFS remote URL of the program called
+<b>curl</b>.
+
+Since as of <b>July 2017</b>, you can also directly paste the
+content of the remote BLFS webpage onto the terminal, if there
+is a remote BLFS page associated with a given program.
 
 The way to do this is as follows:
 
-rbt gcc --paste-blfs-page
-If you want to show all programs that have a blfs entry, use the following command:
+    rbt gcc --paste-blfs-page
 
-rbt --show-programs-with-a-blfs-entry
-If you want to obtain an Array of all programs containing a BLFS entry, you can use the following toplevel API:
+If you want to show all programs that have a blfs entry, use the
+following command:
 
-RBT.return_all_blfs_entries
-This is currently rather slow; I'll look into making it faster in the future, making use of grep.
+    rbt --show-programs-with-a-blfs-entry
 
-If you want to find out how many BLFS entries are registered, use this toplevel method:
+If you want to obtain an Array of all programs containing
+a BLFS entry, you can use the following toplevel API:
 
-RBT.n_BLFS_entries?
-Licence of this project
+    RBT.return_all_blfs_entries
+
+This is currently rather slow; I'll look into making it
+faster in the future, making use of grep.
+
+If you want to find out how many BLFS entries are registered,
+use this toplevel method:
+
+    RBT.n_BLFS_entries?
+    
+## Licence of this project
+
 Now to some semi-boring legalese, aka the "no warrant disclaimer" in particular.
 
 Forst, the copyright notice:
 
 Copyright 2010-2024 Robert A. Heiler
 
-Up until the beginning of April 2021, the rbt project was using the GPL-2.0 licence (no later clause).
+Up until the beginning of <b>April 2021</b>, the rbt project was using the
+<b>GPL-2.0 licence</b> (no later clause).
 
-In April 2021, though, I decided to switch to the MIT licence instead for this project. The older GPL code will remain available for some time, most likely at the least a full year, perhaps even longer. But the older code is now deprecated as far as I am concerned; others would have to maintain it. I only focus on the MIT variant from this point onward.
+In <b>April 2021</b>, though, I decided to switch to the <b>MIT</b> licence
+instead for this project. The older GPL code will remain available for some
+time, most likely at the least a full year, perhaps even longer. But the
+older code is now deprecated as far as I am concerned; others would have to
+maintain it. I only focus on the MIT variant from this point onward.
 
 You can read up on the MIT licence here:
 
 https://opensource.org/licenses/MIT
 
-To make it even more explicit, let me additionally formulate the no-warranty disclaimer:
+To make it even more explicit, let me additionally formulate
+the no-warranty disclaimer:
 
-The source code is provided as is. No explicit guarantees are given of any kind whatsoever.
+The source code is <b>provided as is</b>. No explicit
+guarantees are given of any kind whatsoever.
 
-Whenever possible, bugs will be fixed. However had, do not expect there to be no bugs in this software suite. Chances should be fairly high that it will run on your system.
+Whenever possible, bugs will be fixed. However had, do
+not expect there to be no bugs in this software suite.
+Chances should be fairly high that it will run on
+your system.
 
 Why was it decided to switch to MIT rather than GPL?
 
 Well, there are several reasons.
 
-First, and most importantly: while I will continue to maintain the project here for a long while (I am using it on a daily basis after all), it is not really a project I particular "care" about in the sense of wanting to restrict how users use it. It is just a ruby gem, not anything I am using for a "mission-critical project". It also is not important to me in regards to my financial status; nothing against donation by interested folks, but I did not create the project for any of that. I created the project mostly because I needed to compile software or otherwise install software.
+First, and most importantly: while I will continue to maintain the project
+here for a long while (I am using it on a daily basis after all), it is not
+really a project I particular "care" about in the sense of wanting to
+restrict how users use it. It is just a ruby gem, not anything I am using
+for a "mission-critical project". It also is not important to me in regards
+to my financial status; nothing against donation by interested folks, but I
+did not create the project for any of that. I created the project mostly
+because I needed to compile software or otherwise install software.
 
-Second, though, the GPL is a strict licence. This can be very useful - see the Linux Kernel. You may also depend less on corporations controlling the whole software stack, so the GPL has quite laudable goals. But ... is the GPL really important for a project like this one here? I am not sure. I think you can already "generate value" if a project is useful, so the licence then is of a secondary concern, in particular when it is a smaller project anyway.
+Second, though, the GPL is a strict licence. This can be very
+useful - see the Linux Kernel. You may also depend less on 
+corporations controlling the whole software stack, so the GPL
+has quite laudable goals. But ... is the GPL really important
+for a project like this one here? I am not sure. I think you
+can already "generate value" if a project is useful, so the 
+licence then is of a secondary concern, in particular when
+it is a smaller project anyway.
 
-These were my two main reasons. There are a few smaller issues, such as the MIT licence being much simpler to use and adhere to, but by and large these were the main reasons.
+These were my two main reasons. There are a few smaller issues,
+such as the MIT licence being <b>much</b> simpler to use and
+adhere to, but by and large these were the main reasons.
 
-And if a company ever decides to want to make use of RBT then I feel flattered, anyway - it means that the project has some real value after all, right? Otherwise people would not use it.
+And if a company ever decides to want to make use of RBT
+then I feel flattered, anyway - it means that the project
+has some real value after all, right? Otherwise people
+would not use it.
 
-Be wary of bugs, though; even the MIT licence comes with a "no warranty" clause, so always test things first in a secure environment (chrooted jail environment, for instance, then you can copy or package the compiled packages to wherever you need them(.
+Be wary of bugs, though; even the MIT licence comes with a
+"no warranty" clause, so always test things first in a
+secure environment (chrooted jail environment, for instance,
+then you can copy or package the compiled packages to 
+wherever you need them(.
 
-While I use this project since over a decade, my use cases may not be the same as how other people use the project.
+While I use this project since over a decade, my use cases
+may not be the same as how other people use the project.
 
-Take note that the rbt-gem erroneously had GPL-2.0 as its licence in the last some months (in 2023). This was a manual error on my behalf, due to rubygems showing a warning on the commandline about "unspecified licences". I am not sure why I changed to GPL-2.0 as a result; perhaps I was working on another project that was GPL-2.0 licenced and confused the two. Either way when the rbt gem was rewritten in the year 2024, this was again fixed and the MIT licence was reinstated here - apologies for any confusion in this regard, it was supposed to be MIT licenced.
+Take note that the rbt-gem erroneously had <b>GPL-2.0</b> as
+its licence in the last some months (in 2023). This
+was a manual error on my behalf, due to rubygems
+showing a warning on the commandline about "unspecified
+licences". I am not sure why I changed to GPL-2.0 as
+a result; perhaps I was working on another project that
+was GPL-2.0 licenced and confused the two. Either way when 
+the rbt gem was rewritten in the year 2024, this was again
+fixed and the MIT licence was reinstated here - apologies
+for any confusion in this regard, it was supposed
+to be MIT licenced.
 
-RBT::Gitty
-class RBT::Gitty is a helper class. It ultimately wraps over the "--gitty" that RBT::Installer uses.
+## RBT::Gitty
 
-The RBT::Gitty class can be used to quickly checkout the git sources of a project.
+class RBT::Gitty is a helper class. It ultimately wraps over
+the "--gitty" that RBT::Installer uses.
 
-So, for instance, if you want to check out the latest source code of mesa, you could do this via the commandline:
+The RBT::Gitty class can be used to quickly checkout the
+git sources of a project.
 
-gitty mesa
-This will download mesa and repackage it to today's timestamp, in dd.mm.yyyy notation.
+So, for instance, if you want to check out the latest
+source code of mesa, you could do this via the commandline:
 
-You can download any program that is registered in the RBT namespace, if it has a corresponding entry called git_url in the .yml file. This is how I maintain this list: I simply change the associated git URL, such as for github or gitlab, in the corresponding .yml file.
+    gitty mesa
 
-Since as of March 2024 gitty was slightly extended, in that it can now work on any arbitrary remote URL that you pass into this class.
+This will download mesa and repackage it to today's
+timestamp, in dd.mm.yyyy notation.
+
+You can download any program that is registered in the
+RBT namespace, if it has a corresponding entry called
+<b>git_url</b> in the .yml file. This is how I maintain
+this list: I simply change the associated git URL,
+such as for github or gitlab, in the corresponding
+.yml file.
+
+Since as of March 2024 gitty was slightly extended, in
+that it can now work on any arbitrary remote URL that
+you pass into this class.
 
 For instance:
 
-gitty https://github.com/kennylevinsen/seatd
-This would download the current git sources from that remote URL, and repackage it automatically for you, using a dd.mm.yyyy notation. This functionality was added because I sometimes found new programs and just wanted to quickly test whether I can compile it, so I can now just copy/paste this URL onto the commandline, as input for gitty.
+    gitty https://github.com/kennylevinsen/seatd
 
-RBT::Action::SoftwareManager
-class RBT::Action::SoftwareManager was added in March 2024. It will eventually replace class Installer. The key idea behind SoftwareManager, aside from fixing a few smaller bugs and issues, will be to transition into an action-based system. This means that everything that is important, to be done by class SoftwareManager, should be handled through the method called RBT.action() primarily.
+This would download the current git sources from
+that remote URL, and repackage it automatically
+for you, using a dd.mm.yyyy notation. This functionality
+was added because I sometimes found new programs and
+just wanted to quickly test whether I can compile it,
+so I can now just copy/paste this URL onto the
+commandline, as input for <b>gitty</b>.
 
-The advantage of this approach is that we can easily change aspects of class SoftwareManager, without having to modify the class directly.
+## RBT::Action::SoftwareManager
 
-This replacement effort may take quite a while, though. For now, class Installer will remain in place and is still the preferred variant to be used.
+class RBT::Action::SoftwareManager was added in March 2024. It
+will eventually replace class Installer. The key idea behind
+SoftwareManager, aside from fixing a few smaller bugs and
+issues, will be to transition into an action-based system.
+This means that everything that is important, to be done
+by class SoftwareManager, should be handled through
+the method called <b>RBT.action()</b> primarily.
 
-Querying the prefix to be used
-If you have the need to find out the prefix that will be used, you can issue the following query:
+The advantage of this approach is that we can easily change
+aspects of class SoftwareManager, without having to 
+modify the class directly.
 
-rbt htop prefix?
-rbt htop --prefix?
-Available programs versions
+This replacement effort may take quite a while, though. For
+now, class Installer will remain in place and is still
+the preferred variant to be used.
 
+## Querying the prefix to be used
+
+If you have the need to find out the prefix that will be used,
+you can issue the following query:
+
+    rbt htop prefix?
+    rbt htop --prefix?
+
+## Available programs versions
+
+
+<pre>
 0install                  2.3.14       22 February 2021 https://sourceforge.net/projects/zero-install/files/0install/2.3.14/0install-2.3.14.tar.bz2
 3ddesktop                 0.2.9        01 June 2014 https://sourceforge.net/projects/desk3d/files/3ddesktop/0.2.9/3ddesktop-0.2.9.tar.gz
 3dpong                    0.5          01 May 2014  https://tuxpaint.org/ftp/unix/x/3dpong/src/3dpong-0.5.tar.gz
@@ -9687,13 +14686,72 @@ zvbi                      0.2.35       28 September 2015 https://sourceforge.net
 zxingcpp                  2.0.0        10 February 2023 https://github.com/zxing-cpp/zxing-cpp/archive/refs/tags/v2.0.0.tar.gz
 zziplib                   0.13.68      18 March 2024 https://sourceforge.net/projects/zziplib/files/zziplib13/0.13.68/zziplib-0.13.68.tar.bz2
 
-Currently this project does not accept donations, but in the future this may be subject to change, including more information in how folks could support the project, if they would like to.
+</pre>
 
-Of course documentation, patches, bug fixes and so forth are always appreciated.
 
-Feedback wanted and appreciated, as well as contributions to the RBT project
-Feedback about rbt will be considered, in particular to make working with it easier and better. Suggestions to improve the project are also welcome, in particular if it comes to smaller changes, as they are easier to implement.
+Currently this project does not accept donations, but
+in the future this may be subject to change, including
+more information in how folks could support the project,
+if they would like to.
 
-New ideas about new or missing features and functionality are appreciated as well.
+Of course **documentation**, **patches**, **bug fixes** and so
+forth are **always** appreciated.
 
-Code contribution of all sorts are also accepted. Please try to adhere to the coding standard(s) though - at the least document any new code that is to be added extensively, so that other users (as well as I) understand what the code does. I may add a github project tracker for ideas pertaining this.
+## Feedback wanted and appreciated, as well as contributions to the RBT project
+
+<b>Feedback</b> about rbt will be considered, in particular to make working
+with it easier and better. Suggestions to improve the project are also welcome,
+in particular if it comes to smaller changes, as they are easier to implement.
+
+New ideas about new or missing features and functionality are appreciated as
+well.
+
+Code contribution of all sorts are also accepted. Please try to adhere to
+the coding standard(s) though - at the least document any new code
+that is to be added extensively, so that other users (as well as I)
+understand what the code does. I may add a github project tracker for
+ideas pertaining this.
+
+
+## Contact information and mandatory 2FA (no longer) coming up in 2022 / 2023
+
+If your creative mind has ideas and specific suggestions to make this gem
+more useful in general, feel free to drop me an email at any time, via:
+
+    shevy@inbox.lt
+
+Before that email I used an email account at Google gmail, but in **2021** I
+decided to slowly abandon gmail, for various reasons. In order to limit the
+explanation here, allow me to just briefly state that I do not feel as if I
+want to promote any Google service anymore when the user becomes the end
+product (such as via data collection by upstream services, including other
+proxy-services). My feeling is that this is a hugely flawed business model
+to begin with, and I no longer wish to support this in any way, even if
+only indirectly so, such as by using services of companies that try to
+promote this flawed model.
+
+In regards to responding to emails: please keep in mind that responding 
+may take some time, depending on the amount of work I may have at that
+moment. So it is not that emails are ignored; it is more that I have not
+(yet) found the time to read and reply. This means there may be a delay
+of days, weeks and in some instances also months. There is, unfortunately,
+not much I can do when I need to prioritise my time investment, but I try
+to consider <b>all</b> feedback as an opportunity to improve my projects
+nonetheless.
+
+In <b>2022</b> rubygems.org decided to make 2FA mandatory for every
+gem owner eventually:
+
+see
+https://blog.rubygems.org/2022/06/13/making-packages-more-secure.html
+
+However had, that has been reverted again, so I decided to shorten
+this paragraph. Mandatory 2FA may exclude users who do not have a 
+smartphone device or other means to 'identify'. I do not feel it is
+a fair assumption by others to be made that non-identified people may
+not contribute code, which is why I reject it. Mandatory 2FA would mean
+an end to all my projects on rubygems.org, so let's hope it will never
+happen. (Keep in mind that I refer to mandatory 2FA; I have no qualms
+for people who use 2FA on their own, but this carrot-and-stick strategy
+by those who control the rubygems infrastructure is a very bad one to
+pursue.
